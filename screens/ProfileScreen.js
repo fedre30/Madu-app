@@ -4,6 +4,7 @@ import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
+import Colors from "../constants/Colors";
 
 export default function ProfileScreen() {
   return (
@@ -21,7 +22,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
+    backgroundColor: Colors.white,
   },
   contentContainer: {
     justifyContent: "center",

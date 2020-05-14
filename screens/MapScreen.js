@@ -5,9 +5,8 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
 import MapView from "react-native-maps";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { getLocation } from "../utils/map";
-import { GOOGLE_API_KEY } from "../api-config";
+import { Backdrop } from "react-native-backdrop";
 
 export default function MapScreen() {
   const [location, setLocation] = React.useState(null);
@@ -25,21 +24,11 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.autocomplete}>
-        <GooglePlacesAutocomplete
-          placeholder="Search"
-          onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
-            console.log(data, details);
-          }}
-          style={styles.inputStyle}
-          query={{
-            key: GOOGLE_API_KEY,
-            language: "en",
-          }}
-        />
-      </View>
-      <MapView style={styles.mapStyle} initialRegion={location} />
+      <MapView
+        style={styles.mapStyle}
+        initialRegion={location}
+        provider={PROVIDER_GOOGLE}
+      />
     </View>
   );
 }
@@ -48,14 +37,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa",
-  },
-  autocomplete: {
-    width: Dimensions.get("window").width,
-    height: 90,
-    paddingTop: 30,
-  },
-  inputStyle: {
-    backgroundColor: "transparent",
   },
   mapStyle: {
     width: Dimensions.get("window").width,

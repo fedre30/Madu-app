@@ -1,30 +1,31 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
+import MapView from "react-native-maps";
+import { getLocation } from "../utils/map";
+import { Backdrop } from "react-native-backdrop";
 
 export default function MapScreen() {
+  const [location, setLocation] = React.useState(null);
+
+  React.useEffect(() => {
+    getLocation().then((data) => {
+      setLocation({
+        latitude: data.latitude,
+        longitude: data.longitude,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
+      });
+    });
+  }, []);
+
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <View>
-        <Title>Map Screen</Title>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require("../assets/images/robot-dev.png")
-                : require("../assets/images/robot-prod.png")
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <MapView style={styles.mapStyle} initialRegion={location} />
+    </View>
   );
 }
 
@@ -33,20 +34,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa",
   },
-  contentContainer: {
-    justifyContent: "center",
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: "contain",
-    marginTop: 3,
-    marginLeft: -10,
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height - 30,
   },
 });

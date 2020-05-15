@@ -34,7 +34,7 @@ export const Title = (props) => {
   return (
     <Text
       {...props}
-      style={[props.style, styles.title, { fontFamily: "gotham-bold" }]}
+      style={[styles.title, props.style, { fontFamily: "gotham-bold" }]}
     />
   );
 };
@@ -88,6 +88,22 @@ export const ThumbnailTitle = (props) => {
       {...props}
       style={[props.style, styles.thumbnailTitle, { fontFamily: "gotham-medium" }]}
     />
+  )
+};
+
+export const ButtonText = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.button,
+        {
+          fontFamily: "gotham-medium",
+          textTransform: props.transform ? "uppercase" : "none",
+        },
+      ]}
+    />
   );
 };
 
@@ -131,4 +147,8 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
 
+  button: {
+    fontSize: 14,
+    lineHeight: 24,
+  },
 });

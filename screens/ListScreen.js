@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
+import {
+  RectButton,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
-import { CardList } from "../components/molecules/Card";
+import { ListCard } from "../components/molecules/Card";
 import { FilterButton } from "../components/atoms/FilterButton";
+import Modal from "react-native-modal";
+import { FilterView } from "../components/organisms/FilterView";
 
 export default function ListScreen() {
   const [activeFilters, setActiveFilters] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onPress = (type) => {
     setActiveFilters((prevState) =>
@@ -21,7 +28,11 @@ export default function ListScreen() {
       contentContainerStyle={styles.contentContainer}
     >
       <ScrollView style={styles.filtersContainer} horizontal={true}>
-        <FilterButton title="Filtres" imageType="filters" onPress={() => {}} />
+        <FilterButton
+          title="Filtres"
+          imageType="filters"
+          onPress={() => setModalVisible(!modalVisible)}
+        />
         <FilterButton
           title="Végétarien"
           imageType="veggie"
@@ -47,9 +58,15 @@ export default function ListScreen() {
           focused={activeFilters.includes("bio")}
         />
       </ScrollView>
-
+      <View>
+        <Modal isVisible={modalVisible} style={{ margin: 0 }} propagateSwipe>
+          <ScrollView style={{ flex: 1 }}>
+            <FilterView search={() => setModalVisible(!modalVisible)} />
+          </ScrollView>
+        </Modal>
+      </View>
       <View style={styles.list}>
-        <CardList
+        <ListCard
           name="Rose Bakery"
           address="Rue de test, 28"
           tags={["vegetarien", "bio", "vegan"]}

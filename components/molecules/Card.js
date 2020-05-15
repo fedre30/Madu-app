@@ -11,7 +11,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { PriceIcon, WheelchairIcon, SuggestionIcon } from "../atoms/CardIcons";
 
-export const CardList = (props) => {
+export const ListCard = (props) => {
   return (
     <TouchableOpacity onPress={() => {}} style={{ position: "relative" }}>
       <Card>

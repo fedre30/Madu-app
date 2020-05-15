@@ -7,10 +7,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const imagesTypes = {
   filters: require("../../assets/images/filters.png"),
   veggie: require("../../assets/images/veggie.png"),
-  glutenFree: require("../../assets/images/glutenfree.png"),
+  glutenfree: require("../../assets/images/glutenfree.png"),
   bio: require("../../assets/images/bio.png"),
   vegan: require("../../assets/images/vegan.png"),
   local: require("../../assets/images/local.png"),
+  fish: require("../../assets/images/poisson.png"),
 };
 
 export const FilterButton = (props) => {
@@ -21,7 +22,7 @@ export const FilterButton = (props) => {
         styles.container,
         {
           borderColor: props.focused ? Colors.secondary : "transparent",
-          width: props.filterView ? 100 : "auto",
+          maxWidth: props.filterView ? 130 : "auto",
           height: props.filterView ? 100 : 70,
         },
       ]}
@@ -53,9 +54,11 @@ const styles = StyleSheet.create({
     elevation: 4,
     paddingTop: 5,
     marginRight: 10,
+    marginBottom: 10,
     borderWidth: 3,
     paddingRight: 20,
     paddingLeft: 20,
+    minWidth: 80,
   },
   contentContainer: {
     justifyContent: "center",

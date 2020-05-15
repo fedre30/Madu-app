@@ -8,11 +8,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-<<<<<<< HEAD
 *.lock
-=======
 api-config.js
->>>>>>> upstream/fa/map
 
 # macOS
 .DS_Store

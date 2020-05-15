@@ -48,6 +48,16 @@ export const TagsText = (props) => {
   );
 };
 
+export const ThumbnailTitle = (props) => {
+  return(
+    <Text
+      {...props}
+      style={[props.style, styles.title, { fontFamily: "gotham-medium" }]}
+    />
+  );
+};
+
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 17,

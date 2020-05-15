@@ -7,7 +7,6 @@ import { Thumbnail } from "../components/molecules/ProfileThumbnail";
 import Colors from "../constants/Colors";
 
 export default function ProfileScreen() {
-  //style={{backgroundColor: Colors.orange}}
   return (
     <ScrollView
       style={styles.container}

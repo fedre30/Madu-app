@@ -17,26 +17,13 @@ export default function ProfileScreen() {
         <View style={{ flex: 1, backgroundColor: 'red' }}>
           <Text>Profile</Text>
         </View>
-        <View style={{ flex: 1, backgroundColor: 'green' }}>
-          <Text>Defis realisé</Text>
-        </View>
         <View style={{ flex: 3, backgroundColor: 'blue' }}>
           <Text>Options</Text>
-          <View style={styles.CagnotteContainer}>
-            <Thumbnail style={styles.thumbnailOption1} >Cagnotte</Thumbnail>
-          </View>
-          <View style={{backgroundColor: "#DCFFF7", width: 162, height: 162}}>
-            <Thumbnail >Recompenses</Thumbnail>
-          </View>
-          <View style={{backgroundColor: "##EEE9FF", width: 162, height: 162}}>
-            <Thumbnail style={styles.thumbnailOption1} >Defis</Thumbnail>
-          </View>
-          <View style={{backgroundColor: "#FFF1E9", width: 162, height: 162}}>
-            <Thumbnail >Nouvelle adresse</Thumbnail>
-          </View>
-          <View style={{backgroundColor: "#FFE9E9", width: 162, height: 162}}>
-            <Thumbnail >Parametre</Thumbnail>
-          </View>
+          <Thumbnail style={styles.thumbnailCagnotte} >Cagnotte</Thumbnail>
+          <Thumbnail style={styles.thumbnailReward} >Recompenses</Thumbnail>
+          <Thumbnail style={styles.thumbnailChallenge} >Defis</Thumbnail>
+          <Thumbnail style={styles.thumbnailNewAddress} >Nouvelle adresse</Thumbnail>
+          <Thumbnail style={styles.thumbnailParameter} >Parametre</Thumbnail>
         </View>
       </View>
     </ScrollView>
@@ -53,13 +40,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flex:1,
   },
-  CagnotteContainer: {
-    //backgroundColor: "#EBF3FF", 
-    backgroundColor: Colors.tintColor, 
-    width: 162, 
-    height: 162
-  },
-  thumbnailOption1:{  
+  thumbnailCagnotte:{  
     backgroundColor: Colors.pink,
     borderRadius: 10,
   }

@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
@@ -9,9 +9,9 @@ import { getLocation } from "../utils/map";
 import { Backdrop } from "react-native-backdrop";
 
 export default function MapScreen() {
-  const [location, setLocation] = React.useState(null);
+  const [location, setLocation] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getLocation().then((data) => {
       setLocation({
         latitude: data.latitude,

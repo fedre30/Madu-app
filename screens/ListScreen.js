@@ -4,6 +4,7 @@ import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
+import { CardList } from "../components/molecules/Card";
 
 export default function ListScreen() {
   return (
@@ -12,7 +13,7 @@ export default function ListScreen() {
       contentContainerStyle={styles.contentContainer}
     >
       <View>
-        <Title>Selection POI</Title>
+        <CardList />
       </View>
     </ScrollView>
   );

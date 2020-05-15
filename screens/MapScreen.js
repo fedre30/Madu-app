@@ -24,11 +24,7 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.mapStyle}
-        initialRegion={location}
-        provider={PROVIDER_GOOGLE}
-      />
+      <MapView style={styles.mapStyle} initialRegion={location} />
     </View>
   );
 }

@@ -21,11 +21,7 @@ export default function ListScreen() {
       contentContainerStyle={styles.contentContainer}
     >
       <ScrollView style={styles.filtersContainer} horizontal={true}>
-        <FilterButton
-          title="Filtres"
-          imageType="filters"
-          onPress={() => onPress("veggie")}
-        />
+        <FilterButton title="Filtres" imageType="filters" onPress={() => {}} />
         <FilterButton
           title="Végétarien"
           imageType="veggie"

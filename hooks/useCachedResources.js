@@ -21,6 +21,7 @@ export default function useCachedResources() {
           "gotham-light": require("../assets/fonts/Gotham-Light.ttf"),
           "gotham-book-italic": require("../assets/fonts/Gotham-BookItalic.ttf"),
           "gotham-light-italic": require("../assets/fonts/Gotham-LightItalic.ttf"),
+          "gotham-book": require("../assets/fonts/Gotham-Book.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

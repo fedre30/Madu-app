@@ -8,11 +8,45 @@ export function MonoText(props) {
   );
 }
 
+export const SimpleText = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[props.style, styles.text, { fontFamily: "gotham-book" }]}
+    />
+  );
+};
+
+export const SecondaryText = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.secondary,
+        { fontFamily: "gotham-medium", fontSize: 15 },
+      ]}
+    />
+  );
+};
+
 export const Title = (props) => {
   return (
     <Text
       {...props}
       style={[props.style, styles.title, { fontFamily: "gotham-bold" }]}
+    />
+  );
+};
+export const Subtitle = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.title,
+        { fontFamily: "gotham-bold", fontSize: 15 },
+      ]}
     />
   );
 };
@@ -59,6 +93,11 @@ export const ThumbnailTitle = (props) => {
 
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 14,
+    color: Colors.text,
+    lineHeight: 24,
+  },
   title: {
     fontSize: 17,
     color: Colors.text,

@@ -2,14 +2,19 @@ import * as React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Colors from "../../constants/Colors";
 import { Container, Header, Content, Card, CardItem, Body } from "native-base";
-import { SecondaryTitle, AddressText, TagsText } from "../atoms/StyledText";
+import {
+  SecondaryText,
+  SecondaryTitle,
+  AddressText,
+  TagsText,
+} from "../atoms/StyledText";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { PriceIcon, WheelchairIcon, SuggestionIcon } from "../atoms/CardIcons";
 
 export const CardList = (props) => {
   return (
-    <TouchableOpacity onPress={() => {}}>
-      <Card style={{ position: "relative" }}>
+    <TouchableOpacity onPress={() => {}} style={{ position: "relative" }}>
+      <Card>
         <View style={styles.greenscore}>
           <Image
             source={require("../../assets/images/greenscore.png")}
@@ -20,9 +25,9 @@ export const CardList = (props) => {
               resizeMode: "contain",
             }}
           />
-          <SecondaryTitle style={{ textAlign: "center" }}>
+          <SecondaryText style={{ textAlign: "center" }}>
             {props.greenscore}%
-          </SecondaryTitle>
+          </SecondaryText>
         </View>
         <CardItem cardBody>
           <Image
@@ -64,14 +69,6 @@ export const CardList = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fafafa",
-  },
-  contentContainer: {
-    justifyContent: "center",
-    paddingTop: 30,
-  },
   infosContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -81,8 +78,8 @@ const styles = StyleSheet.create({
     marginRight: 30,
   },
   greenscore: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     position: "absolute",
     zIndex: 2,
     top: -10,

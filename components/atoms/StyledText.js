@@ -39,6 +39,15 @@ export const AddressText = (props) => {
   );
 };
 
+export const TagsText = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[props.style, styles.tags, { fontFamily: "gotham-light-italic" }]}
+    />
+  );
+};
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 17,
@@ -55,8 +64,13 @@ const styles = StyleSheet.create({
   },
 
   address: {
-    fontSize: 16,
+    fontSize: 15,
     color: Colors.text,
+    lineHeight: 24,
+  },
+  tags: {
+    fontSize: 15,
+    color: Colors.grey,
     lineHeight: 24,
   },
 });

@@ -8,6 +8,7 @@ export default {
   orange: "#F9722D",
   text: "#1C1C1C",
   white: "#EFEFEF",
+  grey: "#787878",
   tintColor,
   tabIconDefault: "#ccc",
   tabIconSelected: tintColor,

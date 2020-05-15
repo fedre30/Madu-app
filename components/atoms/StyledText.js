@@ -86,7 +86,7 @@ export const ThumbnailTitle = (props) => {
   return(
     <Text
       {...props}
-      style={[props.style, styles.title, { fontFamily: "gotham-medium" }]}
+      style={[props.style, styles.thumbnailTitle, { fontFamily: "gotham-medium" }]}
     />
   );
 };
@@ -122,4 +122,13 @@ const styles = StyleSheet.create({
     color: Colors.grey,
     lineHeight: 24,
   },
+  thumbnailTitle:{
+    // fontWeight: 500, 
+    fontSize: 15, 
+    lineHeight: 21,
+    alignItems: "center",
+    textTransform: "uppercase",
+    color: Colors.black,
+  },
+
 });

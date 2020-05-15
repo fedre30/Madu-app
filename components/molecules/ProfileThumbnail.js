@@ -1,16 +1,24 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity,  Image, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity,  Image, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { ThumbnailTitle } from "../../components/atoms/StyledText";
 
-import ChallengesScreen from "../../screens/profile-subscreens/ChallengesScreen";
+const imagesTypes = {
+    jackpot: require("../../assets/images/treasure.png"),
+    rewards: require("../../assets/images/veggie.png"),
+    challenges: require("../../assets/images/glutenfree.png"),
+    newAddress: require("../../assets/images/bio.png"),
+    quizz: require("../../assets/images/vegan.png"),
+    ranking: require("../../assets/images/local.png"),
+    infos: require("../../assets/images/local.png"),
+    settings: require("../../assets/images/local.png"),
+  };
 
 export const Thumbnail = (props) => {
-  //this.props.navigation.navigate(ChallengesScreen)
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: props.backgroundColor}]}>
       <TouchableOpacity style={styles.button} > 
-        <Image style={styles.logo} source={require('../../assets/images/favicon.png')} />
+        <Image source={imagesTypes[props.imageType]} style={styles.icon} />
         <ThumbnailTitle {...props}/>
       </TouchableOpacity>
     </View>
@@ -19,17 +27,17 @@ export const Thumbnail = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
+    justifyContent: 'center',    
+    width: 162,
+    height: 162,
+    borderRadius: 10,
   },
   button: {
-    alignItems: 'center',
-    //backgroundColor: '#DDDDDD',
-    padding: 10,
-    flexDirection: 'row',
+    position: "absolute",
+    left: 18,
+    top: 22,
   },
-    logo: {
+  icon: {
     height: 60,
     width: 60,
   }

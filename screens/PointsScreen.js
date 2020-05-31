@@ -1,10 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
-import { StyleSheet, Text, View, Image, Strong } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
-import { Row } from "native-base";
+import { Row, Item } from "native-base";
+import Items from "./ListRecompense";
+import data from "./data";
 
 export default function PointsScreen() {
   return (
@@ -15,7 +17,7 @@ export default function PointsScreen() {
       <View>
         <Title>Cagnotte</Title>
       </View>
-      <View style={styles.header}>
+      <View style={styles.contentView}>
         <Text style={styles.number}>150</Text>
         <Image
           source={require("../assets/images/Vector.png")}
@@ -29,13 +31,23 @@ export default function PointsScreen() {
           récompense.
         </Text>
       </View>
-      <View style={styles.header}>
+      <View style={styles.contentView}>
         <View style={styles.progressContainer}>
           <View style={styles.porgressInner}></View>
         </View>
         <Image
           source={require("../assets/images/Ellipse.png")}
           style={styles.iconImage1}
+        />
+      </View>
+      <View style={styles.contentView}>
+        <Text style={styles.title}>récompenses à débloquer</Text>
+      </View>
+      <View>
+        <FlatList
+          keyExtractor={(item) => item.id.toString()}
+          data={data}
+          renderItem={({ item }) => <Items list={item} />}
         />
       </View>
     </ScrollView>
@@ -51,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 40,
   },
-  header: {
+  contentView: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -74,16 +86,14 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   description: {
-    marginTop: 18,
+    marginTop: 10,
     fontSize: 20,
-    fontWeight: "500",
     marginLeft: 30,
   },
   progressContainer: {
     width: 303,
     height: 10,
     justifyContent: "center",
-    padding: 3,
     backgroundColor: "#F0F0F0",
     borderRadius: 20,
   },
@@ -96,5 +106,10 @@ const styles = StyleSheet.create({
   iconImage1: {
     position: "relative",
     right: 30,
+  },
+  title: {
+    textTransform: "uppercase",
+    fontSize: 20,
+    fontWeight: "500",
   },
 });

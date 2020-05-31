@@ -29,6 +29,15 @@ export default function PointsScreen() {
           récompense.
         </Text>
       </View>
+      <View style={styles.header}>
+        <View style={styles.progressContainer}>
+          <View style={styles.porgressInner}></View>
+        </View>
+        <Image
+          source={require("../assets/images/Ellipse.png")}
+          style={styles.iconImage1}
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -69,5 +78,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "500",
     marginLeft: 30,
+  },
+  progressContainer: {
+    width: 303,
+    height: 10,
+    justifyContent: "center",
+    padding: 3,
+    backgroundColor: "#F0F0F0",
+    borderRadius: 20,
+  },
+  porgressInner: {
+    width: 176,
+    height: 10,
+    backgroundColor: "#69FFD4",
+    borderRadius: 15,
+  },
+  iconImage1: {
+    position: "relative",
+    right: 30,
   },
 });

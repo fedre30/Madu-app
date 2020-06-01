@@ -19,6 +19,9 @@ export default function useCachedResources() {
           "gotham-bold": require("../assets/fonts/Gotham-Bold.ttf"),
           "gotham-medium": require("../assets/fonts/Gotham-Medium.ttf"),
           "gotham-light": require("../assets/fonts/Gotham-Light.ttf"),
+          "gotham-book-italic": require("../assets/fonts/Gotham-BookItalic.ttf"),
+          "gotham-light-italic": require("../assets/fonts/Gotham-LightItalic.ttf"),
+          "gotham-book": require("../assets/fonts/Gotham-Book.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

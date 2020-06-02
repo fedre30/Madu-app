@@ -24,7 +24,7 @@ export const SecondaryText = (props) => {
       style={[
         props.style,
         styles.secondary,
-        { fontFamily: "gotham-medium", fontSize: 15 },
+        { fontFamily: "gotham-medium", fontSize: props.size ? props.size : 15 },
       ]}
     />
   );
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
 
   secondary: {
     fontSize: 17,
-    color: Colors.text,
     lineHeight: 24,
     textTransform: "uppercase",
   },

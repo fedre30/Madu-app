@@ -7,12 +7,14 @@ import {
   AddressText,
   SimpleText,
   SecondaryTitle,
+  SecondaryText,
 } from "../../components/atoms/StyledText";
 import { API_URL } from "../../utils/api";
 import { Button, Subtitle } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Tag } from "../../components/atoms/Tag";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Criterium } from "../../components/atoms/Criterium";
 const data = {
   name: "ma boutique vegan",
   description:
@@ -22,6 +24,8 @@ const data = {
   city: "Montreuil",
   website: "https://www.google.com",
   tags: ["bio", "local", "traditionnelle"],
+  criteria: ["bio", "local", "lactosefree", "glutenfree"],
+  greenscore: "89",
 };
 
 export default function ShopInfoScreen({ navigation }) {
@@ -46,6 +50,20 @@ export default function ShopInfoScreen({ navigation }) {
         />
       </View>
       <View style={styles.infosContainer}>
+        <View style={styles.greenscore}>
+          <Image
+            source={require("../../assets/images/greenscore-2.png")}
+            style={{
+              flex: 1,
+              width: null,
+              height: null,
+              resizeMode: "contain",
+            }}
+          />
+          <SecondaryText style={{ marginTop: 5 }}>
+            {data.greenscore}%
+          </SecondaryText>
+        </View>
         <SecondaryTitle style={{ textAlign: "center" }}>
           {data.name}
         </SecondaryTitle>
@@ -53,15 +71,18 @@ export default function ShopInfoScreen({ navigation }) {
           {data.address}
         </AddressText>
         <SimpleText>{data.description}</SimpleText>
-        <View style={styles.tagsContainer}>
+        <View style={[styles.tagsContainer, { marginBottom: 50 }]}>
           {data.tags.map((tag, idx) => (
             <Tag title={tag} key={idx} />
           ))}
         </View>
-        <View>
-          <SecondaryTitle style={{ textAlign: "center" }}>
-            Critères de sélection
-          </SecondaryTitle>
+        <SecondaryTitle style={{ textAlign: "center", marginBottom: 10 }}>
+          Critères de sélection
+        </SecondaryTitle>
+        <View style={styles.tagsContainer}>
+          {data.criteria.map((criterium, idx) => (
+            <Criterium title={criterium} imageType={criterium} />
+          ))}
         </View>
       </View>
     </ScrollView>
@@ -91,7 +112,7 @@ const styles = StyleSheet.create({
   },
   infosContainer: {
     flex: 1,
-    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
     padding: 15,
     borderWidth: 1,
     borderTopLeftRadius: 20,
@@ -99,11 +120,19 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     marginTop: -20,
     backgroundColor: Colors.white,
+    justifyContent: "center",
   },
   tagsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: 30,
-    marginTop: 10,
+    marginTop: 20,
+    width: Dimensions.get("window").width,
+  },
+  greenscore: {
+    width: 70,
+    flexDirection: "row",
+    marginBottom: 20,
+    alignSelf: "center",
   },
 });

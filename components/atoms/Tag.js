@@ -15,38 +15,50 @@ export const Tag = (props) => {
       ]}
       contentContainerStyle={styles.contentContainer}
     >
-      <Text
-        style={[
-          styles.title,
-          { color: props.focused ? Colors.white : Colors.secondary },
-        ]}
-      >
-        {props.title}
-      </Text>
+      <View style={styles.button}>
+        <Text
+          style={[
+            styles.title,
+            { color: props.focused ? Colors.white : Colors.secondary },
+          ]}
+        >
+          {props.title}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFFFFF",
-    borderColor: Colors.secondary,
-    borderWidth: 1,
-    minWidth: 50,
-    height: 30,
-    borderRadius: 3,
-    margin: 5,
-    paddingRight: 10,
-    paddingLeft: 10,
-  },
+  container: {},
   contentContainer: {
     justifyContent: "center",
     alignItems: "center",
   },
+  button: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "transparent",
+    borderWidth: 1,
+    minWidth: 50,
+    height: 30,
+    borderRadius: 3,
+    paddingRight: 10,
+    paddingLeft: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 5,
+    paddingTop: 5,
+    marginRight: 10,
+    marginBottom: 10,
+  },
   title: {
     textAlign: "center",
     textTransform: "capitalize",
-    marginTop: 5,
-    fontSize: 15,
+    fontSize: 16,
   },
 });

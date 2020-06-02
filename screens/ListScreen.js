@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { StyleSheet, Text, View } from "react-native";
 import {
   RectButton,
@@ -10,10 +11,16 @@ import { ListCard } from "../components/molecules/Card";
 import { FilterButton } from "../components/atoms/FilterButton";
 import Modal from "react-native-modal";
 import { FilterView } from "../components/organisms/FilterView";
+import { API_URL } from "../utils/api";
 
 export default function ListScreen() {
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/shops`).then((resp) => setShops(resp.data));
+  }, []);
 
   const onPress = (type) => {
     setActiveFilters((prevState) =>
@@ -27,6 +34,7 @@ export default function ListScreen() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
+      {console.log(shops)}
       <ScrollView style={styles.filtersContainer} horizontal={true}>
         <FilterButton
           title="Filtres"
@@ -67,6 +75,7 @@ export default function ListScreen() {
       </View>
       <View style={styles.list}>
         <ListCard
+          id={1}
           name="Rose Bakery"
           address="Rue de test, 28"
           tags={["vegetarien", "bio", "vegan"]}

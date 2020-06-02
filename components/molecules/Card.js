@@ -10,10 +10,15 @@ import {
 } from "../atoms/StyledText";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { PriceIcon, WheelchairIcon, SuggestionIcon } from "../atoms/CardIcons";
+import { useNavigation } from "@react-navigation/native";
 
 export const ListCard = (props) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => {}} style={{ position: "relative" }}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Shop", { id: props.id })}
+      style={{ position: "relative" }}
+    >
       <Card>
         <View style={styles.greenscore}>
           <Image

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   View,
   Text,
   Image,
@@ -14,7 +13,11 @@ import { RectButton } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
 import Constants from "expo-constants";
 
-const Items = () => {
+const Items = (props) => {
+  const shadowStyle = {
+    shadowOpacity: (0, 0, 0, 0.1),
+  };
+  const list = props.list;
   renderButton = (text, onPress) => (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -34,26 +37,26 @@ const Items = () => {
       </View>
     </TouchableOpacity>
   );
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [isModalVisible_1, setModalVisible_1] = useState(false);
+  const [isFirstModalVisible, setFirstModalVisible] = useState(false);
+  const [isSecondModalVisible, setSecondModalVisible] = useState(false);
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableHighlight onPress={() => setModalVisible(true)}>
+      <TouchableHighlight onPress={() => setFirstModalVisible(true)}>
         <View style={styles.contentRecompense}>
           <View style={styles.contentView}>
             <Modal
-              isVisible={isModalVisible}
-              onBackdropPress={() => setModalVisible(false)}
+              isVisible={isFirstModalVisible}
+              onBackdropPress={() => setFirstModalVisible(false)}
               style={{
                 flex: 2,
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <View style={styles.modal_1}>
+              <View style={styles.firstdModal}>
                 <Image
-                  style={styles.iconImage_3}
+                  style={styles.threeIconImage}
                   source={require("../assets/images/Ellipse2.png")}
                 />
                 <Text
@@ -64,7 +67,7 @@ const Items = () => {
                     top: 100,
                   }}
                 >
-                  Récompense #2
+                  {list.title}
                 </Text>
                 <View
                   style={{
@@ -81,7 +84,11 @@ const Items = () => {
                   }}
                 >
                   <Text
-                    style={{ fontSize: 25, fontWeight: "bold", color: "#FFF" }}
+                    style={{
+                      fontSize: 25,
+                      fontWeight: "bold",
+                      color: "#FFF",
+                    }}
                   >
                     Débloqué !
                   </Text>
@@ -106,20 +113,19 @@ const Items = () => {
                 >
                   Vous avez débloqué un nouveau tips !
                 </Text>
-                {renderButton("SUIVANT", () => setModalVisible_1(true))}
+                {renderButton("SUIVANT", () => setSecondModalVisible(true))}
               </View>
               <Modal
-                isVisible={isModalVisible_1}
-                onBackdropPress={() => setModalVisible_1(false)}
+                isVisible={isSecondModalVisible}
                 style={{
                   flex: 2,
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <View style={styles.modal_2}>
+                <View style={styles.secondModal}>
                   <Image
-                    style={styles.iconImage_2}
+                    style={styles.secondIconImage}
                     source={require("../assets/images/Ellipse2.png")}
                   />
                   <Text
@@ -130,7 +136,7 @@ const Items = () => {
                       top: 100,
                     }}
                   >
-                    Récompense #1
+                    {list.title}
                   </Text>
                   <View
                     style={{
@@ -179,7 +185,10 @@ const Items = () => {
                     </Text>
                   </View>
 
-                  {renderButton("OK", () => setModalVisible_1(false))}
+                  {renderButton("OK", () => {
+                    setSecondModalVisible(false);
+                    setFirstModalVisible(false);
+                  })}
                 </View>
               </Modal>
             </Modal>
@@ -188,17 +197,17 @@ const Items = () => {
               style={styles.imageCadeaux}
               source={require("../assets/images/Ellipse1.png")}
             />
-            <View style={styles.contentDesciption}>
-              <Text style={styles.text}>Réference #2</Text>
+            <View style={(styles.contentProgress, shadowStyle)}>
+              <Text style={styles.text}>{list.title}</Text>
               <View style={styles.description}>
-                <Text>150</Text>
+                <Text>150 </Text>
                 <View style={styles.progressContainer}>
                   <View style={styles.porgressInner}></View>
                 </View>
-                <Text> / 350</Text>
+                <Text>{list.score}</Text>
                 <Image
                   source={require("../assets/images/Vector_1.png")}
-                  style={styles.iconImage1}
+                  style={styles.firstIconImage}
                 />
               </View>
             </View>
@@ -228,7 +237,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 5,
   },
-  modal_1: {
+  firstdModal: {
     backgroundColor: "#FFFFFF",
     width: "90%",
     alignItems: "center",
@@ -236,7 +245,7 @@ const styles = StyleSheet.create({
     height: 400,
     borderRadius: 4,
   },
-  modal_2: {
+  secondModal: {
     backgroundColor: "#FFFFFF",
     width: "90%",
     alignItems: "center",
@@ -245,11 +254,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     position: "absolute",
   },
-  iconImage_2: {
+  secondIconImage: {
     position: "absolute",
     bottom: 380,
   },
-  iconImage_3: {
+  threeIconImage: {
     position: "absolute",
     bottom: 330,
   },
@@ -258,12 +267,12 @@ const styles = StyleSheet.create({
     bottom: 5,
     left: 10,
   },
-  contentDesciption: {
+  contentProgress: {
     flex: 1,
     flexDirection: "column",
   },
   progressContainer: {
-    width: 166,
+    width: 140,
     height: 10,
     justifyContent: "center",
     backgroundColor: "#F0F0F0",
@@ -271,7 +280,7 @@ const styles = StyleSheet.create({
   },
 
   porgressInner: {
-    width: 60,
+    width: 20,
     height: 10,
     backgroundColor: "#69FFD4",
     borderRadius: 15,
@@ -281,6 +290,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    marginLeft: 20,
   },
   text: {
     fontWeight: "500",
@@ -288,7 +298,7 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     marginTop: 10,
   },
-  iconImage1: {
+  firstIconImage: {
     marginLeft: 3,
   },
 });

@@ -37,7 +37,7 @@ export default function PointsScreen() {
         </View>
         <Image
           source={require("../assets/images/Ellipse.png")}
-          style={styles.iconImage1}
+          style={styles.firstIconImage}
         />
       </View>
       <View style={styles.contentView}>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#69FFD4",
     borderRadius: 15,
   },
-  iconImage1: {
+  firstIconImage: {
     position: "relative",
     right: 30,
   },

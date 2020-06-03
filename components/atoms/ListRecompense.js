@@ -1,22 +1,10 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Button,
-  TouchableHighlight,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
 import Constants from "expo-constants";
 
 const Items = (props) => {
-  const shadowStyle = {
-    shadowOpacity: (0, 0, 0, 0.1),
-  };
   const list = props.list;
   renderButton = (text, onPress) => (
     <TouchableOpacity onPress={onPress}>
@@ -42,7 +30,7 @@ const Items = (props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableHighlight onPress={() => setFirstModalVisible(true)}>
+      <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
         <View style={styles.contentRecompense}>
           <View style={styles.contentView}>
             <Modal
@@ -55,62 +43,19 @@ const Items = (props) => {
               }}
             >
               <View style={styles.firstdModal}>
-                <Image
-                  style={styles.threeIconImage}
-                  source={require("../assets/images/Ellipse2.png")}
-                />
-                <Text
-                  style={{
-                    fontSize: 30,
-                    fontWeight: "bold",
-                    position: "absolute",
-                    top: 100,
-                  }}
-                >
-                  {list.title}
-                </Text>
-                <View
-                  style={{
-                    fontSize: 30,
-                    fontWeight: "bold",
-                    color: "#FFF",
-                    backgroundColor: "#69FFD4",
-                    width: 166,
-                    height: 41,
-                    borderRadius: 40,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginTop: 110,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 25,
-                      fontWeight: "bold",
-                      color: "#FFF",
-                    }}
-                  >
-                    Débloqué !
-                  </Text>
+                <View style={styles.contentImageCadeauxModal}>
+                  <Image
+                    style={styles.imageCadeauxModal}
+                    source={require("../../assets/images/cadeaux_1.png")}
+                  />
                 </View>
-                <Text
-                  style={{
-                    color: "#69FFD4",
-                    fontSize: 25,
-                    fontWeight: "bold",
-                    marginTop: 30,
-                  }}
-                >
-                  Bravo !
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    marginTop: 10,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+
+                <Text style={styles.firstModalTitle}>{list.title}</Text>
+                <View style={styles.firstModalDebock}>
+                  <Text style={styles.DeblockTitle}>Débloqué !</Text>
+                </View>
+                <Text style={styles.bravo}>Bravo !</Text>
+                <Text style={styles.firstModalTex}>
                   Vous avez débloqué un nouveau tips !
                 </Text>
                 {renderButton("SUIVANT", () => setSecondModalVisible(true))}
@@ -124,57 +69,19 @@ const Items = (props) => {
                 }}
               >
                 <View style={styles.secondModal}>
-                  <Image
-                    style={styles.secondIconImage}
-                    source={require("../assets/images/Ellipse2.png")}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 30,
-                      fontWeight: "bold",
-                      position: "absolute",
-                      top: 100,
-                    }}
-                  >
-                    {list.title}
-                  </Text>
-                  <View
-                    style={{
-                      fontSize: 30,
-                      fontWeight: "bold",
-                      color: "#FFF",
-                      backgroundColor: "#69FFD4",
-                      width: 166,
-                      height: 41,
-                      borderRadius: 40,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginTop: 100,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 25,
-                        fontWeight: "bold",
-                        color: "#FFF",
-                      }}
-                    >
-                      Débloqué !
-                    </Text>
+                  <View style={styles.contentImageCadeauxModalSecond}>
+                    <Image
+                      style={styles.imageCadeauxModalSecond}
+                      source={require("../../assets/images/cadeaux_1.png")}
+                    />
                   </View>
-                  <View
-                    style={{
-                      width: "90%",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginTop: 10,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 15,
-                      }}
-                    >
+
+                  <Text style={styles.secondModalTitle}>{list.title}</Text>
+                  <View style={styles.secondModalDeblock}>
+                    <Text style={styles.secondDeblockTitle}>Débloqué !</Text>
+                  </View>
+                  <View style={styles.secondModalContentText}>
+                    <Text style={styles.secondModalText}>
                       Nullam convallis tincidunt odio id auctor. In eleifend non
                       arcu a lacinia. Cras et ipsum id leo pharetra lobortis a
                       sed nibh. Morbi ante ligula, vehicula vel est ut, accumsan
@@ -192,12 +99,14 @@ const Items = (props) => {
                 </View>
               </Modal>
             </Modal>
+            <View style={styles.contentImageCadeaux}>
+              <Image
+                style={styles.imageCadeaux}
+                source={require("../../assets/images/cadeaux_1.png")}
+              />
+            </View>
 
-            <Image
-              style={styles.imageCadeaux}
-              source={require("../assets/images/Ellipse1.png")}
-            />
-            <View style={(styles.contentProgress, shadowStyle)}>
+            <View style={styles.contentProgress}>
               <Text style={styles.text}>{list.title}</Text>
               <View style={styles.description}>
                 <Text>150 </Text>
@@ -206,14 +115,14 @@ const Items = (props) => {
                 </View>
                 <Text>{list.score}</Text>
                 <Image
-                  source={require("../assets/images/Vector_1.png")}
+                  source={require("../../assets/images/Vector_1.png")}
                   style={styles.firstIconImage}
                 />
               </View>
             </View>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -235,7 +144,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   text: {
-    fontSize: 5,
+    fontSize: 15,
+    fontWeight: "bold",
   },
   firstdModal: {
     backgroundColor: "#FFFFFF",
@@ -244,6 +154,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 400,
     borderRadius: 4,
+  },
+  firstModalTitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    position: "absolute",
+    top: 90,
+  },
+  firstModalDebock: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#FFF",
+    backgroundColor: "#69FFD4",
+    width: 166,
+    height: 41,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    bottom: 60,
+  },
+  DeblockTitle: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#FFF",
+  },
+  bravo: {
+    color: "#69FFD4",
+    fontSize: 25,
+    fontWeight: "bold",
+    position: "relative",
+    bottom: 20,
+  },
+  firstModalText: {
+    fontSize: 15,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   secondModal: {
     backgroundColor: "#FFFFFF",
@@ -254,13 +200,76 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     position: "absolute",
   },
+  secondModalTitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    bottom: 45,
+  },
+  secondModalDeblock: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#FFF",
+    backgroundColor: "#69FFD4",
+    width: 166,
+    height: 41,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    bottom: 20,
+  },
+  secondDeblockTitle: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#FFF",
+  },
+  secondModalContentText: {
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+  },
   secondIconImage: {
     position: "absolute",
     bottom: 380,
   },
-  threeIconImage: {
-    position: "absolute",
-    bottom: 330,
+  secondModalText: {
+    fontSize: 15,
+  },
+  contentImageCadeauxModal: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    backgroundColor: "#EDF3FF",
+    alignItems: "center",
+    borderRadius: 60,
+    marginBottom: 100,
+    shadowOpacity: 0.1,
+    position: "relative",
+    bottom: 50,
+  },
+  contentImageCadeauxModalSecond: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    backgroundColor: "#EDF3FF",
+    alignItems: "center",
+    borderRadius: 60,
+    shadowOpacity: 0.1,
+    position: "relative",
+    bottom: 70,
+  },
+  imageCadeauxModal: {
+    width: 70,
+    height: 70,
+  },
+  contentImageCadeaux: {
+    width: 70,
+    height: 70,
+    borderRadius: 50,
+    marginLeft: 10,
+    justifyContent: "center",
+    backgroundColor: "#EDF3FF",
+    shadowOpacity: 0.1,
   },
   imageCadeaux: {
     position: "relative",
@@ -269,10 +278,12 @@ const styles = StyleSheet.create({
   },
   contentProgress: {
     flex: 1,
+    width: "100%",
+    shadowOpacity: (0, 0, 0, 0.1),
     flexDirection: "column",
   },
   progressContainer: {
-    width: 140,
+    width: "65%",
     height: 10,
     justifyContent: "center",
     backgroundColor: "#F0F0F0",
@@ -293,9 +304,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   text: {
-    fontWeight: "500",
+    fontWeight: "bold",
     fontSize: 15,
-    marginLeft: 18,
+    width: "100%",
+    marginLeft: 25,
     marginTop: 10,
   },
   firstIconImage: {

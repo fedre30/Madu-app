@@ -5,8 +5,8 @@ import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
 import { Row, Item } from "native-base";
-import Items from "./ListRecompense";
-import data from "./data";
+import Items from "../components/atoms/ListRecompense";
+import data from "../components/atoms/data";
 
 export default function PointsScreen() {
   return (
@@ -35,10 +35,12 @@ export default function PointsScreen() {
         <View style={styles.progressContainer}>
           <View style={styles.porgressInner}></View>
         </View>
-        <Image
-          source={require("../assets/images/Ellipse.png")}
-          style={styles.firstIconImage}
-        />
+        <View style={styles.imageContent}>
+          <Image
+            source={require("../assets/images/cadeaux_1.png")}
+            style={styles.firstIconImage}
+          />
+        </View>
       </View>
       <View style={styles.contentView}>
         <Text style={styles.title}>récompenses à débloquer</Text>
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   progressContainer: {
-    width: 303,
+    width: "80%",
     height: 10,
     justifyContent: "center",
     backgroundColor: "#F0F0F0",
@@ -103,9 +105,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#69FFD4",
     borderRadius: 15,
   },
+  imageContent: {
+    width: 50,
+    borderRadius: 30,
+    height: 50,
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowOpacity: 0.1,
+  },
   firstIconImage: {
-    position: "relative",
-    right: 30,
+    width: 30,
+    height: 30,
   },
   title: {
     textTransform: "uppercase",

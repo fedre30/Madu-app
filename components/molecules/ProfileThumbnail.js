@@ -1,6 +1,5 @@
 import * as React from "react";
 import { StyleSheet, TouchableOpacity,  Image, View } from "react-native";
-import Colors from "../../constants/Colors";
 import { ThumbnailTitle } from "../../components/atoms/StyledText";
 
 const imagesTypes = {
@@ -17,9 +16,9 @@ const imagesTypes = {
 export const Thumbnail = (props) => {
   return (
     <View style={[styles.container, {backgroundColor: props.backgroundColor}]}>
-      <TouchableOpacity style={styles.button} > 
+      <TouchableOpacity style={styles.button} onPress={props.onPress} > 
         <Image source={imagesTypes[props.imageType]} style={styles.icon} />
-        <ThumbnailTitle {...props}/>
+        <ThumbnailTitle style={styles.title} {...props}/>
       </TouchableOpacity>
     </View>
   );
@@ -27,18 +26,24 @@ export const Thumbnail = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',    
-    width: 162,
-    height: 162,
+    justifyContent: 'center',
+    width: 152,
+    height: 152,
     borderRadius: 10,
   },
+
   button: {
     position: "absolute",
     left: 18,
-    top: 22,
+    top: 22, 
   },
+
   icon: {
-    height: 60,
-    width: 60,
-  }
+    height: 50,
+    width: 50,
+  },
+
+  title: {
+    top: 15,
+  },
 });

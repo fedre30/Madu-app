@@ -101,13 +101,15 @@ export default class Sliding extends Component {
             />
             <TouchableOpacity
               style={{
-                flex: 2,
+                flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 50,
                 borderRightWidth: 0,
                 borderTopRightRadius: 0,
-                borderBottomEndRadius: 0,
+                borderBottomRightRadius: 0,
+                borderWidth: 1,
+                borderColor: "#DFDFDF",
               }}
               onLayout={(event) =>
                 this.setState({
@@ -130,11 +132,13 @@ export default class Sliding extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={{
-                flex: 2,
+                flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 50,
                 borderLeftWidth: 0,
+                borderWidth: 1,
+                borderColor: "#DFDFDF",
                 borderTopLeftRadius: 0,
                 borderBottomLeftRadius: 0,
               }}

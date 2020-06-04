@@ -15,6 +15,7 @@ export default class Sliding extends Component {
     xTabOne: 0,
     xtabTwo: 0,
     translateX: new Animated.Value(0),
+    translateY: -1000,
     translateXTabOne: new Animated.Value(0),
     translateXTabTwo: new Animated.Value(width),
   };
@@ -63,6 +64,7 @@ export default class Sliding extends Component {
       active,
       translateXTabTwo,
       translateXTabOne,
+      translateY,
     } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -199,6 +201,9 @@ export default class Sliding extends Component {
                 },
               ],
             }}
+            onLayout={(event) =>
+              this.setState({ translateY: event.nativeEvent.layout.height })
+            }
           >
             <Text>Hi i am a cut cat </Text>
           </Animated.View>
@@ -209,6 +214,9 @@ export default class Sliding extends Component {
               transform: [
                 {
                   translateX: translateXTabTwo,
+                },
+                {
+                  translateY: -translateY,
                 },
               ],
             }}

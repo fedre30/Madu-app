@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../../constants/Colors";
 import { Container, Header, Content, Card, CardItem, Body } from "native-base";
 import {
@@ -77,14 +77,15 @@ const styles = StyleSheet.create({
   infosContainer: {
     flexDirection: "row",
     alignItems: "center",
+    width: Dimensions.get("window").width,
   },
   infos: {
     flexDirection: "row",
     marginRight: 30,
   },
   greenscore: {
-    width: 60,
-    height: 80,
+    width: 70,
+    height: 60,
     position: "absolute",
     zIndex: 2,
     top: -10,

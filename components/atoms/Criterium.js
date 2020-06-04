@@ -1,18 +1,13 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Dimensions } from "react-native";
 import { SimpleText, Title, Subtitle, SecondaryText } from "./StyledText";
 import Colors from "../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const imagesTypes = {
-  veggie: require("../../assets/images/tag-veggie.png"),
-  glutenfree: require("../../assets/images/tag-glutenfree.png"),
-  bio: require("../../assets/images/bio.png"),
-  vegan: require("../../assets/images/vegan.png"),
-  local: require("../../assets/images/local.png"),
-  fish: require("../../assets/images/tag-pesci.png"),
-  lactosefree: require("../../assets/images/tag-lactosefree.png"),
-  plasticfree: require("../../assets/images/tag-plastic.png"),
+  food: require("../../assets/images/food.png"),
+  equipment: require("../../assets/images/equipment.png"),
+  social: require("../../assets/images/social.png"),
 };
 
 export const Criterium = (props) => {
@@ -28,27 +23,37 @@ export const Criterium = (props) => {
       contentContainerStyle={styles.contentContainer}
     >
       {props.imageType && (
-        <Image source={imagesTypes[props.imageType]} style={styles.image} />
+        <View style={styles.imageContainer}>
+          <Image source={imagesTypes[props.imageType]} style={styles.image} />
+        </View>
       )}
-
-      <SecondaryText style={styles.title} size={13}>
-        {props.title}
-      </SecondaryText>
+      <View style={styles.textContainer}>
+        <SecondaryText style={styles.title} size={13}>
+          {props.title} -
+        </SecondaryText>
+        <SecondaryText style={styles.title} size={13} color={Colors.secondary}>
+          {props.score}%
+        </SecondaryText>
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-    maxWidth: "auto",
-    height: 90,
-    minWidth: 130,
+    height: 150,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   contentContainer: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingTop: 30,
+  },
+  imageContainer: {
+    width: 100,
+    height: 100,
   },
   image: {
     flex: 1,
@@ -56,10 +61,16 @@ const styles = StyleSheet.create({
     height: null,
     resizeMode: "contain",
   },
+  textContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 20,
+  },
   title: {
     textAlign: "center",
     marginTop: 10,
     textTransform: "capitalize",
     color: Colors.grey,
+    marginRight: 15,
   },
 });

@@ -32,7 +32,11 @@ export const SecondaryText = (props) => {
       style={[
         props.style,
         styles.secondary,
-        { fontFamily: "gotham-medium", fontSize: props.size ? props.size : 15 },
+        {
+          fontFamily: "gotham-medium",
+          fontSize: props.size ? props.size : 15,
+          color: props.color ? props.color : Colors.text,
+        },
       ]}
     />
   );

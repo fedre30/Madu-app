@@ -12,20 +12,12 @@
     "accessibility": true,
     "suggestionRate": 89,
     "price": 2,
-    "criteria": [
-      {
-        "type": "nourriture",
-        "note": 79
-      },
-      {
-        "type": "equipment",
-        "note": 63
-      },
-      {
-        "type": "social",
-        "note": 89
-      }
-    ]
+    "criteria": {
+      "food": { "note": 89 },
+      "equipment": { "note": 37 },
+      "social": { "note": 78 }
+    },
+    "openingHours": "Tous les jours sauf le lundi de 10h à 18h."
   },
   {
     "id": 2,
@@ -40,19 +32,11 @@
     "accessibility": true,
     "suggestionRate": 74,
     "price": 3,
-    "criteria": [
-      {
-        "type": "nourriture",
-        "note": 67
-      },
-      {
-        "type": "equipment",
-        "note": 63
-      },
-      {
-        "type": "social",
-        "note": 82
-      }
-    ]
+    "criteria": {
+      "food": { "note": 89 },
+      "equipment": { "note": 37 },
+      "social": { "note": 78 }
+    },
+    "openingHours": "Tous les jours sauf le lundi de 10h à 18h."
   }
 ]

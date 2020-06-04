@@ -20,20 +20,6 @@ export const ListCard = (props) => {
       style={{ position: "relative", marginBottom: 20 }}
     >
       <Card>
-        <View style={styles.greenscore}>
-          <Image
-            source={require("../../assets/images/greenscore.png")}
-            style={{
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: "contain",
-            }}
-          />
-          <SecondaryText style={{ textAlign: "center" }}>
-            {props.greenscore}%
-          </SecondaryText>
-        </View>
         <CardItem cardBody>
           <Image
             source={require("../../assets/images/image_test.png")}
@@ -53,12 +39,9 @@ export const ListCard = (props) => {
             </View>
             <View style={styles.infosContainer}>
               <View style={styles.infos}>
-                <PriceIcon focused={props.price >= 1} />
-                <PriceIcon focused={props.price >= 2} />
-                <PriceIcon focused={props.price >= 3} />
-              </View>
-              <View style={styles.infos}>
-                <WheelchairIcon focused={props.accessibility} />
+                <SecondaryText style={{ textAlign: "center" }}>
+                  {props.greenscore}%
+                </SecondaryText>
               </View>
               {props.suggestionRate && (
                 <View style={styles.infos}>
@@ -77,28 +60,12 @@ const styles = StyleSheet.create({
   infosContainer: {
     flexDirection: "row",
     alignItems: "center",
+    flex: 2,
+    width: Dimensions.get("window").width / 2 - 20,
+    height: 100,
   },
   infos: {
     flexDirection: "row",
     marginRight: 30,
-  },
-  greenscore: {
-    width: 60,
-    height: 80,
-    position: "absolute",
-    zIndex: 2,
-    top: -10,
-    left: -10,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-    justifyContent: "center",
   },
 });

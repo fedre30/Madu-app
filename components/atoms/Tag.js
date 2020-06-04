@@ -2,6 +2,7 @@ import React from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
 import Colors from "../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { SimpleText } from "./StyledText";
 
 export const Tag = (props) => {
   return (
@@ -16,14 +17,16 @@ export const Tag = (props) => {
       contentContainerStyle={styles.contentContainer}
     >
       <View style={styles.button}>
-        <Text
+        <SimpleText
+          color={Colors.secondary}
+          fontSize={16}
           style={[
             styles.title,
             { color: props.focused ? Colors.white : Colors.secondary },
           ]}
         >
           {props.title}
-        </Text>
+        </SimpleText>
       </View>
     </TouchableOpacity>
   );
@@ -59,6 +62,5 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     textTransform: "capitalize",
-    fontSize: 16,
   },
 });

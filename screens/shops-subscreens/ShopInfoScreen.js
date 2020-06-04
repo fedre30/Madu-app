@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   Title,
-  AddressText,
+  ItalicText,
   SimpleText,
   SecondaryTitle,
   SecondaryText,
@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Tag } from "../../components/atoms/Tag";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Criterium } from "../../components/atoms/Criterium";
+import { FullButton } from "../../components/atoms/FullButton";
 const data = {
   name: "ma boutique vegan",
   description:
@@ -64,25 +65,35 @@ export default function ShopInfoScreen({ navigation }) {
             {data.greenscore}%
           </SecondaryText>
         </View>
-        <SecondaryTitle style={{ textAlign: "center" }}>
-          {data.name}
-        </SecondaryTitle>
-        <AddressText style={{ textAlign: "center", marginBottom: 20 }}>
+        <View style={{ marginTop: 10 }}>
+          <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
+            {data.name}
+          </SecondaryTitle>
+        </View>
+        <ItalicText style={{ textAlign: "center", marginBottom: 20 }}>
           {data.address}
-        </AddressText>
+        </ItalicText>
         <SimpleText>{data.description}</SimpleText>
         <View style={[styles.tagsContainer, { marginBottom: 50 }]}>
           {data.tags.map((tag, idx) => (
             <Tag title={tag} key={idx} />
           ))}
         </View>
-        <SecondaryTitle style={{ textAlign: "center", marginBottom: 10 }}>
+        <SecondaryTitle
+          style={{ textAlign: "center", marginBottom: 10 }}
+          fontSize={20}
+        >
           Critères de sélection
         </SecondaryTitle>
         <View style={styles.tagsContainer}>
           {data.criteria.map((criterium, idx) => (
-            <Criterium title={criterium} imageType={criterium} />
+            <Criterium title={criterium} imageType={criterium} key={idx} />
           ))}
+        </View>
+        <View>
+          <FullButton title="Site Internet" />
+          <FullButton title="Page Facebook" />
+          <FullButton title="Remettre en question le greenscore" />
         </View>
       </View>
     </ScrollView>

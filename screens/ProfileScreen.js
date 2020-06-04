@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     left: 131,
     top: 45,
     
-//     shadowColor: "#000",
+// shadowColor: "#000",
 // shadowOffset: {
 // 	width: 0,
 // 	height: 6,

@@ -16,7 +16,6 @@ export default function BottomTabNavigator({ navigation, route }) {
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   //navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   navigation.setOptions({ headerShown: false });
-
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen

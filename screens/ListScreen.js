@@ -12,6 +12,7 @@ import { FilterButton } from "../components/atoms/FilterButton";
 import Modal from "react-native-modal";
 import { FilterView } from "../components/organisms/FilterView";
 import { API_URL } from "../utils/api";
+import data from "../utils/poi-api-test.json";
 
 export default function ListScreen() {
   const [activeFilters, setActiveFilters] = useState([]);
@@ -19,7 +20,9 @@ export default function ListScreen() {
   const [shops, setShops] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/shops`).then((resp) => setShops(resp.data));
+    if (data) {
+      setShops(data);
+    }
   }, []);
 
   const onPress = (type) => {
@@ -34,7 +37,6 @@ export default function ListScreen() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      {console.log(shops)}
       <ScrollView style={styles.filtersContainer} horizontal={true}>
         <FilterButton
           title="Filtres"
@@ -74,16 +76,19 @@ export default function ListScreen() {
         </Modal>
       </View>
       <View style={styles.list}>
-        <ListCard
-          id={1}
-          name="Rose Bakery"
-          address="Rue de test, 28"
-          tags={["vegetarien", "bio", "vegan"]}
-          price={2}
-          accessibility={true}
-          suggestionRate={78}
-          greenscore={80}
-        />
+        {shops.map((shop) => (
+          <ListCard
+            key={shop.id}
+            id={shop.id}
+            name={shop.name}
+            address={shop.address}
+            tags={shop.tags}
+            price={shop.price}
+            accessibility={shop.accessibility}
+            suggestionRate={shop.suggestionRate}
+            greenscore={shop.greenscore}
+          />
+        ))}
       </View>
     </ScrollView>
   );

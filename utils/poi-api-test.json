@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "given",
+    "description": "Cantine végetarienne",
+    "address": "89 rue de Bagnolet",
+    "zipcode": "75020",
+    "city": "Paris",
+    "website": "https://www.facebook.com/givencantine/",
+    "tags": ["bio", "local", "traditionnelle"],
+    "greenscore": 78,
+    "accessibility": true,
+    "suggestionRate": 89,
+    "price": 2,
+    "criteria": [
+      {
+        "type": "nourriture",
+        "note": 79
+      },
+      {
+        "type": "equipment",
+        "note": 63
+      },
+      {
+        "type": "social",
+        "note": 89
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "abattoir vegetal",
+    "description": "Restaurant vegan situé au coeur de Montmartre proposant plats de cuisine végétale très variés. Brunch disponible le dimanche",
+    "address": "61 rue Ramey",
+    "zipcode": "75018",
+    "city": "Paris",
+    "website": "https://www.abattoirvegetal.com",
+    "tags": ["bio", "local", "traditionnelle"],
+    "greenscore": 70,
+    "accessibility": true,
+    "suggestionRate": 74,
+    "price": 3,
+    "criteria": [
+      {
+        "type": "nourriture",
+        "note": 67
+      },
+      {
+        "type": "equipment",
+        "note": 63
+      },
+      {
+        "type": "social",
+        "note": 82
+      }
+    ]
+  }
+]

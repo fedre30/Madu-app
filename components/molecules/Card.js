@@ -17,7 +17,7 @@ export const ListCard = (props) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Shop", { id: props.id })}
-      style={{ position: "relative" }}
+      style={{ position: "relative", marginBottom: 20 }}
     >
       <Card>
         <View style={styles.greenscore}>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   greenscore: {
     width: 60,
-    height: 60,
+    height: 80,
     position: "absolute",
     zIndex: 2,
     top: -10,

@@ -93,8 +93,8 @@ const Items = (props) => {
                   </View>
 
                   {renderButton("OK", () => {
-                    setSecondModalVisible(false);
                     setFirstModalVisible(false);
+                    setSecondModalVisible(false);
                   })}
                 </View>
               </Modal>

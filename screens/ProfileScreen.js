@@ -33,7 +33,7 @@ export const Profile = ({navigation}) => {
             imageType="challenges"
             width={207}
             height={129}
-            left={136}
+            left={96}
             top={10}
             //onPress={() => navigation.navigate('ChallengesPageName')}
           >Mes défis
@@ -44,7 +44,7 @@ export const Profile = ({navigation}) => {
             imageType="jackpotAndRewards"
             width={176}
             height={130}
-            left={165}
+            left={125}
             top={-12}
             // onPress={() => navigation.navigate('jackpotAndRewardsPageName')}
           >Cagnotte et récompenses
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa",
-    padding: 10,
+    //padding: 10,
   },
   
   contentContainer: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 70,
     height: 70,
-    left: 71,
+    left: 81,
     top: 0,
   },
   
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 100,
     height: 21,
-    left: 57,
+    left: 67,
     top: 95,
 
     fontFamily: "gotham-bold",
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 123,
     height: 20,
-    left: 45,
+    left: 55,
     top: 115,
 
     fontFamily: "gotham-bold",
@@ -145,11 +145,11 @@ const styles = StyleSheet.create({
   },
 
   profileOption: {
-    top: 201,
     flexDirection: "row",
     flexWrap: "wrap",
+
     width: Dimensions.get("window").width,
-    height: 739,
-    marginBottom: 5,
+    height: 759,
+    top: 201,
   },
 });

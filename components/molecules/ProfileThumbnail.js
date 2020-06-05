@@ -15,12 +15,12 @@ export const Thumbnail = (props) => {
         <ThumbnailTitle style={styles.title} {...props}/>
         <Image 
           source={imagesTypes[props.imageType]} 
-          style={{
+          style={[styles.icon, {
             width: props.width || 100, 
             height: props.height || 100, 
             left: props.left || 190, 
-            top: props.top || 15 
-          }}
+            top: props.top || 15,
+          }]}
           />
       </TouchableOpacity>
     </View>
@@ -30,10 +30,10 @@ export const Thumbnail = (props) => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    width: 354,
+    width: 328,
     height: 160,
-    margin: 9,
-    justifyContent: "space-around",
+    marginBottom: 30,
+    marginLeft: 16,
     borderRadius: 10,
   },
 
@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 25,
     top: 0,
+  },
+
+  icon:{
+    borderRadius: 10,
   },
 
   title: {

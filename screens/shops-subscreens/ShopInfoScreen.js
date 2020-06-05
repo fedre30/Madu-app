@@ -130,8 +130,8 @@ export default function ShopInfoScreen({ route, navigation }) {
                   initialRegion={{
                     latitude: location.latitude,
                     longitude: location.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
+                    latitudeDelta: 0.00922,
+                    longitudeDelta: 0.00421,
                   }}
                 >
                   <Marker coordinate={location} />

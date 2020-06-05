@@ -6,8 +6,12 @@ import {
   Animated,
   ScrollView,
   Dimensions,
+  FlatList,
+  Image,
 } from "react-native";
 const { width } = Dimensions.get("window");
+import DataIndividuel from "./DataIndividuel";
+import Individuel from "./Individuel";
 
 export default class Sliding extends Component {
   state = {
@@ -221,7 +225,13 @@ export default class Sliding extends Component {
               ],
             }}
           >
-            <Text>Hi i am a bad cat </Text>
+            <View>
+              <FlatList
+                data={DataIndividuel}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => <Individuel />}
+              />
+            </View>
           </Animated.View>
         </ScrollView>
       </View>

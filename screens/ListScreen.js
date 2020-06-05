@@ -14,7 +14,7 @@ import { FilterView } from "../components/organisms/FilterView";
 import { API_URL } from "../utils/api";
 import data from "../utils/poi-api-test.json";
 
-export default function ListScreen() {
+export const ListScreen = () => {
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [shops, setShops] = useState([]);
@@ -92,7 +92,7 @@ export default function ListScreen() {
       </View>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

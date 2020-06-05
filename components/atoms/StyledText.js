@@ -139,11 +139,9 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   thumbnailTitle:{
-    // fontWeight: 500, 
-    fontSize: 15, 
+    fontSize: 18, 
     lineHeight: 21,
-    alignItems: "center",
-    textTransform: "uppercase",
+    width: 200,
     color: Colors.black,
   },
 

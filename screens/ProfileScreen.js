@@ -2,26 +2,16 @@ import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
-import Colors from "../constants/Colors";
+import { ScrollView } from "react-native-gesture-handler";
 import { createStackNavigator } from '@react-navigation/stack';
+
+import Colors from "../constants/Colors";
 import { Thumbnail } from "../components/molecules/ProfileThumbnail";
+// import {ChallengesPageName} from "./profile-subscreens/ChallengesPageName";
+// import {jackpotAndRewardsPageName} from "./profile-subscreens/jackpotAndRewardsPageName";
+import {NewAddress} from "./profile-subscreens/NewAddressScreen";
 
 const PointsStack = createStackNavigator();
-
-export const Challenges = () => {
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <View>
-        <Text>Challenges</Text>
-      </View>
-    </ScrollView>
-  );
-}
-
 
 export const Profile = ({navigation}) => {
   navigation.setOptions({ headerShown: false });
@@ -33,67 +23,42 @@ export const Profile = ({navigation}) => {
       <ScrollView>
         <View style={styles.headerContainer} >
           <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
-          <Image style={styles.trophy} source={require('../assets/images/clover.png')} />
-          <Image style={styles.editProfile} source={require('../assets/images/edit-pencil.png')} />
           <Text style={styles.name}>Marie TE</Text>
           <Text style={styles.institution}>Little cigogne</Text>
         </View>
       
         <View style={styles.profileOption} >
           <Thumbnail 
-            backgroundColor={"#EBF3FF"} 
-            imageType="jackpot"
-            onPress={() => navigation.navigate('Challenges')}
-          >MA CAGNOTTE
+            backgroundColor={"#FDE6E6"} 
+            imageType="challenges"
+            width={207}
+            height={129}
+            left={136}
+            top={10}
+            //onPress={() => navigation.navigate('ChallengesPageName')}
+          >Mes défis
           </Thumbnail>
               
           <Thumbnail 
-            backgroundColor={"#DCFFF7"} 
-            imageType="rewards"
-            onPress={() => navigation.navigate('Challenges')}
-          >Mes récompenses
-          </Thumbnail>
-            
-          <Thumbnail 
-            backgroundColor={"#EEE9FF"} 
-            imageType="challenges"
-            onPress={() => navigation.navigate('Challenges')}
-          >Mon défi quotidien
-          </Thumbnail>
-            
-          <Thumbnail 
-            backgroundColor={"#FFF1E9"} 
-            imageType="newAddress"
-            onPress={() => navigation.navigate('Challenges')}
-          >Proposer une nouvelle adresse
-          </Thumbnail>
-            
-          <Thumbnail 
             backgroundColor={"#E9F7FF"} 
-            imageType="quizz"
-            onPress={() => navigation.navigate('Challenges')}
-          >Le quiz
+            imageType="jackpotAndRewards"
+            width={176}
+            height={130}
+            left={165}
+            top={-12}
+            // onPress={() => navigation.navigate('jackpotAndRewardsPageName')}
+          >Cagnotte et récompenses
           </Thumbnail>
             
           <Thumbnail 
-            backgroundColor={"#FFFCE3"} 
-            imageType="ranking"
-            onPress={() => navigation.navigate('Challenges')}
-          >Classement
-          </Thumbnail>
-            
-          <Thumbnail 
-            backgroundColor={"#FFF1E9"} 
-            imageType="infos"
-            onPress={() => navigation.navigate('Challenges')}
-          >Informations
-          </Thumbnail>
-            
-          <Thumbnail 
-            backgroundColor={"#FFE9E9"} 
-            imageType="settings"
-            onPress={() => navigation.navigate('Challenges')}
-          >Paramètres
+            backgroundColor={"#E3E8FF"} 
+            imageType="newAddress"
+            width={114}
+            height={115}
+            left={166}
+            top={3}
+            onPress={() => navigation.navigate('NewAddress')}
+          >Proposer une nouvelle adresse
           </Thumbnail>
         </View>
         
@@ -107,7 +72,9 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      <PointsStack.Screen name="Challenges" component={Challenges} />
+      {/* <PointsStack.Screen name="ChallengesName" component={ChallengesPageName} /> */}
+      {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
+      <PointsStack.Screen name="NewAddress" component={NewAddress} />
     </PointsStack.Navigator>
   );
 }
@@ -131,67 +98,41 @@ const styles = StyleSheet.create({
     height: "auto",
     left: 66,
     top: 30,
-
-    backgroundColor: "#fda",//"#075",
   },
 
   profilePic: {
     position: "absolute",
-    width: 100,
-    height: 100,
-    left: 61,
+    width: 70,
+    height: 70,
+    left: 71,
     top: 0,
-  },
-  
-  trophy: {
-    position: "absolute",
-    width: 50,
-    height: 50,
-    left: 0,
-    top: 55,
-  },
-  
-  editProfile: {
-    position: "absolute",
-    width: 50,
-    height: 50,
-    left: 131,
-    top: 45,
-    
-// shadowColor: "#000",
-// shadowOffset: {
-// 	width: 0,
-// 	height: 6,
-// },
-// shadowOpacity: 0.37,
-// shadowRadius: 7.49,
-
-// elevation: 12,
   },
   
   name: {
     position: "absolute",
     width: 100,
     height: 21,
-    left: 62,
-    top: 126,
+    left: 57,
+    top: 95,
 
     fontFamily: "gotham-bold",
+    fontStyle: "normal",
+    fontWeight: "bold",
     fontSize: 20,
     lineHeight: 21,
 
     textAlign: "center",
     textTransform: "uppercase",
-    
-    color: "#000000",
+
+    color: Colors.black,
   },
-  
+
   institution: {
     position: "absolute",
     width: 123,
     height: 20,
-    left: 50,
-    top: 155,
+    left: 45,
+    top: 115,
 
     fontFamily: "gotham-bold",
     fontSize: 14,
@@ -204,14 +145,11 @@ const styles = StyleSheet.create({
   },
 
   profileOption: {
-    top: 251,
-    paddingLeft: 15,
+    top: 201,
     flexDirection: "row",
+    flexWrap: "wrap",
     width: Dimensions.get("window").width,
-    height: 709,
-    
-
-
-    backgroundColor: "#ab0",
+    height: 739,
+    marginBottom: 5,
   },
 });

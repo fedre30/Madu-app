@@ -11,7 +11,7 @@ import {
   ButtonText,
 } from "../../components/atoms/StyledText";
 import { API_URL } from "../../utils/api";
-import api from "../../utils/poi-api-test.json";
+import shops from "../../utils/poi-api-test.json";
 import { Button, Subtitle } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Tag } from "../../components/atoms/Tag";
@@ -31,7 +31,7 @@ export default function ShopInfoScreen({ route, navigation }) {
 
   useEffect(() => {
     if (index) {
-      setData(api.find((obj) => obj.id === index));
+      setData(shops.find((obj) => obj.id === index));
     }
     if (data) {
       const address = `${data.address}, ${data.zipcode}, ${data.city}`;
@@ -165,20 +165,17 @@ export default function ShopInfoScreen({ route, navigation }) {
             fontSize={20}
           ></SecondaryTitle>
           <View style={styles.miniCards}>
-            <MiniCard
-              name={data.name}
-              address={data.address}
-              greenscore={data.greenscore}
-              suggestionRate={data.suggestionRate}
-              tags={data.tags}
-            />
-            <MiniCard
-              name={data.name}
-              address={data.address}
-              greenscore={data.greenscore}
-              suggestionRate={data.suggestionRate}
-              tags={data.tags}
-            />
+            {shops.slice(0, 2).map((shop, idx) => (
+              <MiniCard
+                key={idx}
+                id={shop.id}
+                name={shop.name}
+                address={shop.address}
+                greenscore={shop.greenscore}
+                suggestionRate={shop.suggestionRate}
+                tags={shop.tags}
+              />
+            ))}
           </View>
           <View>
             <FullButton title="Site Internet" />

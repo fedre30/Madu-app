@@ -27,7 +27,7 @@
     "zipcode": "75018",
     "city": "Paris",
     "website": "https://www.abattoirvegetal.com",
-    "tags": ["bio", "local", "traditionnelle"],
+    "tags": ["bio", "local", "vegan"],
     "greenscore": 70,
     "accessibility": true,
     "suggestionRate": 74,
@@ -36,6 +36,26 @@
       "food": { "note": 89 },
       "equipment": { "note": 37 },
       "social": { "note": 78 }
+    },
+    "openingHours": "Tous les jours sauf le lundi de 10h à 18h."
+  },
+  {
+    "id": 3,
+    "name": "vg patisserie",
+    "description": "Pâtisseriee vegan située près de Bastille. Différents types de pâtisserie sont proposés, dont des alternatives sans lactose ouu gluten",
+    "address": "123 Boulevard Voltaire",
+    "zipcode": "75018",
+    "city": "Paris",
+    "website": "hvgpatisserie-commande.fr",
+    "tags": ["patisserie", "glutenfree", "vegan"],
+    "greenscore": 74,
+    "accessibility": true,
+    "suggestionRate": 90,
+    "price": 1,
+    "criteria": {
+      "food": { "note": 72 },
+      "equipment": { "note": 87 },
+      "social": { "note": 68 }
     },
     "openingHours": "Tous les jours sauf le lundi de 10h à 18h."
   }

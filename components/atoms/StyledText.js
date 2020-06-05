@@ -12,7 +12,15 @@ export const SimpleText = (props) => {
   return (
     <Text
       {...props}
-      style={[props.style, styles.text, { fontFamily: "gotham-book" }]}
+      style={[
+        props.style,
+        {
+          fontFamily: "gotham-book",
+          lineHeight: props.lineHeight ? props.lineHeight : 28,
+          color: props.color ? props.color : Colors.text,
+          fontSize: props.fontSize ? props.fontSize : 14,
+        },
+      ]}
     />
   );
 };
@@ -24,7 +32,11 @@ export const SecondaryText = (props) => {
       style={[
         props.style,
         styles.secondary,
-        { fontFamily: "gotham-medium", fontSize: 15 },
+        {
+          fontFamily: "gotham-medium",
+          fontSize: props.size ? props.size : 15,
+          color: props.color ? props.color : Colors.text,
+        },
       ]}
     />
   );
@@ -55,19 +67,29 @@ export const SecondaryTitle = (props) => {
   return (
     <Text
       {...props}
-      style={[props.style, styles.secondary, { fontFamily: "gotham-medium" }]}
+      style={[
+        props.style,
+        styles.secondary,
+        {
+          fontFamily: "gotham-medium",
+          fontSize: props.fontSize ? props.fontSize : 17,
+        },
+      ]}
     />
   );
 };
 
-export const AddressText = (props) => {
+export const ItalicText = (props) => {
   return (
     <Text
       {...props}
       style={[
         props.style,
-        styles.address,
-        { fontFamily: "gotham-book-italic" },
+        styles.italic,
+        {
+          fontFamily: "gotham-book-italic",
+          color: props.color ? props.color : Colors.text,
+        },
       ]}
     />
   );
@@ -109,11 +131,6 @@ export const ButtonText = (props) => {
 
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 14,
-    color: Colors.text,
-    lineHeight: 24,
-  },
   title: {
     fontSize: 17,
     color: Colors.text,
@@ -123,14 +140,12 @@ const styles = StyleSheet.create({
 
   secondary: {
     fontSize: 17,
-    color: Colors.text,
-    lineHeight: 24,
+    lineHeight: 30,
     textTransform: "uppercase",
   },
 
-  address: {
+  italic: {
     fontSize: 15,
-    color: Colors.text,
     lineHeight: 24,
   },
   tags: {

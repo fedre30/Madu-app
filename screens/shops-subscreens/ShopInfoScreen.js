@@ -8,6 +8,7 @@ import {
   SimpleText,
   SecondaryTitle,
   SecondaryText,
+  ButtonText,
 } from "../../components/atoms/StyledText";
 import { API_URL } from "../../utils/api";
 import api from "../../utils/poi-api-test.json";
@@ -20,6 +21,7 @@ import { FullButton } from "../../components/atoms/FullButton";
 import { getLocation, geocodeLocationByName } from "../../utils/map";
 import MapView, { Marker } from "react-native-maps";
 import Geocoder from "react-native-geocoding";
+import { MiniCard } from "../../components/molecules/MiniCard";
 
 export default function ShopInfoScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -54,7 +56,7 @@ export default function ShopInfoScreen({ route, navigation }) {
           <Ionicons name="md-arrow-round-back" size={20} />
         </Button>
         <Image
-          source={require("../../assets/images/image_test.png")}
+          source={require("../../assets/images/abattoirveg.jpg")}
           style={{
             flex: 1,
             width: null,
@@ -66,15 +68,17 @@ export default function ShopInfoScreen({ route, navigation }) {
       {data && (
         <View style={styles.infosContainer}>
           <View style={styles.greenscore}>
-            <Image
-              source={require("../../assets/images/greenscore-2.png")}
-              style={{
-                flex: 1,
-                width: null,
-                height: null,
-                resizeMode: "contain",
-              }}
-            />
+            <View style={{ width: 40, height: 30, flex: 1 }}>
+              <Image
+                source={require("../../assets/images/greenscore-2.png")}
+                style={{
+                  flex: 1,
+                  width: null,
+                  height: null,
+                  resizeMode: "contain",
+                }}
+              />
+            </View>
             <SecondaryText style={{ marginTop: 5 }}>
               {data.greenscore}%
             </SecondaryText>
@@ -135,6 +139,47 @@ export default function ShopInfoScreen({ route, navigation }) {
               </View>
             )}
           </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              marginBottom: 50,
+              marginTop: 50,
+            }}
+          >
+            <SecondaryTitle
+              style={{ textAlign: "center", marginBottom: 10 }}
+              fontSize={20}
+            >
+              vous voulez exprimer votre avis ?
+            </SecondaryTitle>
+
+            <Button style={styles.searchButton}>
+              <ButtonText style={styles.buttonText} transform>
+                Donner mon avis
+              </ButtonText>
+            </Button>
+          </View>
+          <SecondaryTitle
+            style={{ textAlign: "center", marginBottom: 10 }}
+            fontSize={20}
+          ></SecondaryTitle>
+          <View style={styles.miniCards}>
+            <MiniCard
+              name={data.name}
+              address={data.address}
+              greenscore={data.greenscore}
+              suggestionRate={data.suggestionRate}
+              tags={data.tags}
+            />
+            <MiniCard
+              name={data.name}
+              address={data.address}
+              greenscore={data.greenscore}
+              suggestionRate={data.suggestionRate}
+              tags={data.tags}
+            />
+          </View>
           <View>
             <FullButton title="Site Internet" />
             <FullButton title="Page Facebook" />
@@ -170,7 +215,7 @@ const styles = StyleSheet.create({
   infosContainer: {
     flex: 1,
     width: Dimensions.get("window").width,
-    padding: 15,
+    padding: 20,
     borderWidth: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -207,5 +252,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 20,
     alignSelf: "center",
+  },
+  buttonText: {
+    paddingTop: 10,
+    alignItems: "center",
+    color: Colors.white,
+  },
+  searchButton: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: Colors.secondary,
+  },
+  miniCards: {
+    flexDirection: "row",
+    marginBottom: 30,
   },
 });

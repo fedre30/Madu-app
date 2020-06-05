@@ -36,7 +36,7 @@ export const ListCard = (props) => {
         </View>
         <CardItem cardBody>
           <Image
-            source={require("../../assets/images/image_test.png")}
+            source={require("../../assets/images/abattoirveg.jpg")}
             style={{ height: 100, width: null, flex: 1 }}
           />
         </CardItem>

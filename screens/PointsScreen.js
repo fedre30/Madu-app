@@ -7,6 +7,7 @@ import { Title } from "../components/atoms/StyledText";
 import { Row, Item } from "native-base";
 import Items from "../components/atoms/ListRecompense";
 import data from "../components/atoms/data";
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { Button } from "native-base"
 

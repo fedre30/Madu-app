@@ -33,63 +33,27 @@ const Items = (props) => {
       <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
         <View style={styles.contentRecompense}>
           <View style={styles.contentView}>
-            <Modal
-              isVisible={isFirstModalVisible}
-              onBackdropPress={() => setFirstModalVisible(false)}
-              style={{
-                flex: 2,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <View style={styles.firstdModal}>
-                <View style={styles.contentImageCadeauxModal}>
-                  <Image
-                    style={styles.imageCadeauxModal}
-                    source={require("../../assets/images/cadeaux_1.png")}
-                  />
-                </View>
-
-                <Text style={styles.firstModalTitle}>{list.title}</Text>
-                <View style={styles.firstModalDebock}>
-                  <Text style={styles.DeblockTitle}>Débloqué !</Text>
-                </View>
-                <Text style={styles.bravo}>Bravo !</Text>
-                <Text style={styles.firstModalTex}>
-                  Vous avez débloqué un nouveau tips !
-                </Text>
-                {renderButton("SUIVANT", () => setSecondModalVisible(true))}
-              </View>
+            {isFirstModalVisible && (
               <Modal
-                isVisible={isSecondModalVisible}
+                isVisible={isFirstModalVisible}
+                onBackdropPress={() => setFirstModalVisible(false)}
                 style={{
                   flex: 2,
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <View style={styles.secondModal}>
-                  <View style={styles.contentImageCadeauxModalSecond}>
+                <View style={styles.firstdModal}>
+                  <View style={styles.contentImageCadeauxModal}>
                     <Image
-                      style={styles.imageCadeauxModalSecond}
+                      style={styles.imageCadeauxModal}
                       source={require("../../assets/images/cadeaux_1.png")}
                     />
                   </View>
 
-                  <Text style={styles.secondModalTitle}>{list.title}</Text>
-                  <View style={styles.secondModalDeblock}>
-                    <Text style={styles.secondDeblockTitle}>Débloqué !</Text>
-                  </View>
-                  <View style={styles.secondModalContentText}>
-                    <Text style={styles.secondModalText}>
-                      Nullam convallis tincidunt odio id auctor. In eleifend non
-                      arcu a lacinia. Cras et ipsum id leo pharetra lobortis a
-                      sed nibh. Morbi ante ligula, vehicula vel est ut, accumsan
-                      luctus mi. Nam aliquam, nisl at lobortis viverra, lectus
-                      magna rutrum lorem, non ornare ex nibh eget sapien.
-                      Praesent est nibh, volutpat et massa et, porttitor posuere
-                      elit.
-                    </Text>
+                  <Text style={styles.firstModalTitle}>{list.title}</Text>
+                  <View style={styles.firstModalDebock}>
+                    <Text style={styles.DeblockTitle}>Débloqué !</Text>
                   </View>
 
                   {renderButton("OK", () => {
@@ -97,8 +61,46 @@ const Items = (props) => {
                     setSecondModalVisible(false);
                   })}
                 </View>
+                <Modal
+                  isVisible={isSecondModalVisible}
+                  style={{
+                    flex: 2,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <View style={styles.secondModal}>
+                    <View style={styles.contentImageCadeauxModalSecond}>
+                      <Image
+                        style={styles.imageCadeauxModalSecond}
+                        source={require("../../assets/images/cadeaux_1.png")}
+                      />
+                    </View>
+
+                    <Text style={styles.secondModalTitle}>{list.title}</Text>
+                    <View style={styles.secondModalDeblock}>
+                      <Text style={styles.secondDeblockTitle}>Débloqué !</Text>
+                    </View>
+                    <View style={styles.secondModalContentText}>
+                      <Text style={styles.secondModalText}>
+                        Nullam convallis tincidunt odio id auctor. In eleifend
+                        non arcu a lacinia. Cras et ipsum id leo pharetra
+                        lobortis a sed nibh. Morbi ante ligula, vehicula vel est
+                        ut, accumsan luctus mi. Nam aliquam, nisl at lobortis
+                        viverra, lectus magna rutrum lorem, non ornare ex nibh
+                        eget sapien. Praesent est nibh, volutpat et massa et,
+                        porttitor posuere elit.
+                      </Text>
+                    </View>
+
+                    {renderButton("OK", () => {
+                      setFirstModalVisible(false);
+                      setSecondModalVisible(false);
+                    })}
+                  </View>
+                </Modal>
               </Modal>
-            </Modal>
+            )}
             <View style={styles.contentImageCadeaux}>
               <Image
                 style={styles.imageCadeaux}

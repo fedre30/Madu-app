@@ -1,30 +1,61 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
-import * as React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
-import { Title } from "../components/atoms/StyledText";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  RectButton,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
+import { Title, SimpleText } from "../components/atoms/StyledText";
+import MapView from "react-native-maps";
+import { getLocation } from "../utils/map";
+import { Backdrop } from "react-native-backdrop";
+import { ListScreen } from "./ListScreen";
+import { ListCard } from "../components/molecules/Card";
+import data from "../utils/poi-api-test.json";
+import { FilterButton } from "../components/atoms/FilterButton";
+import Modal from "react-native-modal";
+import { FilterView } from "../components/organisms/FilterView";
+import { MapBackDrop } from "../components/organisms/Backdrop";
 
 export default function MapScreen() {
+  const [location, setLocation] = useState(null);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    getLocation().then((data) => {
+      setLocation({
+        latitude: data.latitude,
+        longitude: data.longitude,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
+      });
+    });
+  }, []);
+
+  const handleOpen = () => {
+    setVisible(true);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <View>
-        <Title>Map Screen</Title>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require("../assets/images/robot-dev.png")
-                : require("../assets/images/robot-prod.png")
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <MapView
+        style={styles.mapStyle}
+        initialRegion={location}
+        onPress={() => setVisible(true)}
+      />
+
+      <MapBackDrop
+        visible={visible}
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+      />
+    </View>
   );
 }
 
@@ -33,20 +64,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa",
   },
-  contentContainer: {
-    justifyContent: "center",
-    paddingTop: 30,
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height - 30,
   },
-  welcomeContainer: {
+
+  closePlateContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
+    justifyContent: "center",
+    height: 32,
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: "contain",
-    marginTop: 3,
-    marginLeft: -10,
+  closePlate: {
+    width: 40,
+    height: 5,
+    borderRadius: 5,
+    backgroundColor: "#bdbdbd",
   },
 });

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { StyleSheet, Text, View } from "react-native";
 import {
   RectButton,
@@ -10,10 +11,19 @@ import { ListCard } from "../components/molecules/Card";
 import { FilterButton } from "../components/atoms/FilterButton";
 import Modal from "react-native-modal";
 import { FilterView } from "../components/organisms/FilterView";
+import { API_URL } from "../utils/api";
+import data from "../utils/poi-api-test.json";
 
 export default function ListScreen() {
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setShops(data);
+    }
+  }, []);
 
   const onPress = (type) => {
     setActiveFilters((prevState) =>
@@ -66,15 +76,19 @@ export default function ListScreen() {
         </Modal>
       </View>
       <View style={styles.list}>
-        <ListCard
-          name="Rose Bakery"
-          address="Rue de test, 28"
-          tags={["vegetarien", "bio", "vegan"]}
-          price={2}
-          accessibility={true}
-          suggestionRate={78}
-          greenscore={80}
-        />
+        {shops.map((shop) => (
+          <ListCard
+            key={shop.id}
+            id={shop.id}
+            name={shop.name}
+            address={shop.address}
+            tags={shop.tags}
+            price={shop.price}
+            accessibility={shop.accessibility}
+            suggestionRate={shop.suggestionRate}
+            greenscore={shop.greenscore}
+          />
+        ))}
       </View>
     </ScrollView>
   );

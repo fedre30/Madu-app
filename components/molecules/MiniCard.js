@@ -12,28 +12,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { PriceIcon, WheelchairIcon, SuggestionIcon } from "../atoms/CardIcons";
 import { useNavigation } from "@react-navigation/native";
 
-export const ListCard = (props) => {
+export const MiniCard = (props) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Shop", { id: props.id })}
-      style={{ position: "relative", marginBottom: 20 }}
+      style={{ marginBottom: 20, width: 160, marginRight: 10 }}
     >
       <Card>
-        <View style={styles.greenscore}>
-          <Image
-            source={require("../../assets/images/greenscore.png")}
-            style={{
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: "contain",
-            }}
-          />
-          <SecondaryText style={{ textAlign: "center" }}>
-            {props.greenscore}%
-          </SecondaryText>
-        </View>
         <CardItem cardBody>
           <Image
             source={require("../../assets/images/abattoirveg.jpg")}
@@ -43,8 +29,7 @@ export const ListCard = (props) => {
         <CardItem>
           <Body>
             <SecondaryTitle>{props.name}</SecondaryTitle>
-            <ItalicText>{props.address}</ItalicText>
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
               {props.tags.map((tag, i) => (
                 <TagsText key={i} style={{ marginRight: 8 }}>
                   #{tag}
@@ -53,12 +38,22 @@ export const ListCard = (props) => {
             </View>
             <View style={styles.infosContainer}>
               <View style={styles.infos}>
-                <PriceIcon focused={props.price >= 1} />
-                <PriceIcon focused={props.price >= 2} />
-                <PriceIcon focused={props.price >= 3} />
-              </View>
-              <View style={styles.infos}>
-                <WheelchairIcon focused={props.accessibility} />
+                <View style={styles.greenscore}>
+                  <View style={{ width: 40, height: 30, flex: 1 }}>
+                    <Image
+                      source={require("../../assets/images/greenscore-2.png")}
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </View>
+                </View>
+                <SecondaryText style={{ textAlign: "center" }}>
+                  {props.greenscore}%
+                </SecondaryText>
               </View>
               {props.suggestionRate && (
                 <View style={styles.infos}>
@@ -75,31 +70,12 @@ export const ListCard = (props) => {
 
 const styles = StyleSheet.create({
   infosContainer: {
-    flexDirection: "row",
     alignItems: "center",
-    width: Dimensions.get("window").width,
+    flex: 1,
   },
   infos: {
+    flex: 1,
     flexDirection: "row",
     marginRight: 30,
-  },
-  greenscore: {
-    width: 70,
-    height: 60,
-    position: "absolute",
-    zIndex: 2,
-    top: -10,
-    left: -10,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-    justifyContent: "center",
   },
 });

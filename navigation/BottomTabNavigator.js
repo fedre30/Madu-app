@@ -19,16 +19,6 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
-        name="Map"
-        component={MapScreen}
-        options={{
-          title: "Map",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-map" />
-          ),
-        }}
-      />
-      <BottomTab.Screen
         name="Liste"
         component={ListScreen}
         options={{
@@ -38,6 +28,17 @@ export default function BottomTabNavigator({ navigation, route }) {
           ),
         }}
       />
+      <BottomTab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          title: "Map",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-map" />
+          ),
+        }}
+      />
+
       <BottomTab.Screen
         name="Profile"
         component={ProfileScreen}

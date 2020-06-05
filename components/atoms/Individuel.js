@@ -16,7 +16,7 @@ export default class Individuel extends Component {
                 source={require("../../assets/images/cadeaux_1.png")}
               />
               <Text>year</Text>
-              <Text style={{ fontSize: 30, color: "red" }}>
+              <Text style={{ fontSize: 15, color: "red" }}>
                 les heros son beaux
               </Text>
               <Text>year</Text>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { FilterButton } from "../atoms/FilterButton";
 import { SecondaryTitle, ButtonText, SimpleText } from "../atoms/StyledText";
 import { Button, CheckBox } from "native-base";
@@ -144,11 +144,19 @@ export const FilterView = (props) => {
           <SimpleText style={{ marginLeft: 15 }}>30€ et plus</SimpleText>
         </View>
       </View>
-      <Button style={styles.searchButton} onPress={props.search}>
-        <ButtonText style={styles.buttonText} transform>
-          Rechercher
-        </ButtonText>
-      </Button>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          width: Dimensions.get("window").width,
+        }}
+      >
+        <Button style={styles.searchButton} onPress={props.search}>
+          <ButtonText style={styles.buttonText} transform>
+            Rechercher
+          </ButtonText>
+        </Button>
+      </View>
     </View>
   );
 };

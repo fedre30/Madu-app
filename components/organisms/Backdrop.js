@@ -61,19 +61,19 @@ export const MapBackDrop = (props) => {
         </View>
       }
     >
-      <View>
-        <TouchableOpacity
-          onPress={props.handleClose}
-          style={{
-            justifyContent: "flex-end",
-            flexDirection: "row",
-            paddingRight: 20,
-            paddingBottom: 20,
-          }}
-        >
-          <SimpleText>Terminer</SimpleText>
-        </TouchableOpacity>
-        <ScrollView style={{ padding: 20 }}>
+      <TouchableOpacity
+        onPress={props.handleClose}
+        style={{
+          justifyContent: "flex-end",
+          flexDirection: "row",
+          paddingRight: 20,
+          paddingBottom: 20,
+        }}
+      >
+        <SimpleText>Terminer</SimpleText>
+      </TouchableOpacity>
+      <ScrollView style={{ padding: 20 }}>
+        <ScrollView>
           <ScrollView style={styles.filtersContainer} horizontal={true}>
             <FilterButton
               title="Filtres"
@@ -132,7 +132,7 @@ export const MapBackDrop = (props) => {
             ))}
           </View>
         </ScrollView>
-      </View>
+      </ScrollView>
     </Backdrop>
   );
 };

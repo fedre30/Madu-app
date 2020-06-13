@@ -4,6 +4,7 @@ import { FilterButton } from "../atoms/FilterButton";
 import { SecondaryTitle, ButtonText, SimpleText } from "../atoms/StyledText";
 import { Button, CheckBox } from "native-base";
 import Colors from "../../constants/Colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const FilterView = (props) => {
   const [activeFilters, setActiveFilters] = useState(["all"]);
@@ -42,6 +43,17 @@ export const FilterView = (props) => {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
+      <TouchableOpacity
+        onPress={props.handleClose}
+        style={{
+          justifyContent: "flex-end",
+          flexDirection: "row",
+          paddingRight: 20,
+          paddingBottom: 20,
+        }}
+      >
+        <SimpleText>Terminer</SimpleText>
+      </TouchableOpacity>
       <SecondaryTitle>Populaires</SecondaryTitle>
       <View style={styles.buttons}>
         <FilterButton
@@ -166,10 +178,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa",
     padding: 20,
+    paddingTop: 50,
   },
   contentContainer: {
     justifyContent: "center",
-    paddingTop: 30,
+    paddingTop: 50,
   },
   buttons: {
     flexDirection: "row",

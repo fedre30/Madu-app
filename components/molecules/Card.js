@@ -15,7 +15,17 @@ import { useNavigation } from "@react-navigation/native";
 export const ListCard = (props) => {
   const navigation = useNavigation();
   return (
-    <View style={{ position: "relative", marginBottom: 20 }}>
+    <View
+      style={[
+        props.style,
+        {
+          position: "relative",
+          marginBottom: 20,
+          flex: 1,
+          width: props.mapCard ? 200 : "auto",
+        },
+      ]}
+    >
       <Card>
         <View style={styles.greenscore}>
           <Image

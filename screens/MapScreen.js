@@ -1,14 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import {
   RectButton,
   ScrollView,
   TouchableOpacity,
+  TouchableHighlight,
 } from "react-native-gesture-handler";
 import { Title, SimpleText } from "../components/atoms/StyledText";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
 import { getLocation } from "../utils/map";
 import { Backdrop } from "react-native-backdrop";
 import { ListScreen } from "./ListScreen";
@@ -19,7 +20,7 @@ import Modal from "react-native-modal";
 import { FilterView } from "../components/organisms/FilterView";
 import { MapBackDrop } from "../components/organisms/Backdrop";
 import Geocoder from "react-native-geocoding";
-import pin from "../assets/images/pin.png";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MapScreen() {
   const [location, setLocation] = useState(null);
@@ -110,38 +111,10 @@ export default function MapScreen() {
       website: "hvgpatisserie-commande.fr",
       zipcode: "75018",
     },
-    {
-      accessibility: true,
-      address: "123 Boulevard Voltaire",
-      city: "Paris",
-      criteria: {
-        equipment: {
-          note: 87,
-        },
-        food: {
-          note: 72,
-        },
-        social: {
-          note: 68,
-        },
-      },
-      description:
-        "Pâtisseriee vegan située près de Bastille. Différents types de pâtisserie sont proposés, dont des alternatives sans lactose ouu gluten",
-      greenscore: 74,
-      id: 3,
-      latitude: 48.856933,
-      longitude: 2.3820088,
-      name: "vg patisserie",
-      openingHours: "Tous les jours sauf le lundi de 10h à 18h.",
-      price: 1,
-      suggestionRate: 90,
-      tags: ["patisserie", "glutenfree", "vegan"],
-      website: "hvgpatisserie-commande.fr",
-      zipcode: "75018",
-    },
   ]);
   const [visible, setVisible] = useState(true);
   const [visibleCards, setVisibleCards] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     getLocation().then((data) => {
@@ -188,7 +161,7 @@ export default function MapScreen() {
   };
 
   const handleCardVisibility = (idx) =>
-    setVisibleCards(() =>
+    setVisibleCards((prevState) =>
       visibleCards.map((card) => {
         if (idx === card.id) {
           if (card.visible) {
@@ -207,7 +180,6 @@ export default function MapScreen() {
         style={styles.mapStyle}
         initialRegion={location}
         onPress={() => setVisible(false)}
-        provider="google"
         loadingEnabled={true}
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
@@ -223,27 +195,41 @@ export default function MapScreen() {
                 latitude: marker.latitude,
                 longitude: marker.longitude,
               }}
-              image={pin}
               name={marker.name}
               key={idx}
+              stopPropagation={true}
               onPress={() => handleCardVisibility(idx)}
               onSelect={() => handleCardVisibility(idx)}
-              stopPropagation={true}
+              onCalloutPress={() =>
+                navigation.navigate("Shop", { id: marker.id })
+              }
             >
               {visibleCards[idx] && visibleCards[idx].visible && (
-                <ListCard
-                  style={{ paddingBottom: 100 }}
-                  id={marker.id}
-                  name={marker.name}
-                  address={marker.address}
-                  tags={marker.tags}
-                  price={marker.price}
-                  accessibility={marker.accessibility}
-                  suggestionRate={marker.suggestionRate}
-                  greenscore={marker.greenscore}
-                  mapCard
-                />
+                <Callout style={{ flex: 1, width: 300 }}>
+                  <ListCard
+                    id={marker.id}
+                    name={marker.name}
+                    address={marker.address}
+                    tags={marker.tags}
+                    price={marker.price}
+                    accessibility={marker.accessibility}
+                    suggestionRate={marker.suggestionRate}
+                    greenscore={marker.greenscore}
+                    mapCard
+                  />
+                </Callout>
               )}
+              {/* <View style={{ index: 1, width: 300, height: 50 }}>
+                <Image
+                  source={require("../assets/images/pin.png")}
+                  style={{
+                    flex: 1,
+                    width: null,
+                    height: null,
+                    resizeMode: "contain",
+                  }}
+                />
+              </View> */}
             </Marker>
           ))}
       </MapView>
@@ -266,7 +252,10 @@ const styles = StyleSheet.create({
   mapStyle: {
     flex: 1,
   },
-
+  markerContainer: {
+    flex: 1,
+    flexDirection: "column",
+  },
   closePlateContainer: {
     flexDirection: "row",
     alignItems: "center",

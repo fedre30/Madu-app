@@ -22,25 +22,26 @@ export const ListCard = (props) => {
           position: "relative",
           marginBottom: 20,
           flex: 1,
-          width: props.mapCard ? 200 : "auto",
         },
       ]}
     >
       <Card>
-        <View style={styles.greenscore}>
-          <Image
-            source={require("../../assets/images/greenscore.png")}
-            style={{
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: "contain",
-            }}
-          />
-          <SecondaryText style={{ textAlign: "center" }}>
-            {props.greenscore}%
-          </SecondaryText>
-        </View>
+        {!props.mapCard && (
+          <View style={styles.greenscore}>
+            <Image
+              source={require("../../assets/images/greenscore.png")}
+              style={{
+                flex: 1,
+                width: null,
+                height: null,
+                resizeMode: "contain",
+              }}
+            />
+            <SecondaryText style={{ textAlign: "center" }}>
+              {props.greenscore}%
+            </SecondaryText>
+          </View>
+        )}
         <CardItem cardBody>
           <Image
             source={require("../../assets/images/abattoirveg.jpg")}
@@ -61,7 +62,7 @@ export const ListCard = (props) => {
                   </TagsText>
                 ))}
               </View>
-              <View style={styles.infosContainer}>
+              <View style={[styles.infosContainer]}>
                 <View style={styles.infos}>
                   <PriceIcon focused={props.price >= 1} />
                   <PriceIcon focused={props.price >= 2} />
@@ -88,7 +89,6 @@ const styles = StyleSheet.create({
   infosContainer: {
     flexDirection: "row",
     alignItems: "center",
-    width: Dimensions.get("window").width,
   },
   infos: {
     flexDirection: "row",

@@ -89,6 +89,7 @@ export const ItalicText = (props) => {
         {
           fontFamily: "gotham-book-italic",
           color: props.color ? props.color : Colors.text,
+          fontSize: props.fontSize ? props.fontSize : 15,
         },
       ]}
     />
@@ -99,7 +100,14 @@ export const TagsText = (props) => {
   return (
     <Text
       {...props}
-      style={[props.style, styles.tags, { fontFamily: "gotham-light-italic" }]}
+      style={[
+        props.style,
+        styles.tags,
+        {
+          fontFamily: "gotham-light-italic",
+          fontSize: props.fontSize ? props.fontSize : 15,
+        },
+      ]}
     />
   );
 };

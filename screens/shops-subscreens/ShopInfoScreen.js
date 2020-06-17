@@ -186,7 +186,10 @@ export default function ShopInfoScreen({ route, navigation }) {
           </View>
           <View>
             <FullButton title="Site Internet" />
-            <FullButton title="Page Facebook" />
+            <FullButton
+              title="Donnez votre avis"
+              onPress={() => navigation.navigate("Feedback", { id: data.id })}
+            />
             <FullButton title="Remettre en question le greenscore" />
           </View>
         </View>

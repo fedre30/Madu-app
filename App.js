@@ -7,6 +7,7 @@ import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import ShopInfoScreen from "./screens/shops-subscreens/ShopInfoScreen";
+import FeedbackScreen from "./screens/shops-subscreens/FeedbackScreen";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App(props) {
           <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen name="Shop" component={ShopInfoScreen} />
+            <Stack.Screen name="Feedback" component={FeedbackScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

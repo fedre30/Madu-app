@@ -21,6 +21,7 @@ import { FilterView } from "../components/organisms/FilterView";
 import { MapBackDrop } from "../components/organisms/Backdrop";
 import Geocoder from "react-native-geocoding";
 import { useNavigation } from "@react-navigation/native";
+import { MapCallout } from "../components/atoms/Callout";
 
 export default function MapScreen() {
   const [location, setLocation] = useState(null);
@@ -180,6 +181,7 @@ export default function MapScreen() {
         style={styles.mapStyle}
         initialRegion={location}
         onPress={() => setVisible(false)}
+        provider="google"
         loadingEnabled={true}
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
@@ -205,21 +207,19 @@ export default function MapScreen() {
               }
             >
               {visibleCards[idx] && visibleCards[idx].visible && (
-                <Callout style={{ flex: 1, width: 300 }}>
-                  <ListCard
-                    id={marker.id}
-                    name={marker.name}
-                    address={marker.address}
-                    tags={marker.tags}
-                    price={marker.price}
-                    accessibility={marker.accessibility}
-                    suggestionRate={marker.suggestionRate}
-                    greenscore={marker.greenscore}
-                    mapCard
-                  />
-                </Callout>
+                <MapCallout
+                  id={marker.id}
+                  name={marker.name}
+                  address={marker.address}
+                  tags={marker.tags}
+                  price={marker.price}
+                  accessibility={marker.accessibility}
+                  suggestionRate={marker.suggestionRate}
+                  mapCard
+                  onPress={() => navigation.navigate("Shop", { id: marker.id })}
+                />
               )}
-              {/* <View style={{ index: 1, width: 300, height: 50 }}>
+              <View style={{ index: 1, width: 300, height: 50 }}>
                 <Image
                   source={require("../assets/images/pin.png")}
                   style={{
@@ -229,7 +229,7 @@ export default function MapScreen() {
                     resizeMode: "contain",
                   }}
                 />
-              </View> */}
+              </View>
             </Marker>
           ))}
       </MapView>

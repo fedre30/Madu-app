@@ -57,7 +57,11 @@ export const Subtitle = (props) => {
       style={[
         props.style,
         styles.title,
-        { fontFamily: "gotham-bold", fontSize: 15 },
+        {
+          fontFamily: "gotham-bold",
+          fontSize: 15,
+          color: props.color ? props.color : Colors.text,
+        },
       ]}
     />
   );
@@ -128,6 +132,22 @@ export const ButtonText = (props) => {
   );
 };
 
+export const HighlightText = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.highlight,
+        {
+          fontFamily: "gotham-medium",
+          textTransform: props.transform ? "uppercase" : "none",
+        },
+      ]}
+    />
+  );
+};
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 17,
@@ -154,5 +174,11 @@ const styles = StyleSheet.create({
   button: {
     fontSize: 14,
     lineHeight: 24,
+  },
+  highlight: {
+    fontSize: 24,
+    lineHeight: 24,
+    color: Colors.secondary,
+    textAlign: "center",
   },
 });

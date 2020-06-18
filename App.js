@@ -8,6 +8,8 @@ import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import ShopInfoScreen from "./screens/shops-subscreens/ShopInfoScreen";
 import FeedbackScreen from "./screens/shops-subscreens/FeedbackScreen";
+import ConfirmationScreen from "./screens/shops-subscreens/ConfirmationScreen";
+import GreenscoreScreen from "./screens/shops-subscreens/GreenscoreScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,8 @@ export default function App(props) {
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen name="Shop" component={ShopInfoScreen} />
             <Stack.Screen name="Feedback" component={FeedbackScreen} />
+            <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
+            <Stack.Screen name="Greenscore" component={GreenscoreScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

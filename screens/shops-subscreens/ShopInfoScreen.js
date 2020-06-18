@@ -190,7 +190,10 @@ export default function ShopInfoScreen({ route, navigation }) {
               title="Donnez votre avis"
               onPress={() => navigation.navigate("Feedback", { id: data.id })}
             />
-            <FullButton title="Remettre en question le greenscore" />
+            <FullButton
+              title="Remettre en question le greenscore"
+              onPress={() => navigation.navigate("Greenscore", { shop: data })}
+            />
           </View>
         </View>
       )}

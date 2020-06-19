@@ -24,6 +24,7 @@ export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   const index = route.params.id;
   const [rate, setRate] = useState(2);
+  const [comments, setComments] = useState("");
 
   return (
     <ScrollView
@@ -66,7 +67,13 @@ export default function FeedbackScreen({ route, navigation }) {
         Vous voulez vous exprimer sur quelque chose en particulier ? Ou bien
         juste donner votre avis ? Remplissez le champ ci-dessous !
       </SimpleText>
-      <Textarea rowSpan={6} bordered placeholder="Tapez votre message" />
+      <Textarea
+        rowSpan={6}
+        bordered
+        placeholder="Tapez votre message"
+        value={comments}
+        onChangeText={(text) => setComments(text)}
+      />
       <Button
         style={styles.searchButton}
         onPress={() =>

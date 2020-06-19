@@ -28,6 +28,18 @@ export default function GreenscoreScreen({ route, navigation }) {
   const shop = route.params.shop;
   const [rate, setRate] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [infos, setInfos] = useState({
+    name: shop.name,
+    address: shop.address,
+    comments: "",
+  });
+
+  const updateField = (field, val) => {
+    setInfos({
+      ...infos,
+      [field]: val,
+    });
+  };
 
   return (
     <ScrollView
@@ -56,11 +68,21 @@ export default function GreenscoreScreen({ route, navigation }) {
       </SimpleText>
       <View style={styles.formItem}>
         <SecondaryText>Nom du commerce</SecondaryText>
-        <Input placeholder={shop.name} rounded />
+        <Input
+          placeholder={shop.name}
+          rounded
+          value={infos.name}
+          onChangeText={(text) => updateField("name", text)}
+        />
       </View>
       <View style={styles.formItem}>
         <SecondaryText>Adresse</SecondaryText>
-        <Input placeholder={shop.address} rounded />
+        <Input
+          placeholder={shop.address}
+          rounded
+          value={infos.address}
+          onChangeText={(text) => updateField("address", text)}
+        />
       </View>
       <View style={styles.formItem}>
         <SecondaryText>Ce commerce vous parait éco-responsable ?</SecondaryText>
@@ -89,7 +111,13 @@ export default function GreenscoreScreen({ route, navigation }) {
       </View>
       <View style={styles.formItem}>
         <SecondaryText>Commentaires</SecondaryText>
-        <Textarea rowSpan={6} bordered placeholder="Tapez votre message" />
+        <Textarea
+          rowSpan={6}
+          bordered
+          placeholder="Tapez votre message"
+          value={infos.comments}
+          onChangeText={(text) => updateField("comments", text)}
+        />
       </View>
 
       <Button

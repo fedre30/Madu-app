@@ -57,7 +57,11 @@ export const Subtitle = (props) => {
       style={[
         props.style,
         styles.title,
-        { fontFamily: "gotham-bold", fontSize: 15 },
+        {
+          fontFamily: "gotham-bold",
+          fontSize: 15,
+          color: props.color ? props.color : Colors.text,
+        },
       ]}
     />
   );
@@ -89,6 +93,7 @@ export const ItalicText = (props) => {
         {
           fontFamily: "gotham-book-italic",
           color: props.color ? props.color : Colors.text,
+          fontSize: props.fontSize ? props.fontSize : 15,
         },
       ]}
     />
@@ -99,7 +104,14 @@ export const TagsText = (props) => {
   return (
     <Text
       {...props}
-      style={[props.style, styles.tags, { fontFamily: "gotham-light-italic" }]}
+      style={[
+        props.style,
+        styles.tags,
+        {
+          fontFamily: "gotham-light-italic",
+          fontSize: props.fontSize ? props.fontSize : 15,
+        },
+      ]}
     />
   );
 };
@@ -111,6 +123,22 @@ export const ButtonText = (props) => {
       style={[
         props.style,
         styles.button,
+        {
+          fontFamily: "gotham-medium",
+          textTransform: props.transform ? "uppercase" : "none",
+        },
+      ]}
+    />
+  );
+};
+
+export const HighlightText = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.highlight,
         {
           fontFamily: "gotham-medium",
           textTransform: props.transform ? "uppercase" : "none",
@@ -146,5 +174,11 @@ const styles = StyleSheet.create({
   button: {
     fontSize: 14,
     lineHeight: 24,
+  },
+  highlight: {
+    fontSize: 24,
+    lineHeight: 24,
+    color: Colors.secondary,
+    textAlign: "center",
   },
 });

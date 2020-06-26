@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useScrollToTop } from "@react-navigation/native";
 import axios from "axios";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -15,13 +16,13 @@ import shops from "../../utils/poi-api-test.json";
 import { Button, Subtitle } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Tag } from "../../components/atoms/Tag";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Criterium } from "../../components/atoms/Criterium";
 import { FullButton } from "../../components/atoms/FullButton";
 import { getLocation, geocodeLocationByName } from "../../utils/map";
 import MapView, { Marker } from "react-native-maps";
 import Geocoder from "react-native-geocoding";
 import { MiniCard } from "../../components/molecules/MiniCard";
+import Colors from "../../constants/Colors";
 
 export default function ShopInfoScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -29,27 +30,33 @@ export default function ShopInfoScreen({ route, navigation }) {
   const [data, setData] = useState(null);
   const index = route.params.id;
 
+  const ref = useRef(null);
+
+  useScrollToTop(ref);
+
   useEffect(() => {
     if (index) {
       setData(shops.find((obj) => obj.id === index));
     }
-    if (data) {
-      const address = `${data.address}, ${data.zipcode}, ${data.city}`;
-      Geocoder.from(address)
-        .then((json) => {
-          setLocation({
-            latitude: json.results[0].geometry.location.lat,
-            longitude: json.results[0].geometry.location.lng,
-          });
-        })
-        .catch((error) => console.warn(error));
-    }
+    ref.current.scrollTo({ top: 0, left: 0, animated: true });
+    // if (data) {
+    //   const address = `${data.address}, ${data.zipcode}, ${data.city}`;
+    //   Geocoder.from(address)
+    //     .then((json) => {
+    //       setLocation({
+    //         latitude: json.results[0].geometry.location.lat,
+    //         longitude: json.results[0].geometry.location.lng,
+    //       });
+    //     })
+    //     .catch((error) => console.warn(error));
+    // }
   }, [index, data]);
 
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      ref={ref}
     >
       <View style={styles.header}>
         <Button onPress={() => navigation.goBack()} light style={styles.back}>
@@ -123,7 +130,7 @@ export default function ShopInfoScreen({ route, navigation }) {
             <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
               {data.openingHours}
             </SimpleText>
-            {location && (
+            {/* {location && (
               <View style={styles.mapContainer}>
                 <MapView
                   style={styles.mapStyle}
@@ -137,7 +144,7 @@ export default function ShopInfoScreen({ route, navigation }) {
                   <Marker coordinate={location} />
                 </MapView>
               </View>
-            )}
+            )} */}
           </View>
           <View
             style={{
@@ -179,8 +186,14 @@ export default function ShopInfoScreen({ route, navigation }) {
           </View>
           <View>
             <FullButton title="Site Internet" />
-            <FullButton title="Page Facebook" />
-            <FullButton title="Remettre en question le greenscore" />
+            <FullButton
+              title="Donnez votre avis"
+              onPress={() => navigation.navigate("Feedback", { id: data.id })}
+            />
+            <FullButton
+              title="Remettre en question le greenscore"
+              onPress={() => navigation.navigate("Greenscore", { shop: data })}
+            />
           </View>
         </View>
       )}
@@ -218,7 +231,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderColor: "transparent",
     marginTop: -20,
-    backgroundColor: Colors.white,
+    backgroundColor: "#FFF",
     justifyContent: "center",
   },
   tagsContainer: {

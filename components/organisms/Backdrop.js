@@ -11,7 +11,7 @@ import {
 import { Title, SimpleText } from "../../components/atoms/StyledText";
 import MapView from "react-native-maps";
 import { getLocation } from "../../utils/map";
-import { Backdrop } from "react-native-backdrop";
+import Backdrop from "react-native-material-backdrop-modal";
 import { ListCard } from "../../components/molecules/Card";
 import data from "../../utils/poi-api-test.json";
 import { FilterButton } from "../../components/atoms/FilterButton";
@@ -39,24 +39,10 @@ export const MapBackDrop = (props) => {
 
   return (
     <Backdrop
-      visible={props.visible}
-      handleOpen={props.handleOpen}
-      handleClose={props.handleClose}
-      onClose={() => {}}
-      swipeConfig={{
-        velocityThreshold: 0.1,
-        directionalOffsetThreshold: 80,
-      }}
-      animationConfig={{
-        speed: 10,
-        bounciness: 2,
-      }}
-      overlayColor="rgba(0,0,0,0.32)"
-      closedHeight={50}
-      backdropStyle={{
-        backgroundColor: "#fff",
-      }}
-      header={
+      focused={props.visible}
+      onFocus={props.handleOpen}
+      title=""
+      icon={
         <View style={styles.closePlateContainer}>
           <View style={styles.closePlate} />
         </View>
@@ -143,7 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fafafa",
   },
   list: {
-    padding: 20,
+    padding: 5,
   },
   filtersContainer: {
     height: "auto",
@@ -161,5 +147,8 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 5,
     backgroundColor: "#bdbdbd",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: Dimensions.get("window").width - 100,
   },
 });

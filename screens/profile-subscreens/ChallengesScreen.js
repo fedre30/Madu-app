@@ -29,7 +29,7 @@ export default function ChallengesScreen() {
           contentContainerStyle={styles.contentContainer}
         >
           <View>
-            <Title>je tien a toi banane :D </Title>
+            <Title>toto </Title>
           </View>
         </ScrollView>
       );

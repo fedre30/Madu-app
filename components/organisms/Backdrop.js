@@ -39,8 +39,9 @@ export const MapBackDrop = (props) => {
 
   return (
     <Backdrop
+      backdropStyle={{ maxHeight: Dimensions.get("window").height - 200 }}
       focused={props.visible}
-      onFocus={props.handleOpen}
+      onFocus={props.onFocus}
       title=""
       icon={
         <View style={styles.closePlateContainer}>
@@ -50,7 +51,7 @@ export const MapBackDrop = (props) => {
     >
       <View style={{ padding: 20 }}>
         <TouchableOpacity
-          onPress={props.handleClose}
+          onPress={props.onFocus}
           style={{
             justifyContent: "flex-end",
             flexDirection: "row",
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   filtersContainer: {
-    height: "auto",
+    height: 100,
     flexDirection: "row",
     marginBottom: 20,
   },

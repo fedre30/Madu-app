@@ -151,14 +151,6 @@ export default function MapScreen() {
     }
   }, []);
 
-  const handleOpen = () => {
-    setVisible(true);
-  };
-
-  const handleClose = () => {
-    setVisible(false);
-  };
-
   const handleCardVisibility = (idx) =>
     setVisibleCards((prevState) =>
       visibleCards.map((card) => {
@@ -231,11 +223,7 @@ export default function MapScreen() {
             </Marker>
           ))}
       </MapView>
-      <MapBackDrop
-        visible={visible}
-        handleClose={handleClose}
-        handleOpen={handleOpen}
-      />
+      <MapBackDrop visible={visible} onFocus={() => setVisible(!visible)} />
     </View>
   );
 }

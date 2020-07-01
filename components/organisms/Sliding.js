@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  StyleSheet,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -75,15 +76,8 @@ export default class Sliding extends Component {
     } = this.state;
 
     return (
-      <View style={{ flex: 1 }}>
-        <View
-          style={{
-            width: "60%",
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 16,
-          }}
-        >
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
           <View
             style={{
               flexDirection: "row",
@@ -255,3 +249,14 @@ export default class Sliding extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    width: "60%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 16,
+  },
+});

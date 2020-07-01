@@ -7,9 +7,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Colors from "../constants/Colors";
 import { Thumbnail } from "../components/molecules/ProfileThumbnail";
-// import {ChallengesPageName} from "./profile-subscreens/ChallengesPageName";
+import { Challenges } from "./profile-subscreens/ChallengesScreen";
+import { NewAddress } from "./profile-subscreens/NewAddressScreen";
 // import {jackpotAndRewardsPageName} from "./profile-subscreens/jackpotAndRewardsPageName";
-import {NewAddress} from "./profile-subscreens/NewAddressScreen";
 
 const PointsStack = createStackNavigator();
 
@@ -28,6 +28,7 @@ export const Profile = ({navigation}) => {
         </View>
       
         <View style={styles.profileOption} >
+          
           <Thumbnail 
             backgroundColor={"#FDE6E6"} 
             imageType="challenges"
@@ -35,7 +36,7 @@ export const Profile = ({navigation}) => {
             height={129}
             left={96}
             top={10}
-            //onPress={() => navigation.navigate('ChallengesPageName')}
+            //onPress={() => navigation.navigate('Challenges')}
           >Mes défis
           </Thumbnail>
               
@@ -60,6 +61,18 @@ export const Profile = ({navigation}) => {
             onPress={() => navigation.navigate('NewAddress')}
           >Proposer une nouvelle adresse
           </Thumbnail>
+            
+          <Thumbnail 
+            backgroundColor={"#CCF8F2"} 
+            imageType="Classement"
+            width={207}
+            height={129}
+            left={96}
+            top={10}
+            // onPress={() => navigation.navigate('ClassementPageName')}
+          >Classement
+          </Thumbnail>
+
         </View>
         
       </ScrollView>
@@ -72,9 +85,9 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      {/* <PointsStack.Screen name="ChallengesName" component={ChallengesPageName} /> */}
-      {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
+      <PointsStack.Screen name="ChallengesName" component={Challenges} />
       <PointsStack.Screen name="NewAddress" component={NewAddress} />
+      {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
     </PointsStack.Navigator>
   );
 }
@@ -149,7 +162,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
 
     width: Dimensions.get("window").width,
-    height: 759,
+    height: 959,
     top: 201,
   },
 });

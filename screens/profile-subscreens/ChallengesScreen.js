@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { RectButton } from "react-native-gesture-handler";
+import CardChallenges from  "../../components/molecules/CardChallenges"
 
 import {
   Title,
@@ -31,6 +32,12 @@ export default function ChallengesScreen() {
           <View>
             <Title>toto </Title>
           </View>
+          <View style={styles.list}>
+            <CardChallenges>
+                
+            </CardChallenges>
+      
+      </View>
         </ScrollView>
       );
     }

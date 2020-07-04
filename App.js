@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import axios from "axios";
 
 import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
@@ -15,6 +16,10 @@ const Stack = createStackNavigator();
 
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
+  
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = "Token 2b55afac7ce42f3eb579b71ff2816e891d8bdfa5";
 
   if (!isLoadingComplete) {
     return null;

@@ -54,7 +54,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Cagnotte"
         component={PointsScreen}
         options={{
-          title: "Cagnotte",
+          title: "Cagnotte test test",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-gift" />
           ),

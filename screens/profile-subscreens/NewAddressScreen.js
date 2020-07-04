@@ -35,7 +35,6 @@ export const NewAddress = ({ route, navigation }) => {
     let data = infos;
     data.related_user_uid = "9faa1753-e7fb-4928-9a5c-6bffb3a370db";
     data.is_eco = true;
-    console.log(data);
     axios.post(
       `${global.base_api_url}new-address/`, 
       data

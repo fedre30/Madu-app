@@ -195,6 +195,7 @@ export default function MapScreen() {
               onCalloutPress={() =>
                 navigation.navigate("Shop", { id: marker.id })
               }
+              image={require("../assets/images/pin.png")}
             >
               {visibleCards[idx] && visibleCards[idx].visible && (
                 <MapCallout
@@ -209,17 +210,6 @@ export default function MapScreen() {
                   onPress={() => navigation.navigate("Shop", { id: marker.id })}
                 />
               )}
-              <View style={{ index: 1, width: 300, height: 50 }}>
-                <Image
-                  source={require("../assets/images/pin.png")}
-                  style={{
-                    flex: 1,
-                    width: null,
-                    height: null,
-                    resizeMode: "contain",
-                  }}
-                />
-              </View>
             </Marker>
           ))}
       </MapView>

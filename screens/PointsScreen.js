@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import Sliding from "../components/organisms/Sliding";
 import { RectButton } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
 import { Row, Item } from "native-base";
@@ -14,47 +15,48 @@ const PointsStack = createStackNavigator();
 
 export const Infos = () => {
   return (
-    <View
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <View>
-        <Title>Infos</Title>
-      </View>
-      <View style={styles.contentView}>
-        <Text style={styles.number}>150</Text>
-        <Image
-          source={require("../assets/images/Vector.png")}
-          style={styles.iconImage}
-        />
-        <Text style={styles.leave}>LEAVES</Text>
-      </View>
-      <View>
-        <Text style={styles.description}>
-          200 leafs à accumuler avant de pouvoir débloquer la prochaine
-          récompense.
-        </Text>
-      </View>
-      <View style={styles.contentView}>
-        <View style={styles.progressContainer}>
-          <View style={styles.porgressInner}></View>
-        </View>
-        <View style={styles.imageContent}>
-          <Image
-            source={require("../assets/images/cadeaux_1.png")}
-            style={styles.firstIconImage}
-          />
-        </View>
-      </View>
-      <View style={styles.contentView}>
-        <Text style={styles.title}>récompenses à débloquer</Text>
-      </View>
-      <FlatList
-        keyExtractor={(item) => item.id.toString()}
-        data={data}
-        renderItem={({ item }) => <Items list={item} />}
-      />
-    </View>
+    <Sliding />
+    // <View
+    //   style={styles.container}
+    //   contentContainerStyle={styles.contentContainer}
+    // >
+    //   <View>
+    //     <Title>Cagnotte</Title>
+    //   </View>
+    //   <View style={styles.contentView}>
+    //     <Text style={styles.number}>150</Text>
+    //     <Image
+    //       source={require("../assets/images/Vector.png")}
+    //       style={styles.iconImage}
+    //     />
+    //     <Text style={styles.leave}>LEAVES</Text>
+    //   </View>
+    //   <View>
+    //     <Text style={styles.description}>
+    //       200 leafs à accumuler avant de pouvoir débloquer la prochaine
+    //       récompense.
+    //     </Text>
+    //   </View>
+    //   <View style={styles.contentView}>
+    //     <View style={styles.progressContainer}>
+    //       <View style={styles.porgressInner}></View>
+    //     </View>
+    //     <View style={styles.imageContent}>
+    //       <Image
+    //         source={require("../assets/images/cadeaux_1.png")}
+    //         style={styles.firstIconImage}
+    //       />
+    //     </View>
+    //   </View>
+    //   <View style={styles.contentView}>
+    //     <Text style={styles.title}>récompenses à débloquer</Text>
+    //   </View>
+    //   <FlatList
+    //     keyExtractor={(item) => item.id.toString()}
+    //     data={data}
+    //     renderItem={({ item }) => <Items list={item} />}
+    //   />
+    // </View>
   );
 }
 export const Cagnotte = ({navigation}) => {

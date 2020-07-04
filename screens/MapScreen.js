@@ -11,8 +11,6 @@ import {
 import { Title, SimpleText } from "../components/atoms/StyledText";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { getLocation } from "../utils/map";
-import { Backdrop } from "react-native-backdrop";
-import { ListScreen } from "./ListScreen";
 import { ListCard } from "../components/molecules/Card";
 import data from "../utils/poi-api-test.json";
 import { FilterButton } from "../components/atoms/FilterButton";
@@ -113,7 +111,7 @@ export default function MapScreen() {
       zipcode: "75018",
     },
   ]);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState([]);
   const navigation = useNavigation();
 
@@ -152,14 +150,6 @@ export default function MapScreen() {
       );
     }
   }, []);
-
-  const handleOpen = () => {
-    setVisible(true);
-  };
-
-  const handleClose = () => {
-    setVisible(false);
-  };
 
   const handleCardVisibility = (idx) =>
     setVisibleCards((prevState) =>
@@ -205,6 +195,7 @@ export default function MapScreen() {
               onCalloutPress={() =>
                 navigation.navigate("Shop", { id: marker.id })
               }
+              image={require("../assets/images/pin.png")}
             >
               {visibleCards[idx] && visibleCards[idx].visible && (
                 <MapCallout
@@ -219,25 +210,10 @@ export default function MapScreen() {
                   onPress={() => navigation.navigate("Shop", { id: marker.id })}
                 />
               )}
-              <View style={{ index: 1, width: 300, height: 50 }}>
-                <Image
-                  source={require("../assets/images/pin.png")}
-                  style={{
-                    flex: 1,
-                    width: null,
-                    height: null,
-                    resizeMode: "contain",
-                  }}
-                />
-              </View>
             </Marker>
           ))}
       </MapView>
-      <MapBackDrop
-        visible={visible}
-        handleClose={handleClose}
-        handleOpen={handleOpen}
-      />
+      <MapBackDrop visible={visible} onFocus={() => setVisible(!visible)} />
     </View>
   );
 }

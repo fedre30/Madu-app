@@ -73,6 +73,7 @@ export default function GreenscoreScreen({ route, navigation }) {
           rounded
           value={infos.name}
           onChangeText={(text) => updateField("name", text)}
+          style={{ color: Colors.grey }}
         />
       </View>
       <View style={styles.formItem}>
@@ -82,17 +83,22 @@ export default function GreenscoreScreen({ route, navigation }) {
           rounded
           value={infos.address}
           onChangeText={(text) => updateField("address", text)}
+          style={{ color: Colors.grey }}
         />
       </View>
       <View style={styles.formItem}>
         <SecondaryText>Ce commerce vous parait éco-responsable ?</SecondaryText>
-        <Switch value={rate} onValueChange={() => setRate(!rate)} />
+        <Switch
+          value={rate}
+          onValueChange={() => setRate(!rate)}
+          style={{ marginTop: 5 }}
+        />
       </View>
       <View style={styles.formItem}>
         <SecondaryText>
           Y’a t-il des tags qui vous paraissent inappropriés ?
         </SecondaryText>
-        <View style={[styles.tagsContainer, { marginBottom: 50 }]}>
+        <View style={[styles.tagsContainer, { marginBottom: 10 }]}>
           {shop.tags.map((tag, idx) => (
             <Tag
               key={idx}
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   formItem: {
-    marginBottom: 20,
+    marginBottom: 30,
   },
   searchButton: {
     justifyContent: "center",
@@ -163,7 +169,6 @@ const styles = StyleSheet.create({
   tagsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginBottom: 30,
     marginTop: 20,
     width: Dimensions.get("window").width,
   },

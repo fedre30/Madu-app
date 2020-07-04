@@ -161,7 +161,10 @@ export default function ShopInfoScreen({ route, navigation }) {
               vous voulez exprimer votre avis ?
             </SecondaryTitle>
 
-            <Button style={styles.searchButton}>
+            <Button
+              style={styles.searchButton}
+              onPress={() => navigation.navigate("Feedback", { id: data.id })}
+            >
               <ButtonText style={styles.buttonText} transform>
                 Donner mon avis
               </ButtonText>

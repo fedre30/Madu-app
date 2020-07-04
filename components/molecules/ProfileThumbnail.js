@@ -6,6 +6,7 @@ const imagesTypes = {
     jackpotAndRewards: require("../../assets/images/gifts.png"),
     challenges: require("../../assets/images/defis.png"),
     newAddress: require("../../assets/images/meeting.png"),
+    Classement: require("../../assets/images/scale.png"),
   };
 
 export const Thumbnail = (props) => {

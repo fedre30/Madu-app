@@ -1,5 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -15,6 +13,8 @@ const PointsStack = createStackNavigator();
 
 export const Profile = ({navigation}) => {
   navigation.setOptions({ headerShown: false });
+
+  
   return (
     <ScrollView
       style={styles.container}

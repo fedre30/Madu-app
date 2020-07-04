@@ -40,11 +40,9 @@ export const NewAddress = ({ route, navigation }) => {
       `${global.base_api_url}new-address/`, 
       data
     ).then((response) => {
-      console.log("CA MARCHE !");
-      console.log(response.data);
+      //TODO: notify succes to user
     }).catch((error) => {
-      console.log("CA MARCHE PASSSS!");
-      console.log(error);
+      //TODO: notify failure to user
     })
 
   }

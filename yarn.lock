@@ -5998,11 +5998,6 @@ react-native-animatable@1.3.3:
   dependencies:
     prop-types "^15.7.2"
 
-react-native-backdrop@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-backdrop/-/react-native-backdrop-2.0.0.tgz#07491fb737890b7b904a7c4e590523577198d306"
-  integrity sha512-mIN23Gcvfe/VBVW+lPSnZvAkah/UmhxIwIfMuJ2gTRkxXflh06itC1vSKd1/d92HrlTRQkvWnCcnBjSxpPjtqg==
-
 react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
@@ -6051,6 +6046,14 @@ react-native-maps@0.26.1:
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.26.1.tgz#6ec316259b38d259c8974448d894bd7a23101da4"
   integrity sha512-p4VTB8YB5ZmOmDRCUpoHZkm05amZwhIo04AJMBbB9+JAR2PNNfpo0vceoWX0Mag4wnePkdzPomeWMplr/wimTg==
 
+react-native-material-backdrop-modal@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-material-backdrop-modal/-/react-native-material-backdrop-modal-1.4.0.tgz#fc99bce3722de399e70c1f21f6f2ced015bdb1fb"
+  integrity sha512-p5hw/105cI65i5iBdFm/M2r+ClV6KbBtDAhnPoSPrh9vzyoUuOvTOM5+igHI4Ym81BKNuvvnlKTdXm5XpHcjVg==
+  dependencies:
+    prop-types "^15.7.2"
+    react-native-platform-touchable "^1.1.1"
+
 react-native-modal@^11.5.6:
   version "11.5.6"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-11.5.6.tgz#bb25a78c35a5e24f45de060e5f64284397d38a87"
@@ -6058,6 +6061,11 @@ react-native-modal@^11.5.6:
   dependencies:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
+
+react-native-platform-touchable@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
+  integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
 
 react-native-safe-area-context@0.7.3:
   version "0.7.3"

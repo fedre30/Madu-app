@@ -146,13 +146,13 @@ export default function MapScreen() {
   useEffect(() => {
     if (markers) {
       setVisibleCards(
-        markers.map((marker, idx) => ({ id: idx, visible: false }))
+        markers.map((marker) => ({ id: marker.id, visible: false }))
       );
     }
   }, []);
 
   const handleCardVisibility = (idx) =>
-    setVisibleCards((prevState) =>
+    setVisibleCards(
       visibleCards.map((card) => {
         if (idx === card.id) {
           if (card.visible) {
@@ -180,6 +180,7 @@ export default function MapScreen() {
         showsCompass={true}
         showsPointsOfInterest={false}
       >
+        {console.log(visibleCards)}
         {markers &&
           markers.map((marker, idx) => (
             <Marker
@@ -190,14 +191,14 @@ export default function MapScreen() {
               name={marker.name}
               key={idx}
               stopPropagation={true}
-              onPress={() => handleCardVisibility(idx)}
-              onSelect={() => handleCardVisibility(idx)}
+              onPress={() => handleCardVisibility(marker.id)}
+              onSelect={() => handleCardVisibility(marker.id)}
               onCalloutPress={() =>
                 navigation.navigate("Shop", { id: marker.id })
               }
               image={require("../assets/images/pin.png")}
+              calloutVisible={visibleCards[marker.id] && visibleCards[marker.id].visible && visibleCards}
             >
-              {/* {visibleCards[idx] && visibleCards[idx].visible && (
                 <MapCallout
                   id={marker.id}
                   name={marker.name}
@@ -209,7 +210,6 @@ export default function MapScreen() {
                   mapCard
                   onPress={() => navigation.navigate("Shop", { id: marker.id })}
                 />
-              )} */}
             </Marker>
           ))}
       </MapView>

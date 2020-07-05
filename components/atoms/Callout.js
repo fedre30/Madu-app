@@ -14,7 +14,7 @@ import { Callout } from "react-native-maps";
 
 export const MapCallout = (props) => {
   return (
-    <Callout onPress={props.onPress} width={300} tooltip={true}>
+    <Callout width={300} tooltip={true}>
       <CardItem cardBody>
         <Image
           source={require("../../assets/images/abattoirveg.jpg")}

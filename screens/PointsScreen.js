@@ -131,7 +131,7 @@ export const Infos = ({ navigation }) => {
             />
           </View>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           progress={Progress}
           onPress={() => {
             Progress < 100 ? setProgress(Progress + 20) : setProgress(20);
@@ -153,7 +153,7 @@ export const Infos = ({ navigation }) => {
               Progress
             </Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={styles.contentView}>
           <Text style={styles.title}>récompenses à débloquer</Text>
         </View>

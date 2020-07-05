@@ -1,27 +1,23 @@
-import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
-import {
-  RectButton,
-  ScrollView,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native-gesture-handler";
 import { Title, SimpleText } from "../components/atoms/StyledText";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { getLocation } from "../utils/map";
-import { ListCard } from "../components/molecules/Card";
 import data from "../utils/poi-api-test.json";
-import { FilterButton } from "../components/atoms/FilterButton";
-import Modal from "react-native-modal";
-import { FilterView } from "../components/organisms/FilterView";
 import { MapBackDrop } from "../components/organisms/Backdrop";
 import Geocoder from "react-native-geocoding";
 import { useNavigation } from "@react-navigation/native";
 import { MapCallout } from "../components/atoms/Callout";
+import ShopInfoScreen from "./shops-subscreens/ShopInfoScreen";
+import GreenscoreScreen from "./shops-subscreens/GreenscoreScreen";
+import ConfirmationScreen from "./shops-subscreens/ConfirmationScreen";
+import FeedbackScreen from "./shops-subscreens/FeedbackScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function MapScreen() {
+const Map = () => {
+  const navigation = useNavigation();
+  navigation.setOptions({ headerShown: false });
   const [location, setLocation] = useState(null);
   const [markers, setMarkers] = useState([
     {
@@ -113,7 +109,6 @@ export default function MapScreen() {
   ]);
   const [visible, setVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState([]);
-  const navigation = useNavigation();
 
   useEffect(() => {
     getLocation().then((data) => {
@@ -216,7 +211,7 @@ export default function MapScreen() {
       <MapBackDrop visible={visible} onFocus={() => setVisible(!visible)} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -245,3 +240,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#bdbdbd",
   },
 });
+
+export default function MapScreen() {
+  const PointsStack = createStackNavigator();
+  return (
+    <PointsStack.Navigator>
+      <PointsStack.Screen name="Map" component={Map} />
+      <PointsStack.Screen name="Shop" component={ShopInfoScreen} />
+      <PointsStack.Screen name="Greenscore" component={GreenscoreScreen} />
+      <PointsStack.Screen name="Confirmation" component={ConfirmationScreen} />
+      <PointsStack.Screen name="Feedback" component={FeedbackScreen} />
+    </PointsStack.Navigator>
+  );
+}

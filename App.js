@@ -2,32 +2,52 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import axios from "axios";
 
 import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import ShopInfoScreen from "./screens/shops-subscreens/ShopInfoScreen";
+import FeedbackScreen from "./screens/shops-subscreens/FeedbackScreen";
+import ConfirmationScreen from "./screens/shops-subscreens/ConfirmationScreen";
+import GreenscoreScreen from "./screens/shops-subscreens/GreenscoreScreen";
+import LoginScreen from "./screens/LoginScreen";
+import { AsyncStorage } from "react-native";
+import { authReducer, initialState, AuthContext } from "./hooks/auth";
 
 const Stack = createStackNavigator();
 
 export default function App(props) {
+  const [state, dispatch] = React.useReducer(authReducer, initialState);
+
   const isLoadingComplete = useCachedResources();
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
+  axios.defaults.headers.common["Authorization"] =
+    "Token 2b55afac7ce42f3eb579b71ff2816e891d8bdfa5";
+
+  if (isLoadingComplete) {
     return (
-      <View style={styles.container}>
-        {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
-        <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-            <Stack.Screen name="Shop" component={ShopInfoScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+      <AuthContext.Provider
+        value={{
+          state,
+          dispatch,
+        }}
+      >
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
+          <NavigationContainer linking={LinkingConfiguration}>
+            <Stack.Navigator>
+              {state.isAuthenticated ? (
+                <Stack.Screen name="Root" component={BottomTabNavigator} />
+              ) : (
+                <Stack.Screen name="Login" component={LoginScreen} />
+              )}
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
+      </AuthContext.Provider>
     );
-  }
+  } else return null;
 }
 
 const styles = StyleSheet.create({

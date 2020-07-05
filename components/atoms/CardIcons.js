@@ -3,12 +3,13 @@ import { View } from "react-native";
 import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Text } from "native-base";
+import { SimpleText } from "./StyledText";
 
 export const PriceIcon = (props) => {
   return (
     <Ionicons
       name="logo-euro"
-      size={20}
+      size={props.size ? props.size : 20}
       style={{ marginRight: 5 }}
       color={props.focused ? Colors.text : Colors.grey}
     />
@@ -19,7 +20,7 @@ export const WheelchairIcon = (props) => {
   return (
     <Ionicons
       name="md-body"
-      size={30}
+      size={props.size ? props.size : 30}
       style={{ marginBottom: -3 }}
       color={props.focused ? Colors.text : Colors.grey}
     />
@@ -31,11 +32,15 @@ export const SuggestionIcon = (props) => {
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <Ionicons
         name="md-thumbs-up"
-        size={30}
+        size={props.size ? props.size : 30}
         style={{ marginBottom: -3 }}
-        color={Colors.text}
+        color={props.color ? props.color : Colors.text}
       />
-      <Text style={{ marginLeft: 10 }}>{props.suggestionRate}%</Text>
+      {props.suggestionRate && (
+        <SimpleText style={{ marginLeft: 10, marginTop: 10 }}>
+          {props.suggestionRate}%
+        </SimpleText>
+      )}
     </View>
   );
 };

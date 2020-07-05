@@ -6,11 +6,12 @@ import {
   RectButton,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from "react-native-gesture-handler";
 import { Title, SimpleText } from "../../components/atoms/StyledText";
 import MapView from "react-native-maps";
 import { getLocation } from "../../utils/map";
-import { Backdrop } from "react-native-backdrop";
+import Backdrop from "react-native-material-backdrop-modal";
 import { ListCard } from "../../components/molecules/Card";
 import data from "../../utils/poi-api-test.json";
 import { FilterButton } from "../../components/atoms/FilterButton";
@@ -38,101 +39,87 @@ export const MapBackDrop = (props) => {
 
   return (
     <Backdrop
-      visible={props.visible}
-      handleOpen={props.handleOpen}
-      handleClose={props.handleClose}
-      onClose={() => {}}
-      swipeConfig={{
-        velocityThreshold: 0.3,
-        directionalOffsetThreshold: 80,
-      }}
-      animationConfig={{
-        speed: 14,
-        bounciness: 4,
-      }}
-      overlayColor="rgba(0,0,0,0.32)"
-      closedHeight={50}
-      backdropStyle={{
-        backgroundColor: "#fff",
-      }}
-      header={
+      backdropStyle={{ maxHeight: Dimensions.get("window").height - 200 }}
+      focused={props.visible}
+      onFocus={props.onFocus}
+      title=""
+      icon={
         <View style={styles.closePlateContainer}>
           <View style={styles.closePlate} />
         </View>
       }
     >
-      <TouchableOpacity
-        onPress={props.handleClose}
-        style={{
-          justifyContent: "flex-end",
-          flexDirection: "row",
-          paddingRight: 20,
-          paddingBottom: 20,
-        }}
-      >
-        <SimpleText>Terminer</SimpleText>
-      </TouchableOpacity>
-      <ScrollView style={{ padding: 20 }}>
-        <ScrollView>
-          <ScrollView style={styles.filtersContainer} horizontal={true}>
-            <FilterButton
-              title="Filtres"
-              imageType="filters"
-              onPress={() => setModalVisible(!modalVisible)}
-            />
-            <FilterButton
-              title="Végétarien"
-              imageType="veggie"
-              onPress={() => onPress("veggie")}
-              focused={activeFilters.includes("veggie")}
-            />
-            <FilterButton
-              title="Local"
-              imageType="local"
-              onPress={() => onPress("local")}
-              focused={activeFilters.includes("local")}
-            />
-            <FilterButton
-              title="Vegan"
-              imageType="vegan"
-              onPress={() => onPress("vegan")}
-              focused={activeFilters.includes("vegan")}
-            />
-            <FilterButton
-              title="Bio"
-              imageType="bio"
-              onPress={() => onPress("bio")}
-              focused={activeFilters.includes("bio")}
-            />
-          </ScrollView>
-          <View>
-            <Modal
-              isVisible={modalVisible}
-              style={{ margin: 0 }}
-              propagateSwipe
-            >
-              <ScrollView style={{ flex: 1 }}>
-                <FilterView search={() => setModalVisible(!modalVisible)} />
-              </ScrollView>
-            </Modal>
-          </View>
-          <View style={styles.list}>
-            {shops.map((shop) => (
-              <ListCard
-                key={shop.id}
-                id={shop.id}
-                name={shop.name}
-                address={shop.address}
-                tags={shop.tags}
-                price={shop.price}
-                accessibility={shop.accessibility}
-                suggestionRate={shop.suggestionRate}
-                greenscore={shop.greenscore}
-              />
-            ))}
-          </View>
+      <View style={{ padding: 20 }}>
+        <TouchableOpacity
+          onPress={props.onFocus}
+          style={{
+            justifyContent: "flex-end",
+            flexDirection: "row",
+            paddingRight: 20,
+            paddingBottom: 20,
+          }}
+        >
+          <SimpleText>Fermer</SimpleText>
+        </TouchableOpacity>
+        <ScrollView style={styles.filtersContainer} horizontal={true}>
+          <FilterButton
+            title="Filtres"
+            imageType="filters"
+            onPress={() => setModalVisible(!modalVisible)}
+          />
+          <FilterButton
+            title="Végétarien"
+            imageType="veggie"
+            onPress={() => onPress("veggie")}
+            focused={activeFilters.includes("veggie")}
+          />
+          <FilterButton
+            title="Local"
+            imageType="local"
+            onPress={() => onPress("local")}
+            focused={activeFilters.includes("local")}
+          />
+          <FilterButton
+            title="Vegan"
+            imageType="vegan"
+            onPress={() => onPress("vegan")}
+            focused={activeFilters.includes("vegan")}
+          />
+          <FilterButton
+            title="Bio"
+            imageType="bio"
+            onPress={() => onPress("bio")}
+            focused={activeFilters.includes("bio")}
+          />
         </ScrollView>
-      </ScrollView>
+        <View>
+          <Modal isVisible={modalVisible} style={{ margin: 0 }} propagateSwipe>
+            <ScrollView style={{ flex: 1 }}>
+              <FilterView
+                search={() => setModalVisible(!modalVisible)}
+                handleClose={() => setModalVisible(!modalVisible)}
+              />
+            </ScrollView>
+          </Modal>
+        </View>
+        <FlatList
+          style={styles.list}
+          data={data}
+          renderItem={({ item }) => (
+            <ListCard
+              id={item.id}
+              name={item.name}
+              address={item.address}
+              tags={item.tags}
+              price={item.price}
+              accessibility={item.accessibility}
+              suggestionRate={item.suggestionRate}
+              greenscore={item.greenscore}
+            />
+          )}
+          keyExtractor={(shop) => shop.id.toString()}
+        ></FlatList>
+      </View>
     </Backdrop>
   );
 };
@@ -143,10 +130,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fafafa",
   },
   list: {
-    padding: 20,
+    padding: 5,
   },
   filtersContainer: {
-    height: "auto",
+    height: 100,
     flexDirection: "row",
     marginBottom: 20,
   },
@@ -161,5 +148,8 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 5,
     backgroundColor: "#bdbdbd",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: Dimensions.get("window").width - 100,
   },
 });

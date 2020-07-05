@@ -15,6 +15,9 @@ export default {
       path: "shop",
       screens: {
         Shop: "shop",
+        Feedback: "feedback",
+        Greenscore: "greenscore",
+        Confirmation: "confirmation",
       },
     },
   },

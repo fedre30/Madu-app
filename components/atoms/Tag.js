@@ -11,19 +11,23 @@ export const Tag = (props) => {
       style={[
         styles.container,
         {
-          backgroundColor: props.focused ? Colors.secondary : "transparent",
+          backgroundColor: "transparent",
         },
       ]}
       contentContainerStyle={styles.contentContainer}
     >
-      <View style={styles.button}>
+      <View
+        style={[
+          styles.button,
+          {
+            backgroundColor: props.focused ? Colors.secondary : "#FFFFFF",
+          },
+        ]}
+      >
         <SimpleText
-          color={Colors.secondary}
+          color={props.focused ? Colors.white : Colors.secondary}
           fontSize={16}
-          style={[
-            styles.title,
-            { color: props.focused ? Colors.white : Colors.secondary },
-          ]}
+          style={[styles.title]}
         >
           {props.title}
         </SimpleText>

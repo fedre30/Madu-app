@@ -1,6 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
+<<<<<<< HEAD
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+=======
+import { StyleSheet, Text, View, Image, FlatList, ScrollView } from "react-native";
+import Sliding from "../components/organisms/Sliding";
+import { RectButton, ScrollView } from "react-native-gesture-handler";
+>>>>>>> 4d1c3e8d4ff0a5f0387565e9571e09c2e7b32859
 import { Title } from "../components/atoms/StyledText";
 
 import { RectButton, ScrollView } from "react-native-gesture-handler";

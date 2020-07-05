@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, FlatList, ScrollView } from "react-native";
 import Sliding from "../components/organisms/Sliding";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
 import { Row, Item } from "native-base";
 import Items from "../components/organisms/ListRecompense";

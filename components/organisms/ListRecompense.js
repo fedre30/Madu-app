@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
-import Constants from "expo-constants";
 
 const Items = (props) => {
   const list = props.list;

@@ -197,7 +197,7 @@ export default function MapScreen() {
               }
               image={require("../assets/images/pin.png")}
             >
-              {visibleCards[idx] && visibleCards[idx].visible && (
+              {/* {visibleCards[idx] && visibleCards[idx].visible && (
                 <MapCallout
                   id={marker.id}
                   name={marker.name}
@@ -209,7 +209,7 @@ export default function MapScreen() {
                   mapCard
                   onPress={() => navigation.navigate("Shop", { id: marker.id })}
                 />
-              )}
+              )} */}
             </Marker>
           ))}
       </MapView>

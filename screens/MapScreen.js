@@ -192,7 +192,7 @@ const Map = () => {
               }
               image={require("../assets/images/pin.png")}
             >
-              {visibleCards[idx] && visibleCards[idx].visible && (
+              {/* {visibleCards[idx] && visibleCards[idx].visible && (
                 <MapCallout
                   id={marker.id}
                   name={marker.name}
@@ -204,7 +204,7 @@ const Map = () => {
                   mapCard
                   onPress={() => navigation.navigate("Shop", { id: marker.id })}
                 />
-              )}
+              )} */}
             </Marker>
           ))}
       </MapView>

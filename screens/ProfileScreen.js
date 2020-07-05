@@ -1,34 +1,41 @@
 import * as React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Colors from "../constants/Colors";
+import Sliding from "../components/organisms/Sliding";
 import { Thumbnail } from "../components/molecules/ProfileThumbnail";
-import { Challenges } from "./profile-subscreens/ChallengesScreen";
+//import { Challenges } from "./profile-subscreens/ChallengesScreen";
 import { NewAddress } from "./profile-subscreens/NewAddressScreen";
 // import {jackpotAndRewardsPageName} from "./profile-subscreens/jackpotAndRewardsPageName";
 
 const PointsStack = createStackNavigator();
 
+export const Ranking = () => {
+  return(
+    <Sliding />
+  );
+}
+
 export const Profile = ({navigation}) => {
   navigation.setOptions({ headerShown: false });
 
-  
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
       <ScrollView>
+        {/* //Données en brute pour afficher dans le profil une image + nom et prenom
         <View style={styles.headerContainer} >
           <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
           <Text style={styles.name}>Marie TE</Text>
           <Text style={styles.institution}>Little cigogne</Text>
-        </View>
+        </View> */}
       
         <View style={styles.profileOption} >
-          
           <Thumbnail 
             backgroundColor={"#FDE6E6"} 
             imageType="challenges"
@@ -36,7 +43,7 @@ export const Profile = ({navigation}) => {
             height={129}
             left={96}
             top={10}
-            //onPress={() => navigation.navigate('Challenges')}
+            // onPress={() => navigation.navigate('Challenges')}
           >Mes défis
           </Thumbnail>
               
@@ -69,10 +76,9 @@ export const Profile = ({navigation}) => {
             height={129}
             left={96}
             top={10}
-            // onPress={() => navigation.navigate('ClassementPageName')}
+            onPress={() => navigation.navigate('Ranking')}
           >Classement
           </Thumbnail>
-
         </View>
         
       </ScrollView>
@@ -85,9 +91,10 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      <PointsStack.Screen name="ChallengesName" component={Challenges} />
-      <PointsStack.Screen name="NewAddress" component={NewAddress} />
+      {/* <PointsStack.Screen name="ChallengesName" component={Challenges} /> */}
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
+      <PointsStack.Screen name="NewAddress" component={NewAddress} />
+      <PointsStack.Screen name="Ranking" component={Ranking} />
     </PointsStack.Navigator>
   );
 }
@@ -96,7 +103,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa",
-    //padding: 10,
   },
   
   contentContainer: {
@@ -104,65 +110,72 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flex: 1,
   },
+
+  /* Profile header*/
+  // headerContainer: {
+  //   position: "absolute",
+  //   width: "auto",
+  //   height: "auto",
+  //   left: 66,
+  //   top: 30,
+  // },
+
+  // profilePic: {
+  //   position: "absolute",
+  //   width: 70,
+  //   height: 70,
+  //   left: 81,
+  //   top: 0,
+  // },
   
-  headerContainer: {
-    position: "absolute",
-    width: "auto",
-    height: "auto",
-    left: 66,
-    top: 30,
-  },
+  // name: {
+  //   position: "absolute",
+  //   width: 100,
+  //   height: 21,
+  //   left: 67,
+  //   top: 95,
 
-  profilePic: {
-    position: "absolute",
-    width: 70,
-    height: 70,
-    left: 81,
-    top: 0,
-  },
-  
-  name: {
-    position: "absolute",
-    width: 100,
-    height: 21,
-    left: 67,
-    top: 95,
+  //   fontFamily: "gotham-bold",
+  //   fontStyle: "normal",
+  //   fontWeight: "bold",
+  //   fontSize: 20,
+  //   lineHeight: 21,
 
-    fontFamily: "gotham-bold",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: 20,
-    lineHeight: 21,
+  //   textAlign: "center",
+  //   textTransform: "uppercase",
 
-    textAlign: "center",
-    textTransform: "uppercase",
+  //   color: Colors.black,
+  // },
 
-    color: Colors.black,
-  },
+  // institution: {
+  //   position: "absolute",
+  //   width: 123,
+  //   height: 20,
+  //   left: 55,
+  //   top: 115,
 
-  institution: {
-    position: "absolute",
-    width: 123,
-    height: 20,
-    left: 55,
-    top: 115,
+  //   fontFamily: "gotham-bold",
+  //   fontSize: 14,
+  //   lineHeight: 20,
 
-    fontFamily: "gotham-bold",
-    fontSize: 14,
-    lineHeight: 20,
+  //   textAlign: "center",
+  //   textTransform: "uppercase",
 
-    textAlign: "center",
-    textTransform: "uppercase",
+  //   color: "#787878",
+  // },
 
-    color: "#787878",
-  },
-
+  /* Cards */
   profileOption: {
     flexDirection: "row",
     flexWrap: "wrap",
-
     width: Dimensions.get("window").width,
-    height: 959,
-    top: 201,
+
+    /* heigh & top when there is the header */
+    //height: 959,
+    //top: 201,
+
+    /* heigh & top when there is not the header */
+    height: 780,
+    top: 20,
   },
 });

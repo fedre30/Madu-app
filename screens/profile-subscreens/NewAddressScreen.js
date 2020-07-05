@@ -6,24 +6,24 @@ import { Ionicons } from "@expo/vector-icons";
 
 import axios from "axios";
 import global from "../../Global";
-
-import { SecondaryText, ButtonText } from "../../components/atoms/StyledText";
-//import { ButtonSwitch } from "../../components/molecules/Switch";
+import { ButtonText } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
-import { UrlTile } from "react-native-maps";
 
+/* test switch button */
+//import { ButtonSwitch } from "../../components/molecules/Switch";
 //import SwitchButton from 'switch-button-react-native';
 
 
-export const NewAddress = ({ route, navigation }) => {
+export const NewAddress = ({ navigation }) => {
   navigation.setOptions({ headerShown: false });
-  //const newShop = route.params.shop;
+
   const [infos, setInfos] = useState({
     name: "",
     address: "",
     zipcode: "",
     city:"",
   });
+
   const updateField = (field, val) => {
     setInfos({
       ...infos,
@@ -43,8 +43,7 @@ export const NewAddress = ({ route, navigation }) => {
     }).catch((error) => {
       //TODO: notify failure to user
     })
-
-  }
+  };
 
   return (
     <ScrollView
@@ -185,16 +184,10 @@ export const NewAddress = ({ route, navigation }) => {
 
       color: "#C0C5D2",
     },
-    switch: {
-      borderWidth: 1,
-      borderColor: "#DFDFDF",
-      borderRadius: 30,
-    },
     addButton: {
-      //position: "absolute",
       justifyContent: "center",
-      marginTop: 50,
-      marginBottom: 70,
+      marginTop: 20,
+      marginBottom: 44,
       width: 125,
       height: 45,
       left: 110,//145,

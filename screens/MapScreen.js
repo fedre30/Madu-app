@@ -11,7 +11,6 @@ import {
 import { Title, SimpleText } from "../components/atoms/StyledText";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { getLocation } from "../utils/map";
-import { ListCard } from "../components/molecules/Card";
 import data from "../utils/poi-api-test.json";
 import { FilterButton } from "../components/atoms/FilterButton";
 import Modal from "react-native-modal";

@@ -42,8 +42,10 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
+            // onPress={() => navigation.navigate('Challenges')}
             onPress={() => navigation.navigate('ContentChallenges')}
-          >Mes défis
+          >
+            Mes défis
           </Thumbnail>
 
           <Thumbnail

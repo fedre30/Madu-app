@@ -23,7 +23,7 @@ import Colors from "../../constants/Colors";
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   const index = route.params.id;
-  const [rate, setRate] = useState(2);
+  const [rate, setRate] = useState(false);
   const [comments, setComments] = useState("");
 
   return (
@@ -52,16 +52,22 @@ export default function FeedbackScreen({ route, navigation }) {
           flexDirection: "row",
         }}
       >
-        {[...Array(5)].map((thumb, i) => (
-          <TouchableOpacity key={i} onPress={() => setRate(i + 1)}>
-            <Ionicons
-              name="md-thumbs-up"
-              size={30}
-              style={{ marginRight: 20 }}
-              color={i >= rate ? Colors.text : Colors.secondary}
-            />
-          </TouchableOpacity>
-        ))}
+        <TouchableOpacity onPress={() => setRate(true)}>
+          <Ionicons
+            name="md-thumbs-up"
+            size={30}
+            style={{ marginRight: 20 }}
+            color={rate ? Colors.secondary : Colors.text}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setRate(false)}>
+          <Ionicons
+            name="md-thumbs-down"
+            size={30}
+            style={{ marginRight: 20 }}
+            color={rate ? Colors.text : "#EB5757"}
+          />
+        </TouchableOpacity>
       </View>
       <SimpleText style={{ marginBottom: 20 }}>
         Vous voulez vous exprimer sur quelque chose en particulier ? Ou bien

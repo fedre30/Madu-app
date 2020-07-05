@@ -3,6 +3,7 @@ import { Image, StyleSheet, View, Dimensions } from "react-native";
 import { SimpleText, Title, Subtitle, SecondaryText } from "./StyledText";
 import Colors from "../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { LeavesCount } from "./LeavesCount";
 
 const imagesTypes = {
   food: require("../../assets/images/food.png"),
@@ -29,11 +30,11 @@ export const Criterium = (props) => {
       )}
       <View style={styles.textContainer}>
         <SecondaryText style={styles.title} size={13}>
-          {props.title} -
+          {props.title}
         </SecondaryText>
-        <SecondaryText style={styles.title} size={13} color={Colors.secondary}>
-          {props.score}%
-        </SecondaryText>
+        <View style={{ width: 40, flex: 1 }}>
+          <LeavesCount rate={props.score} />
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -41,15 +42,14 @@ export const Criterium = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 150,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
+    marginBottom: 50,
   },
   contentContainer: {
     justifyContent: "flex-start",
-    paddingTop: 30,
   },
   imageContainer: {
     width: 100,
@@ -62,15 +62,11 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   textContainer: {
-    flexDirection: "row",
-    alignItems: "center",
     marginLeft: 20,
   },
   title: {
     textAlign: "center",
-    marginTop: 10,
     textTransform: "capitalize",
     color: Colors.grey,
-    marginRight: 15,
   },
 });

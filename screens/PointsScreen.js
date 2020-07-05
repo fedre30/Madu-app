@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import * as React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,7 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Title } from "../components/atoms/StyledText";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
+import {
+  RectButton,
+  ScrollView,
+  TouchableHighlight,
+} from "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import Recompense from "../components/organisms/Recompense";
 import Items from "../components/organisms/DeblockRecompense";
@@ -46,11 +50,66 @@ export const ShowRecompense = () => {
 };
 
 export const Infos = ({ navigation }) => {
+  const [Progress, setProgress] = useState(20);
+  const InnerProgress = ({ width }) => (
+    <View
+      style={{
+        width: `${width}%`,
+        height: 10,
+        backgroundColor: "#69FFD4",
+        borderRadius: 15,
+      }}
+    ></View>
+  );
+  const Number = () => {
+    if (Progress === 100) {
+      return <Text style={styles.number}>350</Text>;
+    } else {
+      return <Text style={styles.number}>150</Text>;
+    }
+  };
+  const LEAVES = () => {
+    if (Progress === 20) {
+      return (
+        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>200 leafs</Text>
+      );
+    } else if (Progress === 40) {
+      return (
+        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>150 leafs</Text>
+      );
+    } else if (Progress === 60) {
+      return (
+        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>100 leafs</Text>
+      );
+    } else if (Progress === 80) {
+      return (
+        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>50 leafs</Text>
+      );
+    } else {
+      return null;
+    }
+  };
+  const Description = () => {
+    if (Progress === 100) {
+      return (
+        <Text style={styles.description}>
+          Vous pouvez dès à présent débloquer une récompense.
+        </Text>
+      );
+    } else {
+      return (
+        <Text style={styles.description}>
+          <LEAVES /> à accumuler avant de pouvoir débloquer la prochaine
+          récompense.
+        </Text>
+      );
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={styles.contentView}>
-          <Text style={styles.number}>350</Text>
+          <Number />
           <Image
             source={require("../assets/images/Vector.png")}
             style={styles.iconImage}
@@ -58,14 +117,13 @@ export const Infos = ({ navigation }) => {
           <Text style={styles.leave}>LEAVES</Text>
         </View>
         <View>
-          <Text style={styles.description}>
-            Vous pouvez dès à présent débloquer une récompense.
-          </Text>
+          <Description />
         </View>
         <View style={styles.contentProgress}>
           <View style={styles.progressContainer}>
-            <View style={styles.porgressInner}></View>
+            <InnerProgress width={Progress} />
           </View>
+
           <View style={styles.imageContent}>
             <Image
               source={require("../assets/images/cadeaux_1.png")}
@@ -73,6 +131,29 @@ export const Infos = ({ navigation }) => {
             />
           </View>
         </View>
+        <TouchableOpacity
+          progress={Progress}
+          onPress={() => {
+            Progress < 100 ? setProgress(Progress + 20) : setProgress(20);
+          }}
+          style={{ alignItems: "center" }}
+        >
+          <View
+            style={{
+              backgroundColor: "#69FFD4",
+              width: 120,
+              height: 36,
+              borderRadius: 4,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 40,
+            }}
+          >
+            <Text style={{ fontSize: 15, fontWeight: "500", color: "#FFF" }}>
+              Progress
+            </Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.contentView}>
           <Text style={styles.title}>récompenses à débloquer</Text>
         </View>
@@ -168,7 +249,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   porgressInner: {
-    width: 176,
     height: 10,
     backgroundColor: "#69FFD4",
     borderRadius: 15,

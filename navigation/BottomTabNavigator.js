@@ -3,7 +3,6 @@ import * as React from "react";
 
 import TabBarIcon from "../components/TabBarIcon";
 import MapScreen from "../screens/MapScreen";
-import ListScreen from "../screens/ListScreen";
 import PointsScreen from "../screens/PointsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 
@@ -19,16 +18,6 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-      <BottomTab.Screen
-        name="Liste"
-        component={ListScreen}
-        options={{
-          title: "Liste",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-list" />
-          ),
-        }}
-      />
       <BottomTab.Screen
         name="Map"
         component={MapScreen}
@@ -54,7 +43,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Cagnotte"
         component={PointsScreen}
         options={{
-          title: "Cagnotte test test",
+          title: "Cagnotte",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-gift" />
           ),

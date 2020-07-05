@@ -1,29 +1,23 @@
-import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
-import {
-  RectButton,
-  ScrollView,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native-gesture-handler";
 import { Title, SimpleText } from "../components/atoms/StyledText";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { getLocation } from "../utils/map";
-import { Backdrop } from "react-native-backdrop";
-import { ListScreen } from "./ListScreen";
-import { ListCard } from "../components/molecules/Card";
 import data from "../utils/poi-api-test.json";
-import { FilterButton } from "../components/atoms/FilterButton";
-import Modal from "react-native-modal";
-import { FilterView } from "../components/organisms/FilterView";
 import { MapBackDrop } from "../components/organisms/Backdrop";
 import Geocoder from "react-native-geocoding";
 import { useNavigation } from "@react-navigation/native";
 import { MapCallout } from "../components/atoms/Callout";
+import ShopInfoScreen from "./shops-subscreens/ShopInfoScreen";
+import GreenscoreScreen from "./shops-subscreens/GreenscoreScreen";
+import ConfirmationScreen from "./shops-subscreens/ConfirmationScreen";
+import FeedbackScreen from "./shops-subscreens/FeedbackScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function MapScreen() {
+const Map = () => {
+  const navigation = useNavigation();
+  navigation.setOptions({ headerShown: false });
   const [location, setLocation] = useState(null);
   const [markers, setMarkers] = useState([
     {
@@ -113,9 +107,8 @@ export default function MapScreen() {
       zipcode: "75018",
     },
   ]);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState([]);
-  const navigation = useNavigation();
 
   useEffect(() => {
     getLocation().then((data) => {
@@ -148,21 +141,13 @@ export default function MapScreen() {
   useEffect(() => {
     if (markers) {
       setVisibleCards(
-        markers.map((marker, idx) => ({ id: idx, visible: false }))
+        markers.map((marker) => ({ id: marker.id, visible: false }))
       );
     }
   }, []);
 
-  const handleOpen = () => {
-    setVisible(true);
-  };
-
-  const handleClose = () => {
-    setVisible(false);
-  };
-
   const handleCardVisibility = (idx) =>
-    setVisibleCards((prevState) =>
+    setVisibleCards(
       visibleCards.map((card) => {
         if (idx === card.id) {
           if (card.visible) {
@@ -190,6 +175,7 @@ export default function MapScreen() {
         showsCompass={true}
         showsPointsOfInterest={false}
       >
+        {console.log(visibleCards)}
         {markers &&
           markers.map((marker, idx) => (
             <Marker
@@ -200,13 +186,14 @@ export default function MapScreen() {
               name={marker.name}
               key={idx}
               stopPropagation={true}
-              onPress={() => handleCardVisibility(idx)}
-              onSelect={() => handleCardVisibility(idx)}
+              onPress={() => handleCardVisibility(marker.id)}
+              onSelect={() => handleCardVisibility(marker.id)}
               onCalloutPress={() =>
                 navigation.navigate("Shop", { id: marker.id })
               }
+              image={require("../assets/images/pin.png")}
+              calloutVisible={visibleCards[marker.id] && visibleCards[marker.id].visible && visibleCards}
             >
-              {visibleCards[idx] && visibleCards[idx].visible && (
                 <MapCallout
                   id={marker.id}
                   name={marker.name}
@@ -218,29 +205,13 @@ export default function MapScreen() {
                   mapCard
                   onPress={() => navigation.navigate("Shop", { id: marker.id })}
                 />
-              )}
-              <View style={{ index: 1, width: 300, height: 50 }}>
-                <Image
-                  source={require("../assets/images/pin.png")}
-                  style={{
-                    flex: 1,
-                    width: null,
-                    height: null,
-                    resizeMode: "contain",
-                  }}
-                />
-              </View>
             </Marker>
           ))}
       </MapView>
-      <MapBackDrop
-        visible={visible}
-        handleClose={handleClose}
-        handleOpen={handleOpen}
-      />
+      <MapBackDrop visible={visible} onFocus={() => setVisible(!visible)} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -269,3 +240,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#bdbdbd",
   },
 });
+
+export default function MapScreen() {
+  const PointsStack = createStackNavigator();
+  return (
+    <PointsStack.Navigator>
+      <PointsStack.Screen name="Map" component={Map} />
+      <PointsStack.Screen name="Shop" component={ShopInfoScreen} />
+      <PointsStack.Screen name="Greenscore" component={GreenscoreScreen} />
+      <PointsStack.Screen name="Confirmation" component={ConfirmationScreen} />
+      <PointsStack.Screen name="Feedback" component={FeedbackScreen} />
+    </PointsStack.Navigator>
+  );
+}

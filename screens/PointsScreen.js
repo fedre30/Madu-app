@@ -1,44 +1,75 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import * as React from "react";
+import { StyleSheet, Text, View, Image, FlatList, ScrollView } from "react-native";
+import Sliding from "../components/organisms/Sliding";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
-import { Button } from "native-base";
-
 import { Title } from "../components/atoms/StyledText";
+import { Row, Item } from "native-base";
 import Items from "../components/organisms/ListRecompense";
 import data from "../utils/data";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function PointsScreen() {
-  const [modalVisible, setModalVisible] = useState(false);
+import { Button } from "native-base";
+
+const PointsStack = createStackNavigator();
+
+export const Infos = () => {
+  return (
+    <Sliding />
+    // <View
+    //   style={styles.container}
+    //   contentContainerStyle={styles.contentContainer}
+    // >
+    //   <View>
+    //     <Title>Cagnotte</Title>
+    //   </View>
+    //   <View style={styles.contentView}>
+    //     <Text style={styles.number}>150</Text>
+    //     <Image
+    //       source={require("../assets/images/Vector.png")}
+    //       style={styles.iconImage}
+    //     />
+    //     <Text style={styles.leave}>LEAVES</Text>
+    //   </View>
+    //   <View>
+    //     <Text style={styles.description}>
+    //       200 leafs à accumuler avant de pouvoir débloquer la prochaine
+    //       récompense.
+    //     </Text>
+    //   </View>
+    //   <View style={styles.contentView}>
+    //     <View style={styles.progressContainer}>
+    //       <View style={styles.porgressInner}></View>
+    //     </View>
+    //     <View style={styles.imageContent}>
+    //       <Image
+    //         source={require("../assets/images/cadeaux_1.png")}
+    //         style={styles.firstIconImage}
+    //       />
+    //     </View>
+    //   </View>
+    //   <View style={styles.contentView}>
+    //     <Text style={styles.title}>récompenses à débloquer</Text>
+    //   </View>
+    //   <FlatList
+    //     keyExtractor={(item) => item.id.toString()}
+    //     data={data}
+    //     renderItem={({ item }) => <Items list={item} />}
+    //   />
+    // </View>
+  );
+};
+export const Cagnotte = ({ navigation }) => {
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      <View style={styles.contentView}>
-        <Text style={styles.number}>150</Text>
-        <Image
-          source={require("../assets/images/Vector.png")}
-          style={styles.iconImage}
-        />
-        <Text style={styles.leave}>LEAVES</Text>
-      </View>
       <View>
-        <Text style={styles.description}>
-          200 leafs à accumuler avant de pouvoir débloquer la prochaine
-          récompense.
-        </Text>
-      </View>
-      <View style={styles.contentView}>
-        <View style={styles.progressContainer}>
-          <View style={styles.porgressInner}></View>
-        </View>
-        <View style={styles.imageContent}>
-          <Image
-            source={require("../assets/images/cadeaux_1.png")}
-            style={styles.firstIconImage}
-          />
-        </View>
+        <Title>Cagnotte test</Title>
+        <Button onPress={() => navigation.navigate("Infos")}>
+          <Text>Infos</Text>
+        </Button>
       </View>
       <View style={styles.contentView}>
         <Text style={styles.title}>récompenses à débloquer</Text>
@@ -49,6 +80,14 @@ export default function PointsScreen() {
         renderItem={({ item }) => <Items list={item} />}
       />
     </ScrollView>
+  );
+};
+export default function PointsScreen() {
+  return (
+    <PointsStack.Navigator>
+      <PointsStack.Screen name="Cagnotte" component={Cagnotte} />
+      <PointsStack.Screen name="Infos" component={Infos} />
+    </PointsStack.Navigator>
   );
 }
 

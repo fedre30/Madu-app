@@ -1,15 +1,38 @@
-import * as React from "react";
+//import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView, Image, } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
 import { Ionicons } from "@expo/vector-icons";
 
+import challenge from "../../utils/challenge-api-test.json";
 import { ButtonText } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
 import { Button } from "native-base";
 
-export const ContentChallenges = ({ navigation }) => {
+export const ContentChallenges = ({ route, navigation }) => {
   navigation.setOptions({ headerShown: false });
+
+  const [data, setData] = useState(null);
+  const index = route.params.id;
+
+  useEffect(() => {
+    if (index) {
+      setData(shops.find((obj) => obj.id === index));
+    }
+    ref.current.scrollTo({ top: 0, left: 0, animated: true });
+    // if (data) {
+    //   const address = `${data.address}, ${data.zipcode}, ${data.city}`;
+    //   Geocoder.from(address)
+    //     .then((json) => {
+    //       setLocation({
+    //         latitude: json.results[0].geometry.location.lat,
+    //         longitude: json.results[0].geometry.location.lng,
+    //       });
+    //     })
+    //     .catch((error) => console.warn(error));
+    // }
+  }, [index, data]);
 
     return (
       <ScrollView
@@ -43,7 +66,10 @@ export const ContentChallenges = ({ navigation }) => {
           </View>
 
           <View>
-            <Text style={styles.subtitle}>Le défi est de vider ta boîte mail !</Text>
+            <Text style={styles.subtitle}>
+              Le défi est de vider ta boîte mail !
+
+            </Text>
           </View>
 
           <View>
@@ -68,7 +94,11 @@ export const ContentChallenges = ({ navigation }) => {
             </Text>
           </View>
           
-          <Button style={styles.buttonOk}>
+          <Button 
+          style={styles.buttonOk}
+          onPress={() =>
+            navigation.navigate("Confirmation", { type: "challenge" })}
+          >
             <ButtonText style={styles.buttonText}>C’est bon pour moi !</ButtonText>
           </Button>
 

@@ -116,7 +116,12 @@ export const NewAddress = ({ navigation }) => {
           style={styles.addButton}
           onPress={ createProposition }
         >
-          <ButtonText style={styles.buttonText} transform>
+          <ButtonText 
+            style={styles.buttonText} 
+            transform
+            onPress={() =>
+              navigation.navigate("Confirmation", { type: "newAddress" })}
+            >
             Ajouter
           </ButtonText>
         </Button>

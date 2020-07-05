@@ -5,7 +5,7 @@ export default function CardChallenges(props) {
     return(
         <View style={StyleSheet.CardChallenges}>
             <View style={StyleSheet.CardChallengesContent}>
-                {props.children }
+                {props.children}
             </View>
         </View>
     )

@@ -16,6 +16,8 @@ export default {
       screens: {
         Shop: "shop",
         Feedback: "feedback",
+        Greenscore: "greenscore",
+        Confirmation: "confirmation",
       },
     },
   },

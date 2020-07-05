@@ -8,9 +8,9 @@
     "city": "Paris",
     "website": "https://www.facebook.com/givencantine/",
     "tags": ["bio", "local", "traditionnelle"],
-    "greenscore": 78,
+    "greenscore": 68,
     "accessibility": true,
-    "suggestionRate": 89,
+    "suggestionRate": 49,
     "price": 2,
     "criteria": {
       "food": { "note": 89 },
@@ -37,7 +37,8 @@
       "equipment": { "note": 37 },
       "social": { "note": 78 }
     },
-    "openingHours": "Tous les jours sauf le lundi de 10h à 18h."
+    "openingHours": "Tous les jours sauf le lundi de 10h à 18h.",
+    "image": "../../assets/images/abattoirveg.jpg"
   },
   {
     "id": 3,
@@ -57,6 +58,7 @@
       "equipment": { "note": 87 },
       "social": { "note": 68 }
     },
-    "openingHours": "Tous les jours sauf le lundi de 10h à 18h."
+    "openingHours": "Tous les jours sauf le lundi de 10h à 18h.",
+    "image": "../../assets/images/abattoirveg.jpg"
   }
 ]

@@ -11,9 +11,9 @@ import {
 } from "react-native";
 
 const { width } = Dimensions.get("window");
-import ListIndividuel from "./DataIndividuel";
+import ListIndividuel from "../../utils/DataIndividuel";
 import Individuel from "./Individuel";
-import ListEntreprise from "./DataEntreprise";
+import ListEntreprise from "../../utils/DataEntreprise";
 import Entreprise from "./Entreprise";
 
 export default class Sliding extends Component {
@@ -167,7 +167,7 @@ export default class Sliding extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <ScrollView>
+        <View>
           <View
             style={{
               justifyContent: "center",
@@ -244,7 +244,7 @@ export default class Sliding extends Component {
               />
             </View>
           </Animated.View>
-        </ScrollView>
+        </View>
       </View>
     );
   }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity, Icon } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
 import Constants from "expo-constants";
 
@@ -36,7 +36,6 @@ const Items = (props) => {
             {isFirstModalVisible && (
               <Modal
                 isVisible={isFirstModalVisible}
-                onBackdropPress={() => setFirstModalVisible(false)}
                 style={{
                   flex: 2,
                   alignItems: "center",
@@ -49,6 +48,16 @@ const Items = (props) => {
                       style={styles.imageCadeauxModal}
                       source={require("../../assets/images/cadeaux_1.png")}
                     />
+                    <TouchableOpacity
+                      onPress={() => setFirstModalVisible(false)}
+                    >
+                      <View>
+                        <Image
+                          style={styles.delete}
+                          source={require("../../assets/images/delete.png")}
+                        />
+                      </View>
+                    </TouchableOpacity>
                   </View>
 
                   <Text style={styles.firstModalTitle}>{list.title}</Text>
@@ -78,22 +87,37 @@ const Items = (props) => {
                     </View>
 
                     <Text style={styles.secondModalTitle}>{list.title}</Text>
-                    <View style={styles.secondModalDeblock}>
-                      <Text style={styles.secondDeblockTitle}>Débloqué !</Text>
+                    <View>
+                      <Text style={styles.secondModalTitleTitle}>
+                        Les déchets en entreprise aussi peuvent être recyclés,
+                        et ce n’est pas compliqué !
+                      </Text>
                     </View>
                     <View style={styles.secondModalContentText}>
                       <Text style={styles.secondModalText}>
-                        Nullam convallis tincidunt odio id auctor. In eleifend
-                        non arcu a lacinia. Cras et ipsum id leo pharetra
-                        lobortis a sed nibh. Morbi ante ligula, vehicula vel est
-                        ut, accumsan luctus mi. Nam aliquam, nisl at lobortis
-                        viverra, lectus magna rutrum lorem, non ornare ex nibh
-                        eget sapien. Praesent est nibh, volutpat et massa et,
-                        porttitor posuere elit.
+                        Pour être éco-responsable, limiter sa consommation en
+                        énergie et en fournitures est un premier pas. il est
+                        maintenant important de limiter les déchets liés à
+                        l’activité des salariés et des entreprises.
+                      </Text>
+                      <Text style={styles.secondModalText}>
+                        Pour un impact moindre sur l’environnement, le tri et le
+                        recyclage sont les maîtres mots de l’activité. Pour que
+                        les gestes soient simples et deviennent automatiques, il
+                        est essentiel de mettre à disposition des salariés des
+                        bacs de tri et de travailler avec des services de
+                        recyclage pour le papier, le plastique, les consommables
+                        d’imprimante ou encore le verre.
+                      </Text>
+                      <Text style={styles.secondModalText}>
+                        Pour la pause café et les déjeuners, privilégier la
+                        vaisselle réutilisable est important pour limiter les
+                        déchets liés à l’utilisation de gobelets et cuillères
+                        plastique plusieurs fois par jour.
                       </Text>
                     </View>
 
-                    {renderButton("OK", () => {
+                    {renderButton("SUIVANT", () => {
                       setFirstModalVisible(false);
                       setSecondModalVisible(false);
                     })}
@@ -133,12 +157,13 @@ export default Items;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    marginTop: 20,
   },
   contentRecompense: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFF",
     height: 70,
     borderRadius: 4,
+    shadowOpacity: 0.1,
     marginHorizontal: 20,
   },
   contentView: {
@@ -175,10 +200,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     bottom: 60,
   },
-  DeblockTitle: {
-    fontSize: 25,
+  secondModalTitleTitle: {
+    fontSize: 20,
     fontWeight: "bold",
-    color: "#FFF",
+    marginTop: 30,
+  },
+  delete: {
+    marginLeft: 260,
+    marginBottom: 50,
   },
   bravo: {
     color: "#69FFD4",
@@ -195,30 +224,18 @@ const styles = StyleSheet.create({
   },
   secondModal: {
     backgroundColor: "#FFFFFF",
-    width: "90%",
+    width: "110%",
     alignItems: "center",
     justifyContent: "center",
-    height: 450,
+    height: "110%",
     borderRadius: 4,
     position: "absolute",
   },
   secondModalTitle: {
-    fontSize: 30,
-    fontWeight: "bold",
-    bottom: 45,
+    fontSize: 25,
+    fontWeight: "500",
   },
-  secondModalDeblock: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#FFF",
-    backgroundColor: "#69FFD4",
-    width: 166,
-    height: 41,
-    borderRadius: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: 20,
-  },
+
   secondDeblockTitle: {
     fontSize: 25,
     fontWeight: "bold",
@@ -235,7 +252,8 @@ const styles = StyleSheet.create({
     bottom: 380,
   },
   secondModalText: {
-    fontSize: 15,
+    fontSize: 17,
+    marginTop: 30,
   },
   contentImageCadeauxModal: {
     width: 100,
@@ -245,7 +263,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 60,
     marginBottom: 100,
-    shadowOpacity: 0.1,
+
     position: "relative",
     bottom: 50,
   },
@@ -256,13 +274,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDF3FF",
     alignItems: "center",
     borderRadius: 60,
-    shadowOpacity: 0.1,
-    position: "relative",
-    bottom: 70,
+    marginBottom: 20,
   },
   imageCadeauxModal: {
     width: 70,
     height: 70,
+    position: "relative",
+    top: 35,
+  },
+  DeblockTitle: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#FFF",
   },
   contentImageCadeaux: {
     width: 70,
@@ -271,11 +294,14 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     justifyContent: "center",
     backgroundColor: "#EDF3FF",
-    shadowOpacity: 0.1,
   },
   imageCadeaux: {
     position: "relative",
     bottom: 5,
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
     left: 10,
   },
   contentProgress: {

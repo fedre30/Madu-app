@@ -1,17 +1,19 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
-import Sliding from "../components/organisms/Sliding";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
-import Items from "../components/organisms/ListRecompense";
-import Leave from "../components/organisms/Leaves";
-import Recompense from "../components/organisms/Recompense";
+import Items from "./ListRecompense";
 
-export default function PointsScreen() {
+import data from "../../utils/data";
+
+export default function Recompense() {
   return (
     <View style={styles.container}>
-      <Leave />
-      <Recompense />
+      <FlatList
+        keyExtractor={(item) => item.id.toString()}
+        data={data}
+        renderItem={({ item }) => <Items list={item} />}
+      />
     </View>
   );
 }
@@ -19,6 +21,5 @@ export default function PointsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
   },
 });

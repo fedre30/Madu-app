@@ -2,14 +2,14 @@ import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import Sliding from "../components/organisms/Sliding";
-import { RectButton } from "react-native-gesture-handler";
+import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
 import { Row, Item } from "native-base";
 import Items from "../components/organisms/ListRecompense";
 import data from "../utils/data";
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from "@react-navigation/stack";
 
-import { Button } from "native-base"
+import { Button } from "native-base";
 
 const PointsStack = createStackNavigator();
 
@@ -58,8 +58,8 @@ export const Infos = () => {
     //   />
     // </View>
   );
-}
-export const Cagnotte = ({navigation}) => {
+};
+export const Cagnotte = ({ navigation }) => {
   return (
     <ScrollView
       style={styles.container}
@@ -67,11 +67,13 @@ export const Cagnotte = ({navigation}) => {
     >
       <View>
         <Title>Cagnotte test</Title>
-        <Button onPress={() => navigation.navigate('Infos')}><Text>Infos</Text></Button>
+        <Button onPress={() => navigation.navigate("Infos")}>
+          <Text>Infos</Text>
+        </Button>
       </View>
     </ScrollView>
   );
-}
+};
 export default function PointsScreen() {
   return (
     <PointsStack.Navigator>

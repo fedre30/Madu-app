@@ -4,8 +4,11 @@ import Colors from "../../constants/Colors";
 import { Button, Card, CardItem } from "native-base";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ButtonText, SimpleText, Title } from "../atoms/StyledText";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CardChallenges(props) {
+  const navigation = useNavigation();
+  
   return (
     <Card style={{ marginBottom: 40 }}>
       <View style={styles.durationContainer}>
@@ -23,9 +26,7 @@ export default function CardChallenges(props) {
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Button
           style={styles.searchButton}
-          onPress={() =>
-            navigation.navigate("Confirmation", { type: "challenge" })
-          }
+          onPress={() => navigation.navigate('ContentChallenges', { id: props.index })}
         >
           <ButtonText style={styles.buttonText} transform>
             Je participe

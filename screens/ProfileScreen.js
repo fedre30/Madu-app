@@ -43,7 +43,7 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
-           // onPress={() => navigation.navigate('Challenges')}
+            onPress={() => navigation.navigate('Challenges')}
           >
             Mes défis
           </Thumbnail>
@@ -93,16 +93,9 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-<<<<<<< HEAD
       <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
-=======
       <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
-      {/* <PointsStack.Screen
-        name="jackpotAndRewardsName"
-        component={jackpotAndRewardsPageName}
-      /> */}
->>>>>>> upstream/master
       <PointsStack.Screen name="NewAddress" component={NewAddress} />
       <PointsStack.Screen name="Ranking" component={Ranking} />
       <PointsStack.Screen name="Confirmation" component={ConfirmationScreen} />

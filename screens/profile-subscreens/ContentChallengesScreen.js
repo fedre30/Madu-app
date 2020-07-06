@@ -37,51 +37,40 @@ export const ContentChallenges = ({ route, navigation }) => {
           >
             <Ionicons name="md-arrow-round-back" size={20}/>
           </Button>
+          {data && (
+            <>
+            <View>
+              <Image style={styles.picture} source={require('../../assets/images/Group_323.png')} />
+            </View>
 
-          <View>
-            <Image style={styles.picture} source={require('../../assets/images/Group_323.png')} />
-          </View>
+            <View>
+              <Text style={styles.remainingDay}>
+                <Text style={styles.span}>{data.days} </Text>
+                restants pour réaliser ce défi
+              </Text>
+            </View>
 
-          <View>
-            <Text style={styles.remainingDay}>
-              <Text style={styles.span}>6 Jours </Text>
-              restants pour réaliser ce défi
-            </Text>
-          </View>
+            <View>
+              <Text style={styles.title}>{data.name}</Text>
+            </View>
 
-          <View>
-            <Text style={styles.title}>Clean my mail</Text>
-          </View>
+            <View>
+              <Text style={styles.subtitle}>{data.description}</Text>
+            </View>
 
-          <View>
-            <Text style={styles.subtitle}>
-              Le défi est de vider ta boîte mail !
+            <View>
+              <Text style={styles.content}> {data.content}</Text>
+            </View>
 
-            </Text>
-          </View>
-
-          <View>
-            <Text style={styles.content}>
-              Ce stockage émet du CO2, plus 
-              précisément 10g pour un an de stockage 
-              en moyenne pour un mail. Une entreprise 
-              de 100 personnes génère environ 13,6 
-              tonnes de CO2 chaque année à cause des 
-              emails. C’est l’équivalent de 14 
-              allers-retours Paris-New York en avion. 
-              Tu peux aussi te désabonner de certaines 
-              newsletter pour en recevoir moins.
-            </Text>
-          </View>
-
-          <View>            
-            <Image source={require('../../assets/images/thumb_up.png')} />
-            <Text  style={styles.subtext}>
-               <Text style={styles.span}>89 </Text>
-               personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
-            </Text>
-          </View>
-          
+            <View>            
+              <Image source={require('../../assets/images/thumb_up.png')} />
+              <Text  style={styles.subtext}>
+                <Text style={styles.span}>89 </Text>
+                personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
+              </Text>
+            </View>
+            </>
+          )}
           <Button 
           style={styles.buttonOk}
           onPress={() =>

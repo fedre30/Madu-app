@@ -41,17 +41,17 @@ export default function ShopInfoScreen({ route, navigation }) {
       setData(shops.find((obj) => obj.id === index));
     }
     ref.current.scrollTo({ top: 0, left: 0, animated: true });
-    // if (data) {
-    //   const address = `${data.address}, ${data.zipcode}, ${data.city}`;
-    //   Geocoder.from(address)
-    //     .then((json) => {
-    //       setLocation({
-    //         latitude: json.results[0].geometry.location.lat,
-    //         longitude: json.results[0].geometry.location.lng,
-    //       });
-    //     })
-    //     .catch((error) => console.warn(error));
-    // }
+    if (data) {
+      const address = `${data.address}, ${data.zipcode}, ${data.city}`;
+      Geocoder.from(address)
+        .then((json) => {
+          setLocation({
+            latitude: json.results[0].geometry.location.lat,
+            longitude: json.results[0].geometry.location.lng,
+          });
+        })
+        .catch((error) => console.warn(error));
+    }
   }, [index, data]);
 
   return (
@@ -127,7 +127,7 @@ export default function ShopInfoScreen({ route, navigation }) {
             <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
               {data.openingHours}
             </SimpleText>
-            {/* {location && (
+            {location && (
               <View style={styles.mapContainer}>
                 <MapView
                   style={styles.mapStyle}
@@ -141,7 +141,7 @@ export default function ShopInfoScreen({ route, navigation }) {
                   <Marker coordinate={location} />
                 </MapView>
               </View>
-            )} */}
+            )}
           </View>
           <View
             style={{

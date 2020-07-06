@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
 
@@ -28,15 +35,15 @@ const Items = (props) => {
   );
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Modal
-          isVisible={isModalVisible}
-          style={{
-            flex: 2,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+      <Modal
+        isVisible={isModalVisible}
+        style={{
+          flex: 2,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <ScrollView style={{ flex: 1, width: Dimensions.get("window").width }}>
           <View style={styles.modal}>
             <View style={styles.contentImageCadeauxModalSecond}>
               <Image
@@ -52,7 +59,7 @@ const Items = (props) => {
                 n’est pas compliqué !
               </Text>
             </View>
-            <View style={styles.modalContentText}>
+            {/* <View style={styles.modalContentText}>
               <Text style={styles.modalText}>
                 Pour être éco-responsable, limiter sa consommation en énergie et
                 en fournitures est un premier pas. il est maintenant important
@@ -73,27 +80,27 @@ const Items = (props) => {
                 l’utilisation de gobelets et cuillères plastique plusieurs fois
                 par jour.
               </Text>
-            </View>
+            </View> */}
 
             {renderButton("FERMER", () => {
               setModalVisible(false);
             })}
           </View>
-        </Modal>
-        <View style={styles.contentRecompense}>
-          <View style={styles.contentView}>
-            <View style={styles.contentImageCadeaux}>
-              <Image
-                style={styles.imageCadeaux}
-                source={require("../../assets/images/cadeaux_1.png")}
-              />
-            </View>
-            <View style={styles.contentProgress}>
-              <Text style={styles.text}>{list.title}</Text>
-            </View>
+        </ScrollView>
+      </Modal>
+      <View style={styles.contentRecompense}>
+        <View style={styles.contentView}>
+          <View style={styles.contentImageCadeaux}>
+            <Image
+              style={styles.imageCadeaux}
+              source={require("../../assets/images/cadeaux_1.png")}
+            />
+          </View>
+          <View style={styles.contentProgress}>
+            <Text style={styles.text}>{list.title}</Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };

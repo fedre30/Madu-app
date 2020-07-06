@@ -50,6 +50,7 @@ export const ShowRecompense = () => {
 };
 
 export const Infos = ({ navigation }) => {
+  navigation.setOptions({ headerShown: false });
   const [Progress, setProgress] = useState(20);
   const InnerProgress = ({ width }) => (
     <View
@@ -170,25 +171,10 @@ export const Infos = ({ navigation }) => {
     </View>
   );
 };
-export const Cagnotte = ({ navigation }) => {
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <View>
-        <Title>Cagnotte test</Title>
-        <Button onPress={() => navigation.navigate("Infos")}>
-          <Text>Infos</Text>
-        </Button>
-      </View>
-    </ScrollView>
-  );
-};
+
 export default function PointsScreen() {
   return (
     <PointsStack.Navigator>
-      <PointsStack.Screen name="Cagnotte" component={Cagnotte} />
       <PointsStack.Screen name="Infos" component={Infos} />
       <PointsStack.Screen name="ShowRecompense" component={ShowRecompense} />
     </PointsStack.Navigator>

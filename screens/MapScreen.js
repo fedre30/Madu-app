@@ -175,7 +175,6 @@ const Map = () => {
         showsCompass={true}
         showsPointsOfInterest={false}
       >
-        {console.log(visibleCards)}
         {markers &&
           markers.map((marker, idx) => (
             <Marker
@@ -192,19 +191,23 @@ const Map = () => {
                 navigation.navigate("Shop", { id: marker.id })
               }
               image={require("../assets/images/pin.png")}
-              calloutVisible={visibleCards[marker.id] && visibleCards[marker.id].visible && visibleCards}
+              calloutVisible={
+                visibleCards[marker.id] &&
+                visibleCards[marker.id].visible &&
+                visibleCards
+              }
             >
-                <MapCallout
-                  id={marker.id}
-                  name={marker.name}
-                  address={marker.address}
-                  tags={marker.tags}
-                  price={marker.price}
-                  accessibility={marker.accessibility}
-                  suggestionRate={marker.suggestionRate}
-                  mapCard
-                  onPress={() => navigation.navigate("Shop", { id: marker.id })}
-                />
+              <MapCallout
+                id={marker.id}
+                name={marker.name}
+                address={marker.address}
+                tags={marker.tags}
+                price={marker.price}
+                accessibility={marker.accessibility}
+                suggestionRate={marker.suggestionRate}
+                mapCard
+                onPress={() => navigation.navigate("Shop", { id: marker.id })}
+              />
             </Marker>
           ))}
       </MapView>

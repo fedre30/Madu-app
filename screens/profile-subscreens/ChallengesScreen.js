@@ -27,7 +27,8 @@ let data = [
   image : "./../../assets/images/defis1.png" ,
   name : "ii",
   day_duration : "6 jours",
-  description : "Adieu le gaspillage, maintenant on prépare ses petits plats de la semaine en avance."
+  description : "Adieu le gaspillage, maintenant on prépare ses petits plats de la semaine en avance.",
+  work : "89 personnes ont réalisé ce défi, dont 3 chez Little Cigogne."
 },
 {
   uid : 2,
@@ -35,7 +36,8 @@ let data = [
   image : "./../../assets/images/defis1.png" ,
   name : "ii",
   day_duration : "3 jours",
-  description : "Adieu le gaspillage, maintenant on prépare ses petits plats de la semaine en avance."
+  description : "Adieu le gaspillage, maintenant on prépare ses petits plats de la semaine en avance.",
+  work : "89 personnes ont réalisé ce défi, dont 3 chez Little Cigogne."
 },
 {
   uid : 3,
@@ -43,7 +45,8 @@ let data = [
   image : "../../assets/images/defis1.png" ,
   name : "ii",
   day_duration : "5 jours",
-  description : "Adieu le gaspillage, maintenant on prépare ses petits plats de la semaine en avance."
+  description : "Adieu le gaspillage, maintenant on prépare ses petits plats de la semaine en avance.",
+  work : "89 personnes ont réalisé ce défi, dont 3 chez Little Cigogne."
 }
 ];
 
@@ -83,6 +86,9 @@ export default function ChallengesScreen() {
                 <Text
                 style={styles.descriptionChallenges}
                 >{item.description}</Text>
+                <Text
+                style={styles.workChallenges}
+                >{item.work}</Text>
                 <TouchableOpacity>
                           <Button
                   style={styles.searchButton}
@@ -94,7 +100,7 @@ export default function ChallengesScreen() {
                   }
                 >
                   <ButtonText style={styles.buttonText} transform>
-                    Je valide
+                    Je participe
                   </ButtonText>
                 </Button>
                 </TouchableOpacity>
@@ -150,7 +156,7 @@ export default function ChallengesScreen() {
         },
         imageChallenge: {
           width: 354,
-          height: 150,
+          height: 130,
         },
         challengeContainer: {
           borderRadius: 4,
@@ -179,13 +185,20 @@ export default function ChallengesScreen() {
           lineHeight: 20,
           paddingLeft: 20,
           paddingTop: 15,
-
+        },
+        workChallenges :{
+          paddingLeft: 20,
+          paddingTop: 15,
         },
         searchButton: {
           justifyContent: "center",
-          backgroundColor: Colors.secondary,
+          backgroundColor: "#00DDC0",
           marginTop: 50,
           marginBottom: 40,
+          width : 150,
+          height : 45,
+          alignItems: "center",
+          
         },
         buttonText: {
           paddingTop: 10,

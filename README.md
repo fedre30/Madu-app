@@ -12,7 +12,7 @@ Madu is a Mobile app that lists on a map all eco-friendly adresses such as shops
 * "Cagnotte" (Points and awards)
 
 ### Stack choices 📦
-## Libraries 📕
+Libraries 📕
 * [Native-base](https://nativebase.io)
 * [React-native-maps](https://github.com/react-native-community/react-native-maps)
 * [Google maps API](https://developers.google.com/maps/documentation)

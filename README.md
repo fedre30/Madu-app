@@ -49,9 +49,9 @@ username: chrystal.leliegard@madu.net
 password: madu
 
 ## Project setup 🚀
-npm install expo-cli --global
-yarn install
-yarn expo start -c
+### Expo Link
+https://exp.host/@fedre30/madu-app
+
 ### Install expo (If not installed yet)
 ```npm install expo-cli --global```
 

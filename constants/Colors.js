@@ -21,4 +21,5 @@ export default {
   noticeBackground: tintColor,
   noticeText: "#fff",
   black: "#000000",
+  pureWhite: "#ffffff",
 };

@@ -10,6 +10,7 @@ Madu is a Mobile app that lists on a map all eco-friendly adresses such as shops
 * List of shops and filters
 * Profile
 * "Cagnotte" (Points and awards)
+* Défis
 
 ## Stack choices 📦
 ### Libraries 📕
@@ -35,13 +36,14 @@ Why React-native-geocoding?
 React-native-geocoding is ...
 
 ## Team 👩🏻‍💻 👨🏻‍💻
-Quentin Aimé (Frontend Developer)
-Federica Alfano (Frontend Developer)
-Mélanie Da Costa (Frontend Developer)
-Mathieu Gelbon (Frontend Developer)
-Joel Pokam (Frontend Developer)
+- Quentin Aimé (Frontend Developer)
+- Federica Alfano (Frontend Developer)
+- Mélanie Da Costa (Frontend Developer)
+- Mathieu Gelbon (Frontend Developer)
+- Joel Pokam (Frontend Developer)
+
 Link 🐼
-{new link}
+https://exp.host/@fedre30/madu-app
 
 ## Login credentials 🔑
 username: chrystal.leliegard@madu.net
@@ -49,8 +51,6 @@ username: chrystal.leliegard@madu.net
 password: madu
 
 ## Project setup 🚀
-### Expo Link
-https://exp.host/@fedre30/madu-app
 
 ### Install expo (If not installed yet)
 ```npm install expo-cli --global```

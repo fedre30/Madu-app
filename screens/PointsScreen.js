@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from "react-native";
 import Sliding from "../components/organisms/Sliding";
-import { RectButton } from "react-native-gesture-handler";
 import { Title } from "../components/atoms/StyledText";
 import { Row, Item } from "native-base";
 import Items from "../components/organisms/ListRecompense";

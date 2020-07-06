@@ -28,14 +28,7 @@ export default class Sliding extends Component {
   };
 
   handleSlide = (type) => {
-    let {
-      active,
-      xTabOne,
-      xTabTwo,
-      translateX,
-      translateXTabOne,
-      translateXTabTwo,
-    } = this.state;
+    let { active, translateX, translateXTabOne, translateXTabTwo } = this.state;
     Animated.spring(translateX, {
       toValue: type,
       duration: 100,

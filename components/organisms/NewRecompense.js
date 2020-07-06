@@ -2,11 +2,11 @@ import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
-import Items from "./SecondListRecompense";
+import Items from "./FirstListRecompense";
 
-import data from "../../utils/SencondDataRecompense.js";
+import data from "../../utils/FirstDataRecompense.js";
 
-export default function Recompense() {
+export default function NewRecompense() {
   return (
     <FlatList
       keyExtractor={(item) => item.id.toString()}
@@ -15,9 +15,3 @@ export default function Recompense() {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

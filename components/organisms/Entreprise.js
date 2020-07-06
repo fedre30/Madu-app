@@ -20,7 +20,7 @@ export default class Individuel extends Component {
                 }}
                 source={{
                   uri:
-                    "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+                    "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
                 }}
               />
               <Text style={styles.name}>{entreprise.name}</Text>

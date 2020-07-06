@@ -28,7 +28,7 @@ const Items = (props) => {
   const [isSecondModalVisible, setSecondModalVisible] = useState(false);
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
         <View style={styles.contentRecompense}>
           <View style={styles.contentView}>
@@ -148,7 +148,7 @@ const Items = (props) => {
           </View>
         </View>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -156,7 +156,7 @@ export default Items;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    marginBottom: 20,
   },
   contentRecompense: {
     backgroundColor: "#FFF",
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     bottom: 60,
   },
   secondModalTitleTitle: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: "bold",
     marginTop: 30,
   },
@@ -251,8 +251,8 @@ const styles = StyleSheet.create({
     bottom: 380,
   },
   secondModalText: {
-    fontSize: 17,
-    marginTop: 30,
+    fontSize: 15,
+    marginTop: 20,
   },
   contentImageCadeauxModal: {
     width: 100,
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
   },
 
   porgressInner: {
-    width: 20,
+    width: 100,
     height: 10,
     backgroundColor: "#69FFD4",
     borderRadius: 15,

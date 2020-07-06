@@ -17,8 +17,9 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import Recompense from "../components/organisms/Recompense";
 import Items from "../components/organisms/DeblockRecompense";
-import data from "../utils/data";
+import data from "../utils/FirstDataRecompense.js";
 import { Button } from "native-base";
+import NewRecompense from "../components/organisms/NewRecompense";
 
 const PointsStack = createStackNavigator();
 
@@ -61,6 +62,14 @@ export const Infos = ({ navigation }) => {
       }}
     ></View>
   );
+  const ShowRecompense = () => {
+    if (Progress === 100) {
+      return <NewRecompense />;
+    } else {
+      return null;
+    }
+  };
+
   const Number = () => {
     if (Progress === 100) {
       return <Text style={styles.number}>350</Text>;
@@ -107,16 +116,16 @@ export const Infos = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.container}>
+      <View style={styles.contentHearder}>
         <View style={styles.contentView}>
           <Number />
           <Image
-            source={require("../assets/images/Vector.png")}
+            source={require("../assets/images/Vector_1.png")}
             style={styles.iconImage}
           />
           <Text style={styles.leave}>LEAVES</Text>
         </View>
-        <View>
+        <View style={{ position: "absolute", top: 60 }}>
           <Description />
         </View>
         <View style={styles.contentProgress}>
@@ -165,8 +174,10 @@ export const Infos = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </View>
-
-      <Recompense />
+      <View style={styles.container}>
+        <ShowRecompense />
+        <Recompense />
+      </View>
     </View>
   );
 };
@@ -203,21 +214,24 @@ const styles = StyleSheet.create({
   contentContainer: {
     justifyContent: "center",
   },
+  contentHearder: {
+    position: "relative",
+  },
   contentView: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     marginLeft: 30,
-    position: "relative",
-    top: 50,
+    position: "absolute",
+    top: 10,
   },
   contentProgress: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     marginLeft: 30,
-    position: "relative",
-    top: 50,
+    position: "absolute",
+    top: 120,
   },
   number: {
     fontWeight: "500",
@@ -238,8 +252,6 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 20,
     marginLeft: 30,
-    position: "relative",
-    top: 50,
   },
   progressContainer: {
     width: "80%",
@@ -268,9 +280,10 @@ const styles = StyleSheet.create({
   },
   title: {
     textTransform: "uppercase",
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "500",
-    bottom: 50,
+    position: "absolute",
+    top: 170,
   },
   contentRecompense: {
     backgroundColor: "#69FFD4",
@@ -279,6 +292,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     marginHorizontal: 20,
     justifyContent: "center",
+    marginTop: 230,
+    marginBottom: 20,
   },
   text: {
     fontSize: 18,

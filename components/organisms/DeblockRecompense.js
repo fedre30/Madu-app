@@ -121,9 +121,9 @@ const styles = StyleSheet.create({
   },
 
   modalTitleTitle: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: "bold",
-    marginTop: 30,
+    marginTop: 20,
   },
 
   modal: {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   modalText: {
-    fontSize: 17,
+    fontSize: 15,
     marginTop: 30,
   },
   contentImageCadeauxModal: {
@@ -194,7 +194,6 @@ const styles = StyleSheet.create({
     shadowOpacity: (0, 0, 0, 0.1),
     justifyContent: "center",
   },
-
   text: {
     fontWeight: "500",
     fontSize: 18,

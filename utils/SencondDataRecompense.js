@@ -29,4 +29,29 @@ export default data = [
     title: "Récompense #8",
     score: "/350",
   },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-09d9Zabb28ba",
+    title: "Récompense #9",
+    score: "/350",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad9Zabb20Aa",
+    title: "Récompense #10",
+    score: "/350",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad9Zab208ba",
+    title: "Récompense #11",
+    score: "/350",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad92abb28ba",
+    title: "Récompense #12",
+    score: "/350",
+  },
+  //   {
+  //     id: "bd7acbea-c1b1-46c2-aed5-3ad9Zabb28a0",
+  //     title: "Récompense #13",
+  //     score: "/350",
+  //   },
 ];

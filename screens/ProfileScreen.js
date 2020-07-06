@@ -10,6 +10,7 @@ import { Thumbnail } from "../components/molecules/ProfileThumbnail";
 import { ContentChallenges } from "./profile-subscreens/ContentChallengesScreen";
 import { NewAddress } from "./profile-subscreens/NewAddressScreen";
 import ConfirmationScreen from "./shops-subscreens/ConfirmationScreen";
+import ChallengesScreen from "./profile-subscreens/ChallengesScreen";
 // import {jackpotAndRewardsPageName} from "./profile-subscreens/jackpotAndRewardsPageName";
 
 const PointsStack = createStackNavigator();
@@ -42,8 +43,7 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
-            // onPress={() => navigation.navigate('Challenges')}
-            onPress={() => navigation.navigate('ContentChallenges')}
+           // onPress={() => navigation.navigate('Challenges')}
           >
             Mes défis
           </Thumbnail>
@@ -93,8 +93,16 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
+<<<<<<< HEAD
       <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
+=======
+      <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
+      {/* <PointsStack.Screen
+        name="jackpotAndRewardsName"
+        component={jackpotAndRewardsPageName}
+      /> */}
+>>>>>>> upstream/master
       <PointsStack.Screen name="NewAddress" component={NewAddress} />
       <PointsStack.Screen name="Ranking" component={Ranking} />
       <PointsStack.Screen name="Confirmation" component={ConfirmationScreen} />

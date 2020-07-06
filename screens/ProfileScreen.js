@@ -26,8 +26,13 @@ export const Profile = ({ navigation }) => {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         {/* //Données en brute pour afficher dans le profil une image + nom et prenom
         <View style={styles.headerContainer} >
           <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
@@ -43,7 +48,7 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
-            onPress={() => navigation.navigate('Challenges')}
+            onPress={() => navigation.navigate("Challenges")}
           >
             Mes défis
           </Thumbnail>
@@ -93,7 +98,10 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
+      <PointsStack.Screen
+        name="ContentChallenges"
+        component={ContentChallenges}
+      />
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
       <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
       <PointsStack.Screen name="NewAddress" component={NewAddress} />

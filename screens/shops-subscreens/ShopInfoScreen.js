@@ -59,6 +59,8 @@ export default function ShopInfoScreen({ route, navigation }) {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       ref={ref}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <View style={styles.header}>
         <Button onPress={() => navigation.goBack()} light style={styles.back}>

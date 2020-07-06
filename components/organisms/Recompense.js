@@ -10,6 +10,8 @@ export default function Recompense() {
   return (
     <View style={styles.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         data={data}
         renderItem={({ item }) => <Items list={item} />}

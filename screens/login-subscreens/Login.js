@@ -21,6 +21,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { AuthContext } from "../../hooks/auth";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -69,7 +70,7 @@ export default function Login({ route, navigation }) {
       >
         Se connecter
       </SecondaryTitle>
-      <View style={styles.formItem}>
+      <SafeAreaView style={styles.formItem}>
         <SecondaryText>Adresse email</SecondaryText>
         <Item regular bordered>
           <Input
@@ -79,7 +80,7 @@ export default function Login({ route, navigation }) {
             style={{ color: Colors.grey }}
           />
         </Item>
-      </View>
+      </SafeAreaView>
       <View style={styles.formItem}>
         <SecondaryText>Mot de passe</SecondaryText>
         <Item regular bordered>

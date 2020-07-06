@@ -67,6 +67,8 @@ export default function ChallengesScreen({ navigation }) {
     >
       <Title style={styles.titleChallenges}>On relève le defis, Marie ?</Title>
       <FlatList
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         style={styles.container}
         data={data}
         renderItem={({ item }) => (

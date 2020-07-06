@@ -61,7 +61,12 @@ export const MapBackDrop = (props) => {
         >
           <SimpleText>Fermer</SimpleText>
         </TouchableOpacity>
-        <ScrollView style={styles.filtersContainer} horizontal={true}>
+        <ScrollView
+          style={styles.filtersContainer}
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
           <FilterButton
             title="Filtres"
             imageType="filters"
@@ -94,7 +99,11 @@ export const MapBackDrop = (props) => {
         </ScrollView>
         <View>
           <Modal isVisible={modalVisible} style={{ margin: 0 }} propagateSwipe>
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView
+              style={{ flex: 1 }}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+            >
               <FilterView
                 search={() => setModalVisible(!modalVisible)}
                 handleClose={() => setModalVisible(!modalVisible)}
@@ -103,6 +112,8 @@ export const MapBackDrop = (props) => {
           </Modal>
         </View>
         <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           style={styles.list}
           data={data}
           renderItem={({ item }) => (

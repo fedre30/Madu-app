@@ -30,6 +30,8 @@ export default function FeedbackScreen({ route, navigation }) {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <Button
         onPress={() => navigation.goBack()}

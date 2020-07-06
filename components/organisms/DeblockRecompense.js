@@ -34,7 +34,11 @@ const Items = (props) => {
     </TouchableOpacity>
   );
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+    >
       <Modal
         isVisible={isModalVisible}
         style={{
@@ -43,7 +47,11 @@ const Items = (props) => {
           justifyContent: "center",
         }}
       >
-        <ScrollView style={{ flex: 1, width: Dimensions.get("window").width }}>
+        <ScrollView
+          style={{ flex: 1, width: Dimensions.get("window").width }}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
           <View style={styles.modal}>
             <View style={styles.contentImageCadeauxModalSecond}>
               <Image

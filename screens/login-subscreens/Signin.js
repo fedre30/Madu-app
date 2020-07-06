@@ -13,6 +13,7 @@ import { Button, Subtitle, Form, Item, Input, Content } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { Tag } from "../../components/atoms/Tag";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Signin({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -33,6 +34,8 @@ export default function Signin({ route, navigation }) {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <Button
         onPress={() => navigation.goBack()}
@@ -55,7 +58,7 @@ export default function Signin({ route, navigation }) {
       >
         S'inscrire
       </SecondaryTitle>
-      <View style={styles.formItem}>
+      <SafeAreaView style={styles.formItem}>
         <SecondaryText>Adresse email</SecondaryText>
         <Item regular bordered>
           <Input
@@ -65,7 +68,7 @@ export default function Signin({ route, navigation }) {
             style={{ color: Colors.grey }}
           />
         </Item>
-      </View>
+      </SafeAreaView>
       <View style={styles.formItem}>
         <SecondaryText>Mot de passe</SecondaryText>
         <Item regular bordered>

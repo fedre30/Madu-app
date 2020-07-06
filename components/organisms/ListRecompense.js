@@ -28,7 +28,11 @@ const Items = (props) => {
   const [isSecondModalVisible, setSecondModalVisible] = useState(false);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+    >
       <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
         <View style={styles.contentRecompense}>
           <View style={styles.contentView}>

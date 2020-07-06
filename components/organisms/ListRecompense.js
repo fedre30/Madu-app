@@ -92,7 +92,7 @@ const Items = (props) => {
                         et ce n’est pas compliqué !
                       </Text>
                     </View>
-                    <View style={styles.secondModalContentText}>
+                    {/* <View style={styles.secondModalContentText}>
                       <Text style={styles.secondModalText}>
                         Pour être éco-responsable, limiter sa consommation en
                         énergie et en fournitures est un premier pas. il est
@@ -114,9 +114,9 @@ const Items = (props) => {
                         déchets liés à l’utilisation de gobelets et cuillères
                         plastique plusieurs fois par jour.
                       </Text>
-                    </View>
+                    </View> */}
 
-                    {renderButton("SUIVANT", () => {
+                    {renderButton("FERMER", () => {
                       setFirstModalVisible(false);
                       setSecondModalVisible(false);
                     })}

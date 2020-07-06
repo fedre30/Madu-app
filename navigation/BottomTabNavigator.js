@@ -5,7 +5,6 @@ import TabBarIcon from "../components/TabBarIcon";
 import MapScreen from "../screens/MapScreen";
 import PointsScreen from "../screens/PointsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import ChallengesScreen from "../screens/profile-subscreens/ChallengesScreen";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
@@ -32,7 +31,7 @@ export default function BottomTabNavigator({ navigation, route }) {
 
       <BottomTab.Screen
         name="Profile"
-        component={ChallengesScreen}
+        component={ProfileScreen}
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (

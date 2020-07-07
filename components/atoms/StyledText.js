@@ -117,12 +117,16 @@ export const TagsText = (props) => {
 };
 
 export const ThumbnailTitle = (props) => {
-  return(
+  return (
     <Text
       {...props}
-      style={[props.style, styles.thumbnailTitle, { fontFamily: "gotham-medium" }]}
+      style={[
+        props.style,
+        styles.thumbnailTitle,
+        { fontFamily: "gotham-medium" },
+      ]}
     />
-  )
+  );
 };
 
 export const ButtonText = (props) => {
@@ -180,8 +184,8 @@ const styles = StyleSheet.create({
     color: Colors.grey,
     lineHeight: 24,
   },
-  thumbnailTitle:{
-    fontSize: 18, 
+  thumbnailTitle: {
+    fontSize: 18,
     lineHeight: 21,
     width: 200,
     color: Colors.black,

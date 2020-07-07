@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
+import SimpleText from "../atoms/StyledText";
 
 const Items = (props) => {
   const list = props.list;
@@ -23,7 +24,7 @@ const Items = (props) => {
                 <View style={styles.progressContainer}>
                   <View style={styles.porgressInner}></View>
                 </View>
-                <Text>{list.score}</Text>
+                <Text style={{ marginLeft: 4 }}>{list.score}</Text>
                 <Image
                   source={require("../../assets/images/Vector_2.png")}
                   style={styles.firstIconImage}
@@ -45,9 +46,10 @@ const styles = StyleSheet.create({
   },
   contentRecompense: {
     backgroundColor: "#8F9298",
+    opacity: 0.5,
     height: 70,
     borderRadius: 4,
-    opacity: 0.5,
+
     shadowOpacity: 0.1,
     marginHorizontal: 20,
   },
@@ -89,7 +91,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginLeft: 10,
     justifyContent: "center",
-    backgroundColor: "#979797",
+    backgroundColor: "#545B62",
+    opacity: 0.4,
   },
   imageCadeaux: {
     position: "relative",

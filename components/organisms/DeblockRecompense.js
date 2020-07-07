@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
+import Colors from "../../constants/Colors";
+import { SimpleText, SecondaryTitle, SecondaryText } from "../atoms/StyledText";
 
 const Items = (props) => {
   const list = props.list;
@@ -11,7 +13,7 @@ const Items = (props) => {
     <TouchableOpacity onPress={onPress}>
       <View
         style={{
-          backgroundColor: "#69FFD4",
+          backgroundColor: Colors.secondary,
           width: 120,
           height: 36,
           borderRadius: 4,
@@ -32,7 +34,7 @@ const Items = (props) => {
         <Modal
           isVisible={isModalVisible}
           style={{
-            flex: 2,
+            flex: 1,
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -45,34 +47,35 @@ const Items = (props) => {
               />
             </View>
 
-            <Text style={styles.modalTitle}>{list.title}</Text>
-            <View>
-              <Text style={styles.modalTitleTitle}>
-                Les déchets en entreprise aussi peuvent être recyclés, et ce
-                n’est pas compliqué !
-              </Text>
-            </View>
+            <SecondaryTitle style={styles.modalTitle}>
+              {list.title}
+            </SecondaryTitle>
+
             <View style={styles.modalContentText}>
-              <Text style={styles.modalText}>
+              <SimpleText style={{ width: "100%", fontWeight: "bold" }}>
+                Les déchets en entreprise aussi peuvent être recyclés, et ce
+                n’est pas compliqué
+              </SimpleText>
+              <SimpleText style={styles.modalText}>
                 Pour être éco-responsable, limiter sa consommation en énergie et
                 en fournitures est un premier pas. il est maintenant important
                 de limiter les déchets liés à l’activité des salariés et des
                 entreprises.
-              </Text>
-              <Text style={styles.modalText}>
+              </SimpleText>
+              <SimpleText style={styles.modalText}>
                 Pour un impact moindre sur l’environnement, le tri et le
                 recyclage sont les maîtres mots de l’activité. Pour que les
                 gestes soient simples et deviennent automatiques, il est
                 essentiel de mettre à disposition des salariés des bacs de tri
                 et de travailler avec des services de recyclage pour le papier,
                 le plastique, les consommables d’imprimante ou encore le verre.
-              </Text>
-              <Text style={styles.modalText}>
+              </SimpleText>
+              <SimpleText style={styles.modalText}>
                 Pour la pause café et les déjeuners, privilégier la vaisselle
                 réutilisable est important pour limiter les déchets liés à
                 l’utilisation de gobelets et cuillères plastique plusieurs fois
                 par jour.
-              </Text>
+              </SimpleText>
             </View>
 
             {renderButton("FERMER", () => {
@@ -103,6 +106,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
+  },
+  Text: {
+    fontWeight: "bold",
+    alignItems: "center",
+    justifyContent: "center",
   },
   contentRecompense: {
     backgroundColor: "#FFF",
@@ -147,8 +155,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   modalText: {
-    fontSize: 15,
-    marginTop: 30,
+    marginTop: 8,
   },
   contentImageCadeauxModal: {
     width: 100,

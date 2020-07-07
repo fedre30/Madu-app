@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
+import Colors from "../../constants/Colors";
 import Modal from "react-native-modal";
+import { SimpleText, SecondaryTitle } from "../atoms/StyledText";
 
 const Items = (props) => {
   const list = props.list;
@@ -9,7 +11,7 @@ const Items = (props) => {
     <TouchableOpacity onPress={onPress}>
       <View
         style={{
-          backgroundColor: "#69FFD4",
+          backgroundColor: Colors.secondary,
           width: 120,
           height: 36,
           borderRadius: 4,
@@ -64,9 +66,9 @@ const Items = (props) => {
                     <Text style={styles.DeblockTitle}>Débloqué !</Text>
                   </View>
                   <Text style={styles.bravo}>Bravo !</Text>
-                  <Text style={styles.firstModalTex}>
+                  <SimpleText style={styles.firstModalTex}>
                     Vous avez débloqué un nouveau tips !
-                  </Text>
+                  </SimpleText>
                   {renderButton("SUIVANT", () => setSecondModalVisible(true))}
                 </View>
                 <Modal
@@ -87,19 +89,19 @@ const Items = (props) => {
 
                     <Text style={styles.secondModalTitle}>{list.title}</Text>
                     <View>
-                      <Text style={styles.secondModalTitleTitle}>
+                      <SecondaryTitle style={styles.secondModalTitleTitle}>
                         Les déchets en entreprise aussi peuvent être recyclés,
                         et ce n’est pas compliqué !
-                      </Text>
+                      </SecondaryTitle>
                     </View>
                     <View style={styles.secondModalContentText}>
-                      <Text style={styles.secondModalText}>
+                      <SimpleText style={styles.secondModalText}>
                         Pour être éco-responsable, limiter sa consommation en
                         énergie et en fournitures est un premier pas. il est
                         maintenant important de limiter les déchets liés à
                         l’activité des salariés et des entreprises.
-                      </Text>
-                      <Text style={styles.secondModalText}>
+                      </SimpleText>
+                      <SimpleText style={styles.secondModalText}>
                         Pour un impact moindre sur l’environnement, le tri et le
                         recyclage sont les maîtres mots de l’activité. Pour que
                         les gestes soient simples et deviennent automatiques, il
@@ -107,13 +109,13 @@ const Items = (props) => {
                         bacs de tri et de travailler avec des services de
                         recyclage pour le papier, le plastique, les consommables
                         d’imprimante ou encore le verre.
-                      </Text>
-                      <Text style={styles.secondModalText}>
+                      </SimpleText>
+                      <SimpleText style={styles.secondModalText}>
                         Pour la pause café et les déjeuners, privilégier la
                         vaisselle réutilisable est important pour limiter les
                         déchets liés à l’utilisation de gobelets et cuillères
                         plastique plusieurs fois par jour.
-                      </Text>
+                      </SimpleText>
                     </View>
 
                     {renderButton("SUIVANT", () => {
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "#FFF",
-    backgroundColor: "#69FFD4",
+    backgroundColor: Colors.secondary,
     width: 166,
     height: 41,
     borderRadius: 40,
@@ -209,7 +211,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   bravo: {
-    color: "#69FFD4",
+    color: Colors.secondary,
     fontSize: 25,
     fontWeight: "bold",
     position: "relative",
@@ -320,7 +322,7 @@ const styles = StyleSheet.create({
   porgressInner: {
     width: 100,
     height: 10,
-    backgroundColor: "#69FFD4",
+    backgroundColor: Colors.secondary,
     borderRadius: 15,
   },
   description: {

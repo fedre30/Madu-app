@@ -12,6 +12,7 @@ import {
 
 const { width } = Dimensions.get("window");
 import ListIndividuel from "../../utils/DataIndividuel";
+import Colors from "../../constants/Colors";
 import Individuel from "./Individuel";
 import ListEntreprise from "../../utils/DataEntreprise";
 import Entreprise from "./Entreprise";
@@ -87,7 +88,7 @@ export default class Sliding extends Component {
                 height: "100%",
                 left: 0,
                 top: 0,
-                backgroundColor: "#69FFD4",
+                backgroundColor: Colors.secondary,
                 borderRadius: 50,
                 transform: [
                   {

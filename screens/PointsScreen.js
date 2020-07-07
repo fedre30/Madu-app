@@ -8,7 +8,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import { Title } from "../components/atoms/StyledText";
+import {
+  Title,
+  SimpleText,
+  SecondaryTitle,
+  Subtitle,
+} from "../components/atoms/StyledText";
 import {
   RectButton,
   ScrollView,
@@ -16,6 +21,7 @@ import {
 } from "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import Recompense from "../components/organisms/Recompense";
+import Colors from "../constants/Colors";
 import Items from "../components/organisms/DeblockRecompense";
 import data from "../utils/FirstDataRecompense.js";
 import { Button } from "native-base";
@@ -57,7 +63,7 @@ export const Infos = ({ navigation }) => {
       style={{
         width: `${width}%`,
         height: 10,
-        backgroundColor: "#69FFD4",
+        backgroundColor: Colors.secondary,
         borderRadius: 15,
       }}
     ></View>
@@ -80,19 +86,27 @@ export const Infos = ({ navigation }) => {
   const LEAVES = () => {
     if (Progress === 20) {
       return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>200 leafs</Text>
+        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
+          200 leafs
+        </Text>
       );
     } else if (Progress === 40) {
       return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>150 leafs</Text>
+        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
+          150 leafs
+        </Text>
       );
     } else if (Progress === 60) {
       return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>100 leafs</Text>
+        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
+          100 leafs
+        </Text>
       );
     } else if (Progress === 80) {
       return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>50 leafs</Text>
+        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
+          50 leafs
+        </Text>
       );
     } else {
       return null;
@@ -101,16 +115,16 @@ export const Infos = ({ navigation }) => {
   const Description = () => {
     if (Progress === 100) {
       return (
-        <Text style={styles.description}>
+        <SimpleText style={styles.description}>
           Vous pouvez dès à présent débloquer une récompense.
-        </Text>
+        </SimpleText>
       );
     } else {
       return (
-        <Text style={styles.description}>
+        <SimpleText style={styles.description}>
           <LEAVES /> à accumuler avant de pouvoir débloquer la prochaine
           récompense.
-        </Text>
+        </SimpleText>
       );
     }
   };
@@ -123,9 +137,16 @@ export const Infos = ({ navigation }) => {
             source={require("../assets/images/Vector_1.png")}
             style={styles.iconImage}
           />
-          <Text style={styles.leave}>LEAVES</Text>
+          <SecondaryTitle style={styles.leave}>leaves</SecondaryTitle>
         </View>
-        <View style={{ position: "absolute", top: 60 }}>
+        <View
+          style={{
+            position: "absolute",
+            top: 60,
+            width: "80%",
+            textAlign: "center",
+          }}
+        >
           <Description />
         </View>
         <View style={styles.contentProgress}>
@@ -149,7 +170,7 @@ export const Infos = ({ navigation }) => {
         >
           <View
             style={{
-              backgroundColor: "#69FFD4",
+              backgroundColor: Colors.secondary,
               width: 120,
               height: 36,
               borderRadius: 4,
@@ -163,8 +184,10 @@ export const Infos = ({ navigation }) => {
             </Text>
           </View>
         </TouchableOpacity> */}
-        <View style={styles.contentView}>
-          <Text style={styles.title}>récompenses à débloquer</Text>
+        <View style={styles.contenTitle}>
+          <SecondaryTitle style={styles.title}>
+            récompenses à débloquer
+          </SecondaryTitle>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("ShowRecompense")}>
           <View style={styles.contentRecompense}>
@@ -211,32 +234,50 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa",
   },
+
   contentContainer: {
     justifyContent: "center",
   },
   contentHearder: {
     position: "relative",
   },
+  subtitle: {
+    color: Colors.secondary,
+    fontWeight: "bold",
+  },
   contentView: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 30,
+    width: "58%",
+    alignItems: "center",
     position: "absolute",
+    justifyContent: "center",
+    top: 10,
+  },
+  contenTitle: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "76%",
+    alignItems: "center",
+    position: "absolute",
+    justifyContent: "center",
     top: 10,
   },
   contentProgress: {
     flex: 1,
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 30,
+    justifyContent: "center",
     position: "absolute",
     top: 120,
   },
   number: {
     fontWeight: "500",
     fontSize: 48,
-    color: "#69FFD4",
+    color: Colors.secondary,
   },
   iconImage: {
     marginLeft: 10,
@@ -244,14 +285,16 @@ const styles = StyleSheet.create({
   },
   leave: {
     fontSize: 25,
-    fontWeight: "500",
-    marginLeft: 20,
-    marginTop: 10,
+    fontWeight: "bold",
+    marginLeft: 30,
+    top: 12,
+    right: 20,
     textTransform: "uppercase",
   },
   description: {
     fontSize: 20,
-    marginLeft: 30,
+    top: 10,
+    marginLeft: 20,
   },
   progressContainer: {
     width: "80%",
@@ -262,7 +305,7 @@ const styles = StyleSheet.create({
   },
   porgressInner: {
     height: 10,
-    backgroundColor: "#69FFD4",
+    backgroundColor: Colors.secondary,
     borderRadius: 15,
   },
   imageContent: {
@@ -281,12 +324,11 @@ const styles = StyleSheet.create({
   title: {
     textTransform: "uppercase",
     fontSize: 20,
-    fontWeight: "500",
     position: "absolute",
     top: 170,
   },
   contentRecompense: {
-    backgroundColor: "#69FFD4",
+    backgroundColor: Colors.secondary,
     height: 70,
     borderRadius: 4,
     shadowOpacity: 0.1,

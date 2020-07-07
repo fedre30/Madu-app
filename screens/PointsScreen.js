@@ -33,17 +33,14 @@ export const ShowRecompense = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Text
+        <SecondaryTitle
           style={{
-            fontWeight: "500",
-            fontSize: 25,
-            textTransform: "uppercase",
             marginLeft: 20,
             marginTop: 30,
           }}
         >
           récompenses débloquées
-        </Text>
+        </SecondaryTitle>
       </View>
       <View style={styles.container}>
         <FlatList
@@ -322,9 +319,6 @@ const styles = StyleSheet.create({
     height: 30,
   },
   title: {
-    textTransform: "uppercase",
-    fontSize: 20,
-    position: "absolute",
     top: 170,
   },
   contentRecompense: {

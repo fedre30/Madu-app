@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import { TouchableOpacity, Icon } from "react-native-gesture-handler";
+import {
+  TouchableOpacity,
+  Icon,
+  BorderlessButton,
+} from "react-native-gesture-handler";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
 import { SimpleText, SecondaryTitle, SecondaryText } from "../atoms/StyledText";
@@ -52,29 +56,30 @@ const Items = (props) => {
             </SecondaryTitle>
 
             <View style={styles.modalContentText}>
-              <SimpleText style={{ width: "100%", fontWeight: "bold" }}>
+              <Text
+                style={{
+                  width: "100%",
+                  fontWeight: "bold",
+                  lineHeight: 28,
+                }}
+              >
                 Les déchets en entreprise aussi peuvent être recyclés, et ce
                 n’est pas compliqué
-              </SimpleText>
+              </Text>
               <SimpleText style={styles.modalText}>
                 Pour être éco-responsable, limiter sa consommation en énergie et
                 en fournitures est un premier pas. il est maintenant important
                 de limiter les déchets liés à l’activité des salariés et des
-                entreprises.
-              </SimpleText>
-              <SimpleText style={styles.modalText}>
-                Pour un impact moindre sur l’environnement, le tri et le
-                recyclage sont les maîtres mots de l’activité. Pour que les
-                gestes soient simples et deviennent automatiques, il est
+                entreprises.{"\n"} Pour un impact moindre sur l’environnement,
+                le tri et le recyclage sont les maîtres mots de l’activité. Pour
+                que les gestes soient simples et deviennent automatiques, il est
                 essentiel de mettre à disposition des salariés des bacs de tri
                 et de travailler avec des services de recyclage pour le papier,
                 le plastique, les consommables d’imprimante ou encore le verre.
-              </SimpleText>
-              <SimpleText style={styles.modalText}>
-                Pour la pause café et les déjeuners, privilégier la vaisselle
-                réutilisable est important pour limiter les déchets liés à
-                l’utilisation de gobelets et cuillères plastique plusieurs fois
-                par jour.
+                {"\n"}Pour la pause café et les déjeuners, privilégier la
+                vaisselle réutilisable est important pour limiter les déchets
+                liés à l’utilisation de gobelets et cuillères plastique
+                plusieurs fois.
               </SimpleText>
             </View>
 

@@ -17,7 +17,6 @@ const Items = (props) => {
           borderRadius: 4,
           justifyContent: "center",
           alignItems: "center",
-          marginTop: 20,
         }}
       >
         <Text style={{ fontSize: 15, fontWeight: "500", color: "#FFF" }}>
@@ -61,7 +60,9 @@ const Items = (props) => {
                     </TouchableOpacity>
                   </View>
 
-                  <Text style={styles.firstModalTitle}>{list.title}</Text>
+                  <SecondaryTitle style={styles.firstModalTitle}>
+                    {list.title}
+                  </SecondaryTitle>
                   <View style={styles.firstModalDebock}>
                     <Text style={styles.DeblockTitle}>Débloqué !</Text>
                   </View>
@@ -87,34 +88,37 @@ const Items = (props) => {
                       />
                     </View>
 
-                    <Text style={styles.secondModalTitle}>{list.title}</Text>
-                    <View>
-                      <SecondaryTitle style={styles.secondModalTitleTitle}>
+                    <SecondaryTitle style={styles.secondModalTitle}>
+                      {list.title}
+                    </SecondaryTitle>
+
+                    <View style={styles.secondModalContentText}>
+                      <Text
+                        style={{
+                          width: "100%",
+                          fontWeight: "bold",
+                          lineHeight: 28,
+                        }}
+                      >
                         Les déchets en entreprise aussi peuvent être recyclés,
                         et ce n’est pas compliqué !
-                      </SecondaryTitle>
-                    </View>
-                    <View style={styles.secondModalContentText}>
-                      <SimpleText style={styles.secondModalText}>
+                      </Text>
+                      <SimpleText style={{ marginTop: 8 }}>
                         Pour être éco-responsable, limiter sa consommation en
                         énergie et en fournitures est un premier pas. il est
                         maintenant important de limiter les déchets liés à
-                        l’activité des salariés et des entreprises.
-                      </SimpleText>
-                      <SimpleText style={styles.secondModalText}>
-                        Pour un impact moindre sur l’environnement, le tri et le
+                        l’activité des salariés et des entreprises. Pour un
+                        impact moindre sur l’environnement, le tri et le
                         recyclage sont les maîtres mots de l’activité. Pour que
                         les gestes soient simples et deviennent automatiques, il
                         est essentiel de mettre à disposition des salariés des
                         bacs de tri et de travailler avec des services de
                         recyclage pour le papier, le plastique, les consommables
-                        d’imprimante ou encore le verre.
-                      </SimpleText>
-                      <SimpleText style={styles.secondModalText}>
-                        Pour la pause café et les déjeuners, privilégier la
-                        vaisselle réutilisable est important pour limiter les
-                        déchets liés à l’utilisation de gobelets et cuillères
-                        plastique plusieurs fois par jour.
+                        d’imprimante ou encore le verre. Pour la pause café et
+                        les déjeuners, privilégier la vaisselle réutilisable est
+                        important pour limiter les déchets liés à l’utilisation
+                        de gobelets et cuillères plastique plusieurs fois par
+                        jour.
                       </SimpleText>
                     </View>
 
@@ -244,8 +248,6 @@ const styles = StyleSheet.create({
   },
   secondModalContentText: {
     width: "90%",
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: 10,
   },
   secondIconImage: {

@@ -126,7 +126,7 @@ export default function ShopInfoScreen({ route, navigation }) {
               Horaires:
             </SecondaryTitle>
             <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
-              {data.openingHours}
+              {data.hours}
             </SimpleText>
             {location && (
               <View style={styles.mapContainer}>

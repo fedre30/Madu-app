@@ -115,8 +115,10 @@ export const MapBackDrop = (props) => {
           <Modal isVisible={modalVisible} style={{ margin: 0 }} propagateSwipe>
             <ScrollView style={{ flex: 1 }}>
               <FilterView
-                search={() => setModalVisible(!modalVisible)}
                 handleClose={() => setModalVisible(!modalVisible)}
+                setModalVisible={setModalVisible}
+                modalVisible={modalVisible}
+                setShops={setShops}
               />
             </ScrollView>
           </Modal>

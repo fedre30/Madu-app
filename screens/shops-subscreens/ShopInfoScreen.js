@@ -14,7 +14,7 @@ import {
 } from "../../components/atoms/StyledText";
 import { API_URL } from "../../utils/api";
 import shops from "../../utils/poi-api-test.json";
-import { Button, Subtitle } from "native-base";
+import { Button, Subtitle, Spinner } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Tag } from "../../components/atoms/Tag";
 import { Criterium } from "../../components/atoms/Criterium";
@@ -77,7 +77,7 @@ export default function ShopInfoScreen({ route, navigation }) {
           }}
         />
       </View>
-      {data && (
+      {data ? (
         <View style={styles.infosContainer}>
           <View style={styles.rate}>
             <View>{/* <LeavesCount rate={data.greenscore} /> */}</View>
@@ -197,6 +197,8 @@ export default function ShopInfoScreen({ route, navigation }) {
             />
           </View>
         </View>
+      ) : (
+        <Spinner color={Colors.secondary} />
       )}
     </ScrollView>
   );

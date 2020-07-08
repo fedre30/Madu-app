@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { RewardItem } from "./RewardItem";
+import { Spinner } from "native-base";
+import Colors from "../../constants/Colors";
 
 export default function RewardsList(props) {
   if (props.rewards) {
@@ -16,7 +18,7 @@ export default function RewardsList(props) {
       />
     );
   } else {
-    return <View></View>;
+    return <Spinner color={Colors.secondary} />;
   }
 }
 

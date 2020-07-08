@@ -162,11 +162,12 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 50,
     marginBottom: 50,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 140,
+    height: 140,
     resizeMode: "contain",
   },
   checkbox: {

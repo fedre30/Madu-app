@@ -20,7 +20,7 @@ export const RewardItem = (props) => {
             },
           ]}
         >
-          <View style={[styles.contentView, { opacity: isUnlock() ? 0.2 : 1 }]}>
+          <View style={[styles.contentView, { opacity: isUnlock() ? 0.5 : 1 }]}>
             <View
               style={[
                 styles.contentImageCadeaux,
@@ -28,7 +28,7 @@ export const RewardItem = (props) => {
               ]}
             >
               <Image
-                style={styles.imageCadeaux}
+                style={[styles.imageCadeaux, { opacity: isUnlock() ? 0.4 : 1 }]}
                 source={
                   list.image
                     ? { uri: list.image }
@@ -40,13 +40,23 @@ export const RewardItem = (props) => {
               <Text style={styles.text}>{list.name}</Text>
               <View style={styles.description}>
                 <Text>{props.userScore} </Text>
-                <View style={styles.progressContainer}>
+                <View
+                  style={[
+                    styles.progressContainer,
+                    {
+                      backgroundColor: isUnlock() ? "#545B62" : Colors.white,
+                    },
+                  ]}
+                >
                   <View
                     style={[
                       styles.progressInner,
                       {
+                        width: isUnlock()
+                          ? `${list.leaves_amount / props.userScore}%`
+                          : "100%",
                         backgroundColor: isUnlock()
-                          ? "#545B62"
+                          ? Colors.white
                           : Colors.secondary,
                       },
                     ]}
@@ -132,14 +142,11 @@ const styles = StyleSheet.create({
     width: "65%",
     height: 10,
     justifyContent: "center",
-    backgroundColor: Colors.white,
     borderRadius: 20,
   },
 
   progressInner: {
-    width: 20,
     height: 10,
-
     borderRadius: 15,
   },
   description: {

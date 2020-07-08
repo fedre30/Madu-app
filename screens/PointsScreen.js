@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import {
   Title,
@@ -26,6 +27,8 @@ import { UnlockReward } from "../components/organisms/UnlockReward";
 import data from "../utils/FirstDataRecompense.js";
 import { Button } from "native-base";
 import NewReward from "../components/organisms/NewReward";
+import axios from "axios";
+import global from "../Global";
 
 const PointsStack = createStackNavigator();
 
@@ -43,7 +46,7 @@ export const ShowReward = () => {
           récompenses débloquées
         </SecondaryTitle>
       </View>
-      <View style={styles.container}>
+      <View>
         <FlatList
           keyExtractor={(item) => item.id.toString()}
           data={data}
@@ -55,7 +58,24 @@ export const ShowReward = () => {
 };
 
 export const Infos = ({ navigation }) => {
+  navigation.setOptions({ headerShown: false });
   const [currentScore, setCurrentScore] = useState(20);
+  const [userScore, setUserScore] = useState(290);
+  const [rewards, setRewards] = useState(null);
+  const [lockedRewards, setLockedRewards] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${global.base_api_url}reward/`)
+      .then((res) => setRewards(res.data.results));
+
+    if (rewards) {
+      setLockedRewards(
+        rewards.filter((reward) => reward.leaves_amount > userScore)
+      );
+    }
+  }, []);
+
   const InnercurrentScore = ({ width }) => (
     <View
       style={{
@@ -74,14 +94,6 @@ export const Infos = ({ navigation }) => {
     }
   };
 
-  const Number = () => {
-    if (currentScore === 100) {
-      return <Text style={styles.number}>350</Text>;
-    } else {
-      return <Text style={styles.number}>150</Text>;
-    }
-  };
-
   const Description = () => {
     if (currentScore === 100) {
       return (
@@ -93,7 +105,8 @@ export const Infos = ({ navigation }) => {
       return (
         <SimpleText style={styles.description}>
           <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-            100 leafs
+            {lockedRewards ? lockedRewards[0].leaves_amount - userScore : 100}{" "}
+            leaves
           </Text>{" "}
           à accumuler avant de pouvoir débloquer la prochaine récompense.
         </SimpleText>
@@ -101,14 +114,16 @@ export const Infos = ({ navigation }) => {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.wrapper}>
       <View style={styles.contentHearder}>
         <View style={styles.contentView}>
-          <Number />
-          <Image
-            source={require("../assets/images/Vector_1.png")}
-            style={styles.iconImage}
-          />
+          <Text style={styles.number}>{userScore}</Text>
+          <View style={{ width: 30, height: 30 }}>
+            <Image
+              source={require("../assets/images/greenscore-2.png")}
+              style={styles.iconImage}
+            />
+          </View>
           <SecondaryTitle fontSize={20} style={styles.leave}>
             leaves
           </SecondaryTitle>
@@ -150,7 +165,7 @@ export const Infos = ({ navigation }) => {
       </View>
       <View style={styles.container}>
         <ShowReward />
-        <RewardsList />
+        <RewardsList rewards={rewards} userScore={userScore} />
       </View>
     </View>
   );
@@ -170,7 +185,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa",
   },
-
+  wrapper: {
+    flex: 1,
+    backgroundColor: "#fafafa",
+    paddingTop: 40,
+  },
   contentContainer: {
     justifyContent: "center",
   },
@@ -189,7 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     justifyContent: "center",
-    top: 10,
+    marginBottom: 20,
   },
   contenTitle: {
     position: "absolute",
@@ -205,13 +224,16 @@ const styles = StyleSheet.create({
     top: 120,
   },
   number: {
-    fontWeight: "500",
-    fontSize: 48,
+    fontWeight: "600",
+    fontSize: 50,
     color: Colors.secondary,
+    marginLeft: 50,
   },
   iconImage: {
-    marginLeft: 10,
-    marginTop: 10,
+    width: null,
+    height: null,
+    flex: 1,
+    resizeMode: "contain",
   },
   leave: {
     marginLeft: 20,
@@ -219,8 +241,8 @@ const styles = StyleSheet.create({
     right: 15,
   },
   description: {
+    width: Dimensions.get("window").width - 20,
     fontSize: 20,
-    top: 10,
     marginLeft: 20,
   },
   progressContainer: {
@@ -243,13 +265,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     shadowOpacity: 0.1,
+    marginTop: 10,
   },
   firstIconImage: {
     width: 30,
     height: 30,
   },
   title: {
-    top: 170,
+    top: 180,
     marginLeft: 20,
   },
   contentRecompense: {

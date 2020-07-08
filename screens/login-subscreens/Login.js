@@ -21,6 +21,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { AuthContext } from "../../hooks/auth";
+import Global from "../../Global.js"
+import axios from "axios"
 
 export default function Login({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -41,15 +43,29 @@ export default function Login({ route, navigation }) {
   };
 
   const onSubmitLogin = () => {
-    //implement API checkin
+    // implement API checkin
     if (infos.email === "" || infos.password === "") {
       setError(true);
-    } else {
+    }
+    console.log(axios); //eslint-disable-line
+    axios.post(`${Global.base_api_url}auth/login/`, {
+      email: infos.email,
+      password: infos.password,
+    }).then(res => {
+      console.log(res);//eslint-disable-line
+      axios.defaults.headers.common["Authorization"] = `Token ${res.token}`
       dispatch({
         type: "LOGIN",
         isLoggedIn: true,
+        payload: {
+          storeData: infos.cache,
+          user: res
+        }
       });
-    }
+    }).catch(err => {
+      console.log(err);
+      setError(true);
+    })
   };
 
   return (

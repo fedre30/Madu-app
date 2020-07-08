@@ -7,7 +7,7 @@ import {
 } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
-import { SimpleText, SecondaryTitle, SecondaryText } from "../atoms/StyledText";
+import { SimpleText, SecondaryTitle } from "../atoms/StyledText";
 
 const Items = (props) => {
   const list = props.list;
@@ -51,9 +51,7 @@ const Items = (props) => {
               />
             </View>
 
-            <SecondaryTitle style={styles.modalTitle}>
-              {list.title}
-            </SecondaryTitle>
+            <SecondaryTitle fontSize={20}>{list.title}</SecondaryTitle>
 
             <View style={styles.modalContentText}>
               <Text
@@ -147,10 +145,6 @@ const styles = StyleSheet.create({
     height: "110%",
     borderRadius: 4,
     position: "absolute",
-  },
-  modalTitle: {
-    fontSize: 25,
-    fontWeight: "500",
   },
 
   modalContentText: {

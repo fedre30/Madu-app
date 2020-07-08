@@ -38,6 +38,7 @@ export const ShowRecompense = () => {
             marginLeft: 20,
             marginTop: 30,
           }}
+          fontSize={20}
         >
           récompenses débloquées
         </SecondaryTitle>
@@ -134,7 +135,9 @@ export const Infos = ({ navigation }) => {
             source={require("../assets/images/Vector_1.png")}
             style={styles.iconImage}
           />
-          <SecondaryTitle style={styles.leave}>leaves</SecondaryTitle>
+          <SecondaryTitle fontSize={20} style={styles.leave}>
+            leaves
+          </SecondaryTitle>
         </View>
         <View
           style={{
@@ -182,15 +185,15 @@ export const Infos = ({ navigation }) => {
           </View>
         </TouchableOpacity> */}
         <View style={styles.contenTitle}>
-          <SecondaryTitle style={styles.title}>
+          <SecondaryTitle fontSize={20} style={styles.title}>
             récompenses à débloquer
           </SecondaryTitle>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("ShowRecompense")}>
           <View style={styles.contentRecompense}>
-            <Text style={styles.text}>
-              Voir les récompenses déjà débloquées
-            </Text>
+            <SecondaryTitle fontSize={14} style={styles.text}>
+              Voir les récompenses {"\n"} déjà débloquées
+            </SecondaryTitle>
           </View>
         </TouchableOpacity>
       </View>
@@ -253,13 +256,7 @@ const styles = StyleSheet.create({
     top: 10,
   },
   contenTitle: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "76%",
-    alignItems: "center",
     position: "absolute",
-    justifyContent: "center",
     top: 10,
   },
   contentProgress: {
@@ -281,12 +278,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   leave: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginLeft: 30,
-    top: 12,
-    right: 20,
-    textTransform: "uppercase",
+    marginLeft: 20,
+    top: 11,
+    right: 15,
   },
   description: {
     fontSize: 20,
@@ -320,6 +314,7 @@ const styles = StyleSheet.create({
   },
   title: {
     top: 170,
+    marginLeft: 20,
   },
   contentRecompense: {
     backgroundColor: Colors.secondary,
@@ -328,13 +323,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     marginHorizontal: 20,
     justifyContent: "center",
+    alignItems: "center",
     marginTop: 230,
     marginBottom: 20,
   },
   text: {
-    fontSize: 18,
     color: "#FFF",
-    fontWeight: "500",
     textAlign: "center",
     textTransform: "uppercase",
   },

@@ -16,6 +16,7 @@ import Colors from "../../constants/Colors";
 import Individuel from "./Individuel";
 import ListEntreprise from "../../utils/DataEntreprise";
 import Entreprise from "./Entreprise";
+import { SecondaryTitle } from "../atoms/StyledText";
 
 export default class Sliding extends Component {
   state = {
@@ -168,17 +169,14 @@ export default class Sliding extends Component {
               alignItems: "center",
             }}
           >
-            <Text
+            <SecondaryTitle
               style={{
-                textTransform: "uppercase",
-                fontSize: 20,
-                fontWeight: "600",
                 marginTop: 30,
-                lineHeight: 21,
               }}
+              fontSize={20}
             >
               ils ont le moins consommés...
-            </Text>
+            </SecondaryTitle>
             <Text
               style={{
                 fontSize: 14,

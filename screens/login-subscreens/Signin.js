@@ -118,6 +118,8 @@ export default function Signin({ route, navigation }) {
         <SecondaryText>Mot de passe</SecondaryText>
         <Item regular bordered>
           <Input
+            textContentType={"password"}
+            secureTextEntry={true}
             placeholder={""}
             rounded
             value={infos.password}

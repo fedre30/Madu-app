@@ -52,7 +52,7 @@ export const ContentChallenges = ({ route, navigation }) => {
 
             <View>
               <Text style={styles.remainingDay}>
-                <Text style={styles.span}>{data.days} </Text>
+                <Text style={styles.span}>{data.days} Jours </Text>
                 restants pour réaliser ce défi
               </Text>
             </View>
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     height: 45,
     left: 67,
     justifyContent: "center",
+    borderRadius:4,
     backgroundColor: Colors.secondary,
   },
   buttonText: {

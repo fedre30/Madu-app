@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import axios from "axios";
 import global from "../../Global";
-import { ButtonText, ItalicText } from "../../components/atoms/StyledText";
+import { ButtonText, ItalicText, LabelInput } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -80,10 +80,10 @@ export const NewAddress = ({ navigation }) => {
 
         <SafeAreaView>
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Nom du commerce</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Nom du commerce</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
-                placeholder="Ex: Le lilas"
+                placeholder="Ex: Le Lilas"
                 value={infos.name}
                 onChangeText={(text) => updateField("name", text)}
               />
@@ -91,8 +91,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
 
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Adresse</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Adresse</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
                 placeholder="Ex: 21 rue des flandres"
                 value={infos.address}
@@ -102,8 +102,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
 
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Code postal</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Code postal</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
                 placeholder="Ex: 75008"
                 value={infos.zipcode}
@@ -113,8 +113,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
 
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Ville</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Ville</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
                 placeholder="Ex: Paris"
                 value={infos.city}
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   goBackText: {
-    left: -250,
+    left: -240,
     fontFamily: "gotham-medium",
     fontStyle: "normal",
     fontWeight: "500",
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     width: 125,
     height: 45,
-    left: 110, //145,
+    left: 110,
 
     borderRadius: 4,
 

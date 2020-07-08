@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
     color: Colors.white,
   },

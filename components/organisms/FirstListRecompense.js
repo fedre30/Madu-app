@@ -60,7 +60,7 @@ const Items = (props) => {
                     </TouchableOpacity>
                   </View>
 
-                  <SecondaryTitle fontSize={100} style={styles.firstModalTitle}>
+                  <SecondaryTitle style={styles.firstModalTitle}>
                     {list.title}
                   </SecondaryTitle>
                   <View style={styles.firstModalDebock}>

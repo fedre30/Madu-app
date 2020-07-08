@@ -103,17 +103,17 @@ export default function ConfirmationScreen({ route, navigation }) {
           </ButtonText>
         </Button>
       )}
-      {route.params.type === "challenge" ||
-        (route.params.type === "newAddress" && (
-          <Button
-            style={styles.searchButton}
-            onPress={() => navigation.navigate("Profile")}
-          >
-            <ButtonText style={styles.buttonText} transform>
-              retourner sur le profil
-            </ButtonText>
-          </Button>
-        ))}
+      {(route.params.type === "challenge" ||
+        route.params.type === "newAddress") && (
+        <Button
+          style={styles.searchButton}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <ButtonText style={styles.buttonText} transform>
+            retourner sur le profil
+          </ButtonText>
+        </Button>
+      )}
     </View>
   );
 }

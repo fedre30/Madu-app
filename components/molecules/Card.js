@@ -38,13 +38,17 @@ export const ListCard = (props) => {
               }}
             />
             <SecondaryText style={{ textAlign: "center" }}>
-              {props.greenscore}%
+              {props.greenscore ? props.greenscore : null}%
             </SecondaryText>
           </View>
         )}
         <CardItem cardBody>
           <Image
-            source={require("../../assets/images/abattoirveg.jpg")}
+            source={
+              props.image
+                ? { uri: props.image }
+                : require("../../assets/images/abattoirveg.jpg")
+            }
             style={{ height: 100, width: null, flex: 1 }}
           />
         </CardItem>
@@ -58,7 +62,7 @@ export const ListCard = (props) => {
               <View style={{ flexDirection: "row" }}>
                 {props.tags.map((tag, i) => (
                   <TagsText key={i} style={{ marginRight: 8 }}>
-                    #{tag}
+                    #{tag.name}
                   </TagsText>
                 ))}
               </View>
@@ -71,11 +75,11 @@ export const ListCard = (props) => {
                 <View style={styles.infos}>
                   <WheelchairIcon focused={props.accessibility} />
                 </View>
-                {props.suggestionRate && (
+                {/* {props.suggestionRate && (
                   <View style={styles.infos}>
                     <SuggestionIcon suggestionRate={props.suggestionRate} />
                   </View>
-                )}
+                )} */}
               </View>
             </Body>
           </CardItem>

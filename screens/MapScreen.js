@@ -119,23 +119,23 @@ const Map = () => {
         longitudeDelta: 0.003,
       });
     });
-    // if (data) {
-    //   data.forEach((shop) => {
-    //     const address = `${shop.address}, ${shop.zipcode}, ${shop.city}`;
-    //     Geocoder.from(address)
-    //       .then((json) => {
-    //         setMarkers((prevState) => [
-    //           ...prevState,
-    //           {
-    //             ...shop,
-    //             latitude: json.results[0].geometry.location.lat,
-    //             longitude: json.results[0].geometry.location.lng,
-    //           },
-    //         ]);
-    //       })
-    //       .catch((error) => console.warn(error));
-    //   });
-    // }
+    if (data) {
+      data.forEach((shop) => {
+        const address = `${shop.address}, ${shop.zipcode}, ${shop.city}`;
+        Geocoder.from(address)
+          .then((json) => {
+            setMarkers((prevState) => [
+              ...prevState,
+              {
+                ...shop,
+                latitude: json.results[0].geometry.location.lat,
+                longitude: json.results[0].geometry.location.lng,
+              },
+            ]);
+          })
+          .catch((error) => console.warn(error));
+      });
+    }
   }, [data]);
 
   useEffect(() => {

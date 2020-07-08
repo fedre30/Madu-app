@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useScrollToTop } from "@react-navigation/native";
 import axios from "axios";
+import global from "../../Global";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
@@ -38,7 +39,9 @@ export default function ShopInfoScreen({ route, navigation }) {
 
   useEffect(() => {
     if (index) {
-      setData(shops.find((obj) => obj.id === index));
+      axios
+        .get(`${global.base_api_url}shop/${index}/`)
+        .then((res) => setData(res.data));
     }
     ref.current.scrollTo({ top: 0, left: 0, animated: true });
     // if (data) {
@@ -51,8 +54,8 @@ export default function ShopInfoScreen({ route, navigation }) {
     //       });
     //     })
     //     .catch((error) => console.warn(error));
-    // }
-  }, [index, data]);
+    //}
+  }, [index]);
 
   return (
     <ScrollView
@@ -77,12 +80,10 @@ export default function ShopInfoScreen({ route, navigation }) {
       {data && (
         <View style={styles.infosContainer}>
           <View style={styles.rate}>
-            <View>
-              <LeavesCount rate={data.greenscore} />
-            </View>
+            <View>{/* <LeavesCount rate={data.greenscore} /> */}</View>
             <View>
               <SuggestionIcon
-                suggestionRate={data.suggestionRate}
+                suggestionRate={data.ratings}
                 color={Colors.secondary}
               />
             </View>
@@ -98,7 +99,7 @@ export default function ShopInfoScreen({ route, navigation }) {
           <SimpleText>{data.description}</SimpleText>
           <View style={[styles.tagsContainer, { marginBottom: 50 }]}>
             {data.tags.map((tag, idx) => (
-              <Tag title={tag} key={idx} />
+              <Tag title={tag.name} key={idx} />
             ))}
           </View>
           <SecondaryTitle
@@ -107,7 +108,7 @@ export default function ShopInfoScreen({ route, navigation }) {
           >
             Critères de sélection
           </SecondaryTitle>
-          <View style={styles.criteria}>
+          {/* <View style={styles.criteria}>
             {Object.keys(data.criteria).map((criterium, idx) => (
               <Criterium
                 title={criterium}
@@ -116,7 +117,7 @@ export default function ShopInfoScreen({ route, navigation }) {
                 score={data.criteria[criterium].note}
               />
             ))}
-          </View>
+          </View> */}
           <View>
             <SecondaryTitle
               style={{ textAlign: "center", marginBottom: 10 }}
@@ -125,9 +126,9 @@ export default function ShopInfoScreen({ route, navigation }) {
               Horaires:
             </SecondaryTitle>
             <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
-              {data.openingHours}
+              {data.hours}
             </SimpleText>
-            {/* {location && (
+            {location && (
               <View style={styles.mapContainer}>
                 <MapView
                   style={styles.mapStyle}
@@ -141,7 +142,7 @@ export default function ShopInfoScreen({ route, navigation }) {
                   <Marker coordinate={location} />
                 </MapView>
               </View>
-            )} */}
+            )}
           </View>
           <View
             style={{

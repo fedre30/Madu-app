@@ -36,11 +36,10 @@ export const SuggestionIcon = (props) => {
         style={{ marginBottom: -3 }}
         color={props.color ? props.color : Colors.text}
       />
-      {props.suggestionRate && (
-        <SimpleText style={{ marginLeft: 10, marginTop: 10 }}>
-          {props.suggestionRate}%
-        </SimpleText>
-      )}
+
+      <SimpleText style={{ marginLeft: 10, marginTop: 10 }}>
+        {props.suggestionRate ? props.suggestionRate : 89}%
+      </SimpleText>
     </View>
   );
 };

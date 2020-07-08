@@ -75,6 +75,7 @@ export default function ChallengesScreen({ navigation }) {
             description={item.description}
             work={item.work}
             dayDuration={item.day_duration}
+            index={item.uid}
           />
         )}
         keyExtractor={(item) => item.uid.toString()}

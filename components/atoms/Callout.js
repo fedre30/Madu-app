@@ -29,7 +29,7 @@ export const MapCallout = (props) => {
           <View style={{ flexDirection: "row" }}>
             {props.tags.map((tag, i) => (
               <TagsText key={i} style={{ marginRight: 8 }}>
-                #{tag}
+                #{tag.name}
               </TagsText>
             ))}
           </View>

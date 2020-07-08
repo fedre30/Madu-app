@@ -92,7 +92,7 @@ const Items = (props) => {
                         et ce n’est pas compliqué !
                       </Text>
                     </View>
-                    <View style={styles.secondModalContentText}>
+                    {/* <View style={styles.secondModalContentText}>
                       <Text style={styles.secondModalText}>
                         Pour être éco-responsable, limiter sa consommation en
                         énergie et en fournitures est un premier pas. il est
@@ -114,7 +114,22 @@ const Items = (props) => {
                         déchets liés à l’utilisation de gobelets et cuillères
                         plastique plusieurs fois par jour.
                       </Text>
-                    </View>
+                      <Text style={styles.secondModalText}>
+                        Pour un impact moindre sur l’environnement, le tri et le
+                        recyclage sont les maîtres mots de l’activité. Pour que
+                        les gestes soient simples et deviennent automatiques, il
+                        est essentiel de mettre à disposition des salariés des
+                        bacs de tri et de travailler avec des services de
+                        recyclage pour le papier, le plastique, les consommables
+                        d’imprimante ou encore le verre.
+                      </Text>
+                      <Text style={styles.secondModalText}>
+                        Pour la pause café et les déjeuners, privilégier la
+                        vaisselle réutilisable est important pour limiter les
+                        déchets liés à l’utilisation de gobelets et cuillères
+                        plastique plusieurs fois par jour.
+                      </Text>
+                    </View> */}
 
                     {renderButton("SUIVANT", () => {
                       setFirstModalVisible(false);

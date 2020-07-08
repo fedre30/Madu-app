@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { createStackNavigator } from "@react-navigation/stack";
@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "../constants/Colors";
 import Sliding from "../components/organisms/Sliding";
 import { Thumbnail } from "../components/molecules/ProfileThumbnail";
-//import { Challenges } from "./profile-subscreens/ChallengesScreen";
+import { ContentChallenges } from "./profile-subscreens/ContentChallengesScreen";
 import { NewAddress } from "./profile-subscreens/NewAddressScreen";
 import ConfirmationScreen from "./shops-subscreens/ConfirmationScreen";
 import ChallengesScreen from "./profile-subscreens/ChallengesScreen";
@@ -43,7 +43,7 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
-            onPress={() => navigation.navigate("Challenges")}
+            onPress={() => navigation.navigate('Challenges')}
           >
             Mes défis
           </Thumbnail>
@@ -93,11 +93,9 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
+      <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
+      {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
       <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
-      {/* <PointsStack.Screen
-        name="jackpotAndRewardsName"
-        component={jackpotAndRewardsPageName}
-      /> */}
       <PointsStack.Screen name="NewAddress" component={NewAddress} />
       <PointsStack.Screen name="Ranking" component={Ranking} />
       <PointsStack.Screen name="Confirmation" component={ConfirmationScreen} />

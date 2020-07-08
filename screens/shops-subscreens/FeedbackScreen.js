@@ -23,7 +23,7 @@ import Colors from "../../constants/Colors";
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   const index = route.params.id;
-  const [rate, setRate] = useState(false);
+  const [rate, setRate] = useState(true);
   const [comments, setComments] = useState("");
 
   return (

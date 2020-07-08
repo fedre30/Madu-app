@@ -17,7 +17,6 @@ import Colors from "../../constants/Colors";
 import { SimpleText, SecondaryTitle } from "../atoms/StyledText";
 
 export const UnlockReward = (props) => {
-  const list = props.list;
   const [isModalVisible, setModalVisible] = useState(false);
 
   renderButton = (text, onPress) => (
@@ -60,7 +59,7 @@ export const UnlockReward = (props) => {
             />
           </View>
 
-          <SecondaryTitle fontSize={20}>{list.title}</SecondaryTitle>
+          <SecondaryTitle fontSize={20}>{props.title}</SecondaryTitle>
 
           <View style={styles.modalContentText}>
             <Text
@@ -70,22 +69,10 @@ export const UnlockReward = (props) => {
                 lineHeight: 28,
               }}
             >
-              Les déchets en entreprise aussi peuvent être recyclés, et ce n’est
-              pas compliqué
+              {props.subtitle}
             </Text>
             <SimpleText style={styles.modalText}>
-              Pour être éco-responsable, limiter sa consommation en énergie et
-              en fournitures est un premier pas. il est maintenant important de
-              limiter les déchets liés à l’activité des salariés et des
-              entreprises.{"\n"} Pour un impact moindre sur l’environnement, le
-              tri et le recyclage sont les maîtres mots de l’activité. Pour que
-              les gestes soient simples et deviennent automatiques, il est
-              essentiel de mettre à disposition des salariés des bacs de tri et
-              de travailler avec des services de recyclage pour le papier, le
-              plastique, les consommables d’imprimante ou encore le verre.
-              {"\n"}Pour la pause café et les déjeuners, privilégier la
-              vaisselle réutilisable est important pour limiter les déchets liés
-              à l’utilisation de gobelets et cuillères plastique plusieurs fois.
+              {props.description}
             </SimpleText>
           </View>
 
@@ -94,7 +81,10 @@ export const UnlockReward = (props) => {
           })}
         </ScrollView>
       </Modal>
-      <View style={styles.contentRecompense}>
+      <TouchableOpacity
+        style={styles.contentRecompense}
+        onPress={() => setModalVisible(true)}
+      >
         <View style={styles.contentView}>
           <View style={styles.contentImageCadeaux}>
             <Image
@@ -103,10 +93,10 @@ export const UnlockReward = (props) => {
             />
           </View>
           <View style={styles.contentProgress}>
-            <Text style={styles.text}>{list.title}</Text>
+            <Text style={styles.text}>{props.title}</Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 };

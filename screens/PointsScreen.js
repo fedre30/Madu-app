@@ -23,58 +23,44 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import RewardsList from "../components/organisms/RewardsList";
 import Colors from "../constants/Colors";
-import { UnlockReward } from "../components/organisms/UnlockReward";
-import data from "../utils/FirstDataRecompense.js";
-import { Button } from "native-base";
+import { Button, Spinner } from "native-base";
 import NewReward from "../components/organisms/NewReward";
 import axios from "axios";
 import global from "../Global";
+import { UnlockedRewardsList } from "../components/organisms/UnlockedRewardsList";
 
 const PointsStack = createStackNavigator();
 
-export const ShowReward = () => {
-  return (
-    <View style={styles.container}>
-      <View>
-        <SecondaryTitle
-          style={{
-            marginLeft: 20,
-            marginTop: 30,
-          }}
-          fontSize={20}
-        >
-          récompenses débloquées
-        </SecondaryTitle>
-      </View>
-      <View>
-        <FlatList
-          keyExtractor={(item) => item.id.toString()}
-          data={data}
-          renderItem={({ item }) => <UnlockReward list={item} />}
-        />
-      </View>
-    </View>
-  );
-};
-
 export const Infos = ({ navigation }) => {
   navigation.setOptions({ headerShown: false });
-  const [currentScore, setCurrentScore] = useState(20);
-  const [userScore, setUserScore] = useState(290);
+  const [currentScore, setCurrentScore] = useState(70);
+  const [userScore, setUserScore] = useState(390);
   const [rewards, setRewards] = useState(null);
-  const [lockedRewards, setLockedRewards] = useState(null);
+  const [unlockedRewards, setUnlockedRewards] = useState(null);
+  const [nextReward, setNextReward] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`${global.base_api_url}reward/`)
-      .then((res) => setRewards(res.data.results));
+    async function fetchRewards() {
+      await axios
+        .get(`${global.base_api_url}reward/`)
+        .then((res) => setRewards(res.data.results));
+    }
 
     if (rewards) {
-      setLockedRewards(
-        rewards.filter((reward) => reward.leaves_amount > userScore)
+      setUnlockedRewards(
+        rewards.filter((reward) => reward.leaves_amount < userScore)
+      );
+
+      setNextReward(
+        rewards.filter((reward) => reward.leaves_amount > userScore)[0]
       );
     }
-  }, []);
+
+    if (nextReward) {
+      setCurrentScore((userScore * 100) / nextReward.leaves_amount);
+    }
+    fetchRewards();
+  }, [rewards]);
 
   const InnercurrentScore = ({ width }) => (
     <View
@@ -105,77 +91,80 @@ export const Infos = ({ navigation }) => {
       return (
         <SimpleText style={styles.description}>
           <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-            {lockedRewards ? lockedRewards[0].leaves_amount - userScore : 100}{" "}
-            leaves
+            {nextReward ? nextReward.leaves_amount - userScore : 100} leaves
           </Text>{" "}
           à accumuler avant de pouvoir débloquer la prochaine récompense.
         </SimpleText>
       );
     }
   };
-  return (
-    <View style={styles.wrapper}>
-      <View style={styles.contentHearder}>
-        <View style={styles.contentView}>
-          <Text style={styles.number}>{userScore}</Text>
-          <View style={{ width: 30, height: 30 }}>
-            <Image
-              source={require("../assets/images/greenscore-2.png")}
-              style={styles.iconImage}
-            />
-          </View>
-          <SecondaryTitle fontSize={20} style={styles.leave}>
-            leaves
-          </SecondaryTitle>
-        </View>
-        <View
-          style={{
-            position: "absolute",
-            top: 60,
-            width: "80%",
-            textAlign: "center",
-          }}
-        >
-          <Description />
-        </View>
-        <View style={styles.contentcurrentScore}>
-          <View style={styles.progressContainer}>
-            <InnercurrentScore width={currentScore} />
-          </View>
-
-          <View style={styles.imageContent}>
-            <Image
-              source={require("../assets/images/cadeaux_1.png")}
-              style={styles.firstIconImage}
-            />
-          </View>
-        </View>
-        <View style={styles.contenTitle}>
-          <SecondaryTitle fontSize={20} style={styles.title}>
-            récompenses à débloquer
-          </SecondaryTitle>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("ShowReward")}>
-          <View style={styles.contentRecompense}>
-            <SecondaryTitle fontSize={14} style={styles.text}>
-              Voir les récompenses {"\n"} déjà débloquées
+  if (rewards && unlockedRewards && nextReward) {
+    return (
+      <View style={styles.wrapper}>
+        <View style={styles.contentHearder}>
+          <View style={styles.contentView}>
+            <Text style={styles.number}>{userScore}</Text>
+            <View style={{ width: 30, height: 30 }}>
+              <Image
+                source={require("../assets/images/greenscore-2.png")}
+                style={styles.iconImage}
+              />
+            </View>
+            <SecondaryTitle fontSize={20} style={styles.leave}>
+              leaves
             </SecondaryTitle>
           </View>
-        </TouchableOpacity>
+          <View
+            style={{
+              position: "absolute",
+              top: 60,
+              width: "80%",
+              textAlign: "center",
+            }}
+          >
+            <Description />
+          </View>
+          <View style={styles.contentcurrentScore}>
+            <View style={styles.progressContainer}>
+              <InnercurrentScore width={currentScore} />
+            </View>
+
+            <View style={styles.imageContent}>
+              <Image
+                source={require("../assets/images/cadeaux_1.png")}
+                style={styles.firstIconImage}
+              />
+            </View>
+          </View>
+          <View style={styles.contenTitle}>
+            <SecondaryTitle fontSize={20} style={styles.title}>
+              récompenses à débloquer
+            </SecondaryTitle>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("ShowReward")}>
+            <View style={styles.contentRecompense}>
+              <SecondaryTitle fontSize={14} style={styles.text}>
+                Voir les récompenses {"\n"} déjà débloquées
+              </SecondaryTitle>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <ShowReward />
+          <RewardsList rewards={rewards} userScore={userScore} />
+        </View>
       </View>
-      <View style={styles.container}>
-        <ShowReward />
-        <RewardsList rewards={rewards} userScore={userScore} />
-      </View>
-    </View>
-  );
+    );
+  } else {
+    return <Spinner color={Colors.secondary} />;
+  }
 };
 
 export default function PointsScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Infos" component={Infos} />
-      <PointsStack.Screen name="ShowReward" component={ShowReward} />
+      <PointsStack.Screen name="ShowReward" component={UnlockedRewardsList} />
     </PointsStack.Navigator>
   );
 }

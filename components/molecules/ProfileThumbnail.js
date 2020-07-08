@@ -1,28 +1,33 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity,  Image, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, View } from "react-native";
 import { ThumbnailTitle } from "../../components/atoms/StyledText";
 
 const imagesTypes = {
-    jackpotAndRewards: require("../../assets/images/gifts.png"),
-    challenges: require("../../assets/images/defis.png"),
-    newAddress: require("../../assets/images/meeting.png"),
-    Classement: require("../../assets/images/scale.png"),
-  };
+  jackpotAndRewards: require("../../assets/images/gifts.png"),
+  challenges: require("../../assets/images/defis.png"),
+  newAddress: require("../../assets/images/meeting.png"),
+  Classement: require("../../assets/images/scale.png"),
+};
 
 export const Thumbnail = (props) => {
   return (
-    <View style={[styles.container, {backgroundColor: props.backgroundColor}]}>
-      <TouchableOpacity style={styles.button} onPress={props.onPress} > 
-        <ThumbnailTitle style={styles.title} {...props}/>
-        <Image 
-          source={imagesTypes[props.imageType]} 
-          style={[styles.icon, {
-            width: props.width || 100, 
-            height: props.height || 100, 
-            left: props.left || 190, 
-            top: props.top || 15,
-          }]}
-          />
+    <View
+      style={[styles.container, { backgroundColor: props.backgroundColor }]}
+    >
+      <TouchableOpacity style={styles.button} onPress={props.onPress}>
+        <ThumbnailTitle style={styles.title} {...props} />
+        <Image
+          source={imagesTypes[props.imageType]}
+          style={[
+            styles.icon,
+            {
+              width: props.width || 100,
+              height: props.height || 100,
+              left: props.left || 190,
+              top: props.top || 15,
+            },
+          ]}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -30,7 +35,7 @@ export const Thumbnail = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     width: 328,
     height: 160,
     marginBottom: 30,
@@ -44,11 +49,12 @@ const styles = StyleSheet.create({
     top: 0,
   },
 
-  icon:{
+  icon: {
     borderRadius: 10,
   },
 
   title: {
-    top: 60
+    top: 60,
+    padding: 10,
   },
 });

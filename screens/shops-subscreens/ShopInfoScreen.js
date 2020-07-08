@@ -23,6 +23,8 @@ import MapView, { Marker } from "react-native-maps";
 import Geocoder from "react-native-geocoding";
 import { MiniCard } from "../../components/molecules/MiniCard";
 import Colors from "../../constants/Colors";
+import { LeavesCount } from "../../components/atoms/LeavesCount";
+import { SuggestionIcon } from "../../components/atoms/CardIcons";
 
 export default function ShopInfoScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -39,17 +41,17 @@ export default function ShopInfoScreen({ route, navigation }) {
       setData(shops.find((obj) => obj.id === index));
     }
     ref.current.scrollTo({ top: 0, left: 0, animated: true });
-    // if (data) {
-    //   const address = `${data.address}, ${data.zipcode}, ${data.city}`;
-    //   Geocoder.from(address)
-    //     .then((json) => {
-    //       setLocation({
-    //         latitude: json.results[0].geometry.location.lat,
-    //         longitude: json.results[0].geometry.location.lng,
-    //       });
-    //     })
-    //     .catch((error) => console.warn(error));
-    // }
+    if (data) {
+      const address = `${data.address}, ${data.zipcode}, ${data.city}`;
+      Geocoder.from(address)
+        .then((json) => {
+          setLocation({
+            latitude: json.results[0].geometry.location.lat,
+            longitude: json.results[0].geometry.location.lng,
+          });
+        })
+        .catch((error) => console.warn(error));
+    }
   }, [index, data]);
 
   return (
@@ -74,21 +76,16 @@ export default function ShopInfoScreen({ route, navigation }) {
       </View>
       {data && (
         <View style={styles.infosContainer}>
-          <View style={styles.greenscore}>
-            <View style={{ width: 40, height: 30, flex: 1 }}>
-              <Image
-                source={require("../../assets/images/greenscore-2.png")}
-                style={{
-                  flex: 1,
-                  width: null,
-                  height: null,
-                  resizeMode: "contain",
-                }}
+          <View style={styles.rate}>
+            <View>
+              <LeavesCount rate={data.greenscore} />
+            </View>
+            <View>
+              <SuggestionIcon
+                suggestionRate={data.suggestionRate}
+                color={Colors.secondary}
               />
             </View>
-            <SecondaryText style={{ marginTop: 5 }}>
-              {data.greenscore}%
-            </SecondaryText>
           </View>
           <View style={{ marginTop: 10 }}>
             <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
@@ -105,7 +102,7 @@ export default function ShopInfoScreen({ route, navigation }) {
             ))}
           </View>
           <SecondaryTitle
-            style={{ textAlign: "center", marginBottom: 10 }}
+            style={{ textAlign: "center", marginBottom: 30 }}
             fontSize={20}
           >
             Critères de sélection
@@ -130,7 +127,7 @@ export default function ShopInfoScreen({ route, navigation }) {
             <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
               {data.openingHours}
             </SimpleText>
-            {/* {location && (
+            {location && (
               <View style={styles.mapContainer}>
                 <MapView
                   style={styles.mapStyle}
@@ -144,7 +141,7 @@ export default function ShopInfoScreen({ route, navigation }) {
                   <Marker coordinate={location} />
                 </MapView>
               </View>
-            )} */}
+            )}
           </View>
           <View
             style={{
@@ -245,10 +242,9 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
   },
   criteria: {
-    justifyContent: "center",
     width: Dimensions.get("window").width,
-    marginLeft: 40,
     marginBottom: 30,
+    paddingRight: 20,
   },
   mapContainer: {
     width: Dimensions.get("window").width,
@@ -260,11 +256,11 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: 200,
   },
-  greenscore: {
-    width: 70,
+  rate: {
+    width: Dimensions.get("window").width,
     flexDirection: "row",
+    justifyContent: "space-around",
     marginBottom: 20,
-    alignSelf: "center",
   },
   buttonText: {
     paddingTop: 10,

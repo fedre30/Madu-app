@@ -30,18 +30,36 @@ export default function ConfirmationScreen({ route, navigation }) {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      <HighlightText style={{ paddingTop: 40, paddingBottom: 20 }}>
-        Merci !
+      <HighlightText style={{ paddingTop: 40, paddingBottom: 20 }} transform>
+        {route.params.type === "challenge" ? "Bravo ! " : "Merci !"}
       </HighlightText>
-      <Subtitle style={{ marginBottom: 20 }}>
-        Nous avons bien pris en compte votre suggestion, elle sera validée sous
-        48h.
-      </Subtitle>
+      {route.params.type === "challenge" && (
+        <SecondaryText>Tu as accompli ta mission du jour !</SecondaryText>
+      )}
+      {route.params.type !== "challenge" && (
+        <Subtitle style={{ marginBottom: 20 }}>
+          Nous avons bien pris en compte votre suggestion, elle sera validée
+          sous 48h.
+        </Subtitle>
+      )}
+      {route.params.type === "challenge" && (
+        <SimpleText style={{ textAlign: "center" }}>
+          Tu viens de gagner
+          <Subtitle color={Colors.secondary}> 50 leaves</Subtitle>
+        </SimpleText>
+      )}
       {route.params.type === "feedback" && (
-        <SimpleText>
-          Lorsque ton avis sera validé{" "}
-          <Subtitle color={Colors.secondary}>20 leaves</Subtitle> seront ajoutés
-          à ta cagnotte.
+        <SimpleText style={{ textAlign: "center" }}>
+          Lorsque ton avis sera validé
+          <Subtitle color={Colors.secondary}> 20 leaves</Subtitle> seront
+          ajoutés à ta cagnotte.
+        </SimpleText>
+      )}
+      {route.params.type === "newAddress" && (
+        <SimpleText style={{ textAlign: "center" }}>
+          Lorsque ton avis sera validé
+          <Subtitle color={Colors.secondary}> 30 leaves</Subtitle> seront
+          ajoutés à ta cagnotte.
         </SimpleText>
       )}
       <View
@@ -52,7 +70,11 @@ export default function ConfirmationScreen({ route, navigation }) {
         }}
       >
         <Image
-          source={require("../../assets/images/thanks.png")}
+          source={
+            route.params.type === "newAddress"
+              ? require("../../assets/images/thanks_man.png")
+              : require("../../assets/images/thanks.png")
+          }
           style={{
             flex: 1,
             width: null,
@@ -61,20 +83,37 @@ export default function ConfirmationScreen({ route, navigation }) {
           }}
         />
       </View>
-      <Button
-        style={styles.searchButton}
-        onPress={() => {
-          route.params.type === "feedback"
-            ? navigation.navigate("Shop", { id: index })
-            : navigation.navigate("Map");
-        }}
-      >
-        <ButtonText style={styles.buttonText} transform>
-          {route.params.type === "feedback"
-            ? "retourner sur la fiche"
-            : "retourner sur la carte"}
-        </ButtonText>
-      </Button>
+      {route.params.type === "feedback" && (
+        <Button
+          style={styles.searchButton}
+          onPress={() => navigation.navigate("Shop", { id: index })}
+        >
+          <ButtonText style={styles.buttonText} transform>
+            retourner sur la fiche
+          </ButtonText>
+        </Button>
+      )}
+      {route.params.type === "greenscore" && (
+        <Button
+          style={styles.searchButton}
+          onPress={() => navigation.navigate("Map")}
+        >
+          <ButtonText style={styles.buttonText} transform>
+            retourner sur la map
+          </ButtonText>
+        </Button>
+      )}
+      {(route.params.type === "challenge" ||
+        route.params.type === "newAddress") && (
+        <Button
+          style={styles.searchButton}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <ButtonText style={styles.buttonText} transform>
+            retourner sur le profil
+          </ButtonText>
+        </Button>
+      )}
     </View>
   );
 }

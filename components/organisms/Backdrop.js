@@ -49,7 +49,7 @@ export const MapBackDrop = (props) => {
         </View>
       }
     >
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 5 }}>
         <TouchableOpacity
           onPress={props.onFocus}
           style={{
@@ -61,7 +61,7 @@ export const MapBackDrop = (props) => {
         >
           <SimpleText>Fermer</SimpleText>
         </TouchableOpacity>
-        <ScrollView
+        <ScrollView 
           style={styles.filtersContainer}
           horizontal={true}
           showsVerticalScrollIndicator={false}

@@ -221,7 +221,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 20,
     left: 10,
-    zIndex: 1,
     padding: 20,
   },
   infosContainer: {

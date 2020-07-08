@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    top: 60,
+    top: 50, //Si y a un header remettre la valeur a 60
     padding: 10,
   },
 });

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Button as BTN } from "react-native";
 import { Text, Input, Switch, Button, Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
 import axios from "axios";
 import global from "../../Global";
-import { ButtonText } from "../../components/atoms/StyledText";
+import { ButtonText, ItalicText } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* test switch button */
@@ -57,24 +58,25 @@ export const NewAddress = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
       >
         <Button
+          title="Retour"
           onPress={() => navigation.goBack()}
-          title="Back"
-          light
           style={styles.back}
           transparent
+          light
         >
           <Ionicons name="md-arrow-round-back" size={20} />
+          <Text style={ styles.goBackText }>Retour</Text>
         </Button>
 
         <View style={{ marginTop: 20 }}>
           <Text style={styles.title}>Proposer une nouvelle adresse</Text>
         </View>
 
-        <Text style={(styles.subText, { marginBottom: 30 })}>
-          Une commerce éco-responsable vous a plu ? N’hésitez pas à le faire
+        <ItalicText style={(styles.italicText, { marginBottom: 10 })}>
+          Un commerce éco-responsable vous a plu ? N’hésitez pas à le faire
           partager avec nous en proposant cette adresse dans les champs
           ci-dessous !
-        </Text>
+        </ItalicText>
 
         <SafeAreaView>
           <View style={{ marginBottom: 30 }}>
@@ -149,8 +151,21 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flex: 1,
   },
+  goBackText: {
+    left: -250,
+    fontFamily: "gotham-medium",
+    fontWeight: "normal",
+    fontWeight: "500",
+    fontSize: 15,
+    lineHeight: 20,
+    
+    color: Colors.black,
+    textTransform: "capitalize",
+
+    textAlign: "center",
+  },
   title: {
-    marginBottom: 30,
+    marginBottom: 20,
 
     fontFamily: "gotham-medium",
     fontWeight: "normal",
@@ -160,12 +175,13 @@ const styles = StyleSheet.create({
 
     color: Colors.black,
   },
-  subText: {
-    fontFamily: "gotham-medium",
+  italicText: {
+    fontFamily: "gotham-hook-italic",
+    fontWeight: "normal",
     fontSize: 17,
     lineHeight: 25,
 
-    color: "#787878",
+    color: Colors.grey,
   },
   label: {
     marginBottom: 13,
@@ -197,7 +213,7 @@ const styles = StyleSheet.create({
   addButton: {
     justifyContent: "center",
     marginTop: 20,
-    marginBottom: 44,
+    marginBottom: 24,
     width: 125,
     height: 45,
     left: 110, //145,

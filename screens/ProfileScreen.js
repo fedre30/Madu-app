@@ -43,7 +43,7 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
-            onPress={() => navigation.navigate('Challenges')}
+            onPress={() => navigation.navigate("Challenges")}
           >
             Mes défis
           </Thumbnail>
@@ -93,7 +93,10 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
+      <PointsStack.Screen
+        name="ContentChallenges"
+        component={ContentChallenges}
+      />
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
       <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
       <PointsStack.Screen name="NewAddress" component={NewAddress} />
@@ -172,6 +175,8 @@ const styles = StyleSheet.create({
   profileOption: {
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
     width: Dimensions.get("window").width,
 
     /* heigh & top when there is the header */

@@ -8,6 +8,7 @@ import {
   SecondaryTitle,
   SecondaryText,
   ButtonText,
+  LabelInput,
 } from "../../components/atoms/StyledText";
 import {
   Button,
@@ -64,17 +65,17 @@ export default function Login({ route, navigation }) {
           style={styles.image}
         />
       </View>
-      <SecondaryTitle
-        style={{ textAlign: "center", marginBottom: 20 }}
+      <Title
+        style={styles.title}
         fontSize={20}
       >
         Se connecter
-      </SecondaryTitle>
+      </Title>
       <SafeAreaView style={styles.formItem}>
-        <SecondaryText>Adresse email</SecondaryText>
-        <Item regular bordered>
+        <LabelInput style={{marginBottom: 15,}}>Adresse email</LabelInput>
+        <Item regular bordered style={styles.input}>
           <Input
-            placeholder={""}
+            placeholder={"Ex: Marie@hetic.net"}
             value={infos.email}
             onChangeText={(text) => updateField("email", text)}
             style={{ color: Colors.grey }}
@@ -82,10 +83,12 @@ export default function Login({ route, navigation }) {
         </Item>
       </SafeAreaView>
       <View style={styles.formItem}>
-        <SecondaryText>Mot de passe</SecondaryText>
-        <Item regular bordered>
+        <LabelInput style={{marginBottom: 15,}}>Mot de passe</LabelInput>
+        <Item regular bordered style={styles.input}>
           <Input
-            placeholder={""}
+            textContentType={"password"}
+            secureTextEntry={true}
+            placeholder={"******"}
             rounded
             value={infos.password}
             onChangeText={(text) => updateField("password", text)}
@@ -104,7 +107,7 @@ export default function Login({ route, navigation }) {
           onPress={() => updateField("cache", !infos.cache)}
           color={Colors.secondary}
         />
-        <SimpleText style={{ marginLeft: 15, marginTop: 10 }}>
+        <SimpleText style={{ marginLeft: 15, marginTop: 0 }}>
           Rester connecté(e)
         </SimpleText>
       </View>
@@ -145,33 +148,48 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 30,
   },
+  title: {
+    marginBottom: 10, 
+    fontSize: 20, 
+    lineHeight: 21, 
+    textAlign: "center", 
+    textTransform: "uppercase",
+  },
   formItem: {
     marginBottom: 30,
+    color: Colors.lightGrey,
+  },
+  imageContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  image: {
+    width: 120,
+    height: 120,
+    resizeMode: "contain",
+  },
+  checkbox: {
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  input: { 
+    borderWidth: 1, 
+    borderColor:Colors.lightGrey, 
+    borderRadius:4,
   },
   loginButton: {
     width: 200,
     justifyContent: "center",
     marginTop: 20,
+    borderRadius: 4,
   },
   buttonText: {
     paddingTop: 10,
     paddingBottom: 10,
     alignItems: "center",
     color: Colors.white,
-  },
-  imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 50,
-    marginBottom: 50,
-  },
-  image: {
-    width: 140,
-    height: 140,
-    resizeMode: "contain",
-  },
-  checkbox: {
-    flexDirection: "row",
-    alignItems: "center",
   },
 });

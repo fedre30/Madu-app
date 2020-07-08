@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   goBackText: {
     left: -250,
     fontFamily: "gotham-medium",
-    fontWeight: "normal",
+    fontStyle: "normal",
     fontWeight: "500",
     fontSize: 15,
     lineHeight: 20,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   input: {
     /* input border */
     borderWidth: 1,
-    borderColor: "#C0C5D2",
+    borderColor: Colors.lightGrey,
     borderRadius: 4,
 
     /* input float */
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 14,
 
-    color: "#C0C5D2",
+    color: Colors.lightGrey,
   },
   addButton: {
     justifyContent: "center",

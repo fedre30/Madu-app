@@ -155,6 +155,7 @@ export const HighlightText = (props) => {
         {
           fontFamily: "gotham-medium",
           textTransform: props.transform ? "uppercase" : "none",
+          fontSize: props.fontSize ? props.fontSize : 24,
         },
       ]}
     />
@@ -196,7 +197,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   highlight: {
-    fontSize: 24,
     lineHeight: 24,
     color: Colors.secondary,
     textAlign: "center",

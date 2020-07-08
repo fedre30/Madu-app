@@ -20,16 +20,16 @@ import {
   TouchableHighlight,
 } from "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
-import Recompense from "../components/organisms/Recompense";
+import RewardsList from "../components/organisms/RewardsList";
 import Colors from "../constants/Colors";
-import Items from "../components/organisms/DeblockRecompense";
+import { UnlockReward } from "../components/organisms/UnlockReward";
 import data from "../utils/FirstDataRecompense.js";
 import { Button } from "native-base";
-import NewRecompense from "../components/organisms/NewRecompense";
+import NewReward from "../components/organisms/NewReward";
 
 const PointsStack = createStackNavigator();
 
-export const ShowRecompense = () => {
+export const ShowReward = () => {
   return (
     <View style={styles.container}>
       <View>
@@ -47,7 +47,7 @@ export const ShowRecompense = () => {
         <FlatList
           keyExtractor={(item) => item.id.toString()}
           data={data}
-          renderItem={({ item }) => <Items list={item} />}
+          renderItem={({ item }) => <UnlockReward list={item} />}
         />
       </View>
     </View>
@@ -55,8 +55,8 @@ export const ShowRecompense = () => {
 };
 
 export const Infos = ({ navigation }) => {
-  const [Progress, setProgress] = useState(20);
-  const InnerProgress = ({ width }) => (
+  const [currentScore, setCurrentScore] = useState(20);
+  const InnercurrentScore = ({ width }) => (
     <View
       style={{
         width: `${width}%`,
@@ -66,52 +66,24 @@ export const Infos = ({ navigation }) => {
       }}
     ></View>
   );
-  const ShowRecompense = () => {
-    if (Progress === 100) {
-      return <NewRecompense />;
+  const ShowReward = () => {
+    if (currentScore === 100) {
+      return <NewReward />;
     } else {
       return null;
     }
   };
 
   const Number = () => {
-    if (Progress === 100) {
+    if (currentScore === 100) {
       return <Text style={styles.number}>350</Text>;
     } else {
       return <Text style={styles.number}>150</Text>;
     }
   };
-  const LEAVES = () => {
-    if (Progress === 20) {
-      return (
-        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-          200 leafs
-        </Text>
-      );
-    } else if (Progress === 40) {
-      return (
-        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-          150 leafs
-        </Text>
-      );
-    } else if (Progress === 60) {
-      return (
-        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-          100 leafs
-        </Text>
-      );
-    } else if (Progress === 80) {
-      return (
-        <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-          50 leafs
-        </Text>
-      );
-    } else {
-      return null;
-    }
-  };
+
   const Description = () => {
-    if (Progress === 100) {
+    if (currentScore === 100) {
       return (
         <SimpleText style={styles.description}>
           Vous pouvez dès à présent débloquer une récompense.
@@ -120,8 +92,10 @@ export const Infos = ({ navigation }) => {
     } else {
       return (
         <SimpleText style={styles.description}>
-          <LEAVES /> à accumuler avant de pouvoir débloquer la prochaine
-          récompense.
+          <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
+            100 leafs
+          </Text>{" "}
+          à accumuler avant de pouvoir débloquer la prochaine récompense.
         </SimpleText>
       );
     }
@@ -149,9 +123,9 @@ export const Infos = ({ navigation }) => {
         >
           <Description />
         </View>
-        <View style={styles.contentProgress}>
+        <View style={styles.contentcurrentScore}>
           <View style={styles.progressContainer}>
-            <InnerProgress width={Progress} />
+            <InnercurrentScore width={currentScore} />
           </View>
 
           <View style={styles.imageContent}>
@@ -161,35 +135,12 @@ export const Infos = ({ navigation }) => {
             />
           </View>
         </View>
-        {/* <TouchableOpacity
-          progress={Progress}
-          onPress={() => {
-            Progress < 100 ? setProgress(Progress + 20) : setProgress(20);
-          }}
-          style={{ alignItems: "center" }}
-        >
-          <View
-            style={{
-              backgroundColor: Colors.secondary,
-              width: 120,
-              height: 36,
-              borderRadius: 4,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 40,
-            }}
-          >
-            <Text style={{ fontSize: 15, fontWeight: "500", color: "#FFF" }}>
-              Progress
-            </Text>
-          </View>
-        </TouchableOpacity> */}
         <View style={styles.contenTitle}>
           <SecondaryTitle fontSize={20} style={styles.title}>
             récompenses à débloquer
           </SecondaryTitle>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("ShowRecompense")}>
+        <TouchableOpacity onPress={() => navigation.navigate("ShowReward")}>
           <View style={styles.contentRecompense}>
             <SecondaryTitle fontSize={14} style={styles.text}>
               Voir les récompenses {"\n"} déjà débloquées
@@ -198,33 +149,18 @@ export const Infos = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <ShowRecompense />
-        <Recompense />
+        <ShowReward />
+        <RewardsList />
       </View>
     </View>
   );
 };
-export const Cagnotte = ({ navigation }) => {
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <View>
-        <Title>Cagnotte test</Title>
-        <Button onPress={() => navigation.navigate("Infos")}>
-          <Text>Infos</Text>
-        </Button>
-      </View>
-    </ScrollView>
-  );
-};
+
 export default function PointsScreen() {
   return (
     <PointsStack.Navigator>
-      <PointsStack.Screen name="Cagnotte" component={Cagnotte} />
       <PointsStack.Screen name="Infos" component={Infos} />
-      <PointsStack.Screen name="ShowRecompense" component={ShowRecompense} />
+      <PointsStack.Screen name="ShowReward" component={ShowReward} />
     </PointsStack.Navigator>
   );
 }
@@ -259,7 +195,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
   },
-  contentProgress: {
+  contentcurrentScore: {
     flex: 1,
     width: "100%",
     flexDirection: "row",

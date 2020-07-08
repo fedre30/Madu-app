@@ -5,7 +5,7 @@ import Colors from "../../constants/Colors";
 import Modal from "react-native-modal";
 import { SimpleText, SecondaryTitle } from "../atoms/StyledText";
 
-const Items = (props) => {
+export const RewardInfos = (props) => {
   const list = props.list;
   renderButton = (text, onPress) => (
     <TouchableOpacity onPress={onPress}>
@@ -158,7 +158,6 @@ const Items = (props) => {
   );
 };
 
-export default Items;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

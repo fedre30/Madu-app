@@ -2,51 +2,78 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
 import SimpleText from "../atoms/StyledText";
+import Colors from "../../constants/Colors";
 
-const Items = (props) => {
+export const RewardItem = (props) => {
   const list = props.list;
 
+  const isUnlock = () => list.leaves_amount > props.userScore;
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity>
-        <View style={styles.contentRecompense}>
-          <View style={styles.contentView}>
-            <View style={styles.contentImageCadeaux}>
+        <View
+          style={[
+            styles.contentRecompense,
+            {
+              opacity: isUnlock() ? 0.5 : 1,
+              backgroundColor: isUnlock() ? "#8F9298" : "#FFF",
+            },
+          ]}
+        >
+          <View style={[styles.contentView, { opacity: isUnlock() ? 0.2 : 1 }]}>
+            <View
+              style={[
+                styles.contentImageCadeaux,
+                { backgroundColor: isUnlock() ? "#545B62" : "#EDF3FF" },
+              ]}
+            >
               <Image
                 style={styles.imageCadeaux}
-                source={require("../../assets/images/cadeaux_2.png")}
+                source={
+                  list.image
+                    ? { uri: list.image }
+                    : require("../../assets/images/cadeaux_1.png")
+                }
               />
             </View>
             <View style={styles.contentProgress}>
-              <Text style={styles.text}>{list.title}</Text>
+              <Text style={styles.text}>{list.name}</Text>
               <View style={styles.description}>
-                <Text>150 </Text>
+                <Text>{props.userScore} </Text>
                 <View style={styles.progressContainer}>
-                  <View style={styles.porgressInner}></View>
+                  <View
+                    style={[
+                      styles.progressInner,
+                      {
+                        backgroundColor: isUnlock()
+                          ? "#545B62"
+                          : Colors.secondary,
+                      },
+                    ]}
+                  ></View>
                 </View>
-                <Text style={{ marginLeft: 4 }}>{list.score}</Text>
-                <Image
-                  source={require("../../assets/images/Vector_2.png")}
-                  style={styles.firstIconImage}
-                />
+                <Text style={{ marginLeft: 4 }}>{list.leaves_amount}</Text>
+                <View style={{ width: 20, height: 20, marginRight: 10 }}>
+                  <Image
+                    source={require("../../assets/images/greenscore-2.png")}
+                    style={styles.firstIconImage}
+                  />
+                </View>
               </View>
             </View>
           </View>
         </View>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 };
 
-export default Items;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
   },
   contentRecompense: {
-    backgroundColor: "#8F9298",
-    opacity: 0.5,
     height: 70,
     borderRadius: 4,
 
@@ -74,10 +101,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDF3FF",
     alignItems: "center",
     borderRadius: 60,
-    marginBottom: 100,
-
-    position: "relative",
-    bottom: 50,
   },
 
   DeblockTitle: {
@@ -86,19 +109,16 @@ const styles = StyleSheet.create({
     color: "#FFF",
   },
   contentImageCadeaux: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     borderRadius: 50,
     marginLeft: 10,
     justifyContent: "center",
-    backgroundColor: "#545B62",
-    opacity: 0.4,
+    marginTop: 5,
   },
   imageCadeaux: {
-    position: "relative",
-    bottom: 5,
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
     left: 10,
@@ -106,21 +126,20 @@ const styles = StyleSheet.create({
   contentProgress: {
     flex: 1,
     width: "100%",
-
     flexDirection: "column",
   },
   progressContainer: {
     width: "65%",
     height: 10,
     justifyContent: "center",
-    backgroundColor: "#979797",
+    backgroundColor: Colors.white,
     borderRadius: 20,
   },
 
-  porgressInner: {
+  progressInner: {
     width: 20,
     height: 10,
-    backgroundColor: "#545B62",
+
     borderRadius: 15,
   },
   description: {
@@ -139,5 +158,9 @@ const styles = StyleSheet.create({
   },
   firstIconImage: {
     marginLeft: 3,
+    width: null,
+    height: null,
+    flex: 1,
+    resizeMode: "contain",
   },
 });

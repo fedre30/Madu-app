@@ -2,22 +2,16 @@ import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
-import Items from "./SecondListRecompense";
+import { RewardInfos } from "./RewardInfos";
 
-import data from "../../utils/SencondDataRecompense.js";
+import data from "../../utils/FirstDataRecompense.js.js";
 
-export default function Recompense() {
+export default function NewReward() {
   return (
     <FlatList
       keyExtractor={(item) => item.id.toString()}
       data={data}
-      renderItem={({ item }) => <Items list={item} />}
+      renderItem={({ item }) => <RewardInfos list={item} />}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

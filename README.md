@@ -65,8 +65,7 @@ password: madu
 ## API 🧐
 
 ### Définition
-```
-An API is used to make the data or functionality of an existing application available for use by other applications. Here is who should make the notion of application programming interface clearer 😊```
+```An API is used to make the data or functionality of an existing application available for use by other applications. Here is who should make the notion of application programming interface clearer 😊```
 
 ### Routes
 

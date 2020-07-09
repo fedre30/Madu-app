@@ -66,7 +66,7 @@ password: madu
 
 ### Structure
 
-    - DetailCompany
+- DetailCompany
 
     ` {
             name	string

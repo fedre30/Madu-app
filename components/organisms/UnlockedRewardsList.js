@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { SecondaryTitle } from "../atoms/StyledText";
 
@@ -10,26 +10,38 @@ import { UnlockReward } from "./UnlockReward";
 import Colors from "../../constants/Colors";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../../hooks/auth";
 
 export const UnlockedRewardsList = () => {
   const navigation = useNavigation();
   navigation.setOptions({ headerShown: false });
-  const [rewards, setRewards] = useState(null);
+  const [unlockedRewardsUids, setUnlockedRewardsUids] = useState(null);
   const [unlockedRewards, setUnlockedRewards] = useState(null);
+
+  const user = useContext(AuthContext);
+
   useEffect(() => {
-    async function fetchRewards() {
+    async function fetchUnlockRewardsUids() {
       await axios
-        .get(`${global.base_api_url}reward/`)
-        .then((res) => setRewards(res.data.results));
+        .get(`${global.base_api_url}account/me/`)
+        .then((res) => setUnlockedRewardsUids(res.data.unlocked_rewards_uid));
     }
 
-    if (rewards) {
-      setUnlockedRewards(
-        rewards.filter((reward) => reward.leaves_amount < 290)
-      );
+    fetchUnlockRewardsUids();
+  }, [null]);
+
+  useEffect(() => {
+    if (unlockedRewardsUids) {
+      async function fetchUnlockRewards() {
+        unlockedRewardsUids.forEach(async (uid) => {
+          await axios
+            .get(`${global.base_api_url}reward/${uid}/`)
+            .then((res) => setUnlockedRewards(() => [res.data]));
+        });
+      }
+      fetchUnlockRewards();
     }
-    fetchRewards();
-  }, []);
+  }, [unlockedRewardsUids]);
   if (unlockedRewards) {
     return (
       <View style={styles.container}>

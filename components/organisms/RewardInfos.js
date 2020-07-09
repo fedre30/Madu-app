@@ -1,9 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import { TouchableOpacity, Icon } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import Modal from "react-native-modal";
 import { SimpleText, SecondaryTitle } from "../atoms/StyledText";
+import { UnlockReward } from "./UnlockReward";
+import axios from "axios";
+import global from "../../Global";
 
 export const RewardInfos = (props) => {
   const list = props.list;
@@ -28,6 +38,16 @@ export const RewardInfos = (props) => {
   const [isFirstModalVisible, setFirstModalVisible] = useState(false);
   const [isSecondModalVisible, setSecondModalVisible] = useState(false);
 
+  const unlockReward = () => {
+    axios
+      .patch(`${global.base_api_url}user/${props.user.uid}/`, {
+        unlocked_rewards_uid: [...props.unlockedRewards, list.uid],
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
@@ -42,7 +62,10 @@ export const RewardInfos = (props) => {
                   justifyContent: "center",
                 }}
               >
-                <View style={styles.firstdModal}>
+                <ScrollView
+                  style={styles.modal}
+                  contentContainerStyle={styles.modalContentContainer}
+                >
                   <View style={styles.contentImageCadeauxModal}>
                     <Image
                       style={styles.imageCadeauxModal}
@@ -61,7 +84,7 @@ export const RewardInfos = (props) => {
                   </View>
 
                   <SecondaryTitle style={styles.firstModalTitle}>
-                    {list.title}
+                    {list.name}
                   </SecondaryTitle>
                   <View style={styles.firstModalDebock}>
                     <Text style={styles.DeblockTitle}>Débloqué !</Text>
@@ -71,7 +94,7 @@ export const RewardInfos = (props) => {
                     Vous avez débloqué un nouveau tips !
                   </SimpleText>
                   {renderButton("SUIVANT", () => setSecondModalVisible(true))}
-                </View>
+                </ScrollView>
                 <Modal
                   isVisible={isSecondModalVisible}
                   style={{
@@ -89,7 +112,7 @@ export const RewardInfos = (props) => {
                     </View>
 
                     <SecondaryTitle style={styles.secondModalTitle}>
-                      {list.title}
+                      {list.name}
                     </SecondaryTitle>
 
                     <View style={styles.secondModalContentText}>
@@ -100,31 +123,17 @@ export const RewardInfos = (props) => {
                           lineHeight: 28,
                         }}
                       >
-                        Les déchets en entreprise aussi peuvent être recyclés,
-                        et ce n’est pas compliqué !
+                        {list.subtitle}
                       </Text>
                       <SimpleText style={{ marginTop: 8 }}>
-                        Pour être éco-responsable, limiter sa consommation en
-                        énergie et en fournitures est un premier pas. il est
-                        maintenant important de limiter les déchets liés à
-                        l’activité des salariés et des entreprises. Pour un
-                        impact moindre sur l’environnement, le tri et le
-                        recyclage sont les maîtres mots de l’activité. Pour que
-                        les gestes soient simples et deviennent automatiques, il
-                        est essentiel de mettre à disposition des salariés des
-                        bacs de tri et de travailler avec des services de
-                        recyclage pour le papier, le plastique, les consommables
-                        d’imprimante ou encore le verre. Pour la pause café et
-                        les déjeuners, privilégier la vaisselle réutilisable est
-                        important pour limiter les déchets liés à l’utilisation
-                        de gobelets et cuillères plastique plusieurs fois par
-                        jour.
+                        {list.description}
                       </SimpleText>
                     </View>
 
-                    {renderButton("SUIVANT", () => {
+                    {renderButton("FERMER", () => {
                       setFirstModalVisible(false);
                       setSecondModalVisible(false);
+                      unlockReward();
                     })}
                   </View>
                 </Modal>
@@ -138,13 +147,13 @@ export const RewardInfos = (props) => {
             </View>
 
             <View style={styles.contentProgress}>
-              <Text style={styles.text}>{list.title}</Text>
+              <Text style={styles.text}>{list.name}</Text>
               <View style={styles.description}>
-                <Text>150 </Text>
+                <Text>{props.user.current_leaves} </Text>
                 <View style={styles.progressContainer}>
                   <View style={styles.porgressInner}></View>
                 </View>
-                <Text>{list.score}</Text>
+                <Text>{list.leaves_amount}</Text>
                 <Image
                   source={require("../../assets/images/Vector_1.png")}
                   style={styles.firstIconImage}
@@ -178,14 +187,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
-  firstdModal: {
+  modal: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
     backgroundColor: "#FFFFFF",
-    width: "90%",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 400,
-    borderRadius: 4,
   },
+
+  modalContentContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+
   firstModalTitle: {
     fontSize: 30,
     fontWeight: "bold",

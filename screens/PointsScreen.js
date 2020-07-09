@@ -24,42 +24,62 @@ import { createStackNavigator } from "@react-navigation/stack";
 import RewardsList from "../components/organisms/RewardsList";
 import Colors from "../constants/Colors";
 import { Button, Spinner } from "native-base";
-import NewReward from "../components/organisms/NewReward";
 import axios from "axios";
 import global from "../Global";
 import { UnlockedRewardsList } from "../components/organisms/UnlockedRewardsList";
+import { RewardInfos } from "../components/organisms/RewardInfos";
 
 const PointsStack = createStackNavigator();
 
 export const Infos = ({ navigation }) => {
   navigation.setOptions({ headerShown: false });
   const [currentScore, setCurrentScore] = useState(70);
-  const [userScore, setUserScore] = useState(390);
+  const [user, setUser] = useState(null);
   const [rewards, setRewards] = useState(null);
   const [unlockedRewards, setUnlockedRewards] = useState(null);
   const [nextReward, setNextReward] = useState(null);
 
   useEffect(() => {
-    async function fetchRewards() {
+    async function fetchUserData() {
       await axios
-        .get(`${global.base_api_url}reward/`)
-        .then((res) => setRewards(res.data.results));
+        .get(`${global.base_api_url}account/me/`)
+        .then((res) => setUser(res.data));
     }
+    fetchUserData();
+  }, [null]);
 
+  useEffect(() => {
+    if (user) {
+      async function fetchRewards() {
+        await axios
+          .get(`${global.base_api_url}reward/`)
+          .then((res) =>
+            setRewards(
+              res.data.results.filter(
+                (reward) => !user.unlocked_rewards_uid.includes(reward.uid)
+              )
+            )
+          );
+      }
+
+      fetchRewards();
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (rewards) {
       setUnlockedRewards(
-        rewards.filter((reward) => reward.leaves_amount < userScore)
+        rewards.filter((reward) =>
+          user.unlocked_rewards_uid.includes(reward.uid)
+        )
       );
 
-      setNextReward(
-        rewards.filter((reward) => reward.leaves_amount > userScore)[0]
-      );
+      setNextReward(rewards[0]);
     }
 
     if (nextReward) {
-      setCurrentScore((userScore * 100) / nextReward.leaves_amount);
+      setCurrentScore((user.current_leaves * 100) / nextReward.leaves_amount);
     }
-    fetchRewards();
   }, [rewards]);
 
   const InnercurrentScore = ({ width }) => (
@@ -73,8 +93,20 @@ export const Infos = ({ navigation }) => {
     ></View>
   );
   const ShowReward = () => {
-    if (currentScore === 100) {
-      return <NewReward />;
+    if (currentScore === 100 && nextReward) {
+      return (
+        <FlatList
+          keyExtractor={(item) => item.uid.toString()}
+          data={[nextReward]}
+          renderItem={({ item }) => (
+            <RewardInfos
+              list={nextReward}
+              user={user}
+              unlockedRewards={unlockedRewards}
+            />
+          )}
+        />
+      );
     } else {
       return null;
     }
@@ -91,19 +123,20 @@ export const Infos = ({ navigation }) => {
       return (
         <SimpleText style={styles.description}>
           <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
-            {nextReward ? nextReward.leaves_amount - userScore : 100} leaves
+            {nextReward ? nextReward.leaves_amount - user.current_leaves : 100}{" "}
+            leaves
           </Text>{" "}
           à accumuler avant de pouvoir débloquer la prochaine récompense.
         </SimpleText>
       );
     }
   };
-  if (rewards && unlockedRewards && nextReward) {
+  if (rewards && unlockedRewards && nextReward && user) {
     return (
       <View style={styles.wrapper}>
         <View style={styles.contentHearder}>
           <View style={styles.contentView}>
-            <Text style={styles.number}>{userScore}</Text>
+            <Text style={styles.number}>{user.current_leaves}</Text>
             <View style={{ width: 30, height: 30 }}>
               <Image
                 source={require("../assets/images/greenscore-2.png")}
@@ -151,7 +184,7 @@ export const Infos = ({ navigation }) => {
         </View>
         <View style={styles.container}>
           <ShowReward />
-          <RewardsList rewards={rewards} userScore={userScore} />
+          <RewardsList rewards={rewards} userScore={user.current_leaves} />
         </View>
       </View>
     );

@@ -8,7 +8,6 @@ import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import LoginScreen from "./screens/LoginScreen";
-import { AsyncStorage } from "react-native";
 import { authReducer, initialState, AuthContext } from "./hooks/auth";
 
 const Stack = createStackNavigator();

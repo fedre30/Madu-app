@@ -48,7 +48,8 @@ const Map = () => {
           const address = `${shop.address}, ${shop.zipcode}, ${shop.city}`;
           await Geocoder.from(address)
             .then((json) => {
-              setMarkers(() => [
+              setMarkers((prevState) => [
+                ...prevState,
                 {
                   ...shop,
                   latitude: json.results[0].geometry.location.lat,
@@ -97,40 +98,44 @@ const Map = () => {
         showsPointsOfInterest={false}
       >
         {markers &&
-          markers.map((marker, idx) => (
-            <Marker
-              coordinate={{
-                latitude: marker.latitude,
-                longitude: marker.longitude,
-              }}
-              name={marker.name}
-              key={idx}
-              stopPropagation={true}
-              onPress={() => handleCardVisibility(marker.id)}
-              onSelect={() => handleCardVisibility(marker.id)}
-              onCalloutPress={() =>
-                navigation.navigate("Shop", { id: marker.id })
-              }
-              image={require("../assets/images/pin.png")}
-              calloutVisible={
-                visibleCards[marker.id] &&
-                visibleCards[marker.id].visible &&
-                visibleCards
-              }
-            >
-              <MapCallout
-                id={marker.id}
+          markers
+            .filter((marker) => marker !== null)
+            .map((marker, idx) => (
+              <Marker
+                coordinate={{
+                  latitude: marker.latitude,
+                  longitude: marker.longitude,
+                }}
                 name={marker.name}
-                address={marker.address}
-                tags={marker.tags}
-                price={marker.price}
-                accessibility={marker.accessibility}
-                suggestionRate={marker.suggestionRate}
-                mapCard
-                onPress={() => navigation.navigate("Shop", { id: marker.uid })}
-              />
-            </Marker>
-          ))}
+                key={idx}
+                stopPropagation={true}
+                onPress={() => handleCardVisibility(marker.id)}
+                onSelect={() => handleCardVisibility(marker.id)}
+                onCalloutPress={() =>
+                  navigation.navigate("Shop", { id: marker.id })
+                }
+                image={require("../assets/images/pin.png")}
+                calloutVisible={
+                  visibleCards[marker.id] &&
+                  visibleCards[marker.id].visible &&
+                  visibleCards
+                }
+              >
+                <MapCallout
+                  id={marker.id}
+                  name={marker.name}
+                  address={marker.address}
+                  tags={marker.tags}
+                  price={marker.price}
+                  accessibility={marker.accessibility}
+                  suggestionRate={marker.suggestionRate}
+                  mapCard
+                  onPress={() =>
+                    navigation.navigate("Shop", { id: marker.uid })
+                  }
+                />
+              </Marker>
+            ))}
       </MapView>
       <MapBackDrop visible={visible} onFocus={() => setVisible(!visible)} />
     </View>

@@ -30,10 +30,17 @@ export default function CardChallenges(props) {
         {challenge.description}
       </SimpleText>
       <View style={{ padding: 10 }}>
-        <Image
-          source={require("../../assets/images/thumb_up.png")}
-          style={{ marginBottom: 20 }}
-        />
+        <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+          <Image
+            source={require("../../assets/images/thumb.png")}
+            style={{
+              width: null,
+              height: null,
+              flex: 1,
+              resizeMode: "contain",
+            }}
+          />
+        </View>
         <SimpleText style={styles.subtext}>
           <Text style={styles.span}>{challenge.done_by_users.length}</Text>{" "}
           personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
@@ -77,10 +84,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 4,
     paddingTop: 10,
-    paddingBottom: 10,
     paddingLeft: 5,
     top: -20,
     left: -10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   imageChallenge: {
     width: null,

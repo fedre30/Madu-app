@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Text } from "native-base";
@@ -17,14 +17,16 @@ export const PriceIcon = (props) => {
 };
 
 export const WheelchairIcon = (props) => {
-  return (
-    <Ionicons
-      name="md-body"
-      size={props.size ? props.size : 30}
-      style={{ marginBottom: -3 }}
-      color={props.focused ? Colors.text : Colors.grey}
-    />
-  );
+  if (props.focused) {
+    return (
+      <View style={{ width: 25, height: 25 }}>
+        <Image
+          source={require("../../assets/images/wheelchair.png")}
+          style={{ width: null, height: null, resizeMode: "contain", flex: 1 }}
+        />
+      </View>
+    );
+  } else return null;
 };
 
 export const SuggestionIcon = (props) => {

@@ -98,10 +98,17 @@ export const ContentChallenges = ({ route, navigation }) => {
             <Text style={styles.content}> {data.description}</Text>
 
             <View>
-              <Image
-                source={require("../../assets/images/thumb_up.png")}
-                style={{ marginBottom: 20 }}
-              />
+              <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+                <Image
+                  source={require("../../assets/images/thumb.png")}
+                  style={{
+                    width: null,
+                    height: null,
+                    flex: 1,
+                    resizeMode: "contain",
+                  }}
+                />
+              </View>
               <Text style={styles.subtext}>
                 <Text style={styles.span}>{data.done_by_users.length} </Text>
                 personnes ont réalisé ce défi, dont 3 chez Little Cigogne.

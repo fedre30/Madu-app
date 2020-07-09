@@ -37,18 +37,21 @@ export const MapBackDrop = (props) => {
             res.data.results.filter((tag) => activeFilters.includes(tag.name))
           )
         );
-    }
-    if (tags) {
-      const parsed = tags.map((tag) => tag.uid).join(",");
-      axios
-        .get(`${global.base_api_url}shop/?tag___in=${parsed}`)
-        .then((res) => setShops(res.data.results));
-    } else {
+
       axios
         .get(`${global.base_api_url}shop/`)
         .then((res) => setShops(res.data.results));
     }
-  }, []);
+  }, [null]);
+
+  useEffect(() => {
+    if (tags) {
+      const parsed = tags.map((tag) => tag.uid).join(",");
+      axios
+        .get(`${global.base_api_url}shop/?tag_uid__in=${parsed}`)
+        .then((res) => console.log(res));
+    }
+  }, [tags]);
 
   const onPress = (type) => {
     setActiveFilters((prevState) =>
@@ -139,7 +142,7 @@ export const MapBackDrop = (props) => {
                 accessibility={item.accessibility}
                 suggestionRate={item.ratings ? item.ratings : null}
                 image={item.image}
-                // greenscore={item.greenscore}
+                greenscore={item.greenscore.value}
               />
             )}
             keyExtractor={(shop) => shop.uid.toString()}

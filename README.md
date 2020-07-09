@@ -103,6 +103,28 @@ Updates a pet in the store with form data
 
 - GET 
 
+`/pet/findByStatus`
+
+Finds Pets by status
+
+Multiple status values can be provided with comma separated strings
+
+-Responses 
+`200 successful operation`
+
+`400 Invalid status value`
+
+`/pet/{petId}`
+
+
+-Responses 
+`200 successful operation`
+
+`400 	Invalid ID supplied`
+
+`404 Pet not found` 	
+
+
 
 
 - PUT
@@ -131,11 +153,21 @@ Pet object that needs to be added to the store
   "status": "available"
 }`
 
+-Responses 
+
+`400 Invalid ID supplied`
+
+`404 Pet not found`
+
+`405 Validation exception`
+
 
 
 - DELETE
 
 `/pet/{petId}`
+
+Deletes a pet
 
 -Responses 
 
@@ -143,7 +175,7 @@ Pet object that needs to be added to the store
 
 `404 Pet not found`
 
-Deletes a pet
+
 
 
 

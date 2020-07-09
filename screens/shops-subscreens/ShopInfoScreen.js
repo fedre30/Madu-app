@@ -77,20 +77,23 @@ export default function ShopInfoScreen({ route, navigation }) {
 
       if (data.greenscore) {
         async function fetchCriteria() {
-          Object.keys(data.greenscore).forEach(async (uid) => {
-            if (uid !== "value") {
-              await axios
-                .get(`${global.base_api_url}greenscore-criteria/${uid}/`)
-                .then((res) =>
-                  setCriteria((prevState) => [
-                    ...prevState,
-                    {
-                      ...uid,
-                      name: res.data.name,
-                    },
-                  ])
-                );
-            }
+          const cleanArray = Object.values(data.greenscore).slice(1);
+          const slicedArray = Object.keys(data.greenscore).slice(1);
+          const result = cleanArray.slice(1).map((g, i) => {
+            return { ...g, greenUid: slicedArray[i] };
+          });
+          result.forEach(async (uid) => {
+            await axios
+              .get(`${global.base_api_url}greenscore-criteria/${uid.greenUid}/`)
+              .then((res) =>
+                setCriteria((prevState) => [
+                  ...prevState,
+                  {
+                    ...uid,
+                    name: res.data.name,
+                  },
+                ])
+              );
           });
         }
         fetchCriteria();
@@ -135,7 +138,6 @@ export default function ShopInfoScreen({ route, navigation }) {
               />
             </View>
           </View>
-          {console.log(criteria)}
           <View style={{ marginTop: 10 }}>
             <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
               {data.name}
@@ -156,16 +158,19 @@ export default function ShopInfoScreen({ route, navigation }) {
           >
             Critères de sélection
           </SecondaryTitle>
+          {console.log(criteria)}
           <View style={styles.criteria}>
-            {/* {criteria &&
-              criteria.map((criterium, idx) => (
-                <Criterium
-                  title={criterium.name}
-                  imageType={criterium}
-                  key={idx}
-                  score={39}
-                />
-              ))} */}
+            {criteria &&
+              criteria
+                .slice(1)
+                .map((criterium) => (
+                  <Criterium
+                    title={criterium.name}
+                    imageType={criterium.name}
+                    score={criterium.value}
+                    key={criterium.greenUid}
+                  />
+                ))}
           </View>
           <View>
             <SecondaryTitle

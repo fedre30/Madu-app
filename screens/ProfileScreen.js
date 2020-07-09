@@ -11,11 +11,15 @@ import { ContentChallenges } from "./profile-subscreens/ContentChallengesScreen"
 import { NewAddress } from "./profile-subscreens/NewAddressScreen";
 import ConfirmationScreen from "./shops-subscreens/ConfirmationScreen";
 import ChallengesScreen from "./profile-subscreens/ChallengesScreen";
+import { LeavesCount } from "../components/atoms/LeavesCount";
+import { useNavigation } from "@react-navigation/native";
 // import {jackpotAndRewardsPageName} from "./profile-subscreens/jackpotAndRewardsPageName";
 
 const PointsStack = createStackNavigator();
 
 export const Ranking = () => {
+  const navigation = useNavigation();
+  navigation.setOptions({ headerShown: false });
   return <Sliding />;
 };
 
@@ -28,13 +32,6 @@ export const Profile = ({ navigation }) => {
       contentContainerStyle={styles.contentContainer}
     >
       <ScrollView>
-        {/* //Données en brute pour afficher dans le profil une image + nom et prenom
-        <View style={styles.headerContainer} >
-          <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
-          <Text style={styles.name}>Marie TE</Text>
-          <Text style={styles.institution}>Little cigogne</Text>
-        </View> */}
-
         <View style={styles.profileOption}>
           <Thumbnail
             backgroundColor={"#FDE6E6"}
@@ -43,11 +40,10 @@ export const Profile = ({ navigation }) => {
             height={129}
             left={96}
             top={10}
-            onPress={() => navigation.navigate('Challenges')}
+            onPress={() => navigation.navigate("Challenges")}
           >
             Mes défis
           </Thumbnail>
-
           <Thumbnail
             backgroundColor={"#E9F7FF"}
             imageType="jackpotAndRewards"
@@ -55,7 +51,7 @@ export const Profile = ({ navigation }) => {
             height={130}
             left={125}
             top={-12}
-            // onPress={() => navigation.navigate('jackpotAndRewardsPageName')}
+            onPress={() => navigation.navigate("Cagnotte")}
           >
             Cagnotte et récompenses
           </Thumbnail>
@@ -93,7 +89,10 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
+      <PointsStack.Screen
+        name="ContentChallenges"
+        component={ContentChallenges}
+      />
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
       <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
       <PointsStack.Screen name="NewAddress" component={NewAddress} />
@@ -114,59 +113,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flex: 1,
   },
-
-  /* Profile header*/
-  // headerContainer: {
-  //   position: "absolute",
-  //   width: "auto",
-  //   height: "auto",
-  //   left: 66,
-  //   top: 30,
-  // },
-
-  // profilePic: {
-  //   position: "absolute",
-  //   width: 70,
-  //   height: 70,
-  //   left: 81,
-  //   top: 0,
-  // },
-
-  // name: {
-  //   position: "absolute",
-  //   width: 100,
-  //   height: 21,
-  //   left: 67,
-  //   top: 95,
-
-  //   fontFamily: "gotham-bold",
-  //   fontStyle: "normal",
-  //   fontWeight: "bold",
-  //   fontSize: 20,
-  //   lineHeight: 21,
-
-  //   textAlign: "center",
-  //   textTransform: "uppercase",
-
-  //   color: Colors.black,
-  // },
-
-  // institution: {
-  //   position: "absolute",
-  //   width: 123,
-  //   height: 20,
-  //   left: 55,
-  //   top: 115,
-
-  //   fontFamily: "gotham-bold",
-  //   fontSize: 14,
-  //   lineHeight: 20,
-
-  //   textAlign: "center",
-  //   textTransform: "uppercase",
-
-  //   color: "#787878",
-  // },
 
   /* Cards */
   profileOption: {

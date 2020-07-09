@@ -38,7 +38,7 @@ export const LeavesCount = (props) => {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      {[...Array(5)].map((leaf, i) => (
+      {[1, 2, 3, 4, 5].map((leaf, i) => (
         <Image
           key={i}
           source={

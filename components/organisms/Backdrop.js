@@ -49,7 +49,7 @@ export const MapBackDrop = (props) => {
       const parsed = tags.map((tag) => tag.uid).join(",");
       axios
         .get(`${global.base_api_url}shop/?tag_uid__in=${parsed}`)
-        .then((res) => console.log(res));
+        .then((res) => setShops(res.data.results));
     }
   }, [tags]);
 
@@ -73,7 +73,7 @@ export const MapBackDrop = (props) => {
         </View>
       }
     >
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, paddingBottom: 100 }}>
         <TouchableOpacity
           onPress={props.onFocus}
           style={{

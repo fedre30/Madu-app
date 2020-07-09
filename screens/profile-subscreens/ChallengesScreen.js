@@ -34,6 +34,7 @@ import {
   Spinner,
 } from "native-base";
 import { AuthContext } from "../../hooks/auth.js";
+import { GoBack } from "../../components/atoms/GoBack.js";
 
 export default function ChallengesScreen({ navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -50,6 +51,7 @@ export default function ChallengesScreen({ navigation }) {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
+      <GoBack />
       <Title style={styles.titleChallenges}>
         On relève le défi {user.first_name} ?
       </Title>

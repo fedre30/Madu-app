@@ -11,6 +11,7 @@ import Colors from "../../constants/Colors";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../hooks/auth";
+import { GoBack } from "../atoms/GoBack";
 
 export const UnlockedRewardsList = () => {
   const navigation = useNavigation();
@@ -45,15 +46,7 @@ export const UnlockedRewardsList = () => {
   if (unlockedRewards) {
     return (
       <View style={styles.container}>
-        <Button
-          onPress={() => navigation.goBack()}
-          title="Back"
-          light
-          style={styles.back}
-          transparent
-        >
-          <Ionicons name="md-arrow-round-back" size={20} />
-        </Button>
+        <GoBack />
         <View>
           <SecondaryTitle
             style={{

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import Global from "../../Global.js"
+import Global from "../../Global.js";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { AuthContext } from "../../hooks/auth";
 import { Tag } from "../../components/atoms/Tag";
+import { GoBack } from "../../components/atoms/GoBack.js";
 
 export default function Signin({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -26,7 +27,9 @@ export default function Signin({ route, navigation }) {
   });
   const { dispatch } = useContext(AuthContext);
   const [error, setError] = useState(false);
-  const [errorTxt, setErrorTxt] = useState("Adresse email ou mot de passe erroné");
+  const [errorTxt, setErrorTxt] = useState(
+    "Adresse email ou mot de passe erroné"
+  );
 
   const updateField = (field, val) => {
     setInfos({
@@ -37,43 +40,52 @@ export default function Signin({ route, navigation }) {
 
   const onSubmitSignin = async () => {
     // implement API checkin
-    delete axios.defaults.headers.common["Authorization"]
+    delete axios.defaults.headers.common["Authorization"];
     let companies = [];
-    if (infos.email === "" || infos.password === "" || infos.confirmationPassword === "") {
+    if (
+      infos.email === "" ||
+      infos.password === "" ||
+      infos.confirmationPassword === ""
+    ) {
       setError(true);
       setErrorTxt("Adresse email ou mot de passe erroné");
     }
-    await axios.get(`${Global.base_api_url}company/`).then(res => {
+    await axios.get(`${Global.base_api_url}company/`).then((res) => {
       companies = res.data.results;
-    })
-    let extension = infos.email.split('@')[1];
-    let available_extensions = companies.map(comp => comp.mail_affix);
+    });
+    let extension = infos.email.split("@")[1];
+    let available_extensions = companies.map((comp) => comp.mail_affix);
     if (!available_extensions.includes(extension)) {
       setError(true);
       setErrorTxt("L'adresse email n'appartient à aucune entreprise");
     } else {
-      let company = companies.find(comp => comp.mail_affix === extension)
-      axios.post(`${Global.base_api_url}auth/register/`, {
-        email: infos.email,
-        password1: infos.password,
-        password2: infos.confirmationPassword,
-      }).then(async user => {
-        axios.defaults.headers.common["Authorization"] = `Token ${user.data.token}`
-        await axios.patch(user.data.url, {
-          company_uid: company.uid
+      let company = companies.find((comp) => comp.mail_affix === extension);
+      axios
+        .post(`${Global.base_api_url}auth/register/`, {
+          email: infos.email,
+          password1: infos.password,
+          password2: infos.confirmationPassword,
         })
-        dispatch({
-          type: "LOGIN",
-          isLoggedIn: true,
-          payload: {
-            storeData: false,
-            user: user
-          }
+        .then(async (user) => {
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Token ${user.data.token}`;
+          await axios.patch(user.data.url, {
+            company_uid: company.uid,
+          });
+          dispatch({
+            type: "LOGIN",
+            isLoggedIn: true,
+            payload: {
+              storeData: false,
+              user: user,
+            },
+          });
+        })
+        .catch((err) => {
+          setError(true);
+          setErrorTxt("Adresse email ou mot de passe erroné");
         });
-      }).catch(err => {
-        setError(true);
-        setErrorTxt("Adresse email ou mot de passe erroné");
-      })
     }
   };
 
@@ -82,15 +94,8 @@ export default function Signin({ route, navigation }) {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      <Button
-        onPress={() => navigation.goBack()}
-        title="Back"
-        light
-        style={styles.back}
-        transparent
-      >
-        <Ionicons name="md-arrow-round-back" size={20} />
-      </Button>
+      <GoBack />
+
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/madu_logo.png")}
@@ -140,11 +145,7 @@ export default function Signin({ route, navigation }) {
           />
         </Item>
       </View>
-      {error && (
-        <SimpleText color={Colors.orange}>
-          {errorTxt}
-        </SimpleText>
-      )}
+      {error && <SimpleText color={Colors.orange}>{errorTxt}</SimpleText>}
       <View
         style={{
           justifyContent: "center",

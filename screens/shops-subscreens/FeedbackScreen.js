@@ -21,6 +21,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import axios from "axios";
 import global from "../../Global";
+import { GoBack } from "../../components/atoms/GoBack";
 
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -55,14 +56,7 @@ export default function FeedbackScreen({ route, navigation }) {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      <Button
-        onPress={() => navigation.goBack()}
-        light
-        style={styles.back}
-        transparent
-      >
-        <Ionicons name="md-arrow-round-back" size={20} />
-      </Button>
+      <GoBack />
       <View style={{ marginTop: 10 }}>
         <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
           Donner votre avis

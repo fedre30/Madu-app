@@ -8,6 +8,7 @@ import axios from "axios";
 import global from "../../Global";
 import { ButtonText } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
+import { GoBack } from "../../components/atoms/GoBack";
 
 /* test switch button */
 //import { ButtonSwitch } from "../../components/molecules/Switch";
@@ -67,15 +68,7 @@ export const NewAddress = ({ navigation }) => {
       contentContainerStyle={styles.contentContainer}
     >
       <ScrollView>
-        <Button
-          onPress={() => navigation.goBack()}
-          title="Back"
-          light
-          style={styles.back}
-          transparent
-        >
-          <Ionicons name="md-arrow-round-back" size={20} />
-        </Button>
+        <GoBack />
 
         <View style={{ marginTop: 20 }}>
           <Text style={styles.title}>Proposer une nouvelle adresse</Text>

@@ -6,8 +6,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { LeavesCount } from "./LeavesCount";
 
 const imagesTypes = {
-  food: require("../../assets/images/food.png"),
-  equipment: require("../../assets/images/equipment.png"),
+  cuisine: require("../../assets/images/food.png"),
+  matériel: require("../../assets/images/equipment.png"),
   social: require("../../assets/images/social.png"),
 };
 

@@ -39,6 +39,13 @@ export const Infos = ({ navigation }) => {
   const [unlockedRewards, setUnlockedRewards] = useState(null);
   const [nextReward, setNextReward] = useState(null);
 
+  const sortByLeaves = (a, b) => {
+    if (a.leaves_amount > b.leaves_amount) return 1;
+    if (b.leaves_amount > a.leaves_amount) return -1;
+
+    return 0;
+  };
+
   useEffect(() => {
     async function fetchUserData() {
       await axios
@@ -55,9 +62,11 @@ export const Infos = ({ navigation }) => {
           .get(`${global.base_api_url}reward/`)
           .then((res) =>
             setRewards(
-              res.data.results.filter(
-                (reward) => !user.unlocked_rewards_uid.includes(reward.uid)
-              )
+              res.data.results
+                .filter(
+                  (reward) => !user.unlocked_rewards_uid.includes(reward.uid)
+                )
+                .sort(sortByLeaves)
             )
           );
       }
@@ -95,7 +104,7 @@ export const Infos = ({ navigation }) => {
     ></View>
   );
   const ShowReward = () => {
-    if (currentScore === 100 && nextReward) {
+    if (currentScore >= 100 && nextReward) {
       return (
         <FlatList
           keyExtractor={(item) => item.uid.toString()}
@@ -115,7 +124,7 @@ export const Infos = ({ navigation }) => {
   };
 
   const Description = () => {
-    if (currentScore === 100) {
+    if (currentScore >= 100) {
       return (
         <SimpleText style={styles.description}>
           Vous pouvez dès à présent débloquer une récompense.

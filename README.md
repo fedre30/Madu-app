@@ -179,10 +179,13 @@ Deletes a pet
 #### STORE 
 
 -POST
+
 `/store/inventory`
+
 Place an order for a pet
 order placed for purchasing the pet
 Example Model
+
 `{
   "id": 0,
   "petId": 0,
@@ -193,7 +196,9 @@ Example Model
 }`
 
 -Responses 
+
 `200 	Succesfull operation`
+
 exemple
 
 `{

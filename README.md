@@ -176,6 +176,41 @@ Deletes a pet
 `404 Pet not found`
 
 
+#### PET 
+
+-POST
+`/store/inventory`
+Place an order for a pet
+order placed for purchasing the pet
+Example Model
+`{
+  "id": 0,
+  "petId": 0,
+  "quantity": 0,
+  "shipDate": "2020-07-09T12:00:42.460Z",
+  "status": "placed",
+  "complete": false
+}`
+
+-Responses 
+`200 	Succesfull operation`
+exemple
+
+`{
+  "id": 0,
+  "petId": 0,
+  "quantity": 0,
+  "shipDate": "2020-07-09T12:36:48.492Z",
+  "status": "placed",
+  "complete": false
+}`
+
+`400  Invalid Order`
+
+-GET
+
+-DELETE
+
 
 
 

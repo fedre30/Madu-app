@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -19,12 +19,36 @@ import {
 import { Button, Subtitle, Textarea } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
+import axios from "axios";
+import global from "../../Global";
 
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   const index = route.params.id;
   const [rate, setRate] = useState(true);
   const [comments, setComments] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${global.base_api_url}account/me/`)
+      .then((res) => setUser(res.data));
+  }, []);
+
+  const onPress = () => {
+    axios.post(`${global.base_api_url}rating/`, data).then((response) => {
+      console.log(response);
+    });
+
+    axios
+      .patch(`${global.base_api_url}user/${user.uid}/`, {
+        current_leaves: user.current_leaves + 20,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+    navigation.navigate("Confirmation", { id: index, type: "feedback" });
+  };
 
   return (
     <ScrollView
@@ -84,12 +108,7 @@ export default function FeedbackScreen({ route, navigation }) {
         value={comments}
         onChangeText={(text) => setComments(text)}
       />
-      <Button
-        style={styles.searchButton}
-        onPress={() =>
-          navigation.navigate("Confirmation", { id: index, type: "feedback" })
-        }
-      >
+      <Button style={styles.searchButton} onPress={() => onPress()}>
         <ButtonText style={styles.buttonText} transform>
           Je valide
         </ButtonText>
@@ -106,6 +125,19 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     justifyContent: "center",
+  },
+  goBackText: {
+    left: -240,
+    fontFamily: "gotham-medium",
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: 15,
+    lineHeight: 20,
+    
+    color: Colors.black,
+    textTransform: "capitalize",
+
+    textAlign: "center",
   },
   searchButton: {
     justifyContent: "center",

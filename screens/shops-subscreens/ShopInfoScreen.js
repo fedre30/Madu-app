@@ -2,7 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useScrollToTop } from "@react-navigation/native";
 import axios from "axios";
 import global from "../../Global";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  Linking,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   Title,
@@ -14,7 +21,7 @@ import {
 } from "../../components/atoms/StyledText";
 import { API_URL } from "../../utils/api";
 import shops from "../../utils/poi-api-test.json";
-import { Button, Subtitle } from "native-base";
+import { Button, Subtitle, Spinner } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Tag } from "../../components/atoms/Tag";
 import { Criterium } from "../../components/atoms/Criterium";
@@ -31,6 +38,8 @@ export default function ShopInfoScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
+  const [selectedShops, setSelectedShops] = useState(null);
+  const [criteria, setCriteria] = useState(null);
   const index = route.params.id;
 
   const ref = useRef(null);
@@ -44,18 +53,50 @@ export default function ShopInfoScreen({ route, navigation }) {
         .then((res) => setData(res.data));
     }
     ref.current.scrollTo({ top: 0, left: 0, animated: true });
-    // if (data) {
-    //   const address = `${data.address}, ${data.zipcode}, ${data.city}`;
-    //   Geocoder.from(address)
-    //     .then((json) => {
-    //       setLocation({
-    //         latitude: json.results[0].geometry.location.lat,
-    //         longitude: json.results[0].geometry.location.lng,
-    //       });
-    //     })
-    //     .catch((error) => console.warn(error));
-    //}
   }, [index]);
+
+  useEffect(() => {
+    if (data) {
+      const address = `${data.address}, ${data.zipcode}, ${data.city}`;
+      Geocoder.from(address)
+        .then((json) => {
+          setLocation({
+            latitude: json.results[0].geometry.location.lat,
+            longitude: json.results[0].geometry.location.lng,
+          });
+        })
+        .catch((error) => console.warn(error));
+
+      axios
+        .get(`${global.base_api_url}shop/`)
+        .then((res) =>
+          setSelectedShops(
+            res.data.results.filter((s) => data.uid !== index).slice(0, 2)
+          )
+        );
+
+      if (data.greenscore) {
+        async function fetchCriteria() {
+          Object.keys(data.greenscore).forEach(async (uid) => {
+            if (uid !== "value") {
+              await axios
+                .get(`${global.base_api_url}greenscore-criteria/${uid}/`)
+                .then((res) =>
+                  setCriteria((prevState) => [
+                    ...prevState,
+                    {
+                      ...uid,
+                      name: res.data.name,
+                    },
+                  ])
+                );
+            }
+          });
+        }
+        fetchCriteria();
+      }
+    }
+  }, [data]);
 
   return (
     <ScrollView
@@ -69,20 +110,26 @@ export default function ShopInfoScreen({ route, navigation }) {
         <Button onPress={() => navigation.goBack()} light style={styles.back}>
           <Ionicons name="md-arrow-round-back" size={20} />
         </Button>
-        <Image
-          source={require("../../assets/images/abattoirveg.jpg")}
-          style={{
-            flex: 1,
-            width: null,
-            height: 200,
-            resizeMode: "cover",
-          }}
-        />
+        {data && data.image ? (
+          <Image
+            source={
+              data.image
+                ? { uri: data.image }
+                : require("../../assets/images/abattoirveg.jpg")
+            }
+            style={{
+              flex: 1,
+              width: null,
+              height: 200,
+              resizeMode: "cover",
+            }}
+          />
+        ) : null}
       </View>
-      {data && (
+      {data ? (
         <View style={styles.infosContainer}>
           <View style={styles.rate}>
-            <View>{/* <LeavesCount rate={data.greenscore} /> */}</View>
+            <View>{<LeavesCount rate={data.greenscore.value} />}</View>
             <View>
               <SuggestionIcon
                 suggestionRate={data.ratings}
@@ -90,6 +137,7 @@ export default function ShopInfoScreen({ route, navigation }) {
               />
             </View>
           </View>
+          {console.log(criteria)}
           <View style={{ marginTop: 10 }}>
             <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
               {data.name}
@@ -110,16 +158,17 @@ export default function ShopInfoScreen({ route, navigation }) {
           >
             Critères de sélection
           </SecondaryTitle>
-          {/* <View style={styles.criteria}>
-            {Object.keys(data.criteria).map((criterium, idx) => (
-              <Criterium
-                title={criterium}
-                imageType={criterium}
-                key={idx}
-                score={data.criteria[criterium].note}
-              />
-            ))}
-          </View> */}
+          <View style={styles.criteria}>
+            {/* {criteria &&
+              criteria.map((criterium, idx) => (
+                <Criterium
+                  title={criterium.name}
+                  imageType={criterium}
+                  key={idx}
+                  score={39}
+                />
+              ))} */}
+          </View>
           <View>
             <SecondaryTitle
               style={{ textAlign: "center", marginBottom: 10 }}
@@ -175,20 +224,30 @@ export default function ShopInfoScreen({ route, navigation }) {
             fontSize={20}
           ></SecondaryTitle>
           <View style={styles.miniCards}>
-            {shops.slice(0, 2).map((shop, idx) => (
-              <MiniCard
-                key={idx}
-                id={shop.id}
-                name={shop.name}
-                address={shop.address}
-                greenscore={shop.greenscore}
-                suggestionRate={shop.suggestionRate}
-                tags={shop.tags}
-              />
-            ))}
+            {selectedShops &&
+              selectedShops.map((shop, idx) => (
+                <MiniCard
+                  key={idx}
+                  id={shop.uid}
+                  name={shop.name}
+                  address={shop.address}
+                  //greenscore={shop.greenscore}
+                  suggestionRate={shop.ratings ? shop.ratings : null}
+                  tags={shop.tags}
+                />
+              ))}
           </View>
           <View>
-            <FullButton title="Site Internet" />
+            {data.website ? (
+              <View>
+                <FullButton
+                  title="Site Internet"
+                  onPress={() =>
+                    data.website ? Linking.openURL(data.website) : null
+                  }
+                />
+              </View>
+            ) : null}
             <FullButton
               title="Donner mon avis"
               onPress={() => navigation.navigate("Feedback", { id: data.id })}
@@ -199,6 +258,8 @@ export default function ShopInfoScreen({ route, navigation }) {
             />
           </View>
         </View>
+      ) : (
+        <Spinner color={Colors.secondary} />
       )}
     </ScrollView>
   );
@@ -260,6 +321,7 @@ const styles = StyleSheet.create({
   },
   rate: {
     width: Dimensions.get("window").width,
+    left: -40,
     flexDirection: "row",
     justifyContent: "space-around",
     marginBottom: 20,

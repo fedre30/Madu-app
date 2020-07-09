@@ -19,7 +19,8 @@ import Modal from "react-native-modal";
 import { FilterView } from "../../components/organisms/FilterView";
 import axios from "axios";
 import global from "../../Global";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Spinner } from "native-base";
+import Colors from "../../constants/Colors";
 
 export const MapBackDrop = (props) => {
   const [shops, setShops] = useState([]);
@@ -36,18 +37,21 @@ export const MapBackDrop = (props) => {
             res.data.results.filter((tag) => activeFilters.includes(tag.name))
           )
         );
-    }
-    if (tags) {
-      const parsed = tags.map((tag) => tag.uid).join(",");
-      axios
-        .get(`${global.base_api_url}shop/?tag___in=${parsed}`)
-        .then((res) => setShops(res.data.results));
-    } else {
+
       axios
         .get(`${global.base_api_url}shop/`)
         .then((res) => setShops(res.data.results));
     }
-  }, []);
+  }, [null]);
+
+  useEffect(() => {
+    if (tags) {
+      const parsed = tags.map((tag) => tag.uid).join(",");
+      axios
+        .get(`${global.base_api_url}shop/?tag_uid__in=${parsed}`)
+        .then((res) => console.log(res));
+    }
+  }, [tags]);
 
   const onPress = (type) => {
     setActiveFilters((prevState) =>
@@ -134,26 +138,28 @@ export const MapBackDrop = (props) => {
             </ScrollView>
           </Modal>
         </View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          style={styles.list}
-          data={shops}
-          renderItem={({ item }) => (
-            <ListCard
-              id={item.uid}
-              name={item.name}
-              address={item.address}
-              tags={item.tags}
-              price={item.range_price}
-              accessibility={item.accessibility}
-              suggestionRate={item.ratings}
-              image={item.image}
-              // greenscore={item.greenscore}
-            />
-          )}
-          keyExtractor={(shop) => shop.uid.toString()}
-        ></FlatList>
+        {shops ? (
+          <FlatList
+            style={styles.list}
+            data={shops}
+            renderItem={({ item }) => (
+              <ListCard
+                id={item.uid}
+                name={item.name}
+                address={item.address}
+                tags={item.tags}
+                price={item.range_price}
+                accessibility={item.accessibility}
+                suggestionRate={item.ratings ? item.ratings : null}
+                image={item.image}
+                greenscore={item.greenscore.value}
+              />
+            )}
+            keyExtractor={(shop) => shop.uid.toString()}
+          ></FlatList>
+        ) : (
+          <Spinner color={Colors.secondary} />
+        )}
       </View>
     </Backdrop>
   );

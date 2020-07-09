@@ -1,5 +1,6 @@
 import * as React from "react";
 export const AuthContext = React.createContext();
+import { AsyncStorage } from "react-native";
 
 export const initialState = {
   isAuthenticated: false,

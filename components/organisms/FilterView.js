@@ -49,7 +49,7 @@ export const FilterView = (props) => {
       const parsedTypes = typeFilters.map((t) => t.uid).join(",");
       axios
         .get(
-          `${global.base_api_url}shop/?tag___in=${parsedTags}?priceRange___in=${priceFilters}?typeofshop___in=${typeFilters} `
+          `${global.base_api_url}shop/?tag_uid__in=${parsedTags}&price_range__in=${priceFilters}&type_of_shop_uid__in=${typeFilters}`
         )
         .then((res) => props.setShops(res.data.results));
     }

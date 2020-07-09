@@ -1,26 +1,53 @@
-//import * as React from "react";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import global from "../../Global.js";
 import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
 import { Ionicons } from "@expo/vector-icons";
 
 import challenge from "../../utils/challenge-api-test.json";
-import { ButtonText } from "../../components/atoms/StyledText";
+import {
+  ButtonText,
+  Title,
+  SimpleText,
+} from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
-import { Button } from "native-base";
+import { Button, Spinner } from "native-base";
 
 export const ContentChallenges = ({ route, navigation }) => {
   navigation.setOptions({ headerShown: false });
 
   const [data, setData] = useState(null);
+  const [user, setUser] = useState(null);
   const index = route.params.id;
 
   useEffect(() => {
     if (index) {
-      setData(challenge.find((obj) => obj.id === index));
+      axios
+        .get(`${global.base_api_url}challenge/${index}/`)
+        .then((res) => setData(res.data));
+
+      axios
+        .get(`${global.base_api_url}account/me/`)
+        .then((res) => setUser(res.data));
     }
-  }, [index, data]);
+  }, [index]);
+
+  const onPress = () => {
+    axios
+      .patch(`${global.base_api_url}user/${user.uid}/`, {
+        current_leaves: user.current_leaves + 50,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    navigation.navigate("Confirmation", {
+      id: index,
+      type: "challenge",
+    });
+  };
 
   return (
     <ScrollView
@@ -29,72 +56,80 @@ export const ContentChallenges = ({ route, navigation }) => {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
     >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
+      <Button
+        onPress={() => navigation.goBack()}
+        title="Back"
+        light
+        style={styles.back}
+        transparent
       >
-        <Button
-          onPress={() => navigation.goBack()}
-          title="Back"
-          light
-          style={styles.back}
-        >
-          <Ionicons name="md-arrow-round-back" size={20} />
-        </Button>
-        {data && (
-          <>
-            <View>
-              <Image
-                style={styles.picture}
-                source={require("../../assets/images/Group_323.png")}
-              />
-            </View>
+        <Ionicons name="md-arrow-round-back" size={20} />
+      </Button>
+      {data ? (
+        <>
+          <View>
+            <Image
+              style={styles.picture}
+              source={
+                data.image
+                  ? { uri: data.image }
+                  : require("../../assets/images/Group_323.png")
+              }
+            />
+          </View>
+          <View style={styles.contentWrapper}>
+            <Text style={styles.remainingDay}>
+              <Text style={styles.span}>{data.day_duration} </Text>
+              jours restants pour réaliser ce défi
+            </Text>
+            <Text
+              style={{
+                textTransform: "uppercase",
+                textAlign: "left",
+                marginBottom: 30,
+                marginTop: 20,
+                fontSize: 28,
+                fontWeight: "700",
+              }}
+            >
+              {data.name}
+            </Text>
+
+            <Text style={styles.subtitle}>{data.small_description}</Text>
+
+            <Text style={styles.content}> {data.description}</Text>
 
             <View>
-              <Text style={styles.remainingDay}>
-                <Text style={styles.span}>{data.days} Jours </Text>
-                restants pour réaliser ce défi
-              </Text>
-            </View>
-
-            <Text style={styles.title}>{data.name}</Text>
-
-            <Text style={styles.subtitle}>{data.description}</Text>
-
-            <Text style={styles.content}> {data.content}</Text>
-
-            <View>
-              <Image
-                source={require("../../assets/images/thumb_up.png")}
-                style={{ marginBottom: 20 }}
-              />
+              <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+                <Image
+                  source={require("../../assets/images/thumb.png")}
+                  style={{
+                    width: null,
+                    height: null,
+                    flex: 1,
+                    resizeMode: "contain",
+                  }}
+                />
+              </View>
               <Text style={styles.subtext}>
-                <Text style={styles.span}>{data.days} </Text>
+                <Text style={styles.span}>{data.done_by_users.length} </Text>
                 personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
               </Text>
             </View>
-          </>
-        )}
-        <Button
-          style={styles.buttonOk}
-          onPress={() =>
-            navigation.navigate("Confirmation", {
-              id: index,
-              type: "challenge",
-            })
-          }
-        >
-          <ButtonText style={styles.buttonText}>
-            C’est bon pour moi !
-          </ButtonText>
-        </Button>
+          </View>
+        </>
+      ) : (
+        <Spinner color={Colors.secondary} />
+      )}
+      <Button style={styles.buttonOk} onPress={() => onPress()}>
+        <ButtonText style={styles.buttonText}>C’est bon pour moi !</ButtonText>
+      </Button>
 
-        <Button style={styles.buttonMoreTime}>
-          <ButtonText style={styles.buttonTextMoreTime}>
-            J’ai besoin de plus de temps
-          </ButtonText>
-        </Button>
-      </ScrollView>
+      <Button style={styles.buttonMoreTime} onPress={() => navigation.goBack()}>
+        <ButtonText style={styles.buttonTextMoreTime}>
+          J’ai besoin de plus de temps
+        </ButtonText>
+      </Button>
     </ScrollView>
   );
 };
@@ -103,12 +138,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa",
-    padding: 10,
+    paddingTop: 40,
   },
   contentContainer: {
     justifyContent: "center",
-    paddingTop: 30,
-    flex: 1,
+    paddingBottom: 90,
+  },
+  contentWrapper: {
+    padding: 20,
   },
   back: {
     position: "absolute",
@@ -153,7 +190,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 20,
 
-    display: "flex",
     alignItems: "center",
     textTransform: "uppercase",
 

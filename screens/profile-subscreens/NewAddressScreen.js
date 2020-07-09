@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Button as BTN } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { Text, Input, Switch, Button, Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,6 +17,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export const NewAddress = ({ navigation }) => {
   navigation.setOptions({ headerShown: false });
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${global.base_api_url}account/me/`)
+      .then((res) => setUser(res.data));
+  }, []);
 
   const [infos, setInfos] = useState({
     name: "",
@@ -44,6 +51,16 @@ export const NewAddress = ({ navigation }) => {
       .catch((error) => {
         //TODO: notify failure to user
       });
+
+    axios
+      .patch(`${global.base_api_url}user/${user.uid}/`, {
+        current_leaves: user.current_leaves + 30,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    navigation.navigate("Confirmation", { type: "newAddress" });
   };
 
   return (
@@ -53,10 +70,7 @@ export const NewAddress = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
     >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-      >
+      <ScrollView>
         <Button
           title="Retour"
           onPress={() => navigation.goBack()}
@@ -65,7 +79,7 @@ export const NewAddress = ({ navigation }) => {
           light
         >
           <Ionicons name="md-arrow-round-back" size={20} />
-          <Text style={ styles.goBackText }>Retoure</Text>
+          <Text style={ styles.goBackText }>Retour</Text>
         </Button>
 
         <View style={{ marginTop: 20 }}>
@@ -124,14 +138,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
         </SafeAreaView>
 
-        <Button style={styles.addButton} onPress={createProposition}>
-          <ButtonText
-            style={styles.buttonText}
-            transform
-            onPress={() =>
-              navigation.navigate("Confirmation", { type: "newAddress" })
-            }
-          >
+        <Button style={styles.addButton} onPress={() => createProposition()}>
+          <ButtonText style={styles.buttonText} transform>
             Ajouter
           </ButtonText>
         </Button>
@@ -175,13 +183,12 @@ const styles = StyleSheet.create({
 
     color: Colors.black,
   },
-  italicText: {
-    fontFamily: "gotham-hook-italic",
-    fontWeight: "normal",
+  subText: {
+    fontFamily: "gotham-medium",
     fontSize: 17,
     lineHeight: 25,
 
-    color: Colors.grey,
+    color: "#787878",
   },
   label: {
     marginBottom: 13,

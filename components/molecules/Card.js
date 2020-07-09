@@ -75,11 +75,11 @@ export const ListCard = (props) => {
                 <View style={styles.infos}>
                   <WheelchairIcon focused={props.accessibility} />
                 </View>
-                {/* {props.suggestionRate && (
+                {props.suggestionRate && (
                   <View style={styles.infos}>
                     <SuggestionIcon suggestionRate={props.suggestionRate} />
                   </View>
-                )} */}
+                )}
               </View>
             </Body>
           </CardItem>

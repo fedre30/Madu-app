@@ -2,7 +2,7 @@
 // import { GOOGLE_API_KEY } from "../api-config";
 
 // Geocoder.init(GOOGLE_API_KEY);
-// // Geocoding Utils
+// Geocoding Utils
 
 export const getLocation = () => {
   return new Promise((resolve, reject) => {

@@ -8,11 +8,13 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function CardChallenges(props) {
   const navigation = useNavigation();
-  
+
+  const challenge = props.challenge;
+
   return (
     <Card style={{ marginBottom: 40 }}>
       <View style={styles.durationContainer}>
-        <Text> {props.dayDuration} restants </Text>
+        <SimpleText> {challenge.day_duration} jours restants </SimpleText>
       </View>
       <CardItem cardBody>
         <Image
@@ -20,13 +22,36 @@ export default function CardChallenges(props) {
           style={styles.imageChallenge}
         />
       </CardItem>
-      <Title style={styles.subtitleChallenges}>{props.title}</Title>
-      <Text style={styles.descriptionChallenges}>{props.description}</Text>
-      <SimpleText style={styles.workChallenges}>{props.work}</SimpleText>
+      <Title style={styles.subtitleChallenges}>{challenge.title}</Title>
+      <Text style={styles.descriptionChallenges}>
+        {challenge.small_description}
+      </Text>
+      <SimpleText style={styles.workChallenges}>
+        {challenge.description}
+      </SimpleText>
+      <View style={{ padding: 10 }}>
+        <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+          <Image
+            source={require("../../assets/images/thumb.png")}
+            style={{
+              width: null,
+              height: null,
+              flex: 1,
+              resizeMode: "contain",
+            }}
+          />
+        </View>
+        <SimpleText style={styles.subtext}>
+          <Text style={styles.span}>{challenge.done_by_users.length}</Text>{" "}
+          personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
+        </SimpleText>
+      </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Button
           style={styles.searchButton}
-          onPress={() => navigation.navigate('ContentChallenges', { id: props.index })}
+          onPress={() =>
+            navigation.navigate("ContentChallenges", { id: challenge.uid })
+          }
         >
           <ButtonText style={styles.buttonText} transform>
             Je participe
@@ -59,10 +84,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 4,
     paddingTop: 10,
-    paddingBottom: 10,
     paddingLeft: 5,
     top: -20,
     left: -10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   imageChallenge: {
     width: null,
@@ -83,9 +115,13 @@ const styles = StyleSheet.create({
     },
     borderRadius: 4,
   },
+  span: {
+    fontFamily: "gotham-bold",
+    fontWeight: "700",
+    marginRight: 5,
+  },
   subtitleChallenges: {
     fontSize: 18,
-    lineHeight: 20,
     textTransform: "uppercase",
     color: "#1C1C1C",
     paddingLeft: 20,

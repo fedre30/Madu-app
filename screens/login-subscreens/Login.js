@@ -23,8 +23,8 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { AuthContext } from "../../hooks/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Global from "../../Global.js"
-import axios from "axios"
+import Global from "../../Global.js";
+import axios from "axios";
 
 export default function Login({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -49,25 +49,28 @@ export default function Login({ route, navigation }) {
     if (infos.email === "" || infos.password === "") {
       setError(true);
     }
-    console.log(axios); //eslint-disable-line
-    axios.post(`${Global.base_api_url}auth/login/`, {
-      email: infos.email,
-      password: infos.password,
-    }).then(res => {
-      console.log(res);//eslint-disable-line
-      axios.defaults.headers.common["Authorization"] = `Token ${res.token}`
-      dispatch({
-        type: "LOGIN",
-        isLoggedIn: true,
-        payload: {
-          storeData: infos.cache,
-          user: res
-        }
+    axios
+      .post(`${Global.base_api_url}auth/login/`, {
+        email: infos.email,
+        password: infos.password,
+      })
+      .then((res) => {
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Token ${res.data.token}`;
+        dispatch({
+          type: "LOGIN",
+          isLoggedIn: true,
+          payload: {
+            storeData: infos.cache,
+            user: res.data,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
       });
-    }).catch(err => {
-      console.log(err);
-      setError(true);
-    })
   };
 
   return (

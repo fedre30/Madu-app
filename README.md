@@ -178,7 +178,7 @@ Deletes a pet
 
 #### STORE 
 
--POST
+- POST
 
 `/store/inventory`
 
@@ -212,9 +212,23 @@ exemple
 
 `400  Invalid Order`
 
--GET
+- GET
 
--DELETE
+- DELETE
+
+`/store/order/{orderId}`
+
+Delete purchase order by ID
+
+-Responses 
+
+`400 	Invalid ID supplied`
+
+`404 	Order not found`
+
+
+	
+
 
 
 

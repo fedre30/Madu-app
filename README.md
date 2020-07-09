@@ -72,6 +72,7 @@ An API is used to make the data or functionality of an existing application avai
 #### PET
 
 - POST
+
 `/pet`
 Add a new pet to the store
 Exemple object model
@@ -99,6 +100,51 @@ Exemple object model
 
 `/pet/{petId}`
 Updates a pet in the store with form data
+
+- GET 
+
+
+
+- PUT
+
+`/pet`
+
+Update an existing pet
+Pet object that needs to be added to the store
+
+`{
+  "id": 0,
+  "category": {
+    "id": 0,
+    "name": "string"
+  },
+  "name": "doggie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "available"
+}`
+
+
+
+- DELETE
+
+`/pet/{petId}`
+
+-Responses 
+
+`400 Invalid ID supplied`
+
+`404 Pet not found`
+
+Deletes a pet
+
 
 
 

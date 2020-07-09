@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -22,6 +22,9 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { Tag } from "../../components/atoms/Tag";
+import { AuthContext } from "../../hooks/auth";
+import axios from "axios";
+import global from "../../Global";
 
 export default function GreenscoreScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -34,10 +37,30 @@ export default function GreenscoreScreen({ route, navigation }) {
     comments: "",
   });
 
+  const user = useContext(AuthContext);
+
   const updateField = (field, val) => {
     setInfos({
       ...infos,
       [field]: val,
+    });
+  };
+
+  const onPress = () => {
+    axios
+      .post(`${global.base_api_url}user-disagreement/`, {
+        tags: selectedTags,
+        shop: shop.uid,
+        user: user.uid,
+        is_eco: rate,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+
+    navigation.navigate("Confirmation", {
+      id: shop.id,
+      type: "greenscore",
     });
   };
 
@@ -126,15 +149,7 @@ export default function GreenscoreScreen({ route, navigation }) {
         />
       </View>
 
-      <Button
-        style={styles.searchButton}
-        onPress={() =>
-          navigation.navigate("Confirmation", {
-            id: shop.id,
-            type: "greenscore",
-          })
-        }
-      >
+      <Button style={styles.searchButton} onPress={() => onPress()}>
         <ButtonText style={styles.buttonText} transform>
           Je valide
         </ButtonText>

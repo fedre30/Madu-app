@@ -2,7 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useScrollToTop } from "@react-navigation/native";
 import axios from "axios";
 import global from "../../Global";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  Linking,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   Title,
@@ -31,6 +38,7 @@ export default function ShopInfoScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
+  const [selectedShops, setSelectedShops] = useState(null);
   const index = route.params.id;
 
   const ref = useRef(null);
@@ -44,18 +52,29 @@ export default function ShopInfoScreen({ route, navigation }) {
         .then((res) => setData(res.data));
     }
     ref.current.scrollTo({ top: 0, left: 0, animated: true });
-    // if (data) {
-    //   const address = `${data.address}, ${data.zipcode}, ${data.city}`;
-    //   Geocoder.from(address)
-    //     .then((json) => {
-    //       setLocation({
-    //         latitude: json.results[0].geometry.location.lat,
-    //         longitude: json.results[0].geometry.location.lng,
-    //       });
-    //     })
-    //     .catch((error) => console.warn(error));
-    //}
   }, [index]);
+
+  useEffect(() => {
+    if (data) {
+      const address = `${data.address}, ${data.zipcode}, ${data.city}`;
+      Geocoder.from(address)
+        .then((json) => {
+          setLocation({
+            latitude: json.results[0].geometry.location.lat,
+            longitude: json.results[0].geometry.location.lng,
+          });
+        })
+        .catch((error) => console.warn(error));
+
+      axios
+        .get(`${global.base_api_url}shop/`)
+        .then((res) =>
+          setSelectedShops(
+            res.data.results.filter((s) => data.uid !== index).slice(0, 2)
+          )
+        );
+    }
+  }, [data]);
 
   return (
     <ScrollView
@@ -173,20 +192,30 @@ export default function ShopInfoScreen({ route, navigation }) {
             fontSize={20}
           ></SecondaryTitle>
           <View style={styles.miniCards}>
-            {shops.slice(0, 2).map((shop, idx) => (
-              <MiniCard
-                key={idx}
-                id={shop.id}
-                name={shop.name}
-                address={shop.address}
-                greenscore={shop.greenscore}
-                suggestionRate={shop.suggestionRate}
-                tags={shop.tags}
-              />
-            ))}
+            {selectedShops &&
+              selectedShops.map((shop, idx) => (
+                <MiniCard
+                  key={idx}
+                  id={shop.uid}
+                  name={shop.name}
+                  address={shop.address}
+                  //greenscore={shop.greenscore}
+                  suggestionRate={shop.ratings ? shop.ratings : null}
+                  tags={shop.tags}
+                />
+              ))}
           </View>
           <View>
-            <FullButton title="Site Internet" />
+            {data.website ? (
+              <View>
+                <FullButton
+                  title="Site Internet"
+                  onPress={() =>
+                    data.website ? Linking.openURL(data.website) : null
+                  }
+                />
+              </View>
+            ) : null}
             <FullButton
               title="Donnez votre avis"
               onPress={() => navigation.navigate("Feedback", { id: data.id })}

@@ -76,11 +76,13 @@ export const Infos = ({ navigation }) => {
 
       setNextReward(rewards[0]);
     }
+  }, [rewards]);
 
+  useEffect(() => {
     if (nextReward) {
       setCurrentScore((user.current_leaves * 100) / nextReward.leaves_amount);
     }
-  }, [rewards]);
+  }, [nextReward]);
 
   const InnercurrentScore = ({ width }) => (
     <View

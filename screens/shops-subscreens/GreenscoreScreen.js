@@ -22,6 +22,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { Tag } from "../../components/atoms/Tag";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../hooks/auth";
 import axios from "axios";
 import global from "../../Global";
@@ -69,6 +70,8 @@ export default function GreenscoreScreen({ route, navigation }) {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <GoBack />
       <View style={{ marginTop: 10 }}>
@@ -83,7 +86,7 @@ export default function GreenscoreScreen({ route, navigation }) {
         Le greenscore d’un commerce vous parait anormal ? Répondez à ce petit
         questionnaire pour que nous puissions revoir la note.
       </SimpleText>
-      <View style={styles.formItem}>
+      <SafeAreaView style={styles.formItem}>
         <SecondaryText>Nom du commerce</SecondaryText>
         <Input
           placeholder={shop.name}
@@ -92,7 +95,7 @@ export default function GreenscoreScreen({ route, navigation }) {
           onChangeText={(text) => updateField("name", text)}
           style={{ color: Colors.grey }}
         />
-      </View>
+      </SafeAreaView>
       <View style={styles.formItem}>
         <SecondaryText>Adresse</SecondaryText>
         <Input

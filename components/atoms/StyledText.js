@@ -83,6 +83,22 @@ export const SecondaryTitle = (props) => {
   );
 };
 
+export const ThirdlyTitle = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.thirdly,
+        {
+          fontFamily: "gotham-medium",
+          fontStyle: props.fontStyle ? props.fontStyle : "normal",
+        },
+      ]}
+    />
+  );
+};
+
 export const ItalicText = (props) => {
   return (
     <Text
@@ -162,6 +178,22 @@ export const HighlightText = (props) => {
   );
 };
 
+export const LabelInput = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.labelInput,
+        {
+          fontFamily: "gotham-medium",
+          fontStyle: props.fontStyle ? props.fontStyle : "normal",
+        },
+      ]}
+    />
+  );
+};
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 17,
@@ -200,5 +232,17 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: Colors.secondary,
     textAlign: "center",
+  },
+  labelInput: {
+    fontWeight: "500",
+    fontSize: 17,
+    lineHeight: 16,
+    color: Colors.black,
+  },
+  thirdly: {
+    fontWeight: "500",
+    fontSize: 17,
+    lineHeight: 20,
+    color: Colors.black,
   },
 });

@@ -54,6 +54,8 @@ export const ContentChallenges = ({ route, navigation }) => {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <GoBack />
       {data ? (
@@ -138,14 +140,23 @@ const styles = StyleSheet.create({
   contentWrapper: {
     padding: 20,
   },
-  picture: {
-    width: 417,
-    height: 232,
+  back: {
+    position: "absolute",
+    top: 20,
+    left: 10,
+    width: 55,
+    padding: 20,
+  },
+  picture: {    
+    flex: 1,
+    width: null,
+    height: 200,
+    resizeMode: "cover",
   },
   remainingDay: {
     marginTop: 15,
 
-    fontFamily: "gotham-medium",
+    fontFamily: "gotham-book",
     fontWeight: "normal",
     fontStyle: "normal",
     fontSize: 14,
@@ -154,18 +165,20 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
 
-    color: "#1C1C1C",
+    color: "#828282",
   },
   span: {
     fontFamily: "gotham-bold",
-    //fontWeight: "bold",
+    fontStyle: "normal",
+    fontWeight: "bold",
+    color: Colors.text,
   },
   title: {
     marginBottom: 20,
     marginTop: 20,
 
-    fontFamily: "gotham-bold",
-    fontWeight: "bold",
+    fontFamily: "gotham-medium",
+    fontWeight: "500",
     fontStyle: "normal",
     fontSize: 18,
     lineHeight: 20,
@@ -174,15 +187,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
 
     color: "#1C1C1C",
-
-    //mix-blend-mode: "normal",
   },
   subtitle: {
     marginBottom: 15,
 
-    fontFamily: "gotham-bold",
-    fontWeight: "bold",
+    fontFamily: "gotham-medium",
     fontStyle: "normal",
+    fontWeight: "500",
     fontSize: 18,
     lineHeight: 26,
 
@@ -191,7 +202,7 @@ const styles = StyleSheet.create({
   content: {
     marginBottom: 15,
 
-    fontFamily: "gotham-medium",
+    fontFamily: "gotham-book",
     fontWeight: "normal",
     fontStyle: "normal",
     fontSize: 17,
@@ -202,13 +213,13 @@ const styles = StyleSheet.create({
   subtext: {
     marginBottom: 15,
 
-    fontFamily: "gotham-medium",
+    fontFamily: "gotham-book",
     fontWeight: "normal",
     fontStyle: "normal",
     fontSize: 14,
     lineHeight: 20,
 
-    color: Colors.black,
+    color: "#828282",
   },
   buttonOk: {
     marginTop: 30,
@@ -216,6 +227,7 @@ const styles = StyleSheet.create({
     height: 45,
     left: 67,
     justifyContent: "center",
+    borderRadius:4,
     backgroundColor: Colors.secondary,
   },
   buttonText: {
@@ -226,6 +238,7 @@ const styles = StyleSheet.create({
   },
   buttonMoreTime: {
     marginTop: 30,
+    marginBottom: 30,
     width: 277,
     height: 45,
     left: 35,

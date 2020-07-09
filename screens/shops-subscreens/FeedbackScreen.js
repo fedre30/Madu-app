@@ -55,11 +55,13 @@ export default function FeedbackScreen({ route, navigation }) {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <GoBack />
       <View style={{ marginTop: 10 }}>
         <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
-          Donner votre avis
+          Donner mon avis
         </SecondaryTitle>
       </View>
       <View
@@ -88,13 +90,13 @@ export default function FeedbackScreen({ route, navigation }) {
         </TouchableOpacity>
       </View>
       <SimpleText style={{ marginBottom: 20 }}>
-        Vous voulez vous exprimer sur quelque chose en particulier ? Ou bien
-        juste donner votre avis ? Remplissez le champ ci-dessous !
+        Veux-tu t'exprimer sur quelque chose en particulier ? Ou bien juste
+        donner ton avis ? Remplis le champ ci-dessous !
       </SimpleText>
       <Textarea
         rowSpan={6}
         bordered
-        placeholder="Tapez votre message"
+        placeholder="Tapes ton message"
         value={comments}
         onChangeText={(text) => setComments(text)}
       />
@@ -116,13 +118,31 @@ const styles = StyleSheet.create({
   contentContainer: {
     justifyContent: "center",
   },
+  goBackText: {
+    left: -240,
+    fontFamily: "gotham-medium",
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: 15,
+    lineHeight: 20,
+
+    color: Colors.black,
+    textTransform: "capitalize",
+
+    textAlign: "center",
+  },
   searchButton: {
     justifyContent: "center",
     backgroundColor: Colors.secondary,
     marginTop: 50,
+    width: 136,
+    left: 96,
+    justifyContent: "center",
+    borderRadius: 4,
   },
   buttonText: {
     paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
     color: Colors.white,
   },

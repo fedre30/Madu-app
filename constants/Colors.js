@@ -9,6 +9,7 @@ export default {
   text: "#1C1C1C",
   white: "#EFEFEF",
   grey: "#787878",
+  lightGrey: "#C0C5D2",
   blue: "#364EC1",
   tintColor,
   tabIconDefault: "#ccc",
@@ -21,5 +22,6 @@ export default {
   noticeBackground: tintColor,
   noticeText: "#fff",
   black: "#000000",
+  black2: "#1C1C1C",
   pureWhite: "#ffffff",
 };

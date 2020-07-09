@@ -30,8 +30,20 @@ export const Profile = ({ navigation }) => {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        {/* //Données en brute pour afficher dans le profil une image + nom et prenom
+        <View style={styles.headerContainer} >
+          <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
+          <Text style={styles.name}>Marie TE</Text>
+          <Text style={styles.institution}>Little cigogne</Text>
+        </View> */}
+
         <View style={styles.profileOption}>
           <Thumbnail
             backgroundColor={"#FDE6E6"}
@@ -39,7 +51,7 @@ export const Profile = ({ navigation }) => {
             width={207}
             height={129}
             left={96}
-            top={10}
+            top={-10} //Si y a un header remettre la valeur a 10
             onPress={() => navigation.navigate("Challenges")}
           >
             Mes défis
@@ -50,7 +62,7 @@ export const Profile = ({ navigation }) => {
             width={176}
             height={130}
             left={125}
-            top={-12}
+            top={-32}
             onPress={() => navigation.navigate("Cagnotte")}
           >
             Cagnotte et récompenses
@@ -62,7 +74,7 @@ export const Profile = ({ navigation }) => {
             width={114}
             height={115}
             left={166}
-            top={3}
+            top={-17} //Si y a un header remettre la valeur a 3
             onPress={() => navigation.navigate("NewAddress")}
           >
             Proposer une nouvelle adresse
@@ -74,7 +86,7 @@ export const Profile = ({ navigation }) => {
             width={207}
             height={129}
             left={96}
-            top={10}
+            top={-10} //Si y a un header remettre la valeur a 10
             onPress={() => navigation.navigate("Ranking")}
           >
             Classement

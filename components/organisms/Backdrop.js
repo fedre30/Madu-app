@@ -73,8 +73,13 @@ export const MapBackDrop = (props) => {
         </View>
       }
     >
+<<<<<<< HEAD
       <View style={{ padding: 20, paddingBottom: 100 }}>
         <TouchableOpacity
+=======
+      <View style={{ padding: 5 }}>
+        {/* <TouchableOpacity
+>>>>>>> c145723b04ab8fb701d4b05095224170e4f9dfd6
           onPress={props.onFocus}
           style={{
             justifyContent: "flex-end",
@@ -84,12 +89,18 @@ export const MapBackDrop = (props) => {
           }}
         >
           <SimpleText>Fermer</SimpleText>
-        </TouchableOpacity>
-        <ScrollView style={styles.filtersContainer} horizontal={true}>
+        </TouchableOpacity> */}
+        <ScrollView 
+          style={styles.filtersContainer}
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
           <FilterButton
             title="Filtres"
             imageType="filters"
             onPress={() => setModalVisible(!modalVisible)}
+            style={{ backgroundColor: Colors.secondary,  }}
           />
           <FilterButton
             title="Végétarien"
@@ -118,7 +129,11 @@ export const MapBackDrop = (props) => {
         </ScrollView>
         <View>
           <Modal isVisible={modalVisible} style={{ margin: 0 }} propagateSwipe>
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView
+              style={{ flex: 1 }}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+            >
               <FilterView
                 handleClose={() => setModalVisible(!modalVisible)}
                 setModalVisible={setModalVisible}
@@ -169,6 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   closePlateContainer: {
+    paddingBottom: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

@@ -137,7 +137,7 @@ export const MapBackDrop = (props) => {
                 tags={item.tags}
                 price={item.range_price}
                 accessibility={item.accessibility}
-                suggestionRate={item.ratings}
+                suggestionRate={item.ratings ? item.ratings : null}
                 image={item.image}
                 // greenscore={item.greenscore}
               />

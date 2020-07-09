@@ -32,7 +32,7 @@ export const MiniCard = (props) => {
             <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
               {props.tags.map((tag, i) => (
                 <TagsText key={i} style={{ marginRight: 8 }}>
-                  #{tag}
+                  #{tag.name}
                 </TagsText>
               ))}
             </View>
@@ -51,13 +51,16 @@ export const MiniCard = (props) => {
                     />
                   </View>
                 </View>
-                <SecondaryText style={{ textAlign: "center" }}>
+                {/* <SecondaryText style={{ textAlign: "center" }}>
                   {props.greenscore}%
-                </SecondaryText>
+                </SecondaryText> */}
               </View>
               {props.suggestionRate && (
                 <View style={styles.infos}>
-                  <SuggestionIcon suggestionRate={props.suggestionRate} />
+                  <SuggestionIcon
+                    suggestionRate={props.suggestionRate}
+                    color={Colors.secondary}
+                  />
                 </View>
               )}
             </View>

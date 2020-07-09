@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import Global from "../../Global.js"
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -12,6 +14,7 @@ import {
 import { Button, Subtitle, Form, Item, Input, Content } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
+import { AuthContext } from "../../hooks/auth";
 import { Tag } from "../../components/atoms/Tag";
 
 export default function Signin({ route, navigation }) {
@@ -21,12 +24,57 @@ export default function Signin({ route, navigation }) {
     password: "",
     confirmationPassword: "",
   });
+  const { dispatch } = useContext(AuthContext);
+  const [error, setError] = useState(false);
+  const [errorTxt, setErrorTxt] = useState("Adresse email ou mot de passe erroné");
 
   const updateField = (field, val) => {
     setInfos({
       ...infos,
       [field]: val,
     });
+  };
+
+  const onSubmitSignin = async () => {
+    // implement API checkin
+    delete axios.defaults.headers.common["Authorization"]
+    let companies = [];
+    if (infos.email === "" || infos.password === "" || infos.confirmationPassword === "") {
+      setError(true);
+      setErrorTxt("Adresse email ou mot de passe erroné");
+    }
+    await axios.get(`${Global.base_api_url}company/`).then(res => {
+      companies = res.data.results;
+    })
+    let extension = infos.email.split('@')[1];
+    let available_extensions = companies.map(comp => comp.mail_affix);
+    if (!available_extensions.includes(extension)) {
+      setError(true);
+      setErrorTxt("L'adresse email n'appartient à aucune entreprise");
+    } else {
+      let company = companies.find(comp => comp.mail_affix === extension)
+      axios.post(`${Global.base_api_url}auth/register/`, {
+        email: infos.email,
+        password1: infos.password,
+        password2: infos.confirmationPassword,
+      }).then(async user => {
+        axios.defaults.headers.common["Authorization"] = `Token ${user.data.token}`
+        await axios.patch(user.data.url, {
+          company_uid: company.uid
+        })
+        dispatch({
+          type: "LOGIN",
+          isLoggedIn: true,
+          payload: {
+            storeData: false,
+            user: user
+          }
+        });
+      }).catch(err => {
+        setError(true);
+        setErrorTxt("Adresse email ou mot de passe erroné");
+      })
+    }
   };
 
   return (
@@ -86,12 +134,17 @@ export default function Signin({ route, navigation }) {
           <Input
             placeholder={""}
             rounded
-            value={infos.password}
-            onChangeText={(text) => updateField("password", text)}
+            value={infos.confirmationPassword}
+            onChangeText={(text) => updateField("confirmationPassword", text)}
             style={{ color: Colors.grey }}
           />
         </Item>
       </View>
+      {error && (
+        <SimpleText color={Colors.orange}>
+          {errorTxt}
+        </SimpleText>
+      )}
       <View
         style={{
           justifyContent: "center",
@@ -100,7 +153,7 @@ export default function Signin({ route, navigation }) {
       >
         <Button
           style={[styles.loginButton, { backgroundColor: Colors.secondary }]}
-          onPress={() => navigation.navigate("root")}
+          onPress={onSubmitSignin}
         >
           <ButtonText style={styles.buttonText} transform>
             S'inscrire

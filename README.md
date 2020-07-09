@@ -176,7 +176,7 @@ Deletes a pet
 `404 Pet not found`
 
 
-#### PET 
+#### STORE 
 
 -POST
 `/store/inventory`

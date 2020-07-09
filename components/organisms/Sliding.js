@@ -12,9 +12,11 @@ import {
 
 const { width } = Dimensions.get("window");
 import ListIndividuel from "../../utils/DataIndividuel";
+import Colors from "../../constants/Colors";
 import Individuel from "./Individuel";
 import ListEntreprise from "../../utils/DataEntreprise";
 import Entreprise from "./Entreprise";
+import { SecondaryTitle } from "../atoms/StyledText";
 
 export default class Sliding extends Component {
   state = {
@@ -28,14 +30,7 @@ export default class Sliding extends Component {
   };
 
   handleSlide = (type) => {
-    let {
-      active,
-      xTabOne,
-      xTabTwo,
-      translateX,
-      translateXTabOne,
-      translateXTabTwo,
-    } = this.state;
+    let { active, translateX, translateXTabOne, translateXTabTwo } = this.state;
     Animated.spring(translateX, {
       toValue: type,
       duration: 100,
@@ -94,7 +89,7 @@ export default class Sliding extends Component {
                 height: "100%",
                 left: 0,
                 top: 0,
-                backgroundColor: "#69FFD4",
+                backgroundColor: Colors.secondary,
                 borderRadius: 50,
                 transform: [
                   {
@@ -174,17 +169,14 @@ export default class Sliding extends Component {
               alignItems: "center",
             }}
           >
-            <Text
+            <SecondaryTitle
               style={{
-                textTransform: "uppercase",
-                fontSize: 20,
-                fontWeight: "600",
                 marginTop: 30,
-                lineHeight: 21,
               }}
+              fontSize={20}
             >
               ils ont le moins consommés...
-            </Text>
+            </SecondaryTitle>
             <Text
               style={{
                 fontSize: 14,

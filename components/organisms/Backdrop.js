@@ -19,6 +19,8 @@ import Modal from "react-native-modal";
 import { FilterView } from "../../components/organisms/FilterView";
 import axios from "axios";
 import global from "../../Global";
+import { Spinner } from "native-base";
+import Colors from "../../constants/Colors";
 
 export const MapBackDrop = (props) => {
   const [shops, setShops] = useState([]);
@@ -123,24 +125,28 @@ export const MapBackDrop = (props) => {
             </ScrollView>
           </Modal>
         </View>
-        <FlatList
-          style={styles.list}
-          data={shops}
-          renderItem={({ item }) => (
-            <ListCard
-              id={item.uid}
-              name={item.name}
-              address={item.address}
-              tags={item.tags}
-              price={item.range_price}
-              accessibility={item.accessibility}
-              suggestionRate={item.ratings}
-              image={item.image}
-              // greenscore={item.greenscore}
-            />
-          )}
-          keyExtractor={(shop) => shop.uid.toString()}
-        ></FlatList>
+        {shops ? (
+          <FlatList
+            style={styles.list}
+            data={shops}
+            renderItem={({ item }) => (
+              <ListCard
+                id={item.uid}
+                name={item.name}
+                address={item.address}
+                tags={item.tags}
+                price={item.range_price}
+                accessibility={item.accessibility}
+                suggestionRate={item.ratings}
+                image={item.image}
+                // greenscore={item.greenscore}
+              />
+            )}
+            keyExtractor={(shop) => shop.uid.toString()}
+          ></FlatList>
+        ) : (
+          <Spinner color={Colors.secondary} />
+        )}
       </View>
     </Backdrop>
   );

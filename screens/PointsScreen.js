@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,175 +7,197 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
-import { Title } from "../components/atoms/StyledText";
+import {
+  Title,
+  SimpleText,
+  SecondaryTitle,
+  Subtitle,
+} from "../components/atoms/StyledText";
 import {
   RectButton,
   ScrollView,
   TouchableHighlight,
 } from "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
-import Recompense from "../components/organisms/Recompense";
-import Items from "../components/organisms/DeblockRecompense";
-import data from "../utils/data";
-import { Button } from "native-base";
+import RewardsList from "../components/organisms/RewardsList";
+import Colors from "../constants/Colors";
+import { Button, Spinner } from "native-base";
+import axios from "axios";
+import global from "../Global";
+import { UnlockedRewardsList } from "../components/organisms/UnlockedRewardsList";
+import { RewardInfos } from "../components/organisms/RewardInfos";
 
 const PointsStack = createStackNavigator();
 
-export const ShowRecompense = () => {
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text
-          style={{
-            fontWeight: "500",
-            fontSize: 25,
-            textTransform: "uppercase",
-            marginLeft: 20,
-            marginTop: 30,
-          }}
-        >
-          récompenses débloquées
-        </Text>
-      </View>
-      <View style={styles.container}>
-        <FlatList
-          keyExtractor={(item) => item.id.toString()}
-          data={data}
-          renderItem={({ item }) => <Items list={item} />}
-        />
-      </View>
-    </View>
-  );
-};
-
 export const Infos = ({ navigation }) => {
   navigation.setOptions({ headerShown: false });
-  const [Progress, setProgress] = useState(20);
-  const InnerProgress = ({ width }) => (
+  const [currentScore, setCurrentScore] = useState(70);
+  const [user, setUser] = useState(null);
+  const [rewards, setRewards] = useState(null);
+  const [unlockedRewards, setUnlockedRewards] = useState(null);
+  const [nextReward, setNextReward] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      await axios
+        .get(`${global.base_api_url}account/me/`)
+        .then((res) => setUser(res.data));
+    }
+    fetchUserData();
+  }, [null]);
+
+  useEffect(() => {
+    if (user) {
+      async function fetchRewards() {
+        await axios
+          .get(`${global.base_api_url}reward/`)
+          .then((res) =>
+            setRewards(
+              res.data.results.filter(
+                (reward) => !user.unlocked_rewards_uid.includes(reward.uid)
+              )
+            )
+          );
+      }
+
+      fetchRewards();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (rewards) {
+      setUnlockedRewards(
+        rewards.filter((reward) =>
+          user.unlocked_rewards_uid.includes(reward.uid)
+        )
+      );
+
+      setNextReward(rewards[0]);
+    }
+
+    if (nextReward) {
+      setCurrentScore((user.current_leaves * 100) / nextReward.leaves_amount);
+    }
+  }, [rewards]);
+
+  const InnercurrentScore = ({ width }) => (
     <View
       style={{
         width: `${width}%`,
         height: 10,
-        backgroundColor: "#69FFD4",
+        backgroundColor: Colors.secondary,
         borderRadius: 15,
       }}
     ></View>
   );
-  const Number = () => {
-    if (Progress === 100) {
-      return <Text style={styles.number}>350</Text>;
-    } else {
-      return <Text style={styles.number}>150</Text>;
-    }
-  };
-  const LEAVES = () => {
-    if (Progress === 20) {
+  const ShowReward = () => {
+    if (currentScore === 100 && nextReward) {
       return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>200 leafs</Text>
-      );
-    } else if (Progress === 40) {
-      return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>150 leafs</Text>
-      );
-    } else if (Progress === 60) {
-      return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>100 leafs</Text>
-      );
-    } else if (Progress === 80) {
-      return (
-        <Text style={{ color: "#69FFD4", fontWeight: "500" }}>50 leafs</Text>
+        <FlatList
+          keyExtractor={(item) => item.uid.toString()}
+          data={[nextReward]}
+          renderItem={({ item }) => (
+            <RewardInfos
+              list={nextReward}
+              user={user}
+              unlockedRewards={unlockedRewards}
+            />
+          )}
+        />
       );
     } else {
       return null;
     }
   };
+
   const Description = () => {
-    if (Progress === 100) {
+    if (currentScore === 100) {
       return (
-        <Text style={styles.description}>
+        <SimpleText style={styles.description}>
           Vous pouvez dès à présent débloquer une récompense.
-        </Text>
+        </SimpleText>
       );
     } else {
       return (
-        <Text style={styles.description}>
-          <LEAVES /> à accumuler avant de pouvoir débloquer la prochaine
-          récompense.
-        </Text>
+        <SimpleText style={styles.description}>
+          <Text style={{ color: Colors.secondary, fontWeight: "bold" }}>
+            {nextReward ? nextReward.leaves_amount - user.current_leaves : 100}{" "}
+            leaves
+          </Text>{" "}
+          à accumuler avant de pouvoir débloquer la prochaine récompense.
+        </SimpleText>
       );
     }
   };
-  return (
-    <View style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.contentView}>
-          <Number />
-          <Image
-            source={require("../assets/images/Vector.png")}
-            style={styles.iconImage}
-          />
-          <Text style={styles.leave}>LEAVES</Text>
-        </View>
-        <View>
-          <Description />
-        </View>
-        <View style={styles.contentProgress}>
-          <View style={styles.progressContainer}>
-            <InnerProgress width={Progress} />
+  if (rewards && unlockedRewards && nextReward && user) {
+    return (
+      <View style={styles.wrapper}>
+        <View style={styles.contentHearder}>
+          <View style={styles.contentView}>
+            <Text style={styles.number}>{user.current_leaves}</Text>
+            <View style={{ width: 30, height: 30 }}>
+              <Image
+                source={require("../assets/images/greenscore-2.png")}
+                style={styles.iconImage}
+              />
+            </View>
+            <SecondaryTitle fontSize={20} style={styles.leave}>
+              leaves
+            </SecondaryTitle>
           </View>
-
-          <View style={styles.imageContent}>
-            <Image
-              source={require("../assets/images/cadeaux_1.png")}
-              style={styles.firstIconImage}
-            />
-          </View>
-        </View>
-        {/* <TouchableOpacity
-          progress={Progress}
-          onPress={() => {
-            Progress < 100 ? setProgress(Progress + 20) : setProgress(20);
-          }}
-          style={{ alignItems: "center" }}
-        >
           <View
             style={{
-              backgroundColor: "#69FFD4",
-              width: 120,
-              height: 36,
-              borderRadius: 4,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 40,
+              position: "absolute",
+              top: 60,
+              width: "80%",
+              textAlign: "center",
             }}
           >
-            <Text style={{ fontSize: 15, fontWeight: "500", color: "#FFF" }}>
-              Progress
-            </Text>
+            <Description />
           </View>
-        </TouchableOpacity> */}
-        <View style={styles.contentView}>
-          <Text style={styles.title}>récompenses à débloquer</Text>
+          <View style={styles.contentcurrentScore}>
+            <View style={styles.progressContainer}>
+              <InnercurrentScore width={currentScore} />
+            </View>
+
+            <View style={styles.imageContent}>
+              <Image
+                source={require("../assets/images/cadeaux_1.png")}
+                style={styles.firstIconImage}
+              />
+            </View>
+          </View>
+          <View style={styles.contenTitle}>
+            <SecondaryTitle fontSize={20} style={styles.title}>
+              récompenses à débloquer
+            </SecondaryTitle>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("ShowReward")}>
+            <View style={styles.contentRecompense}>
+              <SecondaryTitle fontSize={14} style={styles.text}>
+                Voir les récompenses {"\n"} déjà débloquées
+              </SecondaryTitle>
+            </View>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("ShowRecompense")}>
-          <View style={styles.contentRecompense}>
-            <Text style={styles.text}>
-              Voir les récompenses déjà débloquées
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.container}>
+          <ShowReward />
+          <RewardsList rewards={rewards} userScore={user.current_leaves} />
+        </View>
       </View>
-      <Recompense />
-    </View>
-  );
+    );
+  } else {
+    return <Spinner color={Colors.secondary} />;
+  }
 };
 
 export default function PointsScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Infos" component={Infos} />
-      <PointsStack.Screen name="ShowRecompense" component={ShowRecompense} />
+      <PointsStack.Screen name="ShowReward" component={UnlockedRewardsList} />
     </PointsStack.Navigator>
   );
 }
@@ -185,46 +207,65 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa",
   },
+  wrapper: {
+    flex: 1,
+    backgroundColor: "#fafafa",
+    paddingTop: 40,
+  },
   contentContainer: {
     justifyContent: "center",
+  },
+  contentHearder: {
+    position: "relative",
+  },
+  subtitle: {
+    color: Colors.secondary,
+    fontWeight: "bold",
   },
   contentView: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 30,
-    position: "relative",
-    top: 50,
+    width: "58%",
+    alignItems: "center",
+    position: "absolute",
+    justifyContent: "center",
+    marginBottom: 20,
   },
-  contentProgress: {
+  contenTitle: {
+    position: "absolute",
+    top: 10,
+  },
+  contentcurrentScore: {
     flex: 1,
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 30,
-    position: "relative",
-    top: 50,
+    justifyContent: "center",
+    position: "absolute",
+    top: 120,
   },
   number: {
-    fontWeight: "500",
-    fontSize: 48,
-    color: "#69FFD4",
+    fontWeight: "600",
+    fontSize: 50,
+    color: Colors.secondary,
+    marginLeft: 50,
   },
   iconImage: {
-    marginLeft: 10,
-    marginTop: 10,
+    width: null,
+    height: null,
+    flex: 1,
+    resizeMode: "contain",
   },
   leave: {
-    fontSize: 25,
-    fontWeight: "500",
     marginLeft: 20,
-    marginTop: 10,
-    textTransform: "uppercase",
+    top: 11,
+    right: 15,
   },
   description: {
+    width: Dimensions.get("window").width - 20,
     fontSize: 20,
-    marginLeft: 30,
-    position: "relative",
-    top: 50,
+    marginLeft: 20,
   },
   progressContainer: {
     width: "80%",
@@ -235,7 +276,7 @@ const styles = StyleSheet.create({
   },
   porgressInner: {
     height: 10,
-    backgroundColor: "#69FFD4",
+    backgroundColor: Colors.secondary,
     borderRadius: 15,
   },
   imageContent: {
@@ -246,29 +287,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     shadowOpacity: 0.1,
+    marginTop: 10,
   },
   firstIconImage: {
     width: 30,
     height: 30,
   },
   title: {
-    textTransform: "uppercase",
-    fontSize: 22,
-    fontWeight: "500",
-    bottom: 50,
+    top: 180,
+    marginLeft: 20,
   },
   contentRecompense: {
-    backgroundColor: "#69FFD4",
+    backgroundColor: Colors.secondary,
     height: 70,
     borderRadius: 4,
     shadowOpacity: 0.1,
     marginHorizontal: 20,
     justifyContent: "center",
+    alignItems: "center",
+    marginTop: 230,
+    marginBottom: 20,
   },
   text: {
-    fontSize: 18,
     color: "#FFF",
-    fontWeight: "500",
     textAlign: "center",
     textTransform: "uppercase",
   },
@@ -285,7 +326,7 @@ const styles = StyleSheet.create({
       width: 4,
       height: 4,
     },
-    shadowOpacity: 0.10,
+    shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 14,
     borderRadius: 4,
@@ -294,7 +335,6 @@ const styles = StyleSheet.create({
   "buttonStyle:last-child": {
     marginBottom: 0,
     backgroundColor: "#FAAAFF",
-
   },
   buttonImage: {
     position: "absolute",
@@ -304,23 +344,21 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   buttonTitleStyle: {
-    textAlign: "left"
+    textAlign: "left",
   },
   buttonSubtitleStyle: {
-    textAlign: "left"
+    textAlign: "left",
   },
   titleStyle: {
     marginBottom: 30,
   },
-
-
 
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 35,
-    backgroundColor: "rgba(53, 64, 82, 0.41)"
+    backgroundColor: "rgba(53, 64, 82, 0.41)",
   },
   modalView: {
     position: "relative",
@@ -333,11 +371,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
   modalImage: {
     position: "absolute",
@@ -349,7 +387,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   textStyle: {
     color: "white",
@@ -360,6 +398,6 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

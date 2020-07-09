@@ -65,14 +65,14 @@ password: madu
 ## API 🧐
 
 ### Définition
-```An API is used to make the data or functionality of an existing application available for use by other applications. Here is who should make the notion of application programming interface clearer 😊```
+An API is used to make the data or functionality of an existing application available for use by other applications. Here is who should make the notion of application programming interface clearer 😊
 
 ### Routes
 
 #### /pet 
 
 - POST Add a new pet to the store
-  ``Exemple object model``
+  Exemple object model
   `{
   "id": 0,
   "category": {
@@ -91,5 +91,7 @@ password: madu
   ],
   "status": "available"
 }`
+-Responses 
+`405 	Invalid input`
 
 

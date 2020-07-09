@@ -62,6 +62,177 @@ password: madu
 ### Run project
 ```expo start```
 
+## BDD 🧐
+
+### Structure
+
+    - DetailCompany
+
+    ` {
+            name	string
+            maxLength: 250
+
+            address	string
+            maxLength: 250
+            
+            zipcode	string
+            maxLength: 250
+
+            city	string
+            maxLength: 250
+
+            size	string
+            maxLength: 250
+
+            type	string
+            maxLength: 250
+
+            mail_affix	string
+            maxLength: 250
+
+            bundle_start_date*	string($date)
+
+            bundle_end_date*	string($date)
+
+            show_other_companies*	boolean
+
+            total_user	integer
+
+            maximum: 21474836477
+
+            minimum: -2147483648
+
+            uid	string($uuid)
+
+            modification_date	string($date-time)
+
+            readOnly: true
+
+            creation_date	string($date-time)
+
+            readOnly: true
+
+            public	boolean
+            url	string
+
+            readOnly: true
+            verbose_name	string
+
+            readOnly: true
+            created_by	string
+
+            readOnly: true
+            can_admin_users	[...]
+
+            can_view_users	[...]
+
+            can_admin_groups	[...]
+
+            can_view_groups	[...]
+
+            scopes	string
+            readOnly: true
+}
+`
+
+        - ListCompany 
+        `{
+            objects_count	integer
+
+            next	string
+
+            previous	string
+
+            objects_count_per_page	integer
+
+            num_total_pages	integer
+
+            num_current_page	integer
+
+            max_allowed_objects_per_page	integer
+
+            model_name	string
+
+            model_verbose_name	string
+
+            list_display	[...]
+
+            list_filter	[...]
+            total_objects_count	integer
+
+            create_url	string
+
+            results	[...]
+        }`
+
+       - DetailLDAPAuthLogin
+        ` {
+            username*	string
+
+            password*	string
+        }`
+
+        - DetailTwoFactorLogin
+        `{
+            email*	string($email)
+
+            token*	string
+
+            verification_code*	string
+        }`
+
+        - DetailAuthLogin
+        
+        `{
+            email*	string($email)
+
+            password*	string          
+        }`
+
+        - DetailRegister
+
+        `{
+            email*	string($email)
+
+            password1	string
+            nullable: true
+
+            password2	string
+            nullable: true
+
+            email_format	string
+            nullable: true
+
+            url_format	string
+            nullable: true
+            default: /#/set-password/{token}/{email}/
+        }`
+        - DetailChangePassword
+
+        `{
+
+            email*	string($email)
+
+            password1*	string
+
+            password2*	string
+
+            password_change_token	string($uuid)
+            
+        }`
+
+        - DetailResetPassword
+        `{
+            email*	string($email)
+
+            url_format	string
+            nullable: true
+            default: /#/reset-password/{token}/{email}/
+            
+        }`
+
+
+
 ## API 🧐
 
 ### Définition

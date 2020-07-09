@@ -38,7 +38,7 @@ export default function ConfirmationScreen({ route, navigation }) {
       )}
       {route.params.type !== "challenge" && (
         <Subtitle style={{ marginBottom: 20 }}>
-          Nous avons bien pris en compte votre suggestion, elle sera validée
+          Nous avons bien pris en compte ta suggestion, elle sera validée
           sous 48h.
         </Subtitle>
       )}
@@ -50,14 +50,14 @@ export default function ConfirmationScreen({ route, navigation }) {
       )}
       {route.params.type === "feedback" && (
         <SimpleText style={{ textAlign: "center" }}>
-          Lorsque ton avis sera validé
+          Lorsque ton avis sera validé,
           <Subtitle color={Colors.secondary}> 20 leaves</Subtitle> seront
           ajoutés à ta cagnotte.
         </SimpleText>
       )}
       {route.params.type === "newAddress" && (
         <SimpleText style={{ textAlign: "center" }}>
-          Lorsque ton avis sera validé
+          Lorsque ton avis sera validé,
           <Subtitle color={Colors.secondary}> 30 leaves</Subtitle> seront
           ajoutés à ta cagnotte.
         </SimpleText>

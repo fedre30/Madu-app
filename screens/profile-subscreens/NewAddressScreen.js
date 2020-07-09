@@ -65,7 +65,7 @@ export const NewAddress = ({ navigation }) => {
           light
         >
           <Ionicons name="md-arrow-round-back" size={20} />
-          <Text style={ styles.goBackText }>Retour</Text>
+          <Text style={ styles.goBackText }>Retoure</Text>
         </Button>
 
         <View style={{ marginTop: 20 }}>

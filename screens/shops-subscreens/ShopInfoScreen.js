@@ -158,7 +158,7 @@ export default function ShopInfoScreen({ route, navigation }) {
               style={{ textAlign: "center", marginBottom: 10 }}
               fontSize={20}
             >
-              vous voulez exprimer votre avis ?
+              veux tu exprimer ton avis ?
             </SecondaryTitle>
 
             <Button
@@ -190,7 +190,7 @@ export default function ShopInfoScreen({ route, navigation }) {
           <View>
             <FullButton title="Site Internet" />
             <FullButton
-              title="Donnez votre avis"
+              title="Donner mon avis"
               onPress={() => navigation.navigate("Feedback", { id: data.id })}
             />
             <FullButton
@@ -264,15 +264,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginBottom: 20,
   },
-  buttonText: {
-    paddingTop: 10,
-    alignItems: "center",
-    color: Colors.white,
-  },
   searchButton: {
     flex: 1,
     justifyContent: "center",
     backgroundColor: Colors.secondary,
+    width: 198,
+    left: 62,
+  },
+  buttonText: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems: "center",
+    color: Colors.white,
   },
   miniCards: {
     flexDirection: "row",

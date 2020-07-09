@@ -69,7 +69,7 @@ export const MapBackDrop = (props) => {
       }
     >
       <View style={{ padding: 5 }}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={props.onFocus}
           style={{
             justifyContent: "flex-end",
@@ -79,7 +79,7 @@ export const MapBackDrop = (props) => {
           }}
         >
           <SimpleText>Fermer</SimpleText>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <ScrollView 
           style={styles.filtersContainer}
           horizontal={true}
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   closePlateContainer: {
+    paddingBottom: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

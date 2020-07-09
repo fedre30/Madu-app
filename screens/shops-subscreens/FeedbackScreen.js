@@ -34,16 +34,18 @@ export default function FeedbackScreen({ route, navigation }) {
       showsHorizontalScrollIndicator={false}
     >
       <Button
+        title="Retour"
         onPress={() => navigation.goBack()}
-        light
         style={styles.back}
         transparent
+        light
       >
         <Ionicons name="md-arrow-round-back" size={20} />
+        <Text style={ styles.goBackText }>Retour</Text>
       </Button>
       <View style={{ marginTop: 10 }}>
         <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
-          Donner votre avis
+          Donner mon avis
         </SecondaryTitle>
       </View>
       <View
@@ -72,13 +74,13 @@ export default function FeedbackScreen({ route, navigation }) {
         </TouchableOpacity>
       </View>
       <SimpleText style={{ marginBottom: 20 }}>
-        Vous voulez vous exprimer sur quelque chose en particulier ? Ou bien
-        juste donner votre avis ? Remplissez le champ ci-dessous !
+        Veux-tu t'exprimer sur quelque chose en particulier ? Ou bien
+        juste donner ton avis ? Remplis le champ ci-dessous !
       </SimpleText>
       <Textarea
         rowSpan={6}
         bordered
-        placeholder="Tapez votre message"
+        placeholder="Tapes ton message"
         value={comments}
         onChangeText={(text) => setComments(text)}
       />
@@ -109,9 +111,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: Colors.secondary,
     marginTop: 50,
+    width: 136,
+    left: 96,
+    justifyContent: "center",
+    borderRadius: 4,
   },
   buttonText: {
     paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
     color: Colors.white,
   },

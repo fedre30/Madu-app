@@ -19,6 +19,7 @@ import Modal from "react-native-modal";
 import { FilterView } from "../../components/organisms/FilterView";
 import axios from "axios";
 import global from "../../Global";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export const MapBackDrop = (props) => {
   const [shops, setShops] = useState([]);
@@ -90,6 +91,7 @@ export const MapBackDrop = (props) => {
             title="Filtres"
             imageType="filters"
             onPress={() => setModalVisible(!modalVisible)}
+            style={{ backgroundColor: Colors.secondary,  }}
           />
           <FilterButton
             title="Végétarien"

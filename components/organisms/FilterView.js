@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { FilterButton } from "../atoms/FilterButton";
-import { SecondaryTitle, ButtonText, SimpleText } from "../atoms/StyledText";
+import { SecondaryTitle, ButtonText, SimpleText, ThirdlyTitle } from "../atoms/StyledText";
 import { Button, CheckBox } from "native-base";
 import Colors from "../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -72,7 +72,7 @@ export const FilterView = (props) => {
       >
         <SimpleText>Terminer</SimpleText>
       </TouchableOpacity>
-      <SecondaryTitle>Populaires</SecondaryTitle>
+      <ThirdlyTitle>Populaires</ThirdlyTitle>
       <View style={styles.buttons}>
         <FilterButton
           title="Végétarien"
@@ -110,7 +110,7 @@ export const FilterView = (props) => {
           filterView
         />
       </View>
-      <SecondaryTitle>Tipes d'établissements</SecondaryTitle>
+      <ThirdlyTitle>Types d'établissements</ThirdlyTitle>
       <View style={styles.buttons}>
         {typeOfShop &&
           typeOfShop.map((shop, i) => (
@@ -143,7 +143,7 @@ export const FilterView = (props) => {
             </Button>
           ))}
       </View>
-      <SecondaryTitle>Budget</SecondaryTitle>
+      <ThirdlyTitle>Budget</ThirdlyTitle>
       <View style={styles.buttons}>
         <View style={styles.checkbox}>
           <CheckBox
@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   searchButton: {
+    marginTop: 30,
     width: 200,
     justifyContent: "center",
     alignItems: "center",
@@ -220,7 +221,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
+    borderRadius: 4,
     color: Colors.white,
   },
   checkbox: {

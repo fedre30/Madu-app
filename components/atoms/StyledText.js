@@ -83,6 +83,22 @@ export const SecondaryTitle = (props) => {
   );
 };
 
+export const ThirdlyTitle = (props) => {
+  return (
+    <Text
+      {...props}
+      style={[
+        props.style,
+        styles.thirdly,
+        {
+          fontFamily: "gotham-medium",
+          fontStyle: props.fontStyle ? props.fontStyle : "normal",
+        },
+      ]}
+    />
+  );
+};
+
 export const ItalicText = (props) => {
   return (
     <Text
@@ -217,6 +233,12 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 17,
     lineHeight: 16,
+    color: Colors.black,
+  },
+  thirdly: {
+    fontWeight: "500",
+    fontSize: 17,
+    lineHeight: 20,
     color: Colors.black,
   },
 });

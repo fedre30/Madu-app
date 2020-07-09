@@ -17,7 +17,7 @@ export const MiniCard = (props) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Shop", { id: props.id })}
-      style={{ marginBottom: 20, width: 160, marginRight: 10 }}
+      style={{ marginBottom: 20, width: 160, marginRight: 10, right:5 }}
     >
       <Card>
         <CardItem cardBody>
@@ -29,7 +29,7 @@ export const MiniCard = (props) => {
         <CardItem>
           <Body>
             <SecondaryTitle>{props.name}</SecondaryTitle>
-            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", marginBottom: 10, }}>
               {props.tags.map((tag, i) => (
                 <TagsText key={i} style={{ marginRight: 8 }}>
                   #{tag.name}
@@ -74,7 +74,7 @@ export const MiniCard = (props) => {
 const styles = StyleSheet.create({
   infosContainer: {
     alignItems: "center",
-    flex: 1,
+    flex: 1, 
   },
   infos: {
     flex: 1,

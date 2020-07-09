@@ -6,7 +6,11 @@ export default class Individuel extends Component {
   render() {
     const individuel = this.props.ListIndividuel;
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         <TouchableOpacity>
           <View style={styles.contentContainer}>
             <View style={styles.contentIndivue}>

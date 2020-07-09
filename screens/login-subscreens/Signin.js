@@ -10,12 +10,14 @@ import {
   SecondaryTitle,
   SecondaryText,
   ButtonText,
+  LabelInput,
 } from "../../components/atoms/StyledText";
 import { Button, Subtitle, Form, Item, Input, Content } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { AuthContext } from "../../hooks/auth";
 import { Tag } from "../../components/atoms/Tag";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Signin({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -81,8 +83,10 @@ export default function Signin({ route, navigation }) {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
-      <Button
+      {/* <Button
         onPress={() => navigation.goBack()}
         title="Back"
         light
@@ -90,37 +94,37 @@ export default function Signin({ route, navigation }) {
         transparent
       >
         <Ionicons name="md-arrow-round-back" size={20} />
-      </Button>
+      </Button> */}
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/madu_logo.png")}
           style={styles.image}
         />
       </View>
-      <SecondaryTitle
+      <Title
+        style={styles.title}
         fontSize={20}
-        style={{ textAlign: "center", marginBottom: 20 }}
       >
         S'inscrire
-      </SecondaryTitle>
-      <View style={styles.formItem}>
-        <SecondaryText>Adresse email</SecondaryText>
-        <Item regular bordered>
+      </Title>
+      <SafeAreaView style={styles.formItem}>
+        <LabelInput style={{marginBottom: 15,}}>Adresse email professionnelle</LabelInput>
+        <Item regular bordered bordered style={styles.input}>
           <Input
-            placeholder={""}
+            placeholder={"Ex: Marie@hetic.net"}
             value={infos.email}
             onChangeText={(text) => updateField("email", text)}
             style={{ color: Colors.grey }}
           />
         </Item>
-      </View>
+      </SafeAreaView>
       <View style={styles.formItem}>
-        <SecondaryText>Mot de passe</SecondaryText>
-        <Item regular bordered>
+        <LabelInput style={{marginBottom: 15,}}>Mot de passe</LabelInput>
+        <Item regular bordered bordered style={styles.input}>
           <Input
             textContentType={"password"}
             secureTextEntry={true}
-            placeholder={""}
+            placeholder={"******"}
             rounded
             value={infos.password}
             onChangeText={(text) => updateField("password", text)}
@@ -129,10 +133,11 @@ export default function Signin({ route, navigation }) {
         </Item>
       </View>
       <View style={styles.formItem}>
-        <SecondaryText>Confirmation de mot de passe</SecondaryText>
-        <Item regular bordered>
+        <LabelInput style={{marginBottom: 15,}}>Confirmation de mot de passe</LabelInput>
+        <Item regular bordered bordered style={styles.input}>
           <Input
-            placeholder={""}
+            secureTextEntry={true}
+            placeholder={"******"}
             rounded
             value={infos.confirmationPassword}
             onChangeText={(text) => updateField("confirmationPassword", text)}
@@ -174,8 +179,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 60,
   },
+  title: {
+    marginBottom: 10, 
+    fontSize: 20, 
+    lineHeight: 21, 
+    textAlign: "center", 
+    textTransform: "uppercase",
+  },
   formItem: {
     marginBottom: 30,
+  },
+  imageContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  image: {
+    width: 120,
+    height: 120,
+    resizeMode: "contain",
+  },
+  input: { 
+    borderWidth: 1, 
+    borderColor:Colors.lightGrey, 
+    borderRadius:4,
   },
   loginButton: {
     width: 200,
@@ -184,17 +212,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
     color: Colors.white,
-  },
-  imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 50,
-  },
-  image: {
-    width: 150,
-    height: 150,
-    resizeMode: "contain",
   },
 });

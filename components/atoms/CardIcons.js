@@ -4,6 +4,7 @@ import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Text } from "native-base";
 import { SimpleText } from "./StyledText";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 export const PriceIcon = (props) => {
   return (
@@ -31,7 +32,7 @@ export const WheelchairIcon = (props) => {
 
 export const SuggestionIcon = (props) => {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View style={{ flexDirection: "row", alignItems: "center", left: 40,}}>
       <Ionicons
         name="md-thumbs-up"
         size={props.size ? props.size : 30}

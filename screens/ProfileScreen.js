@@ -26,8 +26,13 @@ export const Profile = ({ navigation }) => {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         {/* //Données en brute pour afficher dans le profil une image + nom et prenom
         <View style={styles.headerContainer} >
           <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
@@ -42,8 +47,8 @@ export const Profile = ({ navigation }) => {
             width={207}
             height={129}
             left={96}
-            top={10}
-            onPress={() => navigation.navigate('Challenges')}
+            top={-10} //Si y a un header remettre la valeur a 10
+            onPress={() => navigation.navigate("Challenges")}
           >
             Mes défis
           </Thumbnail>
@@ -54,7 +59,7 @@ export const Profile = ({ navigation }) => {
             width={176}
             height={130}
             left={125}
-            top={-12}
+            top={-32} //Si y a un header remettre la valeur a -12
             // onPress={() => navigation.navigate('jackpotAndRewardsPageName')}
           >
             Cagnotte et récompenses
@@ -66,7 +71,7 @@ export const Profile = ({ navigation }) => {
             width={114}
             height={115}
             left={166}
-            top={3}
+            top={-17} //Si y a un header remettre la valeur a 3
             onPress={() => navigation.navigate("NewAddress")}
           >
             Proposer une nouvelle adresse
@@ -78,7 +83,7 @@ export const Profile = ({ navigation }) => {
             width={207}
             height={129}
             left={96}
-            top={10}
+            top={-10} //Si y a un header remettre la valeur a 10
             onPress={() => navigation.navigate("Ranking")}
           >
             Classement
@@ -93,7 +98,10 @@ export default function ProfileScreen() {
   return (
     <PointsStack.Navigator>
       <PointsStack.Screen name="Profile" component={Profile} />
-      <PointsStack.Screen name="ContentChallenges" component={ContentChallenges} />
+      <PointsStack.Screen
+        name="ContentChallenges"
+        component={ContentChallenges}
+      />
       {/* <PointsStack.Screen name="jackpotAndRewardsName" component={jackpotAndRewardsPageName} /> */}
       <PointsStack.Screen name="Challenges" component={ChallengesScreen} />
       <PointsStack.Screen name="NewAddress" component={NewAddress} />

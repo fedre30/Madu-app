@@ -8,9 +8,9 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "splash": {
-      "image": "./assets/images/madu_logo.png",
+      "image": "./assets/images/madu_logo_blanc_grand.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#738BFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

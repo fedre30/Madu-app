@@ -208,6 +208,8 @@ export default class Sliding extends Component {
           >
             <View>
               <FlatList
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 data={ListIndividuel}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <Individuel ListIndividuel={item} />}
@@ -230,6 +232,8 @@ export default class Sliding extends Component {
           >
             <View>
               <FlatList
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 data={ListEntreprise}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <Entreprise ListEntreprise={item} />}

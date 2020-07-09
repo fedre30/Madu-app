@@ -6,8 +6,10 @@ import { Ionicons } from "@expo/vector-icons";
 
 import axios from "axios";
 import global from "../../Global";
-import { ButtonText } from "../../components/atoms/StyledText";
+import { ButtonText, ItalicText, LabelInput } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 
 /* test switch button */
 //import { ButtonSwitch } from "../../components/molecules/Switch";
@@ -65,34 +67,37 @@ export const NewAddress = ({ navigation }) => {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     >
       <ScrollView>
         <Button
+          title="Retour"
           onPress={() => navigation.goBack()}
-          title="Back"
-          light
           style={styles.back}
           transparent
+          light
         >
           <Ionicons name="md-arrow-round-back" size={20} />
+          <Text style={ styles.goBackText }>Retour</Text>
         </Button>
 
         <View style={{ marginTop: 20 }}>
           <Text style={styles.title}>Proposer une nouvelle adresse</Text>
         </View>
 
-        <Text style={(styles.subText, { marginBottom: 30 })}>
-          Une commerce éco-responsable vous a plu ? N’hésitez pas à le faire
+        <ItalicText style={(styles.italicText, { marginBottom: 10 })}>
+          Un commerce éco-responsable vous a plu ? N’hésitez pas à le faire
           partager avec nous en proposant cette adresse dans les champs
           ci-dessous !
-        </Text>
+        </ItalicText>
 
-        <View>
+        <SafeAreaView>
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Nom du commerce</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Nom du commerce</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
-                placeholder="Ex: Le lilas"
+                placeholder="Ex: Le Lilas"
                 value={infos.name}
                 onChangeText={(text) => updateField("name", text)}
               />
@@ -100,8 +105,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
 
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Adresse</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Adresse</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
                 placeholder="Ex: 21 rue des flandres"
                 value={infos.address}
@@ -111,8 +116,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
 
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Code postal</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Code postal</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
                 placeholder="Ex: 75008"
                 value={infos.zipcode}
@@ -122,8 +127,8 @@ export const NewAddress = ({ navigation }) => {
           </View>
 
           <View style={{ marginBottom: 30 }}>
-            <Text style={styles.label}>Ville</Text>
-            <Item regular style={styles.input}>
+            <LabelInput style={{marginBottom: 15,}}>Ville</LabelInput>
+            <Item regular bordered style={styles.input}>
               <Input
                 placeholder="Ex: Paris"
                 value={infos.city}
@@ -131,7 +136,7 @@ export const NewAddress = ({ navigation }) => {
               />
             </Item>
           </View>
-        </View>
+        </SafeAreaView>
 
         <Button style={styles.addButton} onPress={() => createProposition()}>
           <ButtonText style={styles.buttonText} transform>
@@ -154,8 +159,21 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flex: 1,
   },
+  goBackText: {
+    left: -240,
+    fontFamily: "gotham-medium",
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: 15,
+    lineHeight: 20,
+    
+    color: Colors.black,
+    textTransform: "capitalize",
+
+    textAlign: "center",
+  },
   title: {
-    marginBottom: 30,
+    marginBottom: 20,
 
     fontFamily: "gotham-medium",
     fontWeight: "normal",
@@ -187,7 +205,7 @@ const styles = StyleSheet.create({
   input: {
     /* input border */
     borderWidth: 1,
-    borderColor: "#C0C5D2",
+    borderColor: Colors.lightGrey,
     borderRadius: 4,
 
     /* input float */
@@ -197,15 +215,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 14,
 
-    color: "#C0C5D2",
+    color: Colors.lightGrey,
   },
   addButton: {
     justifyContent: "center",
     marginTop: 20,
-    marginBottom: 44,
+    marginBottom: 24,
     width: 125,
     height: 45,
-    left: 110, //145,
+    left: 110,
 
     borderRadius: 4,
 

@@ -68,7 +68,7 @@ password: madu
 
 - DetailCompany
 
-    ` {
+        ` {
             name	string
             maxLength: 250
 
@@ -132,10 +132,10 @@ password: madu
 
             scopes	string
             readOnly: true
-}
-`
+        }
+        `
 
-        - ListCompany 
+- ListCompany 
         `{
             objects_count	integer
 
@@ -165,14 +165,15 @@ password: madu
             results	[...]
         }`
 
-       - DetailLDAPAuthLogin
-        ` {
+- DetailLDAPAuthLogin
+        `{
             username*	string
 
             password*	string
         }`
 
-        - DetailTwoFactorLogin
+- DetailTwoFactorLogin
+
         `{
             email*	string($email)
 
@@ -181,7 +182,7 @@ password: madu
             verification_code*	string
         }`
 
-        - DetailAuthLogin
+- DetailAuthLogin
         
         `{
             email*	string($email)
@@ -189,7 +190,7 @@ password: madu
             password*	string          
         }`
 
-        - DetailRegister
+- DetailRegister
 
         `{
             email*	string($email)
@@ -207,7 +208,8 @@ password: madu
             nullable: true
             default: /#/set-password/{token}/{email}/
         }`
-        - DetailChangePassword
+
+- DetailChangePassword
 
         `{
 
@@ -221,7 +223,8 @@ password: madu
             
         }`
 
-        - DetailResetPassword
+- DetailResetPassword
+
         `{
             email*	string($email)
 
@@ -230,8 +233,6 @@ password: madu
             default: /#/reset-password/{token}/{email}/
             
         }`
-
-
 
 ## API 🧐
 

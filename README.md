@@ -69,10 +69,12 @@ An API is used to make the data or functionality of an existing application avai
 
 ### Routes
 
-#### /pet 
+#### PET
 
-- POST Add a new pet to the store
-  Exemple object model
+- POST
+`/pet`
+Add a new pet to the store
+Exemple object model
   `{
   "id": 0,
   "category": {
@@ -91,7 +93,12 @@ An API is used to make the data or functionality of an existing application avai
   ],
   "status": "available"
 }`
+
 -Responses 
 `405 	Invalid input`
+
+`/pet/{petId}`
+Updates a pet in the store with form data
+
 
 

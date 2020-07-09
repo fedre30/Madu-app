@@ -62,4 +62,35 @@ password: madu
 ### Run project
 ```expo start```
 
+## API 🧐
+
+### Définition
+```
+An API is used to make the data or functionality of an existing application available for use by other applications. Here is who should make the notion of application programming interface clearer 😊```
+
+### Routes
+
+#### /pet 
+
+- POST Add a new pet to the store
+  ``Exemple object model``
+  `{
+  "id": 0,
+  "category": {
+    "id": 0,
+    "name": "string"
+  },
+  "name": "doggie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "available"
+}`
+
 

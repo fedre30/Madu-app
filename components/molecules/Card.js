@@ -72,11 +72,9 @@ export const ListCard = (props) => {
                   <PriceIcon focused={props.price >= 20 && props.price <= 30} />
                   <PriceIcon focused={props.price >= 30} />
                 </View>
-                {props.accessibility && (
-                  <View style={styles.infos}>
-                    <WheelchairIcon focused={props.accessibility} />
-                  </View>
-                )}
+                <View style={styles.infos}>
+                  <WheelchairIcon focused={props.accessibility} />
+                </View>
                 {props.suggestionRate && (
                   <View style={styles.infos}>
                     <SuggestionIcon suggestionRate={props.suggestionRate} />

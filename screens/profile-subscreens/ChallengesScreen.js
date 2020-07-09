@@ -25,7 +25,6 @@ import {
   ButtonText,
 } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
-import { ListCard } from "../../components/molecules/Card";
 import {
   Button,
   Subtitle,
@@ -71,7 +70,7 @@ export default function ChallengesScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: "#FFF",
     padding: 20,
   },
   titleChallenges: {

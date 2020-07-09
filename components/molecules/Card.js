@@ -68,9 +68,9 @@ export const ListCard = (props) => {
               </View>
               <View style={[styles.infosContainer]}>
                 <View style={styles.infos}>
-                  <PriceIcon focused={props.price <= 20} />
-                  <PriceIcon focused={props.price >= 20 && props.price <= 30} />
-                  <PriceIcon focused={props.price >= 30} />
+                  <PriceIcon focused={props.price >= 1} />
+                  <PriceIcon focused={props.price >= 2} />
+                  <PriceIcon focused={props.price >= 3} />
                 </View>
                 <View style={styles.infos}>
                   <WheelchairIcon focused={props.accessibility} />

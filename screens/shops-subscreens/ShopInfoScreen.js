@@ -39,6 +39,7 @@ export default function ShopInfoScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
   const [selectedShops, setSelectedShops] = useState(null);
+  const [criteria, setCriteria] = useState(null);
   const index = route.params.id;
 
   const ref = useRef(null);
@@ -73,6 +74,27 @@ export default function ShopInfoScreen({ route, navigation }) {
             res.data.results.filter((s) => data.uid !== index).slice(0, 2)
           )
         );
+
+      if (data.greenscore) {
+        async function fetchCriteria() {
+          Object.keys(data.greenscore).forEach(async (uid) => {
+            if (uid !== "value") {
+              await axios
+                .get(`${global.base_api_url}greenscore-criteria/${uid}/`)
+                .then((res) =>
+                  setCriteria((prevState) => [
+                    ...prevState,
+                    {
+                      ...uid,
+                      name: res.data.name,
+                    },
+                  ])
+                );
+            }
+          });
+        }
+        fetchCriteria();
+      }
     }
   }, [data]);
 
@@ -86,20 +108,26 @@ export default function ShopInfoScreen({ route, navigation }) {
         <Button onPress={() => navigation.goBack()} light style={styles.back}>
           <Ionicons name="md-arrow-round-back" size={20} />
         </Button>
-        <Image
-          source={require("../../assets/images/abattoirveg.jpg")}
-          style={{
-            flex: 1,
-            width: null,
-            height: 200,
-            resizeMode: "cover",
-          }}
-        />
+        {data && data.image ? (
+          <Image
+            source={
+              data.image
+                ? { uri: data.image }
+                : require("../../assets/images/abattoirveg.jpg")
+            }
+            style={{
+              flex: 1,
+              width: null,
+              height: 200,
+              resizeMode: "cover",
+            }}
+          />
+        ) : null}
       </View>
       {data ? (
         <View style={styles.infosContainer}>
           <View style={styles.rate}>
-            <View>{/* <LeavesCount rate={data.greenscore} /> */}</View>
+            <View>{<LeavesCount rate={data.greenscore.value} />}</View>
             <View>
               <SuggestionIcon
                 suggestionRate={data.ratings}
@@ -107,6 +135,7 @@ export default function ShopInfoScreen({ route, navigation }) {
               />
             </View>
           </View>
+          {console.log(criteria)}
           <View style={{ marginTop: 10 }}>
             <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
               {data.name}
@@ -127,16 +156,17 @@ export default function ShopInfoScreen({ route, navigation }) {
           >
             Critères de sélection
           </SecondaryTitle>
-          {/* <View style={styles.criteria}>
-            {Object.keys(data.criteria).map((criterium, idx) => (
-              <Criterium
-                title={criterium}
-                imageType={criterium}
-                key={idx}
-                score={data.criteria[criterium].note}
-              />
-            ))}
-          </View> */}
+          <View style={styles.criteria}>
+            {/* {criteria &&
+              criteria.map((criterium, idx) => (
+                <Criterium
+                  title={criterium.name}
+                  imageType={criterium}
+                  key={idx}
+                  score={39}
+                />
+              ))} */}
+          </View>
           <View>
             <SecondaryTitle
               style={{ textAlign: "center", marginBottom: 10 }}

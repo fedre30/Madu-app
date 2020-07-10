@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -25,7 +25,10 @@ import { GoBack } from "../../components/atoms/GoBack";
 
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
+  // Shop uid given by route prop
   const index = route.params.id;
+
+  // State
   const [rate, setRate] = useState(true);
   const [comments, setComments] = useState("");
   const [user, setUser] = useState(null);
@@ -36,10 +39,18 @@ export default function FeedbackScreen({ route, navigation }) {
       .then((res) => setUser(res.data));
   }, []);
 
+  // POST Feedback
   const onPress = () => {
-    axios.post(`${global.base_api_url}rating/`, data).then((response) => {
-      console.log(response);
-    });
+    axios
+      .post(`${global.base_api_url}rating/`, {
+        comment: comments,
+        value: rate,
+        user: user.uid,
+        shop: index,
+      })
+      .then((response) => {
+        console.log(response);
+      });
 
     axios
       .patch(`${global.base_api_url}user/${user.uid}/`, {

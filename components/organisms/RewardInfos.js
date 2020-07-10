@@ -154,7 +154,17 @@ export const RewardInfos = (props) => {
               <View style={styles.description}>
                 <Text>{props.user.current_leaves} </Text>
                 <View style={styles.progressContainer}>
-                  <View style={styles.porgressInner}></View>
+                  <View
+                    style={[
+                      styles.porgressInner,
+                      {
+                        width: `${
+                          (props.user.current_leaves * 100) / list.leaves_amount
+                        }%`,
+                        maxWidth: "100%",
+                      },
+                    ]}
+                  ></View>
                 </View>
                 <Text>{list.leaves_amount}</Text>
                 <Image
@@ -349,7 +359,6 @@ const styles = StyleSheet.create({
   },
 
   porgressInner: {
-    width: 100,
     height: 10,
     backgroundColor: Colors.secondary,
     borderRadius: 15,

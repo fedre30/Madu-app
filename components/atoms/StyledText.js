@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     color: Colors.text,
-    lineHeight: 24,
+    lineHeight: 44,
     textAlign: "center",
   },
 
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
   labelInput: {
     fontWeight: "500",
     fontSize: 17,
-    lineHeight: 16,
+    lineHeight: 26,
     color: Colors.black,
   },
   thirdly: {

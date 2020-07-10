@@ -13,7 +13,8 @@ import ConfirmationScreen from "./shops-subscreens/ConfirmationScreen";
 import ChallengesScreen from "./profile-subscreens/ChallengesScreen";
 import { LeavesCount } from "../components/atoms/LeavesCount";
 import { useNavigation } from "@react-navigation/native";
-// import {jackpotAndRewardsPageName} from "./profile-subscreens/jackpotAndRewardsPageName";
+
+// PROFILE SCREEN
 
 const PointsStack = createStackNavigator();
 
@@ -37,13 +38,6 @@ export const Profile = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        {/* //Données en brute pour afficher dans le profil une image + nom et prenom
-        <View style={styles.headerContainer} >
-          <Image style={styles.profilePic} source={require('../assets/images/Female-User.png')} />
-          <Text style={styles.name}>Marie TE</Text>
-          <Text style={styles.institution}>Little cigogne</Text>
-        </View> */}
-
         <View style={styles.profileOption}>
           <Thumbnail
             backgroundColor={"#FDE6E6"}

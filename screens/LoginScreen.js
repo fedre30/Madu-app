@@ -5,6 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./login-subscreens/Login";
 import Signin from "./login-subscreens/Signin";
 
+// LOGIN AND SIGN-IN SCREENS
+
 export default function LoginScreen({ navigation }) {
   navigation.setOptions({ headerShown: false });
   const PointsStack = createStackNavigator();

@@ -16,6 +16,8 @@ import FeedbackScreen from "./shops-subscreens/FeedbackScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+// MAP SCREEN
+
 const Map = () => {
   const navigation = useNavigation();
   navigation.setOptions({ headerShown: false });
@@ -26,14 +28,14 @@ const Map = () => {
   const [visibleCards, setVisibleCards] = useState([]);
 
   useEffect(() => {
-    // getLocation().then((data) => {
-    //   setLocation({
-    //     latitude: data.latitude,
-    //     longitude: data.longitude,
-    //     latitudeDelta: 0.003,
-    //     longitudeDelta: 0.003,
-    //   });
-    // });
+    getLocation().then((data) => {
+      setLocation({
+        latitude: data.latitude,
+        longitude: data.longitude,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
+      });
+    });
     async function getShops() {
       await axios
         .get(`${global.base_api_url}shop/`)
@@ -129,6 +131,7 @@ const Map = () => {
                   price={marker.price}
                   accessibility={marker.accessibility}
                   suggestionRate={marker.suggestionRate}
+                  image={marker.image}
                   mapCard
                   onPress={() =>
                     navigation.navigate("Shop", { id: marker.uid })

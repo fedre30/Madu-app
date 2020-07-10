@@ -17,29 +17,39 @@ export const MiniCard = (props) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Shop", { id: props.id })}
-      style={{ marginBottom: 20, width: 160, marginRight: 10, right:5 }}
+      style={{ marginBottom: 20, width: 160, marginRight: 10, right: 5 }}
     >
       <Card>
         <CardItem cardBody>
           <Image
-            source={require("../../assets/images/abattoirveg.jpg")}
+            source={
+              props.image
+                ? { uri: props.image }
+                : require("../../assets/images/abattoirveg.jpg")
+            }
             style={{ height: 100, width: null, flex: 1 }}
           />
         </CardItem>
         <CardItem>
           <Body>
             <SecondaryTitle>{props.name}</SecondaryTitle>
-            <View style={{ flexDirection: "row", flexWrap: "wrap", marginBottom: 10, }}>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                marginBottom: 10,
+              }}
+            >
               {props.tags.map((tag, i) => (
                 <TagsText key={i} style={{ marginRight: 8 }}>
                   #{tag.name}
                 </TagsText>
               ))}
             </View>
-            <View style={styles.infosContainer}>
-              <View style={styles.infos}>
-                <View style={styles.greenscore}>
-                  <View style={{ width: 40, height: 30, flex: 1 }}>
+            <View style={{ width: 80, flex: 1 }}>
+              <View style={styles.infosContainer}>
+                <View style={styles.infos}>
+                  <View style={{ width: 20, height: 20, flex: 1 }}>
                     <Image
                       source={require("../../assets/images/greenscore-2.png")}
                       style={{
@@ -50,19 +60,20 @@ export const MiniCard = (props) => {
                       }}
                     />
                   </View>
+                  <SecondaryText style={{ textAlign: "center" }}>
+                    {props.greenscore}%
+                  </SecondaryText>
                 </View>
-                {/* <SecondaryText style={{ textAlign: "center" }}>
-                  {props.greenscore}%
-                </SecondaryText> */}
+                <View style={styles.rate}>
+                  {props.suggestionRate && (
+                    <SuggestionIcon
+                      noLeft
+                      suggestionRate={props.suggestionRate}
+                      color={Colors.secondary}
+                    />
+                  )}
+                </View>
               </View>
-              {props.suggestionRate && (
-                <View style={styles.infos}>
-                  <SuggestionIcon
-                    suggestionRate={props.suggestionRate}
-                    color={Colors.secondary}
-                  />
-                </View>
-              )}
             </View>
           </Body>
         </CardItem>
@@ -74,11 +85,12 @@ export const MiniCard = (props) => {
 const styles = StyleSheet.create({
   infosContainer: {
     alignItems: "center",
-    flex: 1, 
+    flexDirection: "column",
+    flex: 1,
+    justifyContent: "center",
+    maxWidth: 100,
   },
   infos: {
-    flex: 1,
     flexDirection: "row",
-    marginRight: 30,
   },
 });

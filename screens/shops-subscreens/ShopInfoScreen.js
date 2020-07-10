@@ -71,7 +71,7 @@ export default function ShopInfoScreen({ route, navigation }) {
         .get(`${global.base_api_url}shop/`)
         .then((res) =>
           setSelectedShops(
-            res.data.results.filter((s) => data.uid !== index).slice(0, 2)
+            res.data.results.filter((s) => s.uid !== index).slice(0, 2)
           )
         );
 
@@ -127,145 +127,152 @@ export default function ShopInfoScreen({ route, navigation }) {
               resizeMode: "cover",
             }}
           />
-        ) : null}
+        ) : (
+          <Spinner color={Colors.secondary} />
+        )}
       </View>
-      {data ? (
-        <View style={styles.infosContainer}>
-          <View style={styles.rate}>
-            <View>{<LeavesCount rate={data.greenscore.value} />}</View>
-            <View>
-              <SuggestionIcon
-                suggestionRate={data.ratings}
-                color={Colors.secondary}
-              />
+
+      <View style={styles.infosContainer}>
+        {data ? (
+          <>
+            <View style={styles.rate}>
+              <View>{<LeavesCount rate={data.greenscore.value} />}</View>
+              <View>
+                <SuggestionIcon
+                  suggestionRate={data.ratings}
+                  color={Colors.secondary}
+                />
+              </View>
             </View>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
-              {data.name}
+            <View style={{ marginTop: 10 }}>
+              <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
+                {data.name}
+              </SecondaryTitle>
+            </View>
+            <ItalicText style={{ textAlign: "center", marginBottom: 20 }}>
+              {data.address}
+            </ItalicText>
+            <SimpleText>{data.description}</SimpleText>
+            <View style={[styles.tagsContainer, { marginBottom: 50 }]}>
+              {data.tags.map((tag, idx) => (
+                <Tag title={tag.name} key={idx} />
+              ))}
+            </View>
+            <SecondaryTitle
+              style={{ textAlign: "center", marginBottom: 30 }}
+              fontSize={20}
+            >
+              Critères de sélection
             </SecondaryTitle>
-          </View>
-          <ItalicText style={{ textAlign: "center", marginBottom: 20 }}>
-            {data.address}
-          </ItalicText>
-          <SimpleText>{data.description}</SimpleText>
-          <View style={[styles.tagsContainer, { marginBottom: 50 }]}>
-            {data.tags.map((tag, idx) => (
-              <Tag title={tag.name} key={idx} />
-            ))}
-          </View>
-          <SecondaryTitle
-            style={{ textAlign: "center", marginBottom: 30 }}
-            fontSize={20}
-          >
-            Critères de sélection
-          </SecondaryTitle>
-          {console.log(criteria)}
-          <View style={styles.criteria}>
-            {criteria &&
-              criteria
-                .slice(1)
-                .map((criterium) => (
-                  <Criterium
-                    title={criterium.name}
-                    imageType={criterium.name}
-                    score={criterium.value}
-                    key={criterium.greenUid}
+            <View style={styles.criteria}>
+              {criteria &&
+                criteria
+                  .slice(1)
+                  .map((criterium) => (
+                    <Criterium
+                      title={criterium.name}
+                      imageType={criterium.name}
+                      score={criterium.value}
+                      key={criterium.greenUid}
+                    />
+                  ))}
+            </View>
+            <View>
+              <SecondaryTitle
+                style={{ textAlign: "center", marginBottom: 10 }}
+                fontSize={20}
+              >
+                Horaires:
+              </SecondaryTitle>
+              <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
+                {data.hours}
+              </SimpleText>
+              {location && (
+                <View style={styles.mapContainer}>
+                  <MapView
+                    style={styles.mapStyle}
+                    initialRegion={{
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                      latitudeDelta: 0.00922,
+                      longitudeDelta: 0.00421,
+                    }}
+                  >
+                    <Marker coordinate={location} />
+                  </MapView>
+                </View>
+              )}
+            </View>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                marginBottom: 50,
+                marginTop: 50,
+              }}
+            >
+              <SecondaryTitle
+                style={{ textAlign: "center", marginBottom: 10 }}
+                fontSize={20}
+              >
+                veux tu exprimer ton avis ?
+              </SecondaryTitle>
+
+              <Button
+                style={styles.searchButton}
+                onPress={() => navigation.navigate("Feedback", { id: data.id })}
+              >
+                <ButtonText style={styles.buttonText} transform>
+                  Donner mon avis
+                </ButtonText>
+              </Button>
+            </View>
+            <SecondaryTitle
+              style={{ textAlign: "center", marginBottom: 10 }}
+              fontSize={20}
+            ></SecondaryTitle>
+            <View style={styles.miniCards}>
+              {selectedShops &&
+                selectedShops.map((shop, idx) => (
+                  <MiniCard
+                    key={idx}
+                    id={shop.uid}
+                    name={shop.name}
+                    address={shop.address}
+                    greenscore={shop.greenscore.value}
+                    suggestionRate={shop.ratings ? shop.ratings : null}
+                    tags={shop.tags}
+                    image={shop.image}
                   />
                 ))}
-          </View>
-          <View>
-            <SecondaryTitle
-              style={{ textAlign: "center", marginBottom: 10 }}
-              fontSize={20}
-            >
-              Horaires:
-            </SecondaryTitle>
-            <SimpleText style={{ textAlign: "center" }} color={Colors.grey}>
-              {data.hours}
-            </SimpleText>
-            {location && (
-              <View style={styles.mapContainer}>
-                <MapView
-                  style={styles.mapStyle}
-                  initialRegion={{
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                    latitudeDelta: 0.00922,
-                    longitudeDelta: 0.00421,
-                  }}
-                >
-                  <Marker coordinate={location} />
-                </MapView>
-              </View>
-            )}
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              marginBottom: 50,
-              marginTop: 50,
-            }}
-          >
-            <SecondaryTitle
-              style={{ textAlign: "center", marginBottom: 10 }}
-              fontSize={20}
-            >
-              veux tu exprimer ton avis ?
-            </SecondaryTitle>
-
-            <Button
-              style={styles.searchButton}
-              onPress={() => navigation.navigate("Feedback", { id: data.id })}
-            >
-              <ButtonText style={styles.buttonText} transform>
-                Donner mon avis
-              </ButtonText>
-            </Button>
-          </View>
-          <SecondaryTitle
-            style={{ textAlign: "center", marginBottom: 10 }}
-            fontSize={20}
-          ></SecondaryTitle>
-          <View style={styles.miniCards}>
-            {selectedShops &&
-              selectedShops.map((shop, idx) => (
-                <MiniCard
-                  key={idx}
-                  id={shop.uid}
-                  name={shop.name}
-                  address={shop.address}
-                  //greenscore={shop.greenscore}
-                  suggestionRate={shop.ratings ? shop.ratings : null}
-                  tags={shop.tags}
-                />
-              ))}
-          </View>
-          <View>
-            {data.website ? (
-              <View>
-                <FullButton
-                  title="Site Internet"
-                  onPress={() =>
-                    data.website ? Linking.openURL(data.website) : null
-                  }
-                />
-              </View>
-            ) : null}
-            <FullButton
-              title="Donner mon avis"
-              onPress={() => navigation.navigate("Feedback", { id: data.id })}
-            />
-            <FullButton
-              title="Remettre en question le greenscore"
-              onPress={() => navigation.navigate("Greenscore", { shop: data })}
-            />
-          </View>
-        </View>
-      ) : (
-        <Spinner color={Colors.secondary} />
-      )}
+            </View>
+            <View>
+              {data.website ? (
+                <View>
+                  <FullButton
+                    title="Site Internet"
+                    onPress={() =>
+                      data.website ? Linking.openURL(data.website) : null
+                    }
+                  />
+                </View>
+              ) : null}
+              <FullButton
+                title="Donner mon avis"
+                onPress={() => navigation.navigate("Feedback", { id: data.id })}
+              />
+              <FullButton
+                title="Remettre en question le greenscore"
+                onPress={() =>
+                  navigation.navigate("Greenscore", { shop: data })
+                }
+              />
+            </View>
+          </>
+        ) : (
+          <Spinner color={Colors.secondary} />
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -308,6 +315,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 20,
     width: Dimensions.get("window").width,
+  },
+  back: {
+    position: "absolute",
+    top: 20,
+    left: 10,
+    width: 55,
+    padding: 20,
+    zIndex: 399,
   },
   criteria: {
     width: Dimensions.get("window").width,

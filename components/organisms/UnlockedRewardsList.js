@@ -35,9 +35,14 @@ export const UnlockedRewardsList = () => {
     if (unlockedRewardsUids) {
       async function fetchUnlockRewards() {
         unlockedRewardsUids.forEach(async (uid) => {
-          await axios
-            .get(`${global.base_api_url}reward/${uid}/`)
-            .then((res) => setUnlockedRewards(() => [res.data]));
+          await axios.get(`${global.base_api_url}reward/${uid}/`).then((res) =>
+            setUnlockedRewards((prevState) => [
+              ...prevState,
+              {
+                reward: res.data,
+              },
+            ])
+          );
         });
       }
       fetchUnlockRewards();
@@ -60,14 +65,14 @@ export const UnlockedRewardsList = () => {
         </View>
         <View>
           <FlatList
-            keyExtractor={(item) => item.uid.toString()}
-            data={unlockedRewards}
+            keyExtractor={(item) => item.reward.uid.toString()}
+            data={unlockedRewards.filter((o) => o !== null)}
             renderItem={({ item }) => (
               <UnlockReward
-                uid={item.uid}
-                title={item.name}
-                description={item.description}
-                subtitle={item.subtitle}
+                uid={item.reward.uid}
+                title={item.reward.name}
+                description={item.reward.description}
+                subtitle={item.reward.subtitle}
               />
             )}
           />

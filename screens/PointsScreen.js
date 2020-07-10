@@ -29,6 +29,8 @@ import global from "../Global";
 import { UnlockedRewardsList } from "../components/organisms/UnlockedRewardsList";
 import { RewardInfos } from "../components/organisms/RewardInfos";
 
+// CAGNOTTE SCREEN
+
 const PointsStack = createStackNavigator();
 
 export const Infos = ({ navigation }) => {
@@ -97,6 +99,7 @@ export const Infos = ({ navigation }) => {
     <View
       style={{
         width: `${width}%`,
+        maxWidth: "110%",
         height: 10,
         backgroundColor: Colors.secondary,
         borderRadius: 15,

@@ -7,7 +7,7 @@ import Colors from "../../constants/Colors";
 export const RewardItem = (props) => {
   const list = props.list;
 
-  const isUnlock = () => list.leaves_amount > props.userScore;
+  const isUnlock = () => true;
   return (
     <View style={styles.container}>
       <TouchableOpacity>
@@ -53,8 +53,9 @@ export const RewardItem = (props) => {
                       styles.progressInner,
                       {
                         width: isUnlock()
-                          ? `${list.leaves_amount / props.userScore}%`
+                          ? `${(props.userScore * 100) / list.leaves_amount}%`
                           : "100%",
+                        maxWidth: "100%",
                         backgroundColor: isUnlock()
                           ? Colors.white
                           : Colors.secondary,

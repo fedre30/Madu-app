@@ -84,14 +84,11 @@ export default function Login({ route, navigation }) {
           style={styles.image}
         />
       </View>
-      <Title
-        style={styles.title}
-        fontSize={20}
-      >
+      <Title style={styles.title} fontSize={17}>
         Se connecter
       </Title>
       <SafeAreaView style={styles.formItem}>
-        <LabelInput style={{marginBottom: 15,}}>Adresse email</LabelInput>
+        <LabelInput style={{ marginBottom: 15 }}>Adresse email</LabelInput>
         <Item regular bordered style={styles.input}>
           <Input
             placeholder={"Ex: Marie@hetic.net"}
@@ -102,7 +99,7 @@ export default function Login({ route, navigation }) {
         </Item>
       </SafeAreaView>
       <View style={styles.formItem}>
-        <LabelInput style={{marginBottom: 15,}}>Mot de passe</LabelInput>
+        <LabelInput style={{ marginBottom: 15 }}>Mot de passe</LabelInput>
         <Item regular bordered style={styles.input}>
           <Input
             textContentType={"password"}
@@ -126,7 +123,7 @@ export default function Login({ route, navigation }) {
           onPress={() => updateField("cache", !infos.cache)}
           color={Colors.secondary}
         />
-        <SimpleText style={{ marginLeft: 15, marginTop: 0 }}>
+        <SimpleText style={{ marginLeft: 15, marginTop: 5 }}>
           Rester connecté(e)
         </SimpleText>
       </View>
@@ -168,10 +165,10 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   title: {
-    marginBottom: 10, 
-    fontSize: 20, 
-    lineHeight: 21, 
-    textAlign: "center", 
+    marginBottom: 10,
+    fontSize: 20,
+    lineHeight: 29,
+    textAlign: "center",
     textTransform: "uppercase",
   },
   formItem: {
@@ -194,10 +191,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  input: { 
-    borderWidth: 1, 
-    borderColor:Colors.lightGrey, 
-    borderRadius:4,
+  input: {
+    borderWidth: 1,
+    borderColor: Colors.lightGrey,
+    borderRadius: 4,
   },
   loginButton: {
     width: 200,

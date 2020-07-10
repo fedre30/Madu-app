@@ -11,6 +11,8 @@ import {
   ButtonText,
   Title,
   SimpleText,
+  ThirdlyTitle,
+  SecondaryTitle,
 } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
 import { Button, Spinner } from "native-base";
@@ -72,28 +74,30 @@ export const ContentChallenges = ({ route, navigation }) => {
           </View>
           <View style={styles.contentWrapper}>
             <Text style={styles.remainingDay}>
-              <Text style={styles.span}>{data.day_duration} </Text>
-              jours restants pour réaliser ce défi
+              <Text style={styles.span}>{data.day_duration} jours </Text>
+              restants pour réaliser ce défi
             </Text>
-            <Text
+            <SecondaryTitle
               style={{
-                textTransform: "uppercase",
-                textAlign: "left",
-                marginBottom: 30,
+                lineHeight: 48,
                 marginTop: 20,
-                fontSize: 28,
-                fontWeight: "500",
+                marginBottom: 20,
+                textAlign: "left",
               }}
             >
-              {data.name}
-            </Text>
-
-            <Text style={styles.subtitle}>{data.small_description}</Text>
-
+              {data.title}
+            </SecondaryTitle>
+            <Text style={styles.subtitle}>{data.subtitle}</Text>
             <Text style={styles.content}> {data.description}</Text>
-
-            <View>
-              <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+            <View style={{ flexDirection: "row" }}>
+              <View
+                style={{
+                  width: 20,
+                  height: 20,
+                  marginBottom: 20,
+                  marginRight: 10,
+                }}
+              >
                 <Image
                   source={require("../../assets/images/thumb.png")}
                   style={{
@@ -105,8 +109,8 @@ export const ContentChallenges = ({ route, navigation }) => {
                 />
               </View>
               <Text style={styles.subtext}>
-                <Text style={styles.span}>{data.done_by_users.length} </Text>
-                personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
+                <Text style={styles.span}>10 </Text>
+                personnes ont réalisé ce défi, dont 3 chez Hetic.
               </Text>
             </View>
           </View>
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
     width: 55,
     padding: 20,
   },
-  picture: {    
+  picture: {
     flex: 1,
     width: null,
     height: 200,
@@ -227,7 +231,7 @@ const styles = StyleSheet.create({
     height: 45,
     left: 67,
     justifyContent: "center",
-    borderRadius:4,
+    borderRadius: 4,
     backgroundColor: Colors.secondary,
   },
   buttonText: {

@@ -129,7 +129,7 @@ export const Infos = ({ navigation }) => {
   const Description = () => {
     if (currentScore >= 100) {
       return (
-        <SimpleText style={styles.description}>
+        <SimpleText style={styles.description} lineHeight={20}>
           Vous pouvez dès à présent débloquer une récompense.
         </SimpleText>
       );
@@ -190,7 +190,7 @@ export const Infos = ({ navigation }) => {
           </View>
           <TouchableOpacity onPress={() => navigation.navigate("ShowReward")}>
             <View style={styles.contentRecompense}>
-              <SecondaryTitle fontSize={14} style={styles.text}>
+              <SecondaryTitle fontSize={14} style={styles.text} lineHeight={22}>
                 Voir les récompenses {"\n"} déjà débloquées
               </SecondaryTitle>
             </View>
@@ -280,6 +280,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width - 20,
     fontSize: 20,
     marginLeft: 20,
+    marginTop: 20,
   },
   progressContainer: {
     width: "80%",
@@ -301,7 +302,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     shadowOpacity: 0.1,
-    marginTop: 10,
   },
   firstIconImage: {
     width: 30,
@@ -321,6 +321,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 230,
     marginBottom: 20,
+    paddingTop: 10,
   },
   text: {
     color: "#FFF",

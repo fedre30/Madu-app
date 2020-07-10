@@ -220,7 +220,7 @@ export default function ShopInfoScreen({ route, navigation }) {
 
               <Button
                 style={styles.searchButton}
-                onPress={() => navigation.navigate("Feedback", { id: data.id })}
+                onPress={() => navigation.navigate("Feedback", { id: index })}
               >
                 <ButtonText style={styles.buttonText} transform>
                   Donner mon avis
@@ -259,7 +259,7 @@ export default function ShopInfoScreen({ route, navigation }) {
               ) : null}
               <FullButton
                 title="Donner mon avis"
-                onPress={() => navigation.navigate("Feedback", { id: data.id })}
+                onPress={() => navigation.navigate("Feedback", { shop: data })}
               />
               <FullButton
                 title="Remettre en question le greenscore"

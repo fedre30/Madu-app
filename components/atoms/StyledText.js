@@ -77,6 +77,7 @@ export const SecondaryTitle = (props) => {
         {
           fontFamily: "gotham-medium",
           fontSize: props.fontSize ? props.fontSize : 17,
+          lineHeight: props.lineHeight ? props.lineHeight : 30,
         },
       ]}
     />
@@ -198,13 +199,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     color: Colors.text,
-    lineHeight: 44,
+    lineHeight: 24,
     textAlign: "center",
   },
 
   secondary: {
     fontSize: 17,
-    lineHeight: 30,
     textTransform: "uppercase",
   },
 
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   thirdly: {
     fontWeight: "500",
     fontSize: 17,
-    lineHeight: 20,
+    lineHeight: 27,
     color: Colors.black,
   },
 });

@@ -16,14 +16,16 @@ export const MapCallout = (props) => {
   return (
     <Callout onPress={props.onPress} width={300} tooltip={true}>
       <CardItem cardBody>
-        <Image
-          source={
-            props.image
-              ? { uri: props.image }
-              : require("../../assets/images/abattoirveg.jpg")
-          }
-          style={{ height: 100, width: null, flex: 1 }}
-        />
+        <Text style={{ width: 300 }}>
+          <Image
+            source={
+              props.image
+                ? { uri: props.image }
+                : require("../../assets/images/abattoirveg.jpg")
+            }
+            style={{ height: 180, width: 300, resizeMode: "cover" }}
+          />
+        </Text>
       </CardItem>
 
       <CardItem>

@@ -4,7 +4,7 @@ export default ListEntreprise = [
     logo: "../../assets/images/Ellipse29.png",
     rang: "1er",
     name: "Figaro",
-    point: 1005,
+    point: 1385,
     icon: "../../assets/images/bio.png",
   },
   {
@@ -20,7 +20,7 @@ export default ListEntreprise = [
     logo: "../../assets/images/Ellipse31.png",
     rang: "3e",
     name: "HETIC",
-    point: 1240,
+    point: 1210,
     icon: "../../assets/images/bio.png",
   },
   {
@@ -28,7 +28,7 @@ export default ListEntreprise = [
     logo: "../../assets/images/Ellipse36.png",
     rang: "4e",
     name: "Too Good TO GO",
-    point: 1343,
+    point: 1043,
     icon: "../../assets/images/bio.png",
   },
 ];

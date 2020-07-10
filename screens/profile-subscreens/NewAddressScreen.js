@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     fontFamily: "gotham-medium",
     fontWeight: "normal",
     fontSize: 20,
-    lineHeight: 27,
+    lineHeight: 30,
     textTransform: "uppercase",
 
     color: Colors.black,

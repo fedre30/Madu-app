@@ -38,7 +38,7 @@ export const ListCard = (props) => {
               }}
             />
             <SecondaryText style={{ textAlign: "center" }}>
-              {props.greenscore ? props.greenscore : null}%
+              {props.greenscore ? props.greenscore.value : null}%
             </SecondaryText>
           </View>
         )}

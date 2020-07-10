@@ -21,7 +21,7 @@ Madu is a Mobile app that lists on a map all eco-friendly adresses such as shops
 
 
 #### Why React Native?
- React Native is React Native isn't necessary better than standard Native development. But React Native's main advantage compared to Native is enabling single JavaScript codebase for 2 different platforms. Furthermore, not only is it easier to maintain the app for both platforms, but also it requires less resources.
+ React Native isn't necessary better than standard Native development. But React Native's main advantage compared to Native is enabling single JavaScript codebase for 2 different platforms. Furthermore, not only is it easier to maintain the app for both platforms, but also it requires less resources.
 
 #### Why Native-base?
  Native-base gives you the potential of building applications that run on iOS and Android using a single codebase. It eases out your development. Since NativeBase is built on top of React Native, hence with any component you can pass the style property which will be merged to the default style of that component.

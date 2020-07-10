@@ -66,6 +66,7 @@ password: madu
 
 ### Structure
 
+![final](https://user-images.githubusercontent.com/33491036/87130863-dbb0ce80-c293-11ea-8c5d-0103d5ead009.png)
 
 ## API 🧐
 

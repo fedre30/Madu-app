@@ -7,6 +7,7 @@ import {
   SecondaryTitle,
   ItalicText,
   TagsText,
+  ThirdlyTitle,
 } from "../atoms/StyledText";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { PriceIcon, WheelchairIcon, SuggestionIcon } from "../atoms/CardIcons";
@@ -37,9 +38,9 @@ export const ListCard = (props) => {
                 resizeMode: "contain",
               }}
             />
-            <SecondaryText style={{ textAlign: "center" }}>
+            <ThirdlyTitle style={{ textAlign: "center" }}>
               {props.greenscore ? props.greenscore.value : null}%
-            </SecondaryText>
+            </ThirdlyTitle>
           </View>
         )}
         <CardItem cardBody>

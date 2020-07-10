@@ -62,6 +62,24 @@ password: madu
 ### Run project
 ```expo start```
 
+### Publish project
+```expo publish```
+
+## Files system
+```
+.
++-- _assets
++-- _screens
+|   +-- _login-subscreens
+|   +-- _profile-subscreens
+|   +-- _shops-subscreens
+|   +-- LoginScreen.js
+|   +-- MapScreen.js
+|   +-- PointsScreen.js
+|   +-- ProfileScreen.js
++-- App.js
+```
+
 ## BDD 🧐
 
 ### Structure

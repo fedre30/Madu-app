@@ -12,7 +12,7 @@ export const PriceIcon = (props) => {
       name="logo-euro"
       size={props.size ? props.size : 20}
       style={{ marginRight: 5 }}
-      color={props.focused ? Colors.text : Colors.grey}
+      color={props.focused ? Colors.secondary : Colors.grey}
     />
   );
 };
@@ -36,7 +36,6 @@ export const SuggestionIcon = (props) => {
       style={{
         flexDirection: "row",
         alignItems: "center",
-        left: props.noLeft ? 0 : 40,
       }}
     >
       <Ionicons

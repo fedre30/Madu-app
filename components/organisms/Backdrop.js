@@ -152,7 +152,7 @@ export const MapBackDrop = (props) => {
                 accessibility={item.accessibility}
                 suggestionRate={item.ratings ? item.ratings : null}
                 image={item.image}
-                greenscore={item.greenscore.value}
+                greenscore={item.greenscore}
               />
             )}
             keyExtractor={(shop) => shop.uid.toString()}

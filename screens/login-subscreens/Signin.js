@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 10,
     fontSize: 20,
-    lineHeight: 21,
+    lineHeight: 30,
     textAlign: "center",
     textTransform: "uppercase",
   },

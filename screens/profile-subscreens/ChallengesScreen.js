@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   titleChallenges: {
-    marginTop: 40,
+    marginBottom: 10,
   },
   containerFullCardChallenges: {
     display: "flex",

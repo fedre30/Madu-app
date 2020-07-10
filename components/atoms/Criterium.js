@@ -1,6 +1,13 @@
 import React from "react";
 import { Image, StyleSheet, View, Dimensions } from "react-native";
-import { SimpleText, Title, Subtitle, SecondaryText } from "./StyledText";
+import {
+  SimpleText,
+  Title,
+  Subtitle,
+  SecondaryText,
+  ItalicText,
+  TagsText,
+} from "./StyledText";
 import Colors from "../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LeavesCount } from "./LeavesCount";
@@ -35,6 +42,20 @@ export const Criterium = (props) => {
         <View style={{ width: 40, flex: 1 }}>
           <LeavesCount rate={props.score} />
         </View>
+        {props.title === "cuisine" && (
+          <>
+            <TagsText>Provenance Matières</TagsText>
+            <TagsText>Agriculture Concernée</TagsText>
+            <TagsText>Tri des déchets</TagsText>
+          </>
+        )}
+        {props.title === "matériel" && (
+          <>
+            <TagsText>À emporter</TagsText>
+            <TagsText>Consommation Énergétique</TagsText>
+            <TagsText>Produits entretien</TagsText>
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -47,6 +68,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginBottom: 50,
+    height: "auto",
   },
   contentContainer: {
     justifyContent: "flex-start",
@@ -63,9 +85,10 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginLeft: 20,
+    height: 150,
   },
   title: {
-    textAlign: "center",
+    textAlign: "left",
     textTransform: "capitalize",
     color: Colors.grey,
   },

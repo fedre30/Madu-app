@@ -179,18 +179,6 @@ export default class Sliding extends Component {
             >
               ils ont le moins consommés...
             </SecondaryTitle>
-            <Text
-              style={{
-                fontSize: 14,
-                color: "#818181",
-                justifyContent: "flex-end",
-                alignSelf: "flex-end",
-                marginRight: 30,
-                marginTop: 14,
-              }}
-            >
-              Empreinte carbone (CO₂)
-            </Text>
           </View>
           <Animated.View
             style={{

@@ -109,8 +109,8 @@ export const ContentChallenges = ({ route, navigation }) => {
                 />
               </View>
               <Text style={styles.subtext}>
-                <Text style={styles.span}>{data.done_by_users.length} </Text>
-                personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
+                <Text style={styles.span}>10 </Text>
+                personnes ont réalisé ce défi, dont 3 chez Hetic.
               </Text>
             </View>
           </View>

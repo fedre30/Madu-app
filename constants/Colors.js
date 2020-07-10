@@ -13,7 +13,7 @@ export default {
   blue: "#364EC1",
   tintColor,
   tabIconDefault: "#ccc",
-  tabIconSelected: tintColor,
+  tabIconSelected: "#00DDC0",
   tabBar: "#fefefe",
   errorBackground: "red",
   errorText: "#fff",

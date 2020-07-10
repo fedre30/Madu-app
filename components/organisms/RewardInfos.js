@@ -204,18 +204,13 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
     backgroundColor: "#FFFFFF",
+    paddingTop: 40,
   },
 
   modalContentContainer: {
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-  },
-
-  modal: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-    backgroundColor: "#FFFFFF",
   },
 
   modalContentContainer: {

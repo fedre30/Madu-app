@@ -56,8 +56,8 @@ export default function CardChallenges(props) {
           />
         </View>
         <SimpleText style={styles.subtext}>
-          <Text style={styles.span}>{challenge.done_by_users.length}</Text>{" "}
-          personnes ont réalisé ce défi, dont 3 chez Little Cigogne.
+          <Text style={styles.span}>10</Text> personnes ont réalisé ce défi,
+          dont 3 chez Hetic.
         </SimpleText>
       </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   searchButton: {
     justifyContent: "center",
     backgroundColor: "#00DDC0",
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 40,
     width: 150,
     height: 45,

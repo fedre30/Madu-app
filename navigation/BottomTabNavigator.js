@@ -17,14 +17,20 @@ export default function BottomTabNavigator({ navigation, route }) {
   //navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator
+      initialRouteName={INITIAL_ROUTE_NAME}
+      tabBarOptions={{
+        activeTintColor: "#00DDC0",
+        inactiveTintColor: "gray",
+      }}
+    >
       <BottomTab.Screen
         name="Map"
         component={MapScreen}
         options={{
-          title: "Map",
+          title: "Sélection",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-map" />
+            <TabBarIcon focused={focused} name="md-search" />
           ),
         }}
       />

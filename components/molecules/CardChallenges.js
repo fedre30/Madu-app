@@ -10,6 +10,7 @@ import {
   SecondaryText,
   SecondaryTitle,
   TagsText,
+  HighlightText,
 } from "../atoms/StyledText";
 import { useNavigation } from "@react-navigation/native";
 
@@ -21,11 +22,20 @@ export default function CardChallenges(props) {
   return (
     <Card style={{ marginBottom: 40 }}>
       <View style={styles.durationContainer}>
-        <SimpleText> {challenge.day_duration} jours restants </SimpleText>
+        <SimpleText>
+          <SecondaryText style={{ fontWeight: "700" }}>
+            {challenge.day_duration} jours
+          </SecondaryText>{" "}
+          restants
+        </SimpleText>
       </View>
       <CardItem cardBody>
         <Image
-          source={require("../../assets/images/defis1.png")}
+          source={
+            challenge.image
+              ? { uri: challenge.image }
+              : require("../../assets/images/defis1.png")
+          }
           style={styles.imageChallenge}
         />
       </CardItem>
@@ -33,8 +43,8 @@ export default function CardChallenges(props) {
       <TagsText style={styles.descriptionChallenges}>
         {challenge.small_description}
       </TagsText>
-      <View style={{ padding: 10 }}>
-        <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+      <View style={{ padding: 20, flexDirection: "row" }}>
+        <View style={{ width: 20, height: 20, marginRight: 5 }}>
           <Image
             source={require("../../assets/images/thumb.png")}
             style={{
@@ -82,13 +92,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   durationContainer: {
-    width: 120,
     position: "absolute",
     zIndex: 4,
     backgroundColor: "#FFFFFF",
     borderRadius: 4,
     paddingTop: 10,
-    paddingLeft: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
     top: -20,
     left: -10,
     shadowColor: "#000",
@@ -130,6 +140,7 @@ const styles = StyleSheet.create({
     color: "#1C1C1C",
     paddingLeft: 20,
     paddingTop: 20,
+    textAlign: "left",
   },
   descriptionChallenges: {
     fontSize: 17,

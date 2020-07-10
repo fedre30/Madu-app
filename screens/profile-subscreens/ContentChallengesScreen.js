@@ -89,8 +89,15 @@ export const ContentChallenges = ({ route, navigation }) => {
             </SecondaryTitle>
             <Text style={styles.subtitle}>{data.subtitle}</Text>
             <Text style={styles.content}> {data.description}</Text>
-            <View>
-              <View style={{ width: 20, height: 20, marginBottom: 20 }}>
+            <View style={{ flexDirection: "row" }}>
+              <View
+                style={{
+                  width: 20,
+                  height: 20,
+                  marginBottom: 20,
+                  marginRight: 10,
+                }}
+              >
                 <Image
                   source={require("../../assets/images/thumb.png")}
                   style={{

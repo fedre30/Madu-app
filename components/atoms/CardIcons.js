@@ -43,10 +43,10 @@ export const SuggestionIcon = (props) => {
         name="md-thumbs-up"
         size={props.size ? props.size : 30}
         style={{ marginBottom: -3 }}
-        color={props.color ? props.color : Colors.text}
+        color={props.color ? props.color : Colors.secondary}
       />
 
-      <SimpleText style={{ marginLeft: 10, marginTop: 10 }}>
+      <SimpleText style={{ marginLeft: 5, marginTop: 15 }}>
         {props.suggestionRate ? props.suggestionRate : 89}%
       </SimpleText>
     </View>

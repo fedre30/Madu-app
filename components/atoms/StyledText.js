@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
   secondary: {
     fontSize: 17,
     textTransform: "uppercase",
+    lineHeight: 29,
   },
 
   italic: {

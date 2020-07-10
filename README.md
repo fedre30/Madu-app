@@ -69,14 +69,79 @@ password: madu
 ```
 .
 +-- _assets
+|   +--fonts
+|   +--images
++-- _components
+|   +-- ___test__
+|    	 -++ ___snapshots__
+|	      -++ StyledText-test.js.snap
+|	 -++ StyledText-test.js
+|    +-- _atoms
+|    	 +-- Callout.js
+|	 +-- Cardlcons.js
+|	 +-- Criterium.js
+|	 +-- FilterButton.js
+|	 +-- FullButton.js
+|	 +-- GoBack.js
+|	 +-- LeavesCount.js
+|	 +-- StyledText.js
+|	 +-- Tag.js
+|   +-- _molecules
+|        +-- Card.js
+|	 +-- CardChallenges.js
+|	 +-- MiniCard.js
+|	 +-- ProfileThumbnail.js
+|   +-- _organisms
+|    	 +-- Backdrop.js
+|	 +-- Entreprise.js
+|	 +-- FilterView.js
+|	 +-- Individuel.js
+|	 +-- Recompense.js
+|	 +-- Rewardinfos.js
+|	 +-- RewardItem.js
+|	 +-- RewwardList.js
+|	 +-- Sliding.js
+|	 +-- UnlockRework.js
+|	 +-- UnlockedReward.js
+|   +-- TabBarlcon.js
++-- _constants
+|    +-- Colors.js
+|    +-- Layout.js
++-- _hooks
+|    +-- api.js
+|    +-- auth.js
+|    +-- useCachedResources.js
++-- _navigation
+|    +-- BottomTabNavigator.js
+|    +-- LinkingConfiguration.js
 +-- _screens
 |   +-- _login-subscreens
+|	 +-- Login.js
+|   	 +-- Signin.js
 |   +-- _profile-subscreens
+|        +-- ChallengesScreen.js
+|    	 +-- ContentChallengesScreen.js
+|	 +-- NewAddressScreen.js
 |   +-- _shops-subscreens
+|	 +-- ConfirmationScreen.js
+|	 +-- FeedBackScreen.js
+|	 +-- GreenscoreScreen.js
+|	 +-- ShopInfoScreen.js
 |   +-- LoginScreen.js
 |   +-- MapScreen.js
 |   +-- PointsScreen.js
 |   +-- ProfileScreen.js
++-- _utils
+|    +-- DataEntreprise.js
+|    +-- DataIndividuel.js
+|    +-- FirsDataRecompense.js.js
+|    +-- SecondDataRecompense.js
+|    +-- api.js
+|    +-- challenge-api-test.json
+|    +-- data.js
+|    +-- map.js
+|    +-- po-api-test-users.json
+|    +-- poi-api-test.json
 +-- App.js
 ```
 

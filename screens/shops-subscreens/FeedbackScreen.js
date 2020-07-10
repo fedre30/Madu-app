@@ -21,6 +21,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import axios from "axios";
 import global from "../../Global";
+import { GoBack } from "../../components/atoms/GoBack";
 
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
@@ -57,16 +58,7 @@ export default function FeedbackScreen({ route, navigation }) {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
     >
-      <Button
-        title="Retour"
-        onPress={() => navigation.goBack()}
-        style={styles.back}
-        transparent
-        light
-      >
-        <Ionicons name="md-arrow-round-back" size={20} />
-        <Text style={ styles.goBackText }>Retour</Text>
-      </Button>
+      <GoBack />
       <View style={{ marginTop: 10 }}>
         <SecondaryTitle style={{ textAlign: "center" }} fontSize={20}>
           Donner mon avis
@@ -98,8 +90,8 @@ export default function FeedbackScreen({ route, navigation }) {
         </TouchableOpacity>
       </View>
       <SimpleText style={{ marginBottom: 20 }}>
-        Veux-tu t'exprimer sur quelque chose en particulier ? Ou bien
-        juste donner ton avis ? Remplis le champ ci-dessous !
+        Veux-tu t'exprimer sur quelque chose en particulier ? Ou bien juste
+        donner ton avis ? Remplis le champ ci-dessous !
       </SimpleText>
       <Textarea
         rowSpan={6}
@@ -133,7 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 15,
     lineHeight: 20,
-    
+
     color: Colors.black,
     textTransform: "capitalize",
 

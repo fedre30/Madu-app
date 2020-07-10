@@ -14,6 +14,7 @@ import {
 } from "../../components/atoms/StyledText";
 import Colors from "../../constants/Colors";
 import { Button, Spinner } from "native-base";
+import { GoBack } from "../../components/atoms/GoBack.js";
 
 export const ContentChallenges = ({ route, navigation }) => {
   navigation.setOptions({ headerShown: false });
@@ -56,15 +57,7 @@ export const ContentChallenges = ({ route, navigation }) => {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
     >
-      <Button
-        onPress={() => navigation.goBack()}
-        title="Back"
-        light
-        style={styles.back}
-        transparent
-      >
-        <Ionicons name="md-arrow-round-back" size={20} />
-      </Button>
+      <GoBack />
       {data ? (
         <>
           <View>
@@ -89,7 +82,7 @@ export const ContentChallenges = ({ route, navigation }) => {
                 marginBottom: 30,
                 marginTop: 20,
                 fontSize: 28,
-                fontWeight: "700",
+                fontWeight: "500",
               }}
             >
               {data.name}

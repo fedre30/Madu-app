@@ -17,6 +17,7 @@ import Individuel from "./Individuel";
 import ListEntreprise from "../../utils/DataEntreprise";
 import Entreprise from "./Entreprise";
 import { SecondaryTitle } from "../atoms/StyledText";
+import { GoBack } from "../atoms/GoBack";
 
 export default class Sliding extends Component {
   state = {
@@ -73,6 +74,7 @@ export default class Sliding extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
+          <GoBack />
           <View
             style={{
               flexDirection: "row",
@@ -250,7 +252,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    width: "60%",
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: 16,

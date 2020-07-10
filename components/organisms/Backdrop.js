@@ -49,7 +49,7 @@ export const MapBackDrop = (props) => {
       const parsed = tags.map((tag) => tag.uid).join(",");
       axios
         .get(`${global.base_api_url}shop/?tag_uid__in=${parsed}`)
-        .then((res) => console.log(res));
+        .then((res) => setShops(res.data.results));
     }
   }, [tags]);
 
@@ -85,7 +85,7 @@ export const MapBackDrop = (props) => {
         >
           <SimpleText>Fermer</SimpleText>
         </TouchableOpacity> */}
-        <ScrollView 
+        <ScrollView
           style={styles.filtersContainer}
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -95,7 +95,7 @@ export const MapBackDrop = (props) => {
             title="Filtres"
             imageType="filters"
             onPress={() => setModalVisible(!modalVisible)}
-            style={{ backgroundColor: Colors.secondary,  }}
+            style={{ backgroundColor: Colors.secondary }}
           />
           <FilterButton
             title="Végétarien"

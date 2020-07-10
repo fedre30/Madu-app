@@ -103,7 +103,10 @@ export const RewardInfos = (props) => {
                     justifyContent: "center",
                   }}
                 >
-                  <View style={styles.secondModal}>
+                  <ScrollView
+                    style={styles.modal}
+                    contentContainerStyle={styles.modalContentContainer}
+                  >
                     <View style={styles.contentImageCadeauxModalSecond}>
                       <Image
                         style={styles.imageCadeauxModalSecond}
@@ -135,7 +138,7 @@ export const RewardInfos = (props) => {
                       setSecondModalVisible(false);
                       unlockReward();
                     })}
-                  </View>
+                  </ScrollView>
                 </Modal>
               </Modal>
             )}
@@ -187,6 +190,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
+  modal: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    backgroundColor: "#FFFFFF",
+  },
+
+  modalContentContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+
   modal: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,

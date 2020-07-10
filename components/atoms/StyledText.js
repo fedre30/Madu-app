@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     color: Colors.text,
-    lineHeight: 44,
+    lineHeight: 24,
     textAlign: "center",
   },
 

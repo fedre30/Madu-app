@@ -51,9 +51,9 @@ export default function GreenscoreScreen({ route, navigation }) {
   const onPress = () => {
     axios
       .post(`${global.base_api_url}user-disagreement/`, {
-        tags: selectedTags,
-        shop: shop.uid,
-        user: user.uid,
+        tags_uid: selectedTags,
+        shop_uid: shop.uid,
+        user_uid: user.state.user.uid,
         is_eco: rate,
       })
       .then((response) => {
@@ -61,7 +61,7 @@ export default function GreenscoreScreen({ route, navigation }) {
       });
 
     navigation.navigate("Confirmation", {
-      id: shop.id,
+      id: shop.uid,
       type: "greenscore",
     });
   };
@@ -125,12 +125,12 @@ export default function GreenscoreScreen({ route, navigation }) {
               onPress={() => {
                 setSelectedTags((prevState) =>
                   prevState.includes(tag)
-                    ? prevState.filter((t) => t !== tag)
-                    : [...prevState, tag]
+                    ? prevState.filter((t) => t !== tag.uid)
+                    : [...prevState, tag.uid]
                 );
               }}
-              title={tag}
-              focused={selectedTags && selectedTags.includes(tag)}
+              title={tag.name}
+              focused={selectedTags && selectedTags.includes(tag.uid)}
             />
           ))}
         </View>

@@ -26,7 +26,7 @@ import { GoBack } from "../../components/atoms/GoBack";
 export default function FeedbackScreen({ route, navigation }) {
   navigation.setOptions({ headerShown: false });
   // Shop uid given by route prop
-  const index = route.params.id;
+  const shop = route.params.shop;
 
   // State
   const [rate, setRate] = useState(true);
@@ -41,12 +41,19 @@ export default function FeedbackScreen({ route, navigation }) {
 
   // POST Feedback
   const onPress = () => {
+    console.log(`${global.base_api_url}rating/`, {
+      comment: comments,
+      value: rate,
+      user_uid: user.uid,
+      shop_uid: shop.uid,
+    });
+
     axios
       .post(`${global.base_api_url}rating/`, {
         comment: comments,
         value: rate,
-        user: user.uid,
-        shop: index,
+        user_uid: user.uid,
+        shop_uid: shop.uid,
       })
       .then((response) => {
         console.log(response);
@@ -59,7 +66,7 @@ export default function FeedbackScreen({ route, navigation }) {
       .then((res) => {
         console.log(res.data);
       });
-    navigation.navigate("Confirmation", { id: index, type: "feedback" });
+    navigation.navigate("Confirmation", { id: shop.uid, type: "feedback" });
   };
 
   return (

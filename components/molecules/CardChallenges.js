@@ -3,7 +3,14 @@ import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../../constants/Colors";
 import { Button, Card, CardItem } from "native-base";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { ButtonText, SimpleText, Title } from "../atoms/StyledText";
+import {
+  ButtonText,
+  SimpleText,
+  Title,
+  SecondaryText,
+  SecondaryTitle,
+  TagsText,
+} from "../atoms/StyledText";
 import { useNavigation } from "@react-navigation/native";
 
 export default function CardChallenges(props) {
@@ -23,12 +30,9 @@ export default function CardChallenges(props) {
         />
       </CardItem>
       <Title style={styles.subtitleChallenges}>{challenge.title}</Title>
-      <Text style={styles.descriptionChallenges}>
+      <TagsText style={styles.descriptionChallenges}>
         {challenge.small_description}
-      </Text>
-      <SimpleText style={styles.workChallenges}>
-        {challenge.description}
-      </SimpleText>
+      </TagsText>
       <View style={{ padding: 10 }}>
         <View style={{ width: 20, height: 20, marginBottom: 20 }}>
           <Image

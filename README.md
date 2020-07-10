@@ -33,7 +33,7 @@ Madu is a Mobile app that lists on a map all eco-friendly adresses such as shops
 - Google maps API is a robust tool that can be used to create a custom map, a searchable map, check-in functions, display live data synching with location, plan routes, or create a mashup just to name a few.
 
 #### Why React-native-geocoding?
-- React-native-geocoding module for React Native to transform a description of a location (i.e. street address, town name, etc.) into geographic coordinates (i.e. latitude and longitude) and vice versa. This module uses Google Maps Geocoding API and requires an API key for purposes of quota management. It saves a considerable amount of time to create a localisation
+- React-native-geocoding module for React Native to transform a description of a location (i.e. street address, town name, etc.) into geographic coordinates (i.e. latitude and longitude) and vice versa. This module uses Google Maps Geocoding API and requires an API key for purposes of quota management. It saves a considerable amount of time to create a localisation.
 
 ## Team 👩🏻‍💻 👨🏻‍💻
 - Quentin Aimé (Frontend Developer)

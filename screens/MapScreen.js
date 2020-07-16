@@ -30,8 +30,8 @@ const Map = () => {
   useEffect(() => {
     getLocation().then((data) => {
       setLocation({
-        latitude: 48.858282,
-        longitude: 2.383353,
+        latitude: data.latitude,
+        longitude: data.longitude,
         latitudeDelta: 0.003,
         longitudeDelta: 0.003,
       });
